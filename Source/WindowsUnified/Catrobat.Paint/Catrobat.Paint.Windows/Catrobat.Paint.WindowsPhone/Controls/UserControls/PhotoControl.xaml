@@ -21,7 +21,7 @@
             </CaptureElement>-->
         <Grid x:Name="GridPhotoCapture">
             <!--<Rectangle Fill="Red" HorizontalAlignment="Left" Height="585" Stroke="Black" VerticalAlignment="Top" Width="384" Margin="0,0,-1,0"/>-->
-            <CaptureElement x:Name="cptElementShowPreview" HorizontalAlignment="Center" Stretch="UniformToFill" VerticalAlignment="Center">
+            <CaptureElement x:Name="cptElementShowPreview" HorizontalAlignment="Center" Stretch="UniformToFill" VerticalAlignment="Center" Height="558" Margin="1,0,-1,82" Width="384">
             </CaptureElement>
 
         </Grid>
@@ -48,9 +48,9 @@
             <AppBarButton x:Name="app_btnCancel" BorderBrush="White" Click="btnCancel_Click" Content="Cancel" Foreground="White" HorizontalAlignment="Left" Icon="Cancel" Label="Cancel" VerticalAlignment="Top"></AppBarButton>
             <AppBarButton x:Name="app_btnTakePhoto" BorderBrush="White" Click="btnTakePhoto_Click" Content="Snap" Foreground="White" HorizontalAlignment="Left" Icon="Camera" Label="Take photo" Margin="101,0,0,0" VerticalAlignment="Top"></AppBarButton>
             <AppBarButton x:Name="app_btnbtnChangeCamera" BorderBrush="White" Click="btnChangeCamera_Click" Content="change Camera" Foreground="White" HorizontalAlignment="Left" Label="Change Camera" Margin="202,0,0,0" VerticalAlignment="Top">
-        <AppBarButton.Icon>
-          <BitmapIcon UriSource="/Assets/AppBar/BackCam.png"/>
-        </AppBarButton.Icon>
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="/Assets/AppBar/BackCam.png"/>
+                </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton x:Name="app_btnSettings" BorderBrush="White" Click="app_btnSettings_Click" Content="Settings" Foreground="White" HorizontalAlignment="Left" Icon="More" Label="Settings" Margin="303,0,0,0" VerticalAlignment="Top"></AppBarButton>
             <!--<Button x:Name="btnCancel" Content="Cancel" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" Click="btnCancel_Click"/>-->
