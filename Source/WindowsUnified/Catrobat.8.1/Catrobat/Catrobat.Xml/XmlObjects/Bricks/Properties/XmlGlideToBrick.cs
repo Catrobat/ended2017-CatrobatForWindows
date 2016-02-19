@@ -17,31 +17,41 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            DurationInSeconds = new XmlFormula(xRoot.Element("durationInSeconds"));
-            XDestination = new XmlFormula(xRoot.Element("xDestination"));
-            YDestination = new XmlFormula(xRoot.Element("yDestination"));
+            if (xRoot != null)
+            {
+                DurationInSeconds = new XmlFormula(xRoot, XmlConstants.DurationInSeconds);
+                XDestination = new XmlFormula(xRoot, XmlConstants.XDestination);
+                YDestination = new XmlFormula(xRoot, XmlConstants.YDestination);
+        }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("glideToBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlGlideToBrickType);
 
-            var xVariable1 = new XElement("durationInSeconds");
-            xVariable1.Add(DurationInSeconds.CreateXml());
-            xRoot.Add(xVariable1);
+            var xElementY = YDestination.CreateXml();
+            xElementY.SetAttributeValue(XmlConstants.Category, XmlConstants.YDestination);
+            
+            var xElementX = XDestination.CreateXml();
+            xElementX.SetAttributeValue(XmlConstants.Category, XmlConstants.XDestination);
 
-            var xVariable2 = new XElement("xDestination");
-            xVariable2.Add(XDestination.CreateXml());
-            xRoot.Add(xVariable2);
+            var xElementDuration = DurationInSeconds.CreateXml();
+            xElementDuration.SetAttributeValue(XmlConstants.Category, XmlConstants.DurationInSeconds);
 
-            var xVariable3 = new XElement("yDestination");
-            xVariable3.Add(YDestination.CreateXml());
-            xRoot.Add(xVariable3);
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElementY);
+            xFormulalist.Add(xElementX);
+            xFormulalist.Add(xElementDuration);
+
+            xRoot.Add(xFormulalist);
+
+
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (DurationInSeconds != null)
                 DurationInSeconds.LoadReference();

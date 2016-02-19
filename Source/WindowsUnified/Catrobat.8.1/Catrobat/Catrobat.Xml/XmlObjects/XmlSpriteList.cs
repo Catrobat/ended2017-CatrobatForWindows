@@ -21,13 +21,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            foreach (XElement xSprite in xRoot.Elements("object"))
+            foreach (XElement xSprite in xRoot.Elements(XmlConstants.Object))
             {
                 Sprites.Add(new XmlSprite());
             }
 
             var enumerator = Sprites.GetEnumerator();
-            foreach (XElement xSprite in xRoot.Elements("object"))
+            foreach (XElement xSprite in xRoot.Elements(XmlConstants.Object))
             {
                 enumerator.MoveNext();
                 enumerator.Current.LoadFromXml(xSprite);
@@ -36,17 +36,21 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("objectList");
+            var xRoot = new XElement(XmlConstants.ObjectList);
 
             foreach (XmlSprite sprite in Sprites)
             {
+                XmlParserTempProjectHelper.currentObjectNum++;
+                XmlParserTempProjectHelper.currentScriptNum = 0;
+                XmlParserTempProjectHelper.currentBrickNum = 0;
+                XmlParserTempProjectHelper.currentVariableNum = 0;
                 xRoot.Add(sprite.CreateXml());
             }
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             foreach (var sprite in Sprites)
                 sprite.LoadReference();

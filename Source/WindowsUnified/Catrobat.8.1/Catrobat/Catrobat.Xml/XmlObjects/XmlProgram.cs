@@ -11,7 +11,6 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 using Catrobat_Player.NativeComponent;
-using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
@@ -29,13 +28,15 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public IList<IObject> Objects
         {
-            get { return SpriteList.Sprites.Cast<IObject>().ToList(); }
+            get { throw new NotImplementedException(); }
+            //get { return SpriteList.Sprites.Cast<IObject>().ToList(); }
             set { }
         }
 
         public IList<IUserVariable> Variables
         {
-            get { return VariableList.ProgramVariableList.UserVariables.Cast<IUserVariable>().ToList(); }
+            get { throw new NotImplementedException(); }
+            //get { return VariableList.ProgramVariableList.UserVariableReferences.Cast<IUserVariable>().ToList(); }
             set { }
         }
 
@@ -64,10 +65,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
             XmlParserTempProjectHelper.Program = this;
 
-            var project = document.Element("program");
-            ProgramHeader = new XmlProjectHeader(project.Element("header"));
-            SpriteList = new XmlSpriteList(project.Element("objectList"));
-            VariableList = new XmlVariableList(project.Element("variables"));
+           var project = document.Element(XmlConstants.Program);
+            ProgramHeader = new XmlProjectHeader(project.Element(XmlConstants.Header));
+            SpriteList = new XmlSpriteList(project.Element(XmlConstants.ObjectList));
+            VariableList = new XmlVariableList(project.Element(XmlConstants.Variables));
 
             foreach (var a in VariableList.ObjectVariableList.ObjectVariableEntries)
             {
@@ -79,24 +80,29 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XDocument CreateXml()
         {
-            var document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
+            XmlParserTempProjectHelper.currentObjectNum = 0;
+            XmlParserTempProjectHelper.currentScriptNum = 0;
+            XmlParserTempProjectHelper.currentBrickNum = 0;
+            XmlParserTempProjectHelper.currentVariableNum = 0;
+
+            XmlParserTempProjectHelper.Document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             XmlParserTempProjectHelper.Program = this;
 
-            var xProject = new XElement("program");
+            var xProject = new XElement(XmlConstants.Program);
             xProject.Add(ProgramHeader.CreateXml());
             xProject.Add(SpriteList.CreateXml());
             xProject.Add(VariableList.CreateXml());
-            document.Add(xProject);
+            XmlParserTempProjectHelper.Document.Add(xProject);
 
-            return document;
+            return XmlParserTempProjectHelper.Document;
         }
 
         internal void LoadReference()
         {
             VariableList.LoadReference();
             SpriteList.LoadReference();
-        }
+        }          
 
         internal void LoadBroadcastMessages()
         {

@@ -20,7 +20,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
                 Count = o.TimesToRepeat == null ? null : formulaConverter.Convert(o.TimesToRepeat, c)
             };
             c.Bricks[o] = result;
-            result.End = o.LoopEndBrick == null ? null : (EndRepeatBrick)repeatEndBrickConverter.Convert(o.LoopEndBrick, c);
             return result;
         }
 
@@ -34,7 +33,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
                 TimesToRepeat = m.Count == null ? new XmlFormula() : formulaConverter.Convert(m.Count, c)
             };
             c.Bricks[m] = result;
-            result.LoopEndBrick = m.End == null ? null : (XmlRepeatLoopEndBrick)loopEndBrickConverter.Convert(m.End, c);
             return result;
         }
     }

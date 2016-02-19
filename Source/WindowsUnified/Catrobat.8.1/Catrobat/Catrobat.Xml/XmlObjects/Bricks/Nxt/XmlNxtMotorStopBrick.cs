@@ -17,7 +17,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("legoNxtMotorStopBrick");
+            var xRoot = new XElement("brick");
+            xRoot.SetAttributeValue("type", "legoNxtMotorStopBrick");
 
             xRoot.Add(new XElement("motor")
             {

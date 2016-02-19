@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Services
         void SetThumbnailAction();
 
         void AxesAction(bool showAxes, string label);
-
+         
         void TakeScreenshotAction();
 
         bool HardwareBackButtonPressed();

@@ -21,7 +21,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("legoNxtPlayToneBrick");
+            var xRoot = new XElement("brick");
+            xRoot.SetAttributeValue("type", "legoNxtPlayToneBrick");
 
             var xVariable1 = new XElement("durationInSeconds");
             xVariable1.Add(DurationInSeconds.CreateXml());
@@ -34,7 +35,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (DurationInSeconds != null)
                 DurationInSeconds.LoadReference();

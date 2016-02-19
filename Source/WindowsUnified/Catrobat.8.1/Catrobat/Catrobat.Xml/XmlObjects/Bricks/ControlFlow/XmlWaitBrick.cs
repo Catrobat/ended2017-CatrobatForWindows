@@ -13,21 +13,29 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            TimeToWaitInSeconds = new XmlFormula(xRoot.Element("timeToWaitInSeconds"));
+            if (xRoot != null)
+            {
+                TimeToWaitInSeconds = new XmlFormula(xRoot, XmlConstants.TimeToWaitInSeconds);
+            }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("waitBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlWaitBrickType);
+            
+            var xElement = TimeToWaitInSeconds.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.TimeToWaitInSeconds);
 
-            var xVariable = new XElement("timeToWaitInSeconds");
-            xVariable.Add(TimeToWaitInSeconds.CreateXml());
-            xRoot.Add(xVariable);
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (TimeToWaitInSeconds != null)
                 TimeToWaitInSeconds.LoadReference();

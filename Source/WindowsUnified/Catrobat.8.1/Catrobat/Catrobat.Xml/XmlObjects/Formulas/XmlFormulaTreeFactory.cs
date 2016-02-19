@@ -1,5 +1,8 @@
 ﻿using System.Globalization;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using System.Xml.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 {
@@ -16,11 +19,23 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         public static XmlFormulaTree CreateNumberNode(double value)
         {
-            return new XmlFormulaTree
+            if (value >= 0)
             {
-                VariableType = "NUMBER", 
-                VariableValue = value.ToString(CultureInfo.InvariantCulture)
-            };
+                return new XmlFormulaTree
+                    {
+                        VariableType = "NUMBER",
+                        VariableValue = value.ToString(CultureInfo.InvariantCulture)
+                    };
+            }
+            else
+            {
+                XmlFormulaTree child = new XmlFormulaTree
+            {
+                    VariableType = "NUMBER",
+                    VariableValue = Math.Abs(value).ToString(CultureInfo.InvariantCulture)
+                };
+                return CreateNegativeSignNode(child);
+            }
         }
 
         public static XmlFormulaTree CreatePiNode()

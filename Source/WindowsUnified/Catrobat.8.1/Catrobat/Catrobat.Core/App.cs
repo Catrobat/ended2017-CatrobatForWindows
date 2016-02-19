@@ -1,5 +1,7 @@
 using System;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Resources;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
@@ -61,7 +63,7 @@ namespace Catrobat.IDE.Core
                 _context.LocalSettings = new LocalSettings();
 
                 var defaultProject = await ServiceLocator.ContextService.
-                    RestoreDefaultProgram(AppResourcesHelper.Get("Main_DefaultProgramName"));
+                    RestoreDefaultProgram(AppResources.Main_DefaultProgramName);
 
                 ProgramChecker.CheckProgram(defaultProject);
 

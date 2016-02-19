@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public string MediaLicense { get; set; }
 
-        public string TargetPlatform { get; set; }
+        public string Platform { get; set; }
 
         public string PlatformVersion { get; set; }
 
@@ -45,6 +45,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public string Url { get; set; }
 
         public string UserHandle { get; set; }
+
+        public string TargetPlatform
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public XmlProjectHeader(bool isAutoFillProperties = true)
         {
@@ -66,8 +79,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Tags = "";
             Url = "http://pocketcode.org/details/871";
             UserHandle = "";
-            ScreenWidth = 768; // TODO: change this! just for Lumia 1020 device
-            ScreenHeight = 1280; // TODO: change this! just for Lumia 1020 device
         }
 
         //private void UpdateSystemInformation()
@@ -93,125 +104,125 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            ApplicationBuildName = xRoot.Element("applicationBuildName").Value;
-            ApplicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value, CultureInfo.InvariantCulture);
-            ApplicationName = xRoot.Element("applicationName").Value;
-            ApplicationVersion = xRoot.Element("applicationVersion").Value;
-            CatrobatLanguageVersion = xRoot.Element("catrobatLanguageVersion").Value;
-            DateTimeUpload = xRoot.Element("dateTimeUpload").Value;
-            Description = xRoot.Element("description").Value;
-            DeviceName = xRoot.Element("deviceName").Value;
-            MediaLicense = xRoot.Element("mediaLicense").Value;
-            TargetPlatform = xRoot.Element("platform").Value;
-            PlatformVersion = xRoot.Element("platformVersion").Value;
-            ProgramLicense = xRoot.Element("programLicense").Value;
-            ProgramName = xRoot.Element("programName").Value;
-            RemixOf = xRoot.Element("remixOf").Value;
-            ScreenHeight = int.Parse(xRoot.Element("screenHeight").Value, CultureInfo.InvariantCulture);
-            ScreenWidth = int.Parse(xRoot.Element("screenWidth").Value, CultureInfo.InvariantCulture);
-            Tags = xRoot.Element("tags").Value;
-            Url = xRoot.Element("url").Value;
-            UserHandle = xRoot.Element("userHandle").Value;
+            ApplicationBuildName = xRoot.Element(XmlConstants.ApplicationBuildName).Value;
+            ApplicationBuildNumber = int.Parse(xRoot.Element(XmlConstants.ApplicationBuildNumber).Value, CultureInfo.InvariantCulture);
+            ApplicationName = xRoot.Element(XmlConstants.ApplicationNameText).Value;
+            ApplicationVersion = xRoot.Element(XmlConstants.ApplicationVersion).Value;
+            CatrobatLanguageVersion = xRoot.Element(XmlConstants.CatrobatLanguageVersion).Value;
+            DateTimeUpload = xRoot.Element(XmlConstants.DateTimeUpload).Value;
+            Description = xRoot.Element(XmlConstants.Description).Value;
+            DeviceName = xRoot.Element(XmlConstants.DeviceName).Value;
+            MediaLicense = xRoot.Element(XmlConstants.MediaLicense).Value;
+            Platform = xRoot.Element(XmlConstants.Platform).Value;
+            PlatformVersion = xRoot.Element(XmlConstants.PlatformVersion).Value;
+            ProgramLicense = xRoot.Element(XmlConstants.ProgramLicense).Value;
+            ProgramName = xRoot.Element(XmlConstants.ProgramName).Value;
+            RemixOf = xRoot.Element(XmlConstants.RemixOf).Value;
+            ScreenHeight = int.Parse(xRoot.Element(XmlConstants.ScreenHeight).Value, CultureInfo.InvariantCulture);
+            ScreenWidth = int.Parse(xRoot.Element(XmlConstants.ScreenWidth).Value, CultureInfo.InvariantCulture);
+            Tags = xRoot.Element(XmlConstants.Tags).Value;
+            Url = xRoot.Element(XmlConstants.Url).Value;
+            UserHandle = xRoot.Element(XmlConstants.userHandle).Value;
         }
 
         internal override XElement CreateXml()
         {
-            var xProjectHeader = new XElement("header");
+            var xProjectHeader = new XElement(XmlConstants.Header);
 
-            xProjectHeader.Add(new XElement("applicationBuildName")
-            {
-                Value = ApplicationBuildName
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ApplicationBuildName)
+                {
+                    Value = ApplicationBuildName
+                });
 
-            xProjectHeader.Add(new XElement("applicationBuildNumber")
-            {
-                Value = ApplicationBuildNumber.ToString(CultureInfo.InvariantCulture)
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ApplicationBuildNumber)
+                {
+                    Value = ApplicationBuildNumber.ToString(CultureInfo.InvariantCulture)
+                });
 
-            xProjectHeader.Add(new XElement("applicationName")
-            {
-                Value = ApplicationName
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ApplicationNameText)
+                {
+                    Value = ApplicationName
+                });
 
-            xProjectHeader.Add(new XElement("applicationVersion")
-            {
-                Value = ApplicationVersion
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ApplicationVersion)
+                {
+                    Value = ApplicationVersion
+                });
 
-            xProjectHeader.Add(new XElement("catrobatLanguageVersion")
-            {
-                Value = CatrobatLanguageVersion
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.CatrobatLanguageVersion)
+                {
+                    Value = CatrobatLanguageVersion
+                });
 
-            xProjectHeader.Add(new XElement("dateTimeUpload")
-            {
-                Value = DateTimeUpload
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.DateTimeUpload)
+                {
+                    Value = DateTimeUpload
+                });
 
-            xProjectHeader.Add(new XElement("description")
-            {
-                Value = Description
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.Description)
+                {
+                    Value = Description
+                });
 
-            xProjectHeader.Add(new XElement("deviceName")
-            {
-                Value = DeviceName
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.DeviceName)
+                {
+                    Value = DeviceName
+                });
 
-            xProjectHeader.Add(new XElement("mediaLicense")
-            {
-                Value = MediaLicense
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.MediaLicense)
+                {
+                    Value = MediaLicense
+                });
 
-            xProjectHeader.Add(new XElement("platform")
-            {
-                Value = TargetPlatform
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.Platform)
+                {
+                    Value = Platform
+                });
 
-            xProjectHeader.Add(new XElement("platformVersion")
-            {
-                Value = PlatformVersion
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.PlatformVersion)
+                {
+                    Value = PlatformVersion
+                });
 
-            xProjectHeader.Add(new XElement("programLicense")
-            {
-                Value = ProgramLicense
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ProgramLicense)
+                {
+                    Value = ProgramLicense
+                });
 
-            xProjectHeader.Add(new XElement("programName")
-            {
-                Value = ProgramName
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ProgramName)
+                {
+                    Value = ProgramName
+                });
 
-            xProjectHeader.Add(new XElement("remixOf")
-            {
-                Value = RemixOf
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.RemixOf)
+                {
+                    Value = RemixOf
+                });
 
-            xProjectHeader.Add(new XElement("screenHeight")
-            {
-                Value = ScreenHeight.ToString(CultureInfo.InvariantCulture)
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ScreenHeight)
+                {
+                    Value = ScreenHeight.ToString(CultureInfo.InvariantCulture)
+                });
 
-            xProjectHeader.Add(new XElement("screenWidth")
-            {
-                Value = ScreenWidth.ToString(CultureInfo.InvariantCulture)
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.ScreenWidth)
+                {
+                    Value = ScreenWidth.ToString(CultureInfo.InvariantCulture)
+                });
 
-            xProjectHeader.Add(new XElement("tags")
-            {
-                Value = Tags
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.Tags)
+                {
+                    Value = Tags
+                });
 
-            xProjectHeader.Add(new XElement("url")
-            {
-                Value = Url
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.Url)
+                {
+                    Value = Url
+                });
 
-            xProjectHeader.Add(new XElement("userHandle")
-            {
-                Value = UserHandle
-            });
+            xProjectHeader.Add(new XElement(XmlConstants.userHandle)
+                {
+                    Value = UserHandle
+                });
 
             return xProjectHeader;
         }

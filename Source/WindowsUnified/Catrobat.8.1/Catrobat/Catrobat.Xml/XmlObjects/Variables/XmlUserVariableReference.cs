@@ -5,9 +5,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlUserVariableReference : XmlObjectNode
     {
-        private string _reference;
+        public string _reference;
 
         public XmlUserVariable UserVariable { get; set; }
+
+        public XElement _xRoot { get; set; }
 
         public XmlUserVariableReference()
         {
@@ -20,23 +22,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _reference = xRoot.Attribute("reference").Value;
+            _reference = xRoot.Attribute(XmlConstants.Reference).Value;
+            _xRoot = xRoot;
+            UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as XmlUserVariable;
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("userVariable");
+            var xRoot = new XElement(XmlConstants.UserVariable);
 
-            xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
+            xRoot.Add(new XAttribute(XmlConstants.Reference, ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
         }
 
-        internal override void LoadReference()
-        {
+        public override void LoadReference()
+        {//TODO: think about it
             if(UserVariable == null)
                 UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as XmlUserVariable;
-            if (string.IsNullOrEmpty(_reference))
+            if (string.IsNullOrEmpty(_reference)) 
                 _reference = ReferenceHelper.GetReferenceString(this);
         }
     }

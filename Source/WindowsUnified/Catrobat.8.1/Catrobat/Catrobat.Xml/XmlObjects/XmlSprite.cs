@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
     {
         #region NativeInterface
         public IList<IUserVariable> UserVariables
-        {
+    {
             get {
                 if (Variables != null)
                     return Variables.UserVariables.Cast<IUserVariable>().ToList();
@@ -65,20 +65,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             XmlParserTempProjectHelper.Sprite = this;
 
-            if (xRoot.Element("lookList") != null)
+            if (xRoot.Element(XmlConstants.XmlLookListType) != null)
             {
-                Looks = new XmlLookList(xRoot.Element("lookList"));
+                 Looks = new XmlLookList(xRoot.Element(XmlConstants.XmlLookListType));
             }
 
-            Name = xRoot.Element("name").Value;
+            Name = xRoot.Attribute(XmlConstants.Name).Value;
 
-            if (xRoot.Element("soundList") != null)
+            if (xRoot.Element(XmlConstants.XmlSoundList) != null)
             {
-                Sounds = new XmlSoundList(xRoot.Element("soundList"));
+                Sounds = new XmlSoundList(xRoot.Element(XmlConstants.XmlSoundList));
             }
-            if (xRoot.Element("scriptList") != null)
+            if (xRoot.Element(XmlConstants.ScriptList) != null)
             {
-                Scripts = new XmlScriptList(xRoot.Element("scriptList"));
+                Scripts = new XmlScriptList(xRoot.Element(XmlConstants.ScriptList));
             }
         }
 
@@ -86,36 +86,42 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             XmlParserTempProjectHelper.Sprite = this;
 
-            var xRoot = new XElement("object");
+            var xRoot = new XElement(XmlConstants.Object);
+            xRoot.SetAttributeValue(XmlConstants.Name, Name.ToString());
 
             if (Looks != null)
             {
                 xRoot.Add(Looks.CreateXml());
             }
 
-            xRoot.Add(new XElement("name")
-            {
-                Value = Name
-            });
+            //xRoot.Add(new XElement("name")
+            //{
+            //    Value = Name
+            //});
 
-            if (Scripts != null)
-            {
-                xRoot.Add(Scripts.CreateXml());
-            }
+            //if (Scripts != null)
+            //{
+            //    xRoot.Add(Scripts.CreateXml());
+            //}
 
             if (Sounds != null)
             {
                 xRoot.Add(Sounds.CreateXml());
             }
 
+            if (Scripts != null)
+            {
+                xRoot.Add(Scripts.CreateXml());
+            }
+
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             XmlParserTempProjectHelper.Sprite = this;
 
-            foreach (var script in Scripts.Scripts)
+            foreach(var script in Scripts.Scripts)
             {
                 XmlParserTempProjectHelper.Script = script;
 

@@ -4,9 +4,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public abstract class XmlLoopEndBrick : XmlBrick
     {
-        protected internal XmlLoopBeginBrickReference LoopBeginBrickReference { get; set; }
+        //protected internal XmlLoopBeginBrickReference LoopBeginBrickReference { get; set; }
 
-        public XmlLoopBeginBrick LoopBeginBrick
+        /*public XmlLoopBeginBrick LoopBeginBrick
         {
             get { return LoopBeginBrickReference.LoopBeginBrick; }
             set
@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 if (value == null)
                     LoopBeginBrickReference = null;
             }
-        }
+        }*/
 
         protected XmlLoopEndBrick() {}
 
@@ -33,25 +33,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         internal abstract override void LoadFromXml(XElement xRoot);
 
         internal abstract override XElement CreateXml();
-
-        protected override void LoadFromCommonXML(XElement xRoot)
-        {
-            if (xRoot.Element("loopBeginBrick") != null)
-            {
-                LoopBeginBrickReference = new XmlLoopBeginBrickReference(xRoot.Element("loopBeginBrick"));
-            }
-        }
-
-        protected override void CreateCommonXML(XElement xRoot)
-        {
-            xRoot.Add(LoopBeginBrickReference.CreateXml());
-        }
-
-        internal override void LoadReference()
-        {
-            if (LoopBeginBrickReference != null)
-                LoopBeginBrickReference.LoadReference();
-        }
     }
 }
 

@@ -13,7 +13,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
             var result = new ForeverBrick();
             c.Bricks[o] = result;
-            result.End = o.LoopEndBrick == null ? null : (EndForeverBrick)loopEndBrickConverter.Convert(o.LoopEndBrick, c);
             return result;
         }
 
@@ -23,7 +22,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
             var result = new XmlForeverBrick();
             c.Bricks[m] = result;
-            result.LoopEndBrick = m.End == null ? null : (XmlLoopEndBrick)foreverEndBrickConverter.Convert(m.End, c);
             return result;
         }
     }

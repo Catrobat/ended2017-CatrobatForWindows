@@ -52,12 +52,6 @@ namespace Catrobat.IDE.Core
 
             if (foreverEnd == null)
                 Debugger.Break();
-
-            if (foreverBegin.LoopEndBrick != foreverEnd)
-                Debugger.Break();
-
-            if (foreverEnd.LoopBeginBrick != foreverBegin)
-                Debugger.Break();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.UI
 {
 
 
-    public sealed class NullItemCollection : IList
+  public sealed class NullItemCollection : IList
   {
       private static readonly Look NullLook = new Look {Name = AppResourcesHelper.Get("Editor_NoLookSelected") };
       private static readonly Sound NullSound = new Sound { Name = AppResourcesHelper.Get("Editor_NoSoundSelected") };
