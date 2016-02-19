@@ -1,6 +1,7 @@
 ﻿using Catrobat.Paint.WindowsPhone.Command;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
@@ -1198,6 +1199,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     }
                 }
             }
+            PocketPaintApplication.GetInstance().PaintingAreaView.drawCheckeredBackgroundInCheckeredCanvas(9);
         }
 
         async public void CropImageForCropCommand(uint offsetX, uint offsetY, uint height, uint width)
