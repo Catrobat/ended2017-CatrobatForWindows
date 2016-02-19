@@ -107,9 +107,10 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             uint sizeOfBoxesToDraw = sizeOfBoxes;
             Rectangle rectToDraw = null;
-            for (int x = 0; x < Math.Floor(Window.Current.Bounds.Width / sizeOfBoxesToDraw) + 1; x++)
+            CheckeredCanvas.Children.Clear();
+            for (int x = 0; x < Math.Floor(PaintingAreaCanvas.Width / sizeOfBoxesToDraw) + 1; x++)
             {
-                for (int y = 0; y < Math.Floor(Window.Current.Bounds.Height / sizeOfBoxesToDraw) + 1; y++)
+                for (int y = 0; y < Math.Floor(PaintingAreaCanvas.Height / sizeOfBoxesToDraw) + 1; y++)
                 {
                     rectToDraw = new Rectangle();
                     if ((x + y) % 2 == 0)
