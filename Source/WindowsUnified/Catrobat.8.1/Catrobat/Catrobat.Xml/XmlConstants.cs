@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Catrobat.IDE.Core
 {
@@ -23,9 +25,12 @@ namespace Catrobat.IDE.Core
 
         public const double MinimumCodeVersion = 0.91;
 
-        public const string TargetIDEVersion = "0.93";//"Win0.91";
+        public static readonly ReadOnlyCollection<string> SupportedXMLVersions = new ReadOnlyCollection<string>
+            (new List<String> { "0.93", "0.95", "0.97" });
 
-        public const string TargetOutputVersion = "0.93"; //Win0.92
+        public const string TargetIDEVersion = "0.93";
+
+        public const string TargetOutputVersion = "0.93";
 
         #endregion
 
