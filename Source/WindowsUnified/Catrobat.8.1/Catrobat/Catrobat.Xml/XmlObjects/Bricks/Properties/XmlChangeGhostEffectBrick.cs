@@ -13,21 +13,29 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            ChangeGhostEffect = new XmlFormula(xRoot.Element("changeGhostEffect"));
+            if (xRoot != null)
+            {
+                ChangeGhostEffect = new XmlFormula(xRoot, XmlConstants.ChangeGhostEffect);
+            }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("changeGhostEffectByNBrick");
+           var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeGhostEffectBrickType);
 
-            var xVariable = new XElement("changeGhostEffect");
-            xVariable.Add(ChangeGhostEffect.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = ChangeGhostEffect.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.ChangeGhostEffect);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (ChangeGhostEffect != null)
                 ChangeGhostEffect.LoadReference();

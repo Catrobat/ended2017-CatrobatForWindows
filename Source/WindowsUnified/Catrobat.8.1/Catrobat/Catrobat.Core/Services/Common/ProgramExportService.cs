@@ -3,6 +3,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Xml.VersionConverter;
+using Catrobat.IDE.Core.Xml.XmlObjects;
+using Newtonsoft.Json.Converters;
 using System.Threading;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.Core.Resources.Localization;

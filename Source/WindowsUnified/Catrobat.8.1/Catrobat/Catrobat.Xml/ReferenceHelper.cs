@@ -9,6 +9,9 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using System.Text;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {
@@ -58,7 +61,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             foreach (var tempLook in sprite.Looks.Looks)
             {
                 count++;
-                if (tempLook == look)
+                if ((tempLook == look) && (count == 1))
+                    return "../../../../../lookList/look";
+                else if (tempLook == look)
                     return "../../../../../lookList/look[" + count + "]";
             }
 
@@ -73,7 +78,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             foreach (var tempSound in sprite.Sounds.Sounds)
             {
                 count++;
-                if (tempSound == sound)
+                if ((tempSound == sound) && (count == 1))
+                    return "../../../../../soundList/sound";
+                else if (tempSound == sound)
                     return "../../../../../soundList/sound[" + count + "]";
             }
 
@@ -99,14 +106,18 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlPointToBrick)
                         {
                             var pointToBrick = brick as XmlPointToBrick;
-                            if (pointToBrick.PointedXmlSpriteReference == xmlSpriteReference)
+                            if ((pointToBrick.PointedXmlSpriteReference == xmlSpriteReference) && (count == 1))
+                                return "../../../../../../object";
+                            else if (pointToBrick.PointedXmlSpriteReference == xmlSpriteReference)
                                 return "../../../../../../object[" + count + "]";
                         }
                     }
 
             foreach (var entry in XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries)
             {
-                if (entry.XmlSpriteReference == xmlSpriteReference)
+                if(( entry.XmlSpriteReference == xmlSpriteReference ) && (count == 1))
+                    return "../../../../objectList/object";
+                else if (entry.XmlSpriteReference == xmlSpriteReference)
                     return "../../../../objectList/object[" + count + "]";
             }
 
@@ -115,30 +126,63 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         private static string GetVariableReferenceString(XmlUserVariableReference xmlUserVariableReference)
         {
-            var userVariable = xmlUserVariableReference.UserVariable;
-            var entryCount = 0;
-            foreach (var entry in XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries)
+            XmlUserVariable var = xmlUserVariableReference.UserVariable;
+            if(XmlParserTempProjectHelper.inObjectVarList)
+                return GetStepDownString(5) + XmlConstants.ObjectList + "/"
+                    + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.ScriptList + "/"
+                    + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.BrickList + "/"
+                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (XmlParserTempProjectHelper.inProgramVarList)
+                return GetStepDownString(3) + XmlConstants.ObjectList + "/"
+                    + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.ScriptList + "/"
+                    + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.BrickList + "/"
+                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.ObjectNum != XmlParserTempProjectHelper.currentObjectNum)
+                return GetStepDownString(6) + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.ScriptList + "/"
+                    + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.BrickList + "/" + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.ScriptNum != XmlParserTempProjectHelper.currentScriptNum)
+                return GetStepDownString(4) + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.BrickNum != XmlParserTempProjectHelper.currentBrickNum)
+                return GetStepDownString(2) + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.VariableNum != XmlParserTempProjectHelper.currentVariableNum)
+                return GetStepDownString(1) + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+            else
+                return "the ReferenceHelper is not working properly!"; 
+        }
+
+        private static string GetReferenceNumeration(uint number)
             {
-                entryCount++;
-                var userVariableCount = 0;
-                foreach (var tempUserVariable in entry.VariableList.UserVariables)
-                {
-                    userVariableCount++;
-                    if (tempUserVariable == userVariable)
-                        return "../../../../../../../variables/objectVariableList/entry[" + entryCount +
-                               "]/list/userVariable[" + userVariableCount + "]";
-                }
+            if (number == 1)
+                return String.Empty;
+            else
+                return "[" + number.ToString() + "]";
             }
 
-            var count = 0;
-            foreach (var tempUserVariable in XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariables)
+        private static string GetStepDownString(int steps)
+        {
+            string str = String.Empty;
+            for(int i = 1; i <= steps; i++)
             {
-                count++;
-                if (tempUserVariable == userVariable)
-                    return "../../../../../../../variables/programVariableList/userVariable[" + count + "]";
-            }
-
-            return "";
+                str += "../";
+        }
+            return str;
         }
 
         private static string GetForeverBrickReferenceString(XmlLoopBeginBrick loopBeginBrick)
@@ -146,13 +190,15 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var sprite = XmlParserTempProjectHelper.Sprite;
 
             var script = XmlParserTempProjectHelper.Script;
-
+            //TODO could this be dead code as since v93 there are no references like this?
                 var count = 0;
                 foreach (var brick in script.Bricks.Bricks)
                     if (brick is XmlForeverBrick)
                     {
                         count++;
-                        if (brick == loopBeginBrick)
+                        if ((brick == loopBeginBrick) && (count == 1))
+                            return "../../foreverBrick";
+                        else if (brick == loopBeginBrick)
                             return "../../foreverBrick[" + count + "]";
                     }
 
@@ -164,13 +210,15 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var sprite = XmlParserTempProjectHelper.Sprite;
 
             var script = XmlParserTempProjectHelper.Script;
-
+            //TODO could this be dead code as since v93 there are no references like this?
                 var count = 0;
                 foreach (var brick in script.Bricks.Bricks)
                     if (brick is XmlRepeatBrick)
                     {
                         count++;
-                        if (brick == loopBeginBrick)
+                        if ((brick == loopBeginBrick) && (count == 1))
+                            return "../../repeatBrick";
+                        else if (brick == loopBeginBrick)
                             return "../../repeatBrick[" + count + "]";
                     }
             return "";
@@ -181,13 +229,15 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var sprite = XmlParserTempProjectHelper.Sprite;
 
             var script = XmlParserTempProjectHelper.Script;
-
+            //TODO could this be dead code as since v93 there are no references like this?
                 var count = 0;
                 foreach (var brick in script.Bricks.Bricks)
                     if (brick is XmlForeverLoopEndBrick)
                     {
                         count++;
-                        if (brick == loopEndBrick)
+                        if ((brick == loopEndBrick) && (count == 1))
+                            return "../../loopEndlessBrick";
+                        else if (brick == loopEndBrick)
                             return "../../loopEndlessBrick[" + count + "]";
                     }
             
@@ -199,13 +249,15 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var sprite = XmlParserTempProjectHelper.Sprite;
 
             var script = XmlParserTempProjectHelper.Script;
-
+                //TODO could this be dead code as since v93 there are no references like this?
                 var count = 0;
                 foreach (var brick in script.Bricks.Bricks)
                     if (brick is XmlRepeatLoopEndBrick)
                     {
                         count++;
-                        if (brick == loopEndBrick)
+                        if ((brick == loopEndBrick) && (count == 1))
+                            return "../../loopEndBrick";
+                        else if (brick == loopEndBrick)
                             return "../../loopEndBrick[" + count + "]";
                     }
             
@@ -225,7 +277,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                     if (brick is XmlIfLogicBeginBrick)
                     {
                         count++;
-                        if (brick == ifLogicBeginBrick)
+                        if ((brick == ifLogicBeginBrick) && (count == 1))
+                            return "../../ifLogicBeginBrick";
+                        else if (brick == ifLogicBeginBrick)
                             return "../../ifLogicBeginBrick[" + count + "]";
                     }
             
@@ -245,7 +299,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                     if (brick is XmlIfLogicElseBrick)
                     {
                         count++;
-                        if (brick == ifLogicElseBrick)
+                        if ((brick == ifLogicElseBrick) && (count == 1))
+                            return "../../ifLogicElseBrick";
+                        else if (brick == ifLogicElseBrick)
                             return "../../ifLogicElseBrick[" + count + "]";
                     }
             
@@ -265,7 +321,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                     if (brick is XmlIfLogicEndBrick)
                     {
                         count++;
-                        if (brick == ifLogicEndBrick)
+                        if ((brick == ifLogicEndBrick) && (count == 1))
+                            return "../../ifLogicEndBrick";
+                        else if (brick == ifLogicEndBrick)
                             return "../../ifLogicEndBrick[" + count + "]";
                     }
             }
@@ -380,48 +438,43 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         private static XmlObjectNode GetUserVariableObject(XmlUserVariableReference xmlUserVariableReference, string reference)
         {
-            var tmpReference = reference;
-            var found = false;
-            var count = 0;
+            XElement currentElement = xmlUserVariableReference._xRoot;
+            string[] array = reference.Split(new char[] { '/'}, StringSplitOptions.RemoveEmptyEntries);
 
-            var sprite = XmlParserTempProjectHelper.Sprite;
+            var matchQuery = from word in array
+                             where word.ToLowerInvariant() == ".."
+                             select word;
 
-            foreach (var script in sprite.Scripts.Scripts)
-                foreach (var brick in script.Bricks.Bricks)
-                    if (brick is XmlSetVariableBrick || brick is XmlChangeVariableBrick)
-                        if (brick is XmlSetVariableBrick && (brick as XmlSetVariableBrick).UserVariableReference == xmlUserVariableReference ||
-                            brick is XmlChangeVariableBrick && (brick as XmlChangeVariableBrick).UserVariableReference == xmlUserVariableReference)
-                        {
-                            found = true;
-                            if (tmpReference.EndsWith("]"))
-                            {
-                                var splittetReference = tmpReference.Split('[');
-                                tmpReference = tmpReference.Split('[')[splittetReference.Count() - 1];
-                                tmpReference = tmpReference.Split(']')[0];
-                                count = Int32.Parse(tmpReference) - 1;
-                            }
-                            break;
-                        }
+            int stepsDown = matchQuery.Count();
 
-            if (found)
+            for(int i=0; i < stepsDown; i++)
             {
-                if (reference.Contains("programVariableList"))
-                {
-                    return XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariables[count];
-                }
-                if (reference.Contains("objectVariableList"))
-                {
-                    var entries = XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries;
-                    foreach (var entry in entries)
-                    {
-                        if (entry.Sprite == sprite)
-                            return entry.VariableList.UserVariables[count];
-                    }
-                }
+                currentElement = currentElement.Parent;
             }
 
+            for(int i=stepsDown; i<array.Length; i++)
+            {
+                //TODO: throws exception
+                string type = array[i].Split('[')[0];
+                int number = GetElementNumber(array[i]);
 
-            return null;
+                currentElement = currentElement.Elements(type).ElementAt(number);
+            }
+
+            return new XmlUserVariable(currentElement);
+        }
+
+        private static int GetElementNumber(string element)
+        {
+            if (element.EndsWith("]"))
+            {
+                var splittetReference = element.Split('[');
+                element = element.Split('[')[splittetReference.Count() - 1];
+                element = element.Split(']')[0];
+                return Int32.Parse(element) - 1;
+            }
+            else
+                return 0;
         }
 
         private static XmlObjectNode GetForeverBrickObject(XmlLoopBeginBrickReference loopBeginBrickReference, string reference)
@@ -437,7 +490,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlLoopEndBrick)
                         {
                             var loopEndBrick = brick as XmlLoopEndBrick;
-                            if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
+                            /*if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
                             {
                                 var count = 0;
                                 if (reference.EndsWith("]"))
@@ -448,9 +501,10 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                                     count = Int32.Parse(reference) - 1;
                                 }
                                 return foreverBricks[count];
-                            }
+                            }*/
                         }
                     }
+                    
             return null;
         }
 
@@ -468,7 +522,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlLoopEndBrick)
                         {
                             var loopEndBrick = brick as XmlLoopEndBrick;
-                            if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
+                            /*if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
                             {
                                 var count = 0;
                                 if (reference.EndsWith("]"))
@@ -479,9 +533,10 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                                     count = Int32.Parse(reference) - 1;
                                 }
                                 return repeatBricks[count];
-                            }
+                            }*/
                         }
                     }
+                    
             return null;
         }
 
@@ -499,8 +554,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlForeverBrick)
                         {
                             var foreverBrick = brick as XmlForeverBrick;
-                            if (foreverBrick.LoopEndBrickReference == loopEndBrickReference)
-                                found = true;
+                            /*if (foreverBrick.LoopEndBrickReference == loopEndBrickReference)
+                                found = true;*/
                         }
                         if (brick is XmlForeverLoopEndBrick)
                             loopEndBricks.Add(brick);
@@ -535,8 +590,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlRepeatBrick)
                         {
                             var repeatBrick = brick as XmlRepeatBrick;
-                            if (repeatBrick.LoopEndBrickReference == loopEndBrickReference)
-                                found = true;
+                            /*if (repeatBrick.LoopEndBrickReference == loopEndBrickReference)
+                                found = true;*/
                         }
                         if (brick is XmlRepeatLoopEndBrick)
                             loopEndBricks.Add(brick);
@@ -691,9 +746,11 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 var brickCount = 0;
                 foreach (var brick in script.Bricks.Bricks)
                 {
-                    if (brick is XmlChangeVariableBrick || brick is XmlSetVariableBrick)
+
+                    /* //TODO outdated? if (brick is XmlChangeVariableBrick || brick is XmlSetVariableBrick)
                         UpdateVariableReference(oldSprite, newSprite, scriptCount, brickCount);
-                    else if (brick is XmlSetLookBrick)
+                    else */
+                    if (brick is XmlSetLookBrick)
                         UpdateLookReference(oldSprite, newSprite, scriptCount, brickCount);
                     else if (brick is XmlForeverBrick || brick is XmlRepeatBrick)
                         UpdateLoopEndBrickReference(oldSprite, newSprite, scriptCount, brickCount);
@@ -760,27 +817,28 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             }
         }
 
-        private static void UpdateVariableReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
+        /* //TODO outdated? private static void UpdateVariableReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
         {
             XmlUserVariableReference oldVariableReference;
             XmlUserVariableReference newVariableReference;
 
             var oldBrick = oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount];
-            if (oldBrick is XmlChangeVariableBrick)
-            {
-                oldVariableReference = (oldBrick as XmlChangeVariableBrick).UserVariableReference;
+            /*if (oldBrick is XmlChangeVariableBrick)
+            {*/
+                /*oldVariableReference = (oldBrick as XmlChangeVariableBrick).UserVariableReference;
                 newVariableReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlChangeVariableBrick)
-                        .UserVariableReference;
-            }
+                        .UserVariableReference;*/
+            /*}
             else
             {
                 oldVariableReference = (oldBrick as XmlSetVariableBrick).UserVariableReference;
                 newVariableReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlSetVariableBrick)
                         .UserVariableReference;
-            }
+            }*/
 
+        /*
             var entries = XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries;
             foreach (var oldEntry in entries)
                 if (oldEntry.Sprite == oldSprite)
@@ -802,21 +860,21 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         variableCount++;
                     }
                 }
-        }
+        }*/
 
         private static void UpdateLoopBeginBrickReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
         {
-            var oldLoopBeginBrickReference = (oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
-            var newLoopBeginBrickReference = (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
+            //var oldLoopBeginBrickReference = (oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
+            //var newLoopBeginBrickReference = (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
 
             var count = 0;
             foreach (var brick in oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks)
             {
-                if (brick == oldLoopBeginBrickReference.LoopBeginBrick)
+                /*if (brick == oldLoopBeginBrickReference.LoopBeginBrick)
                 {
                     newLoopBeginBrickReference.LoopBeginBrick = newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[count] as XmlLoopBeginBrick;
                     return;
-                }
+                }*/
                 count++;
             }
         }
@@ -829,27 +887,22 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var oldBrick = oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount];
             if (oldBrick is XmlForeverBrick)
             {
-                oldLoopEndBrickReference = (oldBrick as XmlForeverBrick).LoopEndBrickReference;
-                newLoopEndBrickReference =
+                //oldLoopEndBrickReference = (oldBrick as XmlForeverBrick).LoopEndBrickReference;
+                /*newLoopEndBrickReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlForeverBrick)
-                        .LoopEndBrickReference;
+                        .LoopEndBrickReference;*/
             }
             else
             {
-                oldLoopEndBrickReference = (oldBrick as XmlRepeatBrick).LoopEndBrickReference;
-                newLoopEndBrickReference =
+               //oldLoopEndBrickReference = (oldBrick as XmlRepeatBrick).LoopEndBrickReference;
+                /* newLoopEndBrickReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlRepeatBrick)
-                        .LoopEndBrickReference;
+                        .LoopEndBrickReference;*/
             }
 
             var count = 0;
             foreach (var brick in oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks)
             {
-                if (brick == oldLoopEndBrickReference.LoopEndBrick)
-                {
-                    newLoopEndBrickReference.LoopEndBrick = newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[count] as XmlLoopEndBrick;
-                    return;
-                }
                 count++;
             }
         }
@@ -951,6 +1004,51 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 }
                 count++;
             }
+        }
+
+        static string GetXPath(XElement node)
+        {
+            StringBuilder builder = new StringBuilder();
+            while (node != null)
+            {
+                switch (node.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        int index = GetElementIndex(node);
+                        builder.Insert(0, "/" + node.Name + "[" + index + "]");
+                        node = node.Parent;
+                        break;
+                    case XmlNodeType.Document:
+                        return builder.ToString();
+                    default:
+                        throw new ArgumentException("Only elements and attributes are supported");
+                }
+            }
+            throw new ArgumentException("Node was not in a document");
+        } 
+
+        static int GetElementIndex(XElement element)
+        {
+            XNode parentNode = element.Parent;
+            if (parentNode is XDocument)
+            {
+                return 1;
+            }
+            XElement parent = (XElement)parentNode;
+            int index = 1;
+
+            foreach (XElement candidate in parent.Elements())
+            {
+                if (candidate is XElement && candidate.Name == element.Name)
+                {
+                    if (candidate == element)
+                    {
+                        return index;
+                    }
+                    index++;
+                }
+            }
+            throw new ArgumentException("Couldn't find element within parent");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Catrobat.Core.Resources.Localization;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
 
+
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.Tree
 {

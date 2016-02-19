@@ -1,36 +1,13 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 {
     public partial class XmlChangeVariableBrick : XmlBrick
     {
-        internal XmlUserVariableReference UserVariableReference { get; set; }
-
-        public XmlUserVariable UserVariable
-        {
-            get
-            {
-                if (UserVariableReference == null)
-                    return null;
-
-                return UserVariableReference.UserVariable;
-            }
-            set
-            {
-                if (UserVariableReference == null)
-                    UserVariableReference = new XmlUserVariableReference();
-
-                if (UserVariableReference.UserVariable == value)
-                    return;
-
-                UserVariableReference.UserVariable = value;
-
-                if (value == null)
-                    UserVariableReference = null;
-            }
-        }
+        public XmlUserVariable UserVariable { get; set; }
 
         public XmlFormula VariableFormula { get; set; }
 
@@ -40,33 +17,32 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element("userVariable") != null)
-                UserVariableReference = new XmlUserVariableReference(xRoot.Element("userVariable"));
 
-            if (xRoot.Element("variableFormula") != null)
-                VariableFormula = new XmlFormula(xRoot.Element("variableFormula"));
+            if (xRoot != null)
+            {
+                VariableFormula = new XmlFormula(xRoot, XmlConstants.VariableChange);
+
+                if (xRoot.Element(XmlConstants.UserVariable) != null)
+                    UserVariable = new XmlUserVariable(xRoot.Element(XmlConstants.UserVariable));
+        }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("changeVariableBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeVariableBrickType);
 
-            if(UserVariableReference != null)
-                xRoot.Add(UserVariableReference.CreateXml());
+            var xElement = VariableFormula.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.VariableChange);
 
-            var xFormula = new XElement("variableFormula");
-            xFormula.Add(VariableFormula.CreateXml());
-            xRoot.Add(xFormula);
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
+
+            xRoot.Add(UserVariable.CreateXml());
 
             return xRoot;
-        }
-
-        internal override void LoadReference()
-        {
-            if (UserVariableReference != null)
-                UserVariableReference.LoadReference();
-            if (VariableFormula != null)
-                VariableFormula.LoadReference();
         }
     }
 }

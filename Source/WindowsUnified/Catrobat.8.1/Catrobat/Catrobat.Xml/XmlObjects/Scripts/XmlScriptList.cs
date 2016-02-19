@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
@@ -20,29 +21,35 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            foreach (XElement element in xRoot.Elements())
+            if (xRoot != null)
             {
-                switch (element.Name.LocalName)
+                foreach (XElement element in xRoot.Elements())
                 {
-                    case "startScript":
-                        Scripts.Add(new XmlStartScript(element));
-                        break;
-                    case "whenScript":
-                        Scripts.Add(new XmlWhenScript(element));
-                        break;
-                    case "broadcastScript":
-                        Scripts.Add(new XmlBroadcastScript(element));
-                        break;
+                    switch (element.Attribute(XmlConstants.Type).Value.ToString())
+                    {
+                        case XmlConstants.XmlStartScriptType:
+                            Scripts.Add(new XmlStartScript(element));
+                            break;
+                        case XmlConstants.XmlWhenScriptType:
+                            Scripts.Add(new XmlWhenScript(element));
+                            break;
+                        case XmlConstants.XmlBroadcastScriptType:
+                            Scripts.Add(new XmlBroadcastScript(element));
+                            break;
+                    }
                 }
             }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("scriptList");
+            var xRoot = new XElement(XmlConstants.ScriptList);
 
             foreach (XmlScript script in Scripts)
             {
+                XmlParserTempProjectHelper.currentScriptNum++;
+                XmlParserTempProjectHelper.currentBrickNum = 0;
+                XmlParserTempProjectHelper.currentVariableNum = 0;
                 xRoot.Add(script.CreateXml());
             }
 

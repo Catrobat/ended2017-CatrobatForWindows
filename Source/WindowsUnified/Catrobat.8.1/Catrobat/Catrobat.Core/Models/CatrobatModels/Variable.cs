@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
+using System;
 
 namespace Catrobat.IDE.Core.Models
 {
@@ -44,6 +45,13 @@ namespace Catrobat.IDE.Core.Models
         }
 
         #endregion
+
+        public Variable() //look at "maybe we should try to use this again" in SetVariableBrickConverter
+        {
+            _isSelected = false;
+            _name = String.Empty;
+        }
+
 
     }
 

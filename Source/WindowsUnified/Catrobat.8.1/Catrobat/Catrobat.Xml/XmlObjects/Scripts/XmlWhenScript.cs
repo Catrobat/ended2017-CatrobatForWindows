@@ -21,6 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
             <string, WhenScriptAction>
         {
             {"Tapped", WhenScriptAction.Tapped}
+            //TODO:{XmlConstants.Tapped, WhenScriptAction.Tapped}
         };
 
         private string _action;
@@ -38,21 +39,22 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element("action") != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.Action) != null)
             {
-                _action = xRoot.Element("action").Value;
+                _action = xRoot.Element(XmlConstants.Action).Value;
             }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("whenScript");
+            var xRoot = new XElement(XmlConstants.Script);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlWhenScriptType);
 
             CreateCommonXML(xRoot);
 
             if (_action != null)
             {
-                xRoot.Add(new XElement("action")
+                xRoot.Add(new XElement(XmlConstants.Action)
                 {
                     Value = _action
                 });

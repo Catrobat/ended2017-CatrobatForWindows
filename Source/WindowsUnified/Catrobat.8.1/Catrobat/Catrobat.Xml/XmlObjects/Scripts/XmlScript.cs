@@ -30,16 +30,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
             LoadFromCommonXML(xElement);
             LoadFromXml(xElement);
         }
-
+        
         internal abstract override void LoadFromXml(XElement xRoot);
 
         private void LoadFromCommonXML(XElement xRoot)
         {
             XmlParserTempProjectHelper.Script = this;
 
-            if (xRoot.Element("brickList") != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.BrickList) != null)
             {
-                Bricks = new XmlBrickList(xRoot.Element("brickList"));
+                Bricks = new XmlBrickList(xRoot.Element(XmlConstants.BrickList));
             }
         }
 

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
@@ -388,11 +390,19 @@ namespace Catrobat.IDE.Core.Services.Common
             program.ProgramHeader.DeviceName = ServiceLocator.
                 SystemInformationService.DeviceName;
 
-            program.ProgramHeader.TargetPlatform = ServiceLocator.
+            program.ProgramHeader.Platform = ServiceLocator.
                 SystemInformationService.PlatformName;
 
             program.ProgramHeader.PlatformVersion = ServiceLocator.
-                SystemInformationService.PlatformVersion; ;
+                SystemInformationService.PlatformVersion;
+
+            program.ProgramHeader.ScreenWidth = ServiceLocator.
+                SystemInformationService.ScreenWidth * ServiceLocator.
+                SystemInformationService.ScaleFactor;
+
+            program.ProgramHeader.ScreenHeight = ServiceLocator.
+                SystemInformationService.ScreenHeight * ServiceLocator.
+                SystemInformationService.ScaleFactor;
             
             // TODO: check if and how the following properties should be set
             //program.ProjectHeader.DateTimeUpload = "";

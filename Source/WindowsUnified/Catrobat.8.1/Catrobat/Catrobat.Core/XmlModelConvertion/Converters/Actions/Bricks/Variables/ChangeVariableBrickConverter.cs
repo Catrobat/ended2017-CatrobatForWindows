@@ -18,7 +18,21 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
             var formulaConverter = new FormulaConverter();
 
             Variable variable = null;
-            if (o.UserVariable != null) c.Variables.TryGetValue(o.UserVariable, out variable);
+
+            //TODO: part of dirty hack:
+            if (o.UserVariable != null)
+                foreach (var entry in c.variables)
+                {
+                    if (entry.Key.Name == o.UserVariable.Name)
+                    {
+                        variable = entry.Value;
+                        break;
+                    }
+                }
+            //maybe its necessary to override .Equals() for the class as it got more properties now
+
+            //old undirty version //if (o.UserVariable != null) c.Variables.TryGetValue(o.UserVariable, out variable);
+            
             return new ChangeVariableBrick
             {
                 Variable = variable,

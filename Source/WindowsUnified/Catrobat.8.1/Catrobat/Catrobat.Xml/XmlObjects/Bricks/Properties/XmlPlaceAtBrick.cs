@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+//using System.Collections.Generic;
+//using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
@@ -15,26 +17,36 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            XPosition = new XmlFormula(xRoot.Element("xPosition"));
-            YPosition = new XmlFormula(xRoot.Element("yPosition"));
+            if (xRoot != null)
+            {
+                YPosition = new XmlFormula(xRoot, XmlConstants.YPosition);
+                XPosition = new XmlFormula(xRoot, XmlConstants.XPosition);           
+            }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("placeAtBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlPlaceAtBrickType);
 
-            var xVariable1 = new XElement("xPosition");
-            xVariable1.Add(XPosition.CreateXml());
-            xRoot.Add(xVariable1);
+            var xElementY = YPosition.CreateXml();
+            xElementY.SetAttributeValue(XmlConstants.Category, XmlConstants.YPosition);
 
-            var xVariable2 = new XElement("yPosition");
-            xVariable2.Add(YPosition.CreateXml());
-            xRoot.Add(xVariable2);
+            var xElementX = XPosition.CreateXml();
+            xElementX.SetAttributeValue(XmlConstants.Category, XmlConstants.XPosition);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElementY);
+            xFormulalist.Add(xElementX);
+
+            xRoot.Add(xFormulalist);
+
+            
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (XPosition != null)
                 XPosition.LoadReference();
