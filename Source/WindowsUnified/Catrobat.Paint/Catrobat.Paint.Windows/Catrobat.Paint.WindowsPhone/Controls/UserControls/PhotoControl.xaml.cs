@@ -34,16 +34,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     {
         Windows.Media.Capture.MediaCapture _captureManager = null;
         MediaCaptureInitializationSettings _mediaCaptureSettings = null;
-        int activeCameraValue = 0;
+        Dictionary<bool, int> boolToIntValue;
+        bool isBackCameraActive;
         bool isPreview = false;
         DeviceInformationCollection _mobileCameras = null;
-        const int BACK_CAMERA = 1;
-        const int FRONT_CAMERA = 0;
         public PhotoControl()
         {
             this.InitializeComponent();
             initDeviceInformationCollection();
-            activeCamera = FRONT_CAMERA;
+            isBackCameraActive = true;
+            boolToIntValue = new Dictionary<bool,int>(){
+                {false, 0},
+                {true,  1}};
         }
 
         async public void initDeviceInformationCollection()
@@ -62,11 +64,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             _captureManager = new MediaCapture();
             await _captureManager.InitializeAsync(getMediaCaptureInitializationSettings());
-            _captureManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
-            // Element is in xaml (is needed to show the camera preview).
             cptElementShowPreview.Source = _captureManager;
-            cptElementShowPreview.FlowDirection = activeCamera == FRONT_CAMERA ?
-                FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+
             await _captureManager.StartPreviewAsync();
 
             DisplayInformation displayInfo = DisplayInformation.GetForCurrentView();
@@ -79,16 +78,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (_captureManager != null)
             {
-                if (activeCamera == FRONT_CAMERA)
-                {
-                    _captureManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, true));
-                }
-                else
-                {
-                    _captureManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, false));
-                }
-                var rotation = VideoRotationLookup(sender.CurrentOrientation, false);
-                _captureManager.SetRecordRotation(rotation);
+                _captureManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, !isBackCameraActive));
             }
         }
 
@@ -122,7 +112,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void setMediaCaptureInitializationSettings()
         {
             _mediaCaptureSettings = new MediaCaptureInitializationSettings();
-            _mediaCaptureSettings.VideoDeviceId = _mobileCameras[activeCamera].Id;
+            _mediaCaptureSettings.VideoDeviceId = _mobileCameras[boolToIntValue[isBackCameraActive]].Id;
             _mediaCaptureSettings.AudioDeviceId = "";
             _mediaCaptureSettings.StreamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.AudioAndVideo;
             _mediaCaptureSettings.PhotoCaptureSource = Windows.Media.Capture.PhotoCaptureSource.VideoPreview;
@@ -151,26 +141,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Height, Window.Current.Bounds.Width));
 
                 RotateTransform rotate = new RotateTransform();
-                ScaleTransform scaleTranssform = new ScaleTransform();
                 TransformGroup transformGroup = new TransformGroup();
                 Path _path = new Path();
 
                 // HACK: Is needed to align the captured photo.
-                if (activeCamera == FRONT_CAMERA)
-                {
-                    rotate.Angle = -90;
-                    scaleTranssform.ScaleX = -1;
-                    Canvas.SetLeft(_path, PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width);
-                    Canvas.SetTop(_path, PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height);
-                
-                    transformGroup.Children.Add(rotate);
-                    transformGroup.Children.Add(scaleTranssform);
-                }
-                else
-                {
+                if (isBackCameraActive)
+                {                    
                     rotate.Angle = 90;
                     transformGroup.Children.Add(rotate);
                     Canvas.SetLeft(_path, PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width);
+                }
+                else
+                {
+                    rotate.Angle = -90;
+                    Canvas.SetTop(_path, PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height);
+                
+                    transformGroup.Children.Add(rotate);
                 }
 
                 _path.Fill = imageBrush;
@@ -205,26 +191,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _captureManager = null;
         }
 
-        public int activeCamera
-        {
-            get
-            {
-                return activeCameraValue;
-            }
-            set
-            {
-                activeCameraValue = value;
-            }
-        }
-
         async private void btnChangeCamera_Click(object sender, RoutedEventArgs e)
         {
             AppBarButton button = sender as AppBarButton;
             if (button != null)
             {
                 BitmapIcon icon = new BitmapIcon();
-                icon.UriSource = activeCamera != FRONT_CAMERA ?
-                    new Uri("ms-appx:///Assets/AppBar/BackCam.png") :
+                icon.UriSource = isBackCameraActive ?
+                    new Uri("ms-appx:///Assets/AppBar/BackCam.png"):
                     new Uri("ms-appx:///Assets/AppBar/FrontCam.png");
                 button.Icon = icon;
             }
@@ -240,14 +214,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void changeCamera()
         {
-            if (activeCameraValue == FRONT_CAMERA)
-            {
-                activeCameraValue = BACK_CAMERA;
-            }
-            else
-            {
-                activeCameraValue = FRONT_CAMERA;
-            }
+            isBackCameraActive = isBackCameraActive ? !isBackCameraActive : true;
         }
 
         private void sldBrigthness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)

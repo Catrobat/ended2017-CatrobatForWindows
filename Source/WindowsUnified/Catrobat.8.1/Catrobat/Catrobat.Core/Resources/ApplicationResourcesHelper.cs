@@ -12,7 +12,7 @@ namespace Catrobat.Core.Resources
     {
         public static string Get(string value)
         {
-            var map = ResourceManager.Current.MainResourceMap.GetSubtree("Catrobat.Core/ApplicationResourcesHelper");
+            var map = ResourceManager.Current.MainResourceMap.GetSubtree("Catrobat.Core/ApplicationResources");
             return map.GetValue(value).ValueAsString;
         }
     }

@@ -25,10 +25,10 @@ namespace Catrobat.IDE.WindowsShared.Services
         public async Task LaunchPlayer(Core.Models.Program program, bool isLaunchedFromTile)
         {
             await ShowSplashScreen(program.Name);
-
+            
             var zipService = new ZipService();
             var tempFolder = ApplicationData.Current.TemporaryFolder;
-            var file = await tempFolder.CreateFileAsync(TempProgramName,
+            var file = await tempFolder.CreateFileAsync(TempProgramName, 
                                                         CreationCollisionOption.ReplaceExisting);
             var stream = await file.OpenStreamForWriteAsync();
 
@@ -54,11 +54,11 @@ namespace Catrobat.IDE.WindowsShared.Services
         public async Task LaunchPlayer(string programName, bool isLaunchedFromTile)
         {
             var messageProjectName = new GenericMessage<string>(programName);
-            Messenger.Default.Send(messageProjectName,
+            Messenger.Default.Send(messageProjectName, 
                                    ViewModelMessagingToken.PlayerProgramNameListener);
 
             var messageIsStartFromTile = new GenericMessage<bool>(isLaunchedFromTile);
-            Messenger.Default.Send(messageIsStartFromTile,
+            Messenger.Default.Send(messageIsStartFromTile, 
                                    ViewModelMessagingToken.PlayerIsStartFromTileListener);
 
             Window.Current.Content = pageFrame;
@@ -74,7 +74,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             pageFrame = (Frame)Window.Current.Content;
 
             BitmapImage programScreenshot = await GetProgramScreenshot(programName);
-            Window.Current.Content = new ExtendedSplash(programScreenshot, 0.5);
+            Window.Current.Content = new ExtendedSplash(programScreenshot, 0.5); 
 
             Window.Current.Activate();
         }
@@ -84,7 +84,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             // TODO check: introduce global constant for "ms-appx:///Assets/SplashScreen.png" or "ms-appdata:///Local/"?
             // TODO: review
 
-            var programFolder = "ms-appdata:///Local/" + StorageConstants.ProgramsPath
+            var programFolder = "ms-appdata:///Local/" + StorageConstants.ProgramsPath 
                                 + "/" + programName + "/";
             StorageFile file = null;
 
@@ -105,7 +105,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             // if the manual screenshot is not available, try to get automatic_screenshot
             if (file == null)
             {
-                var automaticScreenshotPath = programFolder
+                var automaticScreenshotPath = programFolder 
                                                 + StorageConstants.ProgramAutomaticScreenshotPath;
                 try
                 {
