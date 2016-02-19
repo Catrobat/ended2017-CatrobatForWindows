@@ -236,7 +236,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 
                     var inputVersion = GetInputVersion(document);
 
-                    if (inputVersion == XmlConstants.TargetIDEVersion)
+                    if (XmlConstants.SupportedXMLVersions.Contains(inputVersion))
                     {
                         return new VersionConverterResult
                         {
