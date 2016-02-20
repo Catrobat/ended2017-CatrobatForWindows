@@ -9,91 +9,50 @@
     Height="60"
     Width="60">
 
-    <Grid>
-        <!--<Ellipse 
-                 Stroke="Transparent"
-                 Fill="LightSkyBlue"
-                 HorizontalAlignment="Left"
-                 Canvas.Left="32"
-                 Canvas.Top="32"
-                 Stretch="Fill"
-                 VerticalAlignment="Top" Height="30" Width="30" RenderTransformOrigin="0.5,0.5">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="360"/>
-            </Ellipse.RenderTransform>
-            <Ellipse.Clip>
-                <RectangleGeometry Rect="0,0,15,15"/>
-            </Ellipse.Clip>
-        </Ellipse>
-        <Ellipse 
-        	Stroke="Transparent"
-        	Fill="LightSkyBlue"
-        	HorizontalAlignment="Left"
-        	Stretch="Fill"
-        	VerticalAlignment="Top" Height="30" Width="30" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="270"/>
-            </Ellipse.RenderTransform>
-            <Ellipse.Clip>
-                <RectangleGeometry Rect="0,0,15,15"/>
-            </Ellipse.Clip>
-        </Ellipse>
+    <Grid>   
+        <Path
+            Fill="White"
+            Stroke="White"
+            StrokeThickness="0"
+            Data="M10,60 L0,50 H20 Z">
+        </Path>
+        
+        <Path
+            Fill="White"
+            Stroke="White"
+            StrokeThickness="0"
+            Data="M60,10 L50,0 V20 Z">
+        </Path>
 
-
-        <Ellipse 
-                 Stroke="Transparent"
-                 Fill="LightSkyBlue"
-                 HorizontalAlignment="Left"
-                 Canvas.Left="32"
-                 Canvas.Top="32"
-                 Stretch="Fill"
-                 VerticalAlignment="Top" Height="30" Margin="0,0,0,0" Width="30" RenderTransformOrigin="0.5,0.5">
-            <Ellipse.RenderTransform>
-                <CompositeTransform Rotation="180"/>
-            </Ellipse.RenderTransform>
-            <Ellipse.Clip>
-                <RectangleGeometry Rect="0,0,15,15"/>
-            </Ellipse.Clip>
-        </Ellipse>-->
-
-        <!--<Line 
-            Stretch="Fill"  
-            Stroke="White" 
+        <!--<Path
+            Stroke="White"
+            StrokeThickness="5">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigureCollection>
+                            <PathFigure StartPoint="10,50">
+                                <PathFigure.Segments>
+                                    <PathSegmentCollection>
+                                        <ArcSegment 
+                                            Size="270,90" 
+                                            RotationAngle="45"
+                                            IsLargeArc="False"
+                                            SweepDirection="Clockwise"
+                                            Point="50,10" />
+                                    </PathSegmentCollection>
+                                </PathFigure.Segments>
+                            </PathFigure>
+                        </PathFigureCollection>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>-->
+        
+        <Path
+            Stroke="White"
             StrokeThickness="5"
-            X1="0" 
-            X2="1" 
-            Y1="0" 
-            Y2="0" >
-        </Line>-->
-        
-        <Path
-            Fill="White"
-            Stroke="White"
-            StrokeThickness="0"
-            Data="M10,60 L0,50 H20 Z"
-        />
-        
-        <Path
-            Fill="White"
-            Stroke="White"
-            StrokeThickness="0"
-            Data="M60,10 L50,0 V20 Z"
-        />
-
-        <Path
-            Fill="White"
-            Stroke="White"
-            StrokeThickness="0"
-            Data="M0,50 C 5,25 25,5 50,0 V 20 C 30,20 25,30 20,50"
-        />
-
-        <!--Data="M4.12,0 L9.67,5.47 L4.12,10.94 L0,10.88 L5.56,5.47 L0,0.06"-->
-        <!--<Polygon 
-            Points="0,0 10,5, 0,10" 
-            Stroke="White" 
-            Fill="White" 
-            Margin="0,0,0,0" 
-            >
-        </Polygon>-->
+            Data="M10,50 A 270,90 45 0 1 50,10">
+        </Path>
     </Grid>
 </UserControl>
