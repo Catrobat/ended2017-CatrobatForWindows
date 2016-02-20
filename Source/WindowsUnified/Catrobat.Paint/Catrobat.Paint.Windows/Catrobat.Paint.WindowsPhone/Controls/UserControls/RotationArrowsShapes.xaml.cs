@@ -13,8 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
-
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
     /// <summary>
