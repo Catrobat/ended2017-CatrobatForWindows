@@ -154,5 +154,12 @@
                 <RectangleGeometry Rect="0,15,30,30"/>
             </Ellipse.Clip>
         </Ellipse>
+        
+        <userControls:RotationArrowsShapes
+            x:Name="rotationArrowTopLeft"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="-30,-30,0,0">
+        </userControls:RotationArrowsShapes>
     </Grid>
 </UserControl>
