@@ -94,32 +94,35 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                     double NormfactorX = PocketPaintApplication.GetInstance().Bitmap.PixelWidth / (double)width;
                     double NormfactorY = PocketPaintApplication.GetInstance().Bitmap.PixelHeight / (double)height;
 
-                    for (int i = 0; i < height; i++)
-                    {
-                        for (int j = 0; j < width; j++)
+                        for (int i = 0; i < height; i++)
                         {
+                            for (int j = 0; j < width; j++)
+                            {
 
-                            double doubleY = i * NormfactorY;
-                            double doubleX = j * NormfactorX;
+                                double doubleY = i * NormfactorY;
+                                double doubleX = j * NormfactorX;
 
-                            int intX = (int)Math.Round(doubleX, 0);
-                            int intY = (int)Math.Round(doubleY, 0);
+                                int intX = (int)Math.Round(doubleX, 0);
+                                int intY = (int)Math.Round(doubleY, 0);
 
-                            int intTemp = intY * PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
-                            int intXTemp = intTemp + intX;
-                            int intValue = intXTemp * 4;
+                                int intTemp = intY * PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+                                int intXTemp = intTemp + intX;
+                                int intValue = intXTemp * 4;
+                                if (intValue >= PixelsBitmap.Length)
+                                    break;
 
-                            int intTempCanvas = i * width;
-                            int intXTempCanvas = intTempCanvas + j;
-                            int intValueCanvas = intXTempCanvas * 4;
+                                int intTempCanvas = i * width;
+                                int intXTempCanvas = intTempCanvas + j;
+                                int intValueCanvas = intXTempCanvas * 4;
 
-                            PixelsBitmap[intValue] = pixles[intValueCanvas];
-                            PixelsBitmap[intValue + 1] = pixles[intValueCanvas + 1];
-                            PixelsBitmap[intValue + 2] = pixles[intValueCanvas + 2];
-                            PixelsBitmap[intValue + 3] = pixles[intValueCanvas + 3];
+                                PixelsBitmap[intValue] = pixles[intValueCanvas];
+                                PixelsBitmap[intValue + 1] = pixles[intValueCanvas + 1];
+                                PixelsBitmap[intValue + 2] = pixles[intValueCanvas + 2];
+                                PixelsBitmap[intValue + 3] = pixles[intValueCanvas + 3];
 
+                            }
                         }
-                    }
+                    
 
                     return PixelsBitmap;
                 }
@@ -308,8 +311,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             List<Point> results = new List<Point>();
 
             //TODO: An Philipp: Wofür wird hier die canvas-Variable benötigt?
-            var canvas = PocketPaintApplication.GetInstance().EraserCanvas;
-            if (canvas != null)
+            if (pixelsCanvasEraser != null && pixelsCanvasEraser.Length > 0)
             {
                 for (int x = 0; x < pixelWidthCanvas; x++)
                 {
