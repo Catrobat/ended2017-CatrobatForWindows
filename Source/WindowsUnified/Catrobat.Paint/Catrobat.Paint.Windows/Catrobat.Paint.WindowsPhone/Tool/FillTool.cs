@@ -28,11 +28,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 return;
             }
             Point coordinate = (Point)arg;
-            fillSpace(coordinate);
-            CommandManager.GetInstance().CommitCommand(new FillCommand(coordinate));
+            SolidColorBrush selectedSolidColorBrush = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            fillSpace(coordinate, selectedSolidColorBrush);
+            CommandManager.GetInstance().CommitCommand(new FillCommand(coordinate, selectedSolidColorBrush));
         }
 
-        async public void fillSpace(Point coordinate)
+        async public void fillSpace(Point coordinate, SolidColorBrush solidColorBrush)
         {
             try
             {
@@ -40,18 +41,21 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PixelData.PixelData pixelData = new PixelData.PixelData();
                 await pixelData.preparePaintingAreaCanvasPixel();
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StartSpinning();
-                if (pixelData.FloodFill4(coordinate, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
+                if (pixelData.FloodFill4(coordinate, solidColorBrush) == false)
                 {
-                    Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                     return;
                 }
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                 await pixelData.PixelBufferToBitmap();
-                PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
             }
             catch(Exception exception)
             {
                 System.Diagnostics.Debug.WriteLine(exception.StackTrace);
+            }
+            finally
+            {
+                Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
+                PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
             }
         }
 
@@ -66,8 +70,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 return;
             }
-            Point coordinate = (Point)obj;
-            fillSpace(coordinate);
         }
 
         public override void ResetDrawingSpace()
