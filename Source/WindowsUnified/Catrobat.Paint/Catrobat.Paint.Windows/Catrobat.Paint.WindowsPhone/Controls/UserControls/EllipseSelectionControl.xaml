@@ -12,11 +12,13 @@
     <Grid x:Name="GridMain" Height="230" Width="230">
         <Ellipse x:Name="ellEllipseToDraw" Fill="Black" Height="160" HorizontalAlignment="Left" Stroke="Gray"
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="35,35,35,35" 
-                 VerticalAlignment="Top" Width="160" />
+                 VerticalAlignment="Top" Width="160" >
+        </Ellipse>
 
         <Rectangle x:Name="rectEllipseForMovement" DoubleTapped="rectEllipseForMovement_DoubleTapped" Fill="#01FFFFFF" Height="200"
                    ManipulationDelta="rectEllipseForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Margin="15,15,15,15"
-                   Stroke="LightSkyBlue" StrokeThickness="5" Width="200" />
+                   Stroke="LightSkyBlue" StrokeThickness="5" Width="200" >
+        </Rectangle>
 
         <Grid x:Name="GridEllCenterBottom" Background="#01FFFFFF" Height="30" HorizontalAlignment="Center"
               ManipulationDelta="ellCenterBottom_ManipulationDelta_1" 
@@ -32,34 +34,40 @@
             <Ellipse x:Name="ellLeftCenter" Fill="LightSkyBlue" Height="25" Margin="-5, 0, 0, 0"
                 Width="25" />
         </Grid>
+        
         <Grid x:Name="GridEllLeftBottom" Background="#01FFFFFF" Height="30" HorizontalAlignment="Left"
               ManipulationDelta="ellLeftBottom_ManipulationDelta"
               ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Bottom" Width="30">
             <Ellipse x:Name="ellLeftBottom" Fill="LightSkyBlue" Height="25" Margin="-5,0,0,-5"
                 Width="25" />
         </Grid>
+        
         <Grid x:Name="GridEllLeftTop" Background="#01FFFFFF" HorizontalAlignment="Left" Height="30"
               ManipulationDelta="ellLeftTop_ManipulationDelta" ManipulationMode="TranslateX, TranslateY"
               VerticalAlignment="Top" Width="30">
             <Ellipse x:Name="ellLeftTop" Fill="red" Height="25" Margin="-5,-5,0,0" Width="25" />
         </Grid>
+        
         <Grid x:Name="GridEllRightCenter" Background="#01FFFFFF" Height="30" HorizontalAlignment="Right"
               ManipulationDelta="ellRightCenter_ManipulationDelta" ManipulationMode="TranslateX"
               VerticalAlignment="Center" Width="30">
             <Ellipse x:Name="ellRightCenter" Fill="LightSkyBlue" Height="25" Margin="0,0,-5,0" Width="25" />
         </Grid>
+        
         <Grid x:Name="GridEllRightBottom" Background="#01FFFFFF" Height="30" HorizontalAlignment="Right"
               ManipulationDelta="ellRightBottom_ManipulationDelta" ManipulationMode="TranslateX, TranslateY"
               VerticalAlignment="Bottom" Width="30" Grid.ColumnSpan="2">
             <Ellipse x:Name="ellRightBottom" Fill="Blue" Height="25" Margin="0,0,-5,-5"
              Width="25" />
         </Grid>
+        
         <Grid x:Name="GridEllRightTop" Background="#01FFFFFF" Height="30" HorizontalAlignment="Right"
               ManipulationDelta="ellRightTop_ManipulationDelta" ManipulationMode="TranslateX, TranslateY"
               VerticalAlignment="Top" Width="30">
             <Ellipse x:Name="ellRightTop" Fill="LightSkyBlue" Height="25" Margin="0,-5,-5,0" Width="25">
             </Ellipse>
         </Grid>
+        
         <Grid x:Name="GridEllCenterTop" Background="#01FFFFFF" Height="30" HorizontalAlignment="Center"
               ManipulationDelta="ellCenterTop_ManipulationDelta"
               ManipulationMode="TranslateY" VerticalAlignment="Top" Width="30">

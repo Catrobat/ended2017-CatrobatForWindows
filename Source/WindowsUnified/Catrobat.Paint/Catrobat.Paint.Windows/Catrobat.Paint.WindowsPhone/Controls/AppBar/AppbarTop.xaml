@@ -42,6 +42,7 @@
       <Grid>
         <Ellipse HorizontalAlignment="Right" Height="38" Margin="0,0,0,0" Stroke="White" StrokeThickness="3" VerticalAlignment="Center" Width="38">
         </Ellipse>
+          
         <Ellipse x:Name="ellipseTool_behind" Height="38" HorizontalAlignment="Right" Margin="0,0,0,0" Opacity="0.1" VerticalAlignment="Center" Width="38">
           <Ellipse.Fill>
             <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="Uniform"/>

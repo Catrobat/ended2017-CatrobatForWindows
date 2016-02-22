@@ -14,6 +14,7 @@
             <Image x:Name="imgStampedImage" Margin="5,5,5,5" Stretch="Fill" />
 
         </Grid>
+        
         <Grid x:Name="GridRectLeftTop" Background="Transparent" HorizontalAlignment="Left" Height="50" ManipulationDelta="rectLeftTop_ManipulationDelta"
               ManipulationMode="TranslateX, TranslateY" Margin="-20.0,-20.0,0,0" VerticalAlignment="Top" Width="50">
             <Rectangle x:Name="rectLeftTopHorz" Fill="Gray" Height="5" Margin="20,-5,0,0" Width="30" />
@@ -31,26 +32,31 @@
             <Rectangle x:Name="rectLeftCenter" Fill="Gray" Height="60" Margin="0, 0, -15, 0"
                 Width="5" />
         </Grid>
+        
         <Grid x:Name="GridRectLeftBottom" Background="Transparent" Height="50" HorizontalAlignment="Left" ManipulationDelta="rectLeftBottom_ManipulationDelta"
                 ManipulationMode="TranslateX, TranslateY" Margin="-20,0,0,-20" VerticalAlignment="Bottom" Width="50">
             <Rectangle x:Name="rectLeftBottomHorz" Fill="Gray" Height="5" Margin="20,5,0,0" Width="30" />
             <Rectangle x:Name="rectLeftBottomVert" Fill="Gray" Height="30" Margin="-5,-20,0,0" Width="5" />
         </Grid>
+        
         <Grid x:Name="GridRectRightCenter" Background="Transparent" Height="80" HorizontalAlignment="Right" ManipulationDelta="rectRightCenter_ManipulationDelta"
                 ManipulationMode="TranslateX" Margin="0,0,-30,0" VerticalAlignment="Center" Width="50" Grid.ColumnSpan="2">
             <Rectangle x:Name="rectRightCenter" Fill="Gray" Height="60" Margin="-15,0,0,0" Width="5" />
         </Grid>
+        
         <Grid x:Name="GridRectRightBottom" Background="Transparent" Height="50" HorizontalAlignment="Right" ManipulationDelta="rectRightBottom_ManipulationDelta"
                 ManipulationMode="TranslateX, TranslateY" Margin="0,0,-20,-20" VerticalAlignment="Bottom" Width="50">
             <Rectangle x:Name="rectRightBottomHorz" Fill="Gray" Height="5" Margin="-20,5,0,0" Width="30" />
             <Rectangle x:Name="rectRightBottomVert" Fill="Gray" Height="30" Margin="5,-20,0,0" Width="5" />
         </Grid>
+        
         <Grid x:Name="GridRectRightTop" Background="Transparent" Height="50" HorizontalAlignment="Right"
                 ManipulationDelta="rectRightTop_ManipulationDelta" ManipulationMode="TranslateX, TranslateY"
                 Margin="0,-20,-20,0" VerticalAlignment="Top" Width="50">
             <Rectangle x:Name="rectRightTopHorz" Fill="Gray" Height="5" Margin="-20,-5,0,0" Width="30" />
             <Rectangle x:Name="rectRightTopVert" Fill="Gray" Height="30" Margin="5,20,0,0" Width="5" />
         </Grid>
+        
         <Grid x:Name="GridRectCenterTop" Background="Transparent" Height="50" HorizontalAlignment="Center" ManipulationDelta="rectCenterTop_ManipulationDelta"
                 ManipulationMode="TranslateY" Margin="0,-30,0,0" VerticalAlignment="Top" Width="140">
             <Rectangle x:Name="rectCenterTop" Fill="Gray" Height="5" Margin="0,15,0,0" Width="120" />

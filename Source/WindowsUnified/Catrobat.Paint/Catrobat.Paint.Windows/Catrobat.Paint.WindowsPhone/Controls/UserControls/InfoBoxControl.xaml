@@ -14,12 +14,17 @@
                 HorizontalContentAlignment="Left" Margin="0,30,0,0" MinHeight="1" MinWidth="1"
                 VerticalAlignment="Top" Width="370">
         </Button>
+        
         <Button x:Name="btnNewPictureFromCamera" Background="White"
                 BorderThickness="1" BorderBrush="Black"
                 Content="Neues Bild von Kamera" Foreground="Black" Height="80"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                Margin="0,90,0,0" MinHeight="1" VerticalAlignment="Top" Width="370" Click="btnNewPictureFromCamera_Click"></Button>
+                Margin="0,90,0,0" MinHeight="1" VerticalAlignment="Top" Width="370" Click="btnNewPictureFromCamera_Click">
+            
+        </Button>
+        
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="40" Stroke="Black" VerticalAlignment="Top" Width="370"/>
+        
         <TextBox x:Name="tbNewPicture" Background="Black" BorderThickness="0" BorderBrush="Black"
                  Foreground="White" Height="40" HorizontalAlignment="Left" IsHitTestVisible="False" IsReadOnly="True" Margin="0" TextWrapping="Wrap"
                  Text="Neues Bild" VerticalAlignment="Top" Width="370"/>

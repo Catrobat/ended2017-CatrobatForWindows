@@ -23,31 +23,6 @@
             StrokeThickness="0"
             Data="M60,10 L50,0 V20 Z">
         </Path>
-
-        <!--<Path
-            Stroke="White"
-            StrokeThickness="5">
-            <Path.Data>
-                <PathGeometry>
-                    <PathGeometry.Figures>
-                        <PathFigureCollection>
-                            <PathFigure StartPoint="10,50">
-                                <PathFigure.Segments>
-                                    <PathSegmentCollection>
-                                        <ArcSegment 
-                                            Size="270,90" 
-                                            RotationAngle="45"
-                                            IsLargeArc="False"
-                                            SweepDirection="Clockwise"
-                                            Point="50,10" />
-                                    </PathSegmentCollection>
-                                </PathFigure.Segments>
-                            </PathFigure>
-                        </PathFigureCollection>
-                    </PathGeometry.Figures>
-                </PathGeometry>
-            </Path.Data>
-        </Path>-->
         
         <Path
             Stroke="White"
