@@ -23,7 +23,8 @@
                         Background="#5FD7CCCC" 
                         HorizontalAlignment="Left"
                         ManipulationMode="TranslateX, TranslateY, Scale"
-                        VerticalAlignment="Top"/>
+                        VerticalAlignment="Top"
+                        ManipulationStarting="PaintingAreaCanvas_ManipulationStarting"/>
 
                 <Canvas x:Name="EraserCanvas" 
                             Width="{Binding ElementName=PaintingAreaCanvas, Path=Width}" 
