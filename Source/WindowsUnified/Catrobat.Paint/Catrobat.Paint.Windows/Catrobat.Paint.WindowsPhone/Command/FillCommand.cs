@@ -21,15 +21,17 @@ namespace Catrobat.Paint.WindowsPhone.Command
     class FillCommand : CommandBase
     {
         Point _coordinate;
-        public FillCommand(Point coordinate)
+        SolidColorBrush _solidColorBrush;
+        public FillCommand(Point coordinate, SolidColorBrush solidColorBrush)
         {
             ToolType = ToolType.Fill;
             _coordinate = coordinate;
+            _solidColorBrush = solidColorBrush;
         }
 
         public override bool ReDo()
         {
-            PocketPaintApplication.GetInstance().ToolCurrent.Draw(_coordinate);
+            ((FillTool)PocketPaintApplication.GetInstance().ToolCurrent).fillSpace(_coordinate, _solidColorBrush);
             return true;
         }
 
