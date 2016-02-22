@@ -3548,7 +3548,7 @@ namespace Catrobat.Core.Resources.Localization
         {
             get
             {
-                return ResourceManager.GetString("Main_MessageBoxSensorsMissing");
+                return resourceLoader.GetString("Main_MessageBoxSensorsMissing");
             }
         }
         
