@@ -26,8 +26,8 @@
         
         <Path
             Stroke="White"
-            StrokeThickness="5"
-            Data="M10,50 A 270,90 45 0 1 50,10">
+            StrokeThickness="6"
+            Data="M10,51 A 270,90 45 0 1 51,10">
         </Path>
     </Grid>
 </UserControl>
