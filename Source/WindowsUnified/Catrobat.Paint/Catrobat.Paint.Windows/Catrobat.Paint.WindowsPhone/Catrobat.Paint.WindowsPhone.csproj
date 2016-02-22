@@ -140,8 +140,8 @@
     <Compile Include="Controls\UserControls\RectangleSelectionControlOld.xaml.cs">
       <DependentUpon>RectangleSelectionControlOld.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserControls\RotationArrowsShapes.xaml.cs">
-      <DependentUpon>RotationArrowsShapes.xaml</DependentUpon>
+    <Compile Include="Controls\UserControls\RotationArrowsShape.xaml.cs">
+      <DependentUpon>RotationArrowsShape.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserControls\StampControl.xaml.cs">
       <DependentUpon>StampControl.xaml</DependentUpon>
@@ -425,9 +425,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\UserControls\RotationArrowsShapes.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\UserControls\RotationArrowsShape.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserControls\StampControl.xaml">
       <Generator>MSBuild:Compile</Generator>

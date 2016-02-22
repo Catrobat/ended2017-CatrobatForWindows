@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     mc:Ignorable="d"
-    d:DesignHeight="230"
-    d:DesignWidth="230" ManipulationMode="All">
+    d:DesignHeight="290"
+    d:DesignWidth="290" ManipulationMode="All">
 
     <Grid x:Name="GridMainSelection" Height="230" Width="230">
         <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" HorizontalAlignment="Left" Stroke="Gray"
@@ -166,7 +166,7 @@
             x:Name="rotationArrowTopRight"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Margin="0,-30,-90,0">
+            Margin="0,-30,-80,0">
             <userControls:RotationArrowsShapes.RenderTransform>
                 <CompositeTransform Rotation="90" />
             </userControls:RotationArrowsShapes.RenderTransform>
@@ -176,7 +176,7 @@
             x:Name="rotationArrowBottomLeft"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Margin="-30,0,0,-90">
+            Margin="-30,0,0,-80">
             <userControls:RotationArrowsShapes.RenderTransform>
                 <CompositeTransform Rotation="-90" />
             </userControls:RotationArrowsShapes.RenderTransform>
@@ -186,7 +186,7 @@
             x:Name="rotationArrowBottomRight"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Margin="0,0,-90,-90">
+            Margin="0,0,-80,-80">
             <userControls:RotationArrowsShapes.RenderTransform>
                 <CompositeTransform Rotation="180" />
             </userControls:RotationArrowsShapes.RenderTransform>

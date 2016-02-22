@@ -6,28 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="60"
-    Width="60">
+    Height="50"
+    Width="50">
 
     <Grid>   
         <Path
             Fill="White"
             Stroke="White"
             StrokeThickness="0"
-            Data="M10,60 L0,50 H20 Z">
+            Data="M10,50 L0,40 H20 Z">
         </Path>
         
         <Path
             Fill="White"
             Stroke="White"
             StrokeThickness="0"
-            Data="M60,10 L50,0 V20 Z">
+            Data="M50,10 L40,0 V20 Z">
         </Path>
         
         <Path
             Stroke="White"
             StrokeThickness="6"
-            Data="M10,51 A 270,90 45 0 1 51,10">
+            Data="M10,41 A 270,90 45 0 1 41,10">
         </Path>
     </Grid>
 </UserControl>
