@@ -27,8 +27,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
             if (!allSensorsWorking)
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_MessageBoxInformation"), 
-                    AppResourcesHelper.Get("Main_NotAllFeaturesSupported"), delegate { /* no action */ }, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get(AppResources.Main_MessageBoxSensorsMissing),
+                    AppResourcesHelper.Get(AppResources.Main_NotAllFeaturesSupported), delegate { /* no action */ }, MessageBoxOptions.Ok);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         //    if (e.PropertyName == PropertyHelper.GetPropertyName(() =>
         //        _viewModel.IsActivatingLocalProject))
         //    {
-                
+
         //    }
         //}
 

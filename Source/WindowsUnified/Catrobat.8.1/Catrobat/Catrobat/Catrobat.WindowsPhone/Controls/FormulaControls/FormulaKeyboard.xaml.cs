@@ -154,6 +154,16 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             DecimalSeparator = ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
 
             Messenger.Default.Register<FormulaEvaluationResult>(this, ViewModelMessagingToken.FormulaEvaluated, FormulaChangedMessageAction);
+
+            this.CheckSensorKeys();
+        }
+
+        private void CheckSensorKeys()
+        {
+            if (!ServiceLocator.SensorService.IsAccelarationEnabled())
+            {
+
+            }
         }
 
         private void FormulaChangedMessageAction(FormulaEvaluationResult result)
