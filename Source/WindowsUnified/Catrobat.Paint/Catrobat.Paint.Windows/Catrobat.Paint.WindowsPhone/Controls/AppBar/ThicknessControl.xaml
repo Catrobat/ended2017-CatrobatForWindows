@@ -15,13 +15,16 @@
                 <Slider x:Name="SliderThickness" Background="White" Height="50" HorizontalAlignment="Left" Margin="10,13,0,2" Maximum="50" Minimum="1" ValueChanged="SliderThickness_ValueChanged" Width="232" />
                 <Button x:Name="BtnBrushThickness" BorderThickness="4" Content="0" Height="60" HorizontalAlignment="Right" Margin="0,5,10,0" MinWidth="1" Width="100" Click="BtnBrushThickness_Click"/>
             </Grid>
+            
             <Grid x:Name="GrdBrushType" VerticalAlignment="Top">
                 <Button x:Name="BtnRoundImage" BorderBrush="White" Background="Transparent" BorderThickness="4" Click="RoundButton_OnClick" Height="60" HorizontalAlignment="Left" Margin="10,65,0,5"  MinWidth="1" Width="100" >
                     <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" Height="30" Width="30" />
                 </Button>
+                
                 <Button x:Name="BtnSquareImage" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Click="SquareButton_OnClick" Height="60" HorizontalAlignment="Center" Margin="0,65,0,5" MinWidth="1" Width="100">
                     <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" Height="30" Width="30" />
                 </Button>
+                
                 <Button x:Name="BtnTriangleImage" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Click="TriangleButton_OnClick" Height="60" HorizontalAlignment="Right" Margin="0,65,10,5"  MinWidth="1" Width="100">
                     <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" Margin="30,-10,0,0" Height="30" Width="30" UseLayoutRounding="False" d:LayoutRounding="Auto" >
                         <Image.RenderTransform>

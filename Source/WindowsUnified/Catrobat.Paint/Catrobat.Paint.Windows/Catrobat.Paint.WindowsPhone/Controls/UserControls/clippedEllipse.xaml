@@ -25,6 +25,7 @@
                 <RectangleGeometry Rect="0,0,15,15"/>
             </Ellipse.Clip>
         </Ellipse>
+        
         <Ellipse 
         	Stroke="Transparent"
         	Fill="LightSkyBlue"
@@ -39,7 +40,6 @@
             </Ellipse.Clip>
         </Ellipse>
         
-
         <Ellipse 
                  Stroke="Transparent"
                  Fill="LightSkyBlue"

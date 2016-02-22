@@ -12,15 +12,19 @@
         <TextBox x:Name="tbTitle" Background="Black" BorderThickness="0" BorderBrush="Black"
                  Foreground="White" Height="40" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="0"
                  Text="Nutzungsbedingungen" VerticalAlignment="Top" Width="370"/>
+        
         <Grid x:Name="GridImage" Background="Black" Height="45" Margin="0,40,0,0" VerticalAlignment="Top" Width="370">
             <Image x:Name="imgLogo" Height="40" Source="/Assets/logoPocketPaint.jpg" VerticalAlignment="Center" Width="40" />
         </Grid>
+        
         <Grid x:Name="GridText" Background="Black" Height="190" Margin="0,95,0,0" VerticalAlignment="Top">
             <TextBox x:Name="tbText" Background="Transparent" BorderBrush="Transparent" FontSize="15" Foreground="White" IsReadOnly="True" Margin="0,5,0,0" 
                         ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled" Text="" TextAlignment="Center" TextWrapping="Wrap">
             </TextBox>
         </Grid>
+       
         <Rectangle Height="400" Fill="Transparent" Stroke="White" StrokeThickness="3" Width="370" />
+        
         <Grid x:Name="GridLinks" Height="95" Margin="0,255,0,0" VerticalAlignment="Top">
             <HyperlinkButton x:Name="HyperLink1" Background="Transparent" FontSize="16" Foreground="Orange" Height="34"
                              HorizontalAlignment="Center" Margin="35,-30,35,21" NavigateUri="http://www.silverlight.net" Width="300">
@@ -29,6 +33,7 @@
                     <TextBox x:Name="tbLink1Underline"  Background="Transparent" Foreground="Orange" BorderBrush="Transparent" Margin="0,-7,0,0" Text="______________________________" VerticalAlignment="Bottom"></TextBox>
                 </Grid>
             </HyperlinkButton>
+            
             <HyperlinkButton x:Name="HyperLink2" Background="Transparent" FontSize="16" Foreground="Orange" Height="34"
                              HorizontalAlignment="Center" NavigateUri="http://www.silverlight.net" Width="300" Margin="35,17,35,9" Grid.ColumnSpan="2">
                 <Grid>
@@ -37,6 +42,7 @@
                 </Grid>
             </HyperlinkButton>
         </Grid>
+       
         <Grid x:Name="GridBottom" Background="Transparent" Height="50" VerticalAlignment="Bottom">
             <Button x:Name="btnOK" Background="LightGray" Click="btnOK_Click" Content="Fertig" Foreground="Black" Height="50" HorizontalAlignment="Center" Width="150"/>
         </Grid>
