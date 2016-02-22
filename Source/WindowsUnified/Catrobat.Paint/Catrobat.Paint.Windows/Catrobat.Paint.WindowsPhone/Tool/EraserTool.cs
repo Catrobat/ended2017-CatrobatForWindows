@@ -164,9 +164,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             throw new NotImplementedException();
         }
 
-        /*public override void ResetUsedElements()
+        public override void ResetUsedElements()
         {
             PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
-        }*/
+        }
     }
 }
