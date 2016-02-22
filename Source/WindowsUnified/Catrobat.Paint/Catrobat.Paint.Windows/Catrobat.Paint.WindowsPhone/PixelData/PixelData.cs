@@ -10,19 +10,18 @@ using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
+using Windows.UI.Xaml;
 
 namespace Catrobat.Paint.WindowsPhone.PixelData
 {
-    class PixelData
+    public class PixelData
     {
         private WriteableBitmap Bitmap;
-        private SolidColorBrush ColorBrush;
         public String ReturnString;
         private int X;
         private int Y;
         public byte[] pixelsCanvas;
-        public byte[] oldPixles;
-        private byte[] pixelsCanvasEraser;
+        public byte[] pixelsCanvasEraser;
         public int pixelHeightCanvas;
         public int pixelWidthCanvas;
 
@@ -145,11 +144,8 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);
 
-            pixelsCanvasEraser = WindowsRuntimeBufferExtensions.ToArray(buffer);
-            oldPixles = WindowsRuntimeBufferExtensions.ToArray(buffer);
             this.pixelHeightCanvas = retarbi.PixelHeight;
             this.pixelWidthCanvas = retarbi.PixelWidth;
-            ColorBrush = new SolidColorBrush();
             return 0;
         }
 
@@ -516,6 +512,8 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             Canvas eraserCanvas = PocketPaintApplication.GetInstance().EraserCanvas;
             try
             {
+                if (eraserCanvas.Visibility == Visibility.Collapsed)
+                    eraserCanvas.Visibility = Visibility.Visible;
                 await retarbi.RenderAsync(eraserCanvas);
 
                 Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
@@ -524,8 +522,10 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                 this.pixelHeightCanvas = retarbi.PixelHeight;
                 this.pixelWidthCanvas = retarbi.PixelWidth;
             }
-            catch { }
-            ColorBrush = new SolidColorBrush();
+            catch 
+            { 
+                return 1; 
+            }
             return 0;
         }
 
