@@ -3540,6 +3540,17 @@ namespace Catrobat.Core.Resources.Localization
                 return resourceLoader.GetString("Main_MessageBoxInformation");
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Sensors Missing.
+        /// </summary>
+        public static string Main_MessageBoxSensorsMissing
+        {
+            get
+            {
+                return ResourceManager.GetString("Main_MessageBoxSensorsMissing");
+            }
+        }
         
         /// <summary>
         /// Localized resource similar to "All downloads finished."

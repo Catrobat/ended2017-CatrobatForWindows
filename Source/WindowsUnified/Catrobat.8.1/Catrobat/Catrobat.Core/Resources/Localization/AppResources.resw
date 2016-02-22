@@ -1383,4 +1383,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="WhackAMole_MovingMole" xml:space="preserve">
     <value>moving mole</value>
   </data>
+  <data name="Main_MessageBoxSensorsMissing" xml:space="preserve">
+    <value>Sensors Missing</value>
+  </data>
 </root>
