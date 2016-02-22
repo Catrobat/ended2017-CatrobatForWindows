@@ -30,6 +30,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _lastPointSet = false;
             points = new List<Point>();
             pixelData = new PixelData.PixelData();
+            pixelDataEraser = new PixelData.PixelData();
             initPathInstances();
             initPathStrokeSettings();
         }
@@ -62,7 +63,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             points = new List<Point>();
             var coordinate = (Point)arg;
             await pixelData.preparePaintingAreaCanvasPixel();
-            pixelDataEraser = new PixelData.PixelData();
 
             initPathInstances();
             initPathStrokeSettings();
@@ -137,18 +137,26 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _path.InvalidateArrange();
             }
-
-            await pixelDataEraser.preparePaintingAreaCanvasForEraser();
+           
+            int returnValue = await pixelDataEraser.preparePaintingAreaCanvasForEraser();
+            if (returnValue == 1)
+                throw new Exception("Preparing pixeldataeraser failed!");
             points = pixelDataEraser.GetWhitePixels();
             pixelData.SetPixel(points, "0_0_0_0");
-            PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().EraserCanvas.Children.Clear();
             if(await pixelData.PixelBufferToBitmap())
                 CommandManager.GetInstance().CommitCommand(new EraserCommand(points));
         }
         async public override void Draw(object obj)
         {
-            throw new NotImplementedException();
+            await pixelData.preparePaintingAreaCanvasPixel();
+            pixelDataEraser = new PixelData.PixelData();
+            await pixelDataEraser.preparePaintingAreaCanvasForEraser();
+            List<Point> pointsToSet = ((List<Point>)obj);
+            pixelData.SetPixel(pointsToSet, "0_0_0_0");
+            PocketPaintApplication.GetInstance().EraserCanvas.Children.Clear();
+            var image = await pixelData.BufferToImage();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
         }
 
         public override void ResetDrawingSpace()
@@ -156,9 +164,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             throw new NotImplementedException();
         }
 
-        public override void ResetUsedElements()
+        /*public override void ResetUsedElements()
         {
             PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
-        }
+        }*/
     }
 }
