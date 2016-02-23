@@ -22,6 +22,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
+            System.Diagnostics.Debug.WriteLine("Rectangle: HandleMove aka Rotation??");
         }
 
         public override void HandleUp(object arg)

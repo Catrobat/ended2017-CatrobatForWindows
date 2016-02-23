@@ -22,13 +22,13 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleDown(object arg)
         {
-
+            System.Diagnostics.Debug.WriteLine("Ellipse: HandleDown!");
         }
 
         public override void HandleMove(object arg)
         {
             RotateTransform rotateTransform = new RotateTransform();
-            rotateTransform = (RotateTransform)arg;
+            rotateTransform = arg as RotateTransform;
 
             TranslateTransform lastTranslateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl.getLastTranslateTransformation();
             RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl.getLastRotateTransformation();
@@ -39,9 +39,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 originTranslateTransform.X = (lastTranslateTransform.X * -1.0);
                 originTranslateTransform.Y = (lastTranslateTransform.Y * -1.0);
 
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(originTranslateTransform);
+                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(originTranslateTransform);
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(rotateTransform);
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(lastTranslateTransform);
+                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(lastTranslateTransform);
             }
             else if (lastTranslateTransform == null && lastRotateTransform != null)
             {
@@ -56,9 +56,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
                 rotateTransform.Angle += lastRotateTransform.Angle;
 
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(originTranslateTransform);
+                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(originTranslateTransform);
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(rotateTransform);
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(lastTranslateTransform);
+                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(lastTranslateTransform);
             }
             else
             {
@@ -68,7 +68,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleUp(object arg)
         {
-
+            System.Diagnostics.Debug.WriteLine("Ellipse: HandleUp!");
         }
 
         public override void Draw(object o)

@@ -139,6 +139,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetUsedElements()
         {
+            PocketPaintApplication.GetInstance().StampControl.setSourceImageStamp(null);
         }
     }
 }

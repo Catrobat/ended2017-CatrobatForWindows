@@ -410,8 +410,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserControls\clippedEllipse.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserControls\colorPicker.xaml">
       <SubType>Designer</SubType>
