@@ -12,7 +12,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
     public sealed partial class CursorControl : UserControl
     {
-        private static bool isDrawing;
+        private static bool _isDrawing;
         private double standardDrawingPoint = 8.0;
         private double standardSizeInner = 13.0;
         private double standardSizeOuter = 20.0;
@@ -20,8 +20,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public CursorControl()
         {
             this.InitializeComponent();
-            isDrawing = false;
-            //setCursorControlLayout();
+            _isDrawing = false;
+
             if(PocketPaintApplication.GetInstance().cursorControl == null)
             {
                 PocketPaintApplication.GetInstance().cursorControl = this;
@@ -104,8 +104,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void changeCursorsize()
         {
-            //double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
-            double currentThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;// *width_multiplicator;
+            double currentThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
             double newCurrentThickness = currentThickness - standardDrawingPoint;
             double newSizeInner = standardSizeInner + newCurrentThickness;
             double newSizeOuter = standardSizeOuter + newCurrentThickness;
@@ -161,14 +160,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public bool isDrawingActivated()
         {
-            return isDrawing;
+            return _isDrawing;
         }
 
-        public void setCursorLook()
+        public void setCursorLook(bool isDrawing)
         {
-            isDrawing = !isDrawing;
+            _isDrawing = isDrawing;
 
-            if(isDrawing)
+            if(_isDrawing)
             {
                 Color color = PocketPaintApplication.GetInstance().PaintData.colorSelected.Color;
                 rectColorEven.Color = color;
@@ -184,7 +183,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void setCursorColor(Color color)
         {
-            if (isDrawing)
+            if (_isDrawing)
             {
                 rectColorEven.Color = color;
                 setVisibilityOfDrawingPoint = Visibility.Visible;
@@ -193,7 +192,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void setDrawingPointColor(Color color)
         {
-            if(isDrawing)
+            if(_isDrawing)
             {
                 ellDrawingPoint.Fill = new SolidColorBrush(color);
                 rectDrawingPoint.Fill = new SolidColorBrush(color);
