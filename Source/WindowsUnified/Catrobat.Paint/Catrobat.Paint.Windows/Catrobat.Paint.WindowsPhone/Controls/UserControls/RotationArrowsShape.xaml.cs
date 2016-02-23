@@ -18,9 +18,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet werden kann oder auf die innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class RotationArrowsShapes : UserControl
+    public sealed partial class RotationArrowsShape : UserControl
     {
-        public RotationArrowsShapes()
+        public RotationArrowsShape()
         {
             this.InitializeComponent();
         }

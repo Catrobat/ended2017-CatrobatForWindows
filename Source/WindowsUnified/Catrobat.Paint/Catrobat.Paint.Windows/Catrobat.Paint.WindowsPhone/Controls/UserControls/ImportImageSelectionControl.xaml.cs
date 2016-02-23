@@ -89,6 +89,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
 
             if(centerTop != null)
+
             {
                 _setGridTransformsOfEllipses(_transfomrGridEllipseCenterTop, centerTop);
             }

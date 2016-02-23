@@ -2,15 +2,18 @@
     x:Class="Catrobat.Paint.WindowsPhone.Controls.UserControls.ImportImageSelectionControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     mc:Ignorable="d"
     d:DesignHeight="230"
-    d:DesignWidth="230" ManipulationMode="All">
+    d:DesignWidth="230" 
+    ManipulationMode="All">
 
     <Grid x:Name="GridMain">
-        <Grid x:Name="GridRectangle" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Height="230" VerticalAlignment="Top" Grid.ColumnSpan="2">
+        <Grid x:Name="GridRectangle" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" 
+              ManipulationMode="TranslateX, TranslateY" Height="230" VerticalAlignment="Top" 
+              Grid.ColumnSpan="2">
             <Rectangle x:Name="rectRectangleToDraw" Height="160" Stroke="Gray"
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="20,20,20,20" 
                 ManipulationMode="TranslateX, TranslateY" Width="160" >
@@ -43,8 +46,12 @@
                 Width="25" />
         </Grid>
         
-        <Grid x:Name="GridEllLeftTop" Background="#01FFFFFF" HorizontalAlignment="Left" Height="50" ManipulationDelta="ellLeftTop_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Margin="-20,-25,0,0" VerticalAlignment="Top" Width="50">
-            <Ellipse x:Name="ellLeftTop" Fill="LightSkyBlue" Height="25" Margin="0,0,-25,-25" Width="25" />
+        <Grid x:Name="GridEllLeftTop" Background="#01FFFFFF" HorizontalAlignment="Left" 
+              Height="50" ManipulationDelta="ellLeftTop_ManipulationDelta" 
+              ManipulationMode="TranslateX, TranslateY" Margin="-20,-25,0,0" 
+              VerticalAlignment="Top" Width="50">
+            <Ellipse x:Name="ellLeftTop" Fill="LightSkyBlue" Height="25" Margin="0,0,-25,-25" 
+                     Width="25" />
         </Grid>
         
         <Grid x:Name="GridEllRightCenter" Background="#01FFFFFF" Height="50" HorizontalAlignment="Right" ManipulationDelta="ellRightCenter_ManipulationDelta"
@@ -67,5 +74,42 @@
                 ManipulationMode="TranslateY" Margin="90,-30,85.833,0" VerticalAlignment="Top" Width="50">
             <Ellipse x:Name="ellCenterTop" Fill="LightSkyBlue" Height="20" Margin="0,0,0,-25" Width="30" />
         </Grid>
+
+        <userControls:RotationArrowsShape
+            x:Name="rotationArrowTopLeft"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="-30,-30,0,0">
+        </userControls:RotationArrowsShape>
+
+        <userControls:RotationArrowsShape
+            x:Name="rotationArrowTopRight"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,-30,-80,0">
+            <userControls:RotationArrowsShape.RenderTransform>
+                <CompositeTransform Rotation="90" />
+            </userControls:RotationArrowsShape.RenderTransform>
+        </userControls:RotationArrowsShape>
+
+        <userControls:RotationArrowsShape
+            x:Name="rotationArrowBottomLeft"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Margin="-30,0,0,-80">
+            <userControls:RotationArrowsShape.RenderTransform>
+                <CompositeTransform Rotation="-90" />
+            </userControls:RotationArrowsShape.RenderTransform>
+        </userControls:RotationArrowsShape>
+
+        <userControls:RotationArrowsShape
+            x:Name="rotationArrowBottomRight"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0,0,-80,-80">
+            <userControls:RotationArrowsShape.RenderTransform>
+                <CompositeTransform Rotation="180" />
+            </userControls:RotationArrowsShape.RenderTransform>
+        </userControls:RotationArrowsShape>
     </Grid>
 </UserControl>
