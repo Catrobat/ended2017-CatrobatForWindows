@@ -962,7 +962,7 @@ namespace Catrobat.Paint.WindowsPhone.Tests
             {
                 bool result = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0;
 
-                bool value = sut.HasElementsPaintingAreaViews();
+                bool value = sut.HasPaintingAreaViewElements();
                 Assert.AreEqual(value, result);
             });
         }
@@ -975,7 +975,7 @@ namespace Catrobat.Paint.WindowsPhone.Tests
             {
                 bool result = !(PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0);
 
-                bool value = sut.HasElementsPaintingAreaViews();
+                bool value = sut.HasPaintingAreaViewElements();
                 Assert.AreNotEqual(value, result);
             });
         }

@@ -5,13 +5,13 @@
     xmlns:local="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="660" Width="384">
+    mc:Ignorable="d" Height="670" Width="400">
     
-    <Grid x:Name="GridMain" Height="660" HorizontalAlignment="Left" Margin="-5,-5,0,0" VerticalAlignment="Top" Width="384">
+    <Grid x:Name="GridMain" Height="670" HorizontalAlignment="Left" Margin="-5,-5,0,0" VerticalAlignment="Top" Width="400">
         <Grid x:Name="GridRectangle" HorizontalAlignment="Left" ManipulationDelta="rectRectangleCropSelection_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
-            <Rectangle x:Name="rectRectangleCropSelection" Fill="Transparent" Height="660" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
+            <Rectangle x:Name="rectRectangleCropSelection" Fill="Transparent" Height="670" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
                 StrokeThickness="5" VerticalAlignment="Bottom" 
-                DoubleTapped="rectRectangleCropSelection_DoubleTapped" Width="384"/>
+                DoubleTapped="rectRectangleCropSelection_DoubleTapped" Width="400"/>
         </Grid>
         
         <Grid x:Name="GridRectLeftTop" Background="Transparent" HorizontalAlignment="Left" Height="50" ManipulationDelta="rectLeftTop_ManipulationDelta"

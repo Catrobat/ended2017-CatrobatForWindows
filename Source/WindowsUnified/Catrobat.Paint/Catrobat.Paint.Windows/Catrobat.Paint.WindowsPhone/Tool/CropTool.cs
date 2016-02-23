@@ -20,6 +20,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public CropTool()
         {
             this.ToolType = ToolType.Crop;
+            PocketPaintApplication.GetInstance().CropControl.Visibility = Visibility.Visible;
+            PocketPaintApplication.GetInstance().CropControl.SetCropSelection();
         }
 
         public override void HandleDown(object arg)
@@ -55,6 +57,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetUsedElements()
         {
+            PocketPaintApplication.GetInstance().CropControl.Visibility = Visibility.Collapsed;
         }
     }
 }
