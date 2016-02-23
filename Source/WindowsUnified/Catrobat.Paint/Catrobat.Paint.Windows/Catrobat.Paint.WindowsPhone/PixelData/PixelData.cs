@@ -11,6 +11,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 using Windows.UI.Xaml;
+using Windows.UI;
 
 namespace Catrobat.Paint.WindowsPhone.PixelData
 {
@@ -149,47 +150,57 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             return 0;
         }
 
-        public bool FloodFill4(Point p, SolidColorBrush color)
+        public bool FloodFill4(Point coordinate, SolidColorBrush color)
         {
             try
             {
-                string newColor = ColorToString(color);
+                if (color.Color.A == 0)
+                {
+                    color = new SolidColorBrush(Color.FromArgb(0x00, 0x00, 0x00, 0x00));
+                }
+
                 if (PocketPaintApplication.GetInstance().Bitmap == null)
                 {
                     PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
                 }
-                p = ConvertCoordinates(p);
-                string oldColor = getPixelFromCanvas(p);
+
+                string newColor = ColorToString(color);
+                coordinate = ConvertCoordinates(coordinate);
+
+                string oldColor = getPixelFromCanvas(coordinate);
                 if (oldColor == newColor)
                     return false;
 
-                Stack<Point> list = new Stack<Point>();
-                list.Push(p);
-                while (list.Count > 0)
+                Stack<Point> stackWithCoordinates = new Stack<Point>();
+                stackWithCoordinates.Push(coordinate);
+                while (stackWithCoordinates.Count > 0)
                 {
-                    var p2 = list.Pop();
-                    SetPixel(p2, newColor);
-                    if (p2.X > 1)
+                    var currentCoordinate = stackWithCoordinates.Pop();
+                    SetPixel(currentCoordinate, newColor);
+
+                    if (currentCoordinate.X > 1)
                     {
-                        if (ComparePixelsColorForFloddFill(new Point(p2.X - 1, p2.Y), oldColor))
-                            list.Push(new Point(p2.X - 1, p2.Y));
-                    }
-                    if (p2.X < pixelWidthCanvas)
-                    {
-                        if (ComparePixelsColorForFloddFill(new Point(p2.X + 1, p2.Y), oldColor))
-                            list.Push(new Point(p2.X + 1, p2.Y));
-                    }
-                    if (p2.Y > 1)
-                    {
-                        if (ComparePixelsColorForFloddFill(new Point(p2.X, p2.Y - 1), oldColor))
-                            list.Push(new Point(p2.X, p2.Y - 1));
-                    }
-                    if (p2.Y < pixelHeightCanvas)
-                    {
-                        if (ComparePixelsColorForFloddFill(new Point(p2.X, p2.Y + 1), oldColor))
-                            list.Push(new Point(p2.X, p2.Y + 1));
+                        if (ComparePixelsColorForFloddFill(new Point(currentCoordinate.X - 1, currentCoordinate.Y), oldColor))
+                            stackWithCoordinates.Push(new Point(currentCoordinate.X - 1, currentCoordinate.Y));
                     }
 
+                    if (currentCoordinate.X < pixelWidthCanvas)
+                    {
+                        if (ComparePixelsColorForFloddFill(new Point(currentCoordinate.X + 1, currentCoordinate.Y), oldColor))
+                            stackWithCoordinates.Push(new Point(currentCoordinate.X + 1, currentCoordinate.Y));
+                    }
+
+                    if (currentCoordinate.Y > 1)
+                    {
+                        if (ComparePixelsColorForFloddFill(new Point(currentCoordinate.X, currentCoordinate.Y - 1), oldColor))
+                            stackWithCoordinates.Push(new Point(currentCoordinate.X, currentCoordinate.Y - 1));
+                    }
+
+                    if (currentCoordinate.Y < pixelHeightCanvas)
+                    {
+                        if (ComparePixelsColorForFloddFill(new Point(currentCoordinate.X, currentCoordinate.Y + 1), oldColor))
+                            stackWithCoordinates.Push(new Point(currentCoordinate.X, currentCoordinate.Y + 1));
+                    }
                 }
                 return true;
             }
