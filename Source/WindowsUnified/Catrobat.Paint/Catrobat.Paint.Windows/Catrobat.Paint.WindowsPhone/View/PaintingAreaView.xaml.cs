@@ -336,7 +336,12 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void PaintingAreaCanvas_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            PocketPaintApplication.GetInstance().cursorControl.setCursorLook();
+            PocketPaintApplication currentPPA = PocketPaintApplication.GetInstance();
+            if(currentPPA != null)
+            {
+                bool shouldDrawingModeActivated = !currentPPA.cursorControl.isDrawingActivated();
+                currentPPA.cursorControl.setCursorLook(shouldDrawingModeActivated);
+            }
         }
 
         private void setPaintingAreaViewLayout()

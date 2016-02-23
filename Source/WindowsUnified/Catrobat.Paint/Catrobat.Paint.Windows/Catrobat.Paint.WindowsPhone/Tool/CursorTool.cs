@@ -22,7 +22,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private double height;
         private double width;
 
-
         public CursorTool()
         {
             ToolType = ToolType.Cursor;
@@ -36,8 +35,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PocketPaintApplication.GetInstance().GridCursor.RenderTransform = _transforms = new TransformGroup();
             }
         }
-
-
  
         public override void HandleDown(object arg)
         {
@@ -191,6 +188,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetUsedElements()
         {
+            PocketPaintApplication.GetInstance().GridCursor.RenderTransform = _transforms = new TransformGroup();
+            PocketPaintApplication.GetInstance().cursorControl.setCursorLook(false);
         }
     }
 }
