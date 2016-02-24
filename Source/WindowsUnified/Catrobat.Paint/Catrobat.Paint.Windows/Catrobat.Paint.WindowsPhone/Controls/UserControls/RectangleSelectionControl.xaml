@@ -70,7 +70,6 @@
             Width="40" >
         </userControls:clippedEllipse>
 
-
         <userControls:clippedEllipse
             x:Name="ucEllLeftTop"
             HorizontalAlignment="Left"
