@@ -84,6 +84,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 ProgramConverter programConverter = new ProgramConverter();
                 checkResult.Program = programConverter.Convert(convertedProgram);
+                NativeWrapper.SetProject(convertedProgram);
             }
             catch (Exception)
             {
