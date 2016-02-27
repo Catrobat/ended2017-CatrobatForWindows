@@ -4,9 +4,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlVariableList : XmlObjectNode
     {
-        public XmlObjectVariableList ObjectVariableList;
+        public XmlObjectVariableList ObjectVariableList { get; set; }
 
-        public XmlProgramVariableList ProgramVariableList;
+        public XmlProgramVariableList ProgramVariableList { get; set; }
 
         public XmlVariableList()
         {

@@ -6,14 +6,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 {
     public partial class XmlFormulaTree : XmlObjectNode, IFormulaTree
     {
-        public XmlFormulaTree LeftChild { get; set; }
-
-        public XmlFormulaTree RightChild { get; set; }
-
-        public string VariableType { get; set; }
-
-        public string VariableValue { get; set; }
-
+        #region NativeInterface
         IFormulaTree IFormulaTree.LeftChild
         {
             get { return LeftChild; }
@@ -25,6 +18,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
             get { return RightChild; }
             set { }
         }
+
+        public string VariableType { get; set; }
+
+        public string VariableValue { get; set; }
+
+        #endregion
+
+        public XmlFormulaTree LeftChild { get; set; }
+
+        public XmlFormulaTree RightChild { get; set; }
 
         public XmlFormulaTree()
         {

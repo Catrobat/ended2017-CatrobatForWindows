@@ -69,12 +69,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             SpriteList = new XmlSpriteList(project.Element(XmlConstants.ObjectList));
             VariableList = new XmlVariableList(project.Element(XmlConstants.Variables));
 
+            LoadReference();
+            LoadBroadcastMessages();
+
             foreach (var a in VariableList.ObjectVariableList.ObjectVariableEntries)
             {
                 a.Sprite.Variables = a.VariableList;
             }
-            LoadReference();
-            LoadBroadcastMessages();
         }
 
         internal override XDocument CreateXml()

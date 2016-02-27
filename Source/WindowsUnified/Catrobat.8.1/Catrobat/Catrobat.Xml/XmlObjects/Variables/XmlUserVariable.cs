@@ -6,13 +6,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public partial class XmlUserVariable : XmlObjectNode, IUserVariable
     {
+        #region NativeInterface
         public string Name { get; set; }
+        
+        #endregion
 
         public bool Set { get; set; }
 
         public uint ObjectNum { get; set; }
+
         public uint ScriptNum { get; set; }
+
         public uint BrickNum { get; set; }
+
         public uint VariableNum { get; set; }
 
         public XmlUserVariable() 

@@ -6,6 +6,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
     public partial class XmlStartScript : XmlScript, IStartScript
     {
+        #region NativeInterface
+
+        #endregion
+
         public XmlStartScript() {}
 
         public XmlStartScript(XElement xElement) : base(xElement) {}

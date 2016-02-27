@@ -1,11 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
-    public partial class XmlWhenScript : XmlScript
+    public partial class XmlWhenScript : XmlScript, IWhenScript
     {
+        #region NativeInterface
+        string IWhenScript.Action
+        {
+            get { return _action; }
+            set
+            {
+                _action = value;
+            }
+        }
+
+        #endregion
+
         public enum WhenScriptAction
         {
             Tapped
@@ -33,9 +46,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
         }
 
 
-        public XmlWhenScript() {}
+        public XmlWhenScript() { }
 
-        public XmlWhenScript(XElement xElement) : base(xElement) {}
+        public XmlWhenScript(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {

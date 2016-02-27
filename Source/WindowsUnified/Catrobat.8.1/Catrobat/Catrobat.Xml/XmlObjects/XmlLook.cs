@@ -6,9 +6,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public partial class XmlLook : XmlObjectNode, ILook
     {
+        #region NativeInterface
         public string FileName { get; set; }
 
         public string Name { get; set; }
+
+        #endregion
 
         public XmlLook() { }
 

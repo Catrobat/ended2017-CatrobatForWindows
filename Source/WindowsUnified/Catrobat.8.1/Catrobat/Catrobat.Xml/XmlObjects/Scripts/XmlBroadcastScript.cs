@@ -1,15 +1,22 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
-    public partial class XmlBroadcastScript : XmlScript
+    public partial class XmlBroadcastScript : XmlScript, IBroadcastScript
     {
+        #region NativeInterface
+        public string Name { get { return string.Empty; } set { } }
+
         public string ReceivedMessage { get; set; }
 
-        public XmlBroadcastScript() {}
+        #endregion
 
-        public XmlBroadcastScript(XElement xElement) : base(xElement) {}
+
+        public XmlBroadcastScript() { }
+
+        public XmlBroadcastScript(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
