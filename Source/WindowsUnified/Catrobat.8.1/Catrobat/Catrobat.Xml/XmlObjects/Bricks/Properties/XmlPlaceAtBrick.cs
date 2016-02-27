@@ -1,12 +1,35 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 //using System.Collections.Generic;
 //using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlPlaceAtBrick : XmlBrick
+    public partial class XmlPlaceAtBrick : XmlBrick, IPlaceAtBrick
     {
+        #region NativeInterface
+        public IFormulaTree PositionY
+        {
+            get
+            {
+                return XPosition == null ? null : XPosition.FormulaTree;
+            }
+            set { }
+        }
+
+        public IFormulaTree PositionX
+        {
+            get
+            {
+                return YPosition == null ? null : YPosition.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula XPosition { get; set; }
 
         public XmlFormula YPosition { get; set; }

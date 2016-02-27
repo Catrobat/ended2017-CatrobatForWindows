@@ -1,15 +1,29 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlSetXBrick : XmlBrick
+    public partial class XmlSetXBrick : XmlBrick, ISetXBrick
     {
+        #region NativeInterface
+        public IFormulaTree PositionX
+        {
+            get
+            {
+                return XPosition == null ? null : XPosition.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula XPosition { get; set; }
 
-        public XmlSetXBrick() {}
+        public XmlSetXBrick() { }
 
-        public XmlSetXBrick(XElement xElement) : base(xElement) {}
+        public XmlSetXBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {

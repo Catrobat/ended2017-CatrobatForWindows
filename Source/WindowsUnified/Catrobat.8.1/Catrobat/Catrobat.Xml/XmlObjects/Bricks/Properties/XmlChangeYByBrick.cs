@@ -1,15 +1,29 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlChangeYByBrick : XmlBrick
+    public partial class XmlChangeYByBrick : XmlBrick, IChangeYByBrick
     {
+        #region NativeInterface
+        public IFormulaTree OffsetY
+        {
+            get
+            {
+                return YMovement == null ? null : YMovement.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula YMovement { get; set; }
 
-        public XmlChangeYByBrick() {}
+        public XmlChangeYByBrick() { }
 
-        public XmlChangeYByBrick(XElement xElement) : base(xElement) {}
+        public XmlChangeYByBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {

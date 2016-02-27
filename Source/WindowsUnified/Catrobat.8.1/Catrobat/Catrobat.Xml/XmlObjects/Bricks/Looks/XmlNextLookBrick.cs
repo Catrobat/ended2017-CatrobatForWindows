@@ -1,9 +1,13 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks
 {
-    public partial class XmlNextLookBrick : XmlBrick
+    public partial class XmlNextLookBrick : XmlBrick, INextLookBrick
     {
+        #region NativeInterface
+        #endregion
+
         public XmlNextLookBrick() {}
 
         public XmlNextLookBrick(XElement xElement) : base(xElement) {}

@@ -1,19 +1,51 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlGlideToBrick : XmlBrick
+    public partial class XmlGlideToBrick : XmlBrick, IGLideToBrick
     {
+        #region NativeInterface
+
+        public IFormulaTree Duration
+        {
+            get
+            {
+                return DurationInSeconds == null ? null : DurationInSeconds.FormulaTree;
+            }
+            set { }
+        }
+
+        public IFormulaTree DestinationY
+        {
+            get
+            {
+                return YDestination == null ? null : YDestination.FormulaTree;
+            }
+            set { }
+        }
+
+        public IFormulaTree DestinationX
+        {
+            get
+            {
+                return XDestination == null ? null : XDestination.FormulaTree;
+            }
+            set { }
+        }
+        #endregion
+
         public XmlFormula DurationInSeconds { get; set; }
 
         public XmlFormula XDestination { get; set; }
 
         public XmlFormula YDestination { get; set; }
 
-        public XmlGlideToBrick() {}
+        public XmlGlideToBrick() { }
 
-        public XmlGlideToBrick(XElement xElement) : base(xElement) {}
+        public XmlGlideToBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
@@ -22,7 +54,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
                 DurationInSeconds = new XmlFormula(xRoot, XmlConstants.DurationInSeconds);
                 XDestination = new XmlFormula(xRoot, XmlConstants.XDestination);
                 YDestination = new XmlFormula(xRoot, XmlConstants.YDestination);
-        }
+            }
         }
 
         internal override XElement CreateXml()
@@ -32,7 +64,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
             var xElementY = YDestination.CreateXml();
             xElementY.SetAttributeValue(XmlConstants.Category, XmlConstants.YDestination);
-            
+
             var xElementX = XDestination.CreateXml();
             xElementX.SetAttributeValue(XmlConstants.Category, XmlConstants.XDestination);
 

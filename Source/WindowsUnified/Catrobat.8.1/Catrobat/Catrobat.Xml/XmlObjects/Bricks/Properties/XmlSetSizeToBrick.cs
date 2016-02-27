@@ -7,19 +7,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlSetSizeToBrick : XmlBrick, ISetSizeToBrick
     {
-        public XmlFormula Size { get; set; }
-
+        #region NativeInterface
         public IFormulaTree Scale
         {
-            get { return Size.FormulaTree; }
-            set
-            {
-            }
+            get { return Size == null ? null : Size.FormulaTree; }
+            set { }
         }
+        #endregion
+
+        public XmlFormula Size { get; set; }
 
         public XmlSetSizeToBrick() { }
 
-        public XmlSetSizeToBrick(XElement xElement) : base(xElement) {}
+        public XmlSetSizeToBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             {
                 Size = new XmlFormula(xRoot, XmlConstants.Size);
             }
-            
+
         }
 
         internal override XElement CreateXml()

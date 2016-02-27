@@ -1,15 +1,29 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlTurnRightBrick : XmlBrick
+    public partial class XmlTurnRightBrick : XmlBrick, ITurnRightBrick
     {
+        #region NativeInterface
+        public IFormulaTree Rotation
+        {
+            get
+            {
+                return Degrees == null ? null : Degrees.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula Degrees { get; set; }
 
-        public XmlTurnRightBrick() {}
+        public XmlTurnRightBrick() { }
 
-        public XmlTurnRightBrick(XElement xElement) : base(xElement) {}
+        public XmlTurnRightBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
