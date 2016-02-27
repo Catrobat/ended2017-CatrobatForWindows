@@ -10,13 +10,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
     public abstract partial class XmlScript : XmlObjectNode, IScript
     {
-        public XmlBrickList Bricks { get; set; }
-
+        #region NativeInterface
         IList<IBrick> IScript.Bricks
         {
             get { return Bricks.Bricks.Cast<IBrick>().ToList(); }
             set { }
         }
+        
+        #endregion
+
+        public XmlBrickList Bricks { get; set; }
 
         protected XmlScript()
         {

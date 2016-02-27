@@ -34,6 +34,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             get { return Looks.Looks.Cast<ILook>().ToList(); }
             set { }
         }
+
+        public string Name { get; set; }
+
         #endregion
 
         /// <summary>
@@ -42,8 +45,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public XmlUserVariableList Variables { get; set; }
 
         public XmlLookList Looks { get; set; }
-
-        public string Name { get; set; }
 
         public XmlScriptList Scripts { get; set; }
 
