@@ -46,18 +46,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public string UserHandle { get; set; }
 
-        public string TargetPlatform
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string TargetPlatform { get; set; }
 
         public XmlProjectHeader(bool isAutoFillProperties = true)
         {
@@ -79,6 +68,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Tags = "";
             Url = "http://pocketcode.org/details/871";
             UserHandle = "";
+            TargetPlatform = string.Empty;
         }
 
         //private void UpdateSystemInformation()
@@ -123,6 +113,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Tags = xRoot.Element(XmlConstants.Tags).Value;
             Url = xRoot.Element(XmlConstants.Url).Value;
             UserHandle = xRoot.Element(XmlConstants.userHandle).Value;
+            TargetPlatform = string.Empty;
         }
 
         internal override XElement CreateXml()
