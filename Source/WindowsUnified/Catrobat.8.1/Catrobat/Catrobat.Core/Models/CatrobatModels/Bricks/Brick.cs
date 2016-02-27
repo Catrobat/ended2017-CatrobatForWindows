@@ -9,12 +9,11 @@ namespace Catrobat.IDE.Core.Models.Bricks
 {
     public abstract partial class Brick : CatrobatModelBase, IBrick
     {
-
         #region Implements ITestEquatable
 
         protected override bool TestEquals(ModelBase other)
         {
-            return base.TestEquals(other) && TestEquals((Brick) other);
+            return base.TestEquals(other) && TestEquals((Brick)other);
         }
 
         protected virtual bool TestEquals(Brick other)
@@ -33,7 +32,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal virtual object CloneInstance()
         {
-            var result = (Brick) MemberwiseClone();
+            var result = (Brick)MemberwiseClone();
             result.IsAttached = true;
             return result;
         }
@@ -47,8 +46,8 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             // prevent endless loops
             Brick result;
-            return context.Bricks.TryGetValue(this, out result) 
-                ? result 
+            return context.Bricks.TryGetValue(this, out result)
+                ? result
                 : CloneInstance(context);
         }
 

@@ -305,6 +305,7 @@
     <Content Include="Assets\StoreLogo.Scale-100.png" />
     <Content Include="Assets\StoreLogo.Scale-140.png" />
     <Content Include="Assets\StoreLogo.scale-240.png" />
+    <Content Include="Assets\Warning.png" />
     <Content Include="Assets\Wide310x150.Scale-100.png" />
     <Content Include="Assets\Wide310x150.Scale-140.png" />
     <Content Include="Assets\Wide310x150.Scale-240.png" />

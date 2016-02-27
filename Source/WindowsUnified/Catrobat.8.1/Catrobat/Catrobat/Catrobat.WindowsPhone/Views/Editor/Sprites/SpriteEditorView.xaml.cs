@@ -11,6 +11,9 @@ using Windows.UI.Xaml.Data;
 using Catrobat.IDE.WindowsPhone.Controls;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.Models.Scripts;
+using Catrobat.IDE.Core.Models.Bricks;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 {
@@ -19,8 +22,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         private double itemWidthPortrait;
         private double itemWidthLandscape;
 
-        private readonly SpriteEditorViewModel _viewModel =
-            ServiceLocator.ViewModelLocator.SpriteEditorViewModel;
+        private readonly SpriteEditorViewModel _viewModel = ServiceLocator.ViewModelLocator.SpriteEditorViewModel;
 
         private MultiModeEditorCommandBar _commandBarActions;
         private MultiModeEditorCommandBar _commandBarLooks;
@@ -28,30 +30,23 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         public SpriteEditorView()
         {
-            //NavigationCacheMode = NavigationCacheMode.Enabled;
-
             InitializeComponent();
 
             var bounds = Window.Current.Bounds;
 
-            double height = bounds.Height * 0.88;
-            double width = bounds.Width * 0.95;
+            int height = (int)(bounds.Height * 0.88);
+            int width = (int)(bounds.Width * 0.95);
 
-            CatrobatListView view = this.FindName("ListViewActions") as CatrobatListView;
-            view.ItemWidthLandscape = (int)height;
-            view.ItemWidthPortrait = (int)width;
+            ListViewActions.ItemWidthLandscape = height;
+            ListViewActions.ItemWidthPortrait = width;
+            ListViewLooks.ItemWidthLandscape = height;
+            ListViewLooks.ItemWidthPortrait = width;
+            ListViewSounds.ItemWidthLandscape = height;
+            ListViewSounds.ItemWidthPortrait = width;
 
-            view = this.FindName("ListViewLooks") as CatrobatListView;
-            view.ItemWidthLandscape = (int)height;
-            view.ItemWidthPortrait = (int)width;
-
-            view = this.FindName("ListViewSounds") as CatrobatListView;
-            view.ItemWidthLandscape = (int)height;
-            view.ItemWidthPortrait = (int)width;
             CreateCommandBars();
 
             BottomAppBar = _commandBarActions;
-            //CommandBarMain = (CommandBar)Resources["AppBarActions"];
         }
 
         private void CreateCommandBars()
@@ -68,8 +63,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             _commandBarActions.ModeChanged += MultiModeEditorCommandBar_OnModeChanged;
             _commandBarActions.SetBinding(MultiModeEditorCommandBar.ModeProperty,
                 new Binding { Path = new PropertyPath("ActionsCommandBarMode"), Mode = BindingMode.TwoWay });
-
-
 
             _commandBarLooks = new MultiModeEditorCommandBar
             {
@@ -155,11 +148,13 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         private void LookItem_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var isClickEnabled = !ListViewLooks.SelectionEnabled;
+
             if (isClickEnabled)
             {
                 if (_viewModel.EditLookCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
+                {
                     _viewModel.EditLookCommand.Execute(((FrameworkElement)e.OriginalSource).DataContext);
-
+                }
             }
         }
 
@@ -168,8 +163,12 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             var isClickEnabled = !ListViewSounds.SelectionEnabled;
 
             if (isClickEnabled)
+            {
                 if (_viewModel.EditSoundCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
+                {
                     _viewModel.EditSoundCommand.Execute(((FrameworkElement)e.OriginalSource).DataContext);
+                }
+            }
         }
     }
 }

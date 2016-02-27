@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.UI
 {
     public class ActionsCollection : IList, INotifyCollectionChanged
     {
-        private ObservableCollection<Script> Scripts
+        public ObservableCollection<Script> Scripts
         {
             get
             {

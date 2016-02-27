@@ -40,20 +40,6 @@
                 Source={StaticResource LocalizedStrings}}">
                 
                 <Grid DataContext="{Binding}">
-
-                    <!-- original <catrobatListView:CatrobatListView 
-                        x:Name="ListViewActions"
-                        Visibility="Visible"
-                        ItemsSource="{Binding Actions}"
-                        SelectedItems="{Binding SelectedActions}"                                        
-                        ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
-                        ItemTemplate="{StaticResource ActionTemplateSelectorTemplate}"
-                        VerticalItemMargin="-10"
-                        ReorderEnabled="true" 
-                        HorizontalAlignment="Center"
-                        ItemWidthPortrait="370" 
-                        ItemWidthLandscape="450"
-                    />-->
                     <catrobatListView:CatrobatListView 
                         x:Name="ListViewActions"
                         Visibility="Visible"
@@ -67,13 +53,7 @@
                         ItemWidthPortrait="0" 
                         ItemWidthLandscape="0"
                     />
-                    <!--  
-                    ItemTemplate="{StaticResource ScriptsBrickTemplate}"
-                    ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}" 
-                    ItemsSourcePerformance="{Binding ScriptBricks}"
-                    SmartSelectedItems="{Binding SelectedActions}"
-                    VerticalItemMargin="-10"-->
-
+                    
                     <TextBlock
                         Text ="{Binding Resources.Editor_ClickPlusToAddAction, 
                         Source={StaticResource LocalizedStrings}}"
@@ -106,6 +86,7 @@
                         ItemWidthPortrait="0" 
                         ItemWidthLandscape="0"
                     />
+                    
                     <TextBlock
                         Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
                         Source={StaticResource LocalizedStrings}}"

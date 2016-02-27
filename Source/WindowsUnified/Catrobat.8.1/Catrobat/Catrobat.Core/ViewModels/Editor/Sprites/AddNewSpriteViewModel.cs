@@ -1,8 +1,12 @@
 ﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 {
@@ -39,7 +43,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             {
                 _currentProgram = value;
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     RaisePropertyChanged(() => CurrentProgram));
             }
         }
@@ -100,6 +104,89 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProgram = message.Content;
+
+            this.CheckSensorSupportOfBricks();
+        }
+
+        private void CheckSensorSupportOfBricks()
+        {
+            foreach (Sprite sprite in CurrentProgram.Sprites)
+            {
+                foreach (Script script in sprite.Scripts)
+                {
+                    foreach (Brick brick in script.Bricks)
+                    {
+                        if (brick.GetType().Equals(typeof(SetSizeBrick)))
+                        {
+                            this.CheckSensorSupportOfSetSizeBrick(brick);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangeSizeBrick)))
+                        {
+                            this.CheckSensorSupportOfChangeSizeBrick(brick);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CheckSensorSupportOfChangeSizeBrick(Brick brick)
+        {
+            ChangeSizeBrick changeSizeBrick = (ChangeSizeBrick)brick;
+
+            if (changeSizeBrick.RelativePercentage.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
+                changeSizeBrick.RelativePercentage.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
+                changeSizeBrick.RelativePercentage.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
+            {
+                if (!ServiceLocator.SensorService.IsAccelarationEnabled())
+                {
+                    brick.SensorUnsupported = (int)Visibility.Visible;
+                    return;
+                }
+            }
+
+            foreach(FormulaTree child in changeSizeBrick.RelativePercentage.Children)
+            {
+                if(child.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
+                    child.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
+                    child.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
+                {
+                    if(!ServiceLocator.SensorService.IsAccelarationEnabled())
+                    {
+                        brick.SensorUnsupported = (int)Visibility.Visible;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void CheckSensorSupportOfSetSizeBrick(Brick brick)
+        {
+            SetSizeBrick setSizeBrick = (SetSizeBrick)brick;
+
+            if (setSizeBrick.Percentage.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
+                setSizeBrick.Percentage.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
+                setSizeBrick.Percentage.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
+            {
+                if (!ServiceLocator.SensorService.IsAccelarationEnabled())
+                {
+                    brick.SensorUnsupported = (int)Visibility.Visible;
+                    return;
+                }
+            }
+
+            foreach (FormulaTree child in setSizeBrick.Percentage.Children)
+            {
+                if (child.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
+                    child.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
+                    child.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
+                {
+                    if (!ServiceLocator.SensorService.IsAccelarationEnabled())
+                    {
+                        brick.SensorUnsupported = (int)Visibility.Visible;
+                        return;
+                    }
+                }
+            }
         }
 
         #endregion
