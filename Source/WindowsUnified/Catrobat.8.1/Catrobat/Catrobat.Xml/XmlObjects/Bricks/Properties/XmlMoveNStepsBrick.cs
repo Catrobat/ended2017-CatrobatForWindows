@@ -1,10 +1,24 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlMoveNStepsBrick : XmlBrick
+    public partial class XmlMoveNStepsBrick : XmlBrick, IMoveNStepsBrick
     {
+        #region NativeInterface
+        IFormulaTree IMoveNStepsBrick.Steps
+        {
+            get
+            {
+                return Steps == null ? null : Steps.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula Steps { get; set; }
 
         public XmlMoveNStepsBrick() {}

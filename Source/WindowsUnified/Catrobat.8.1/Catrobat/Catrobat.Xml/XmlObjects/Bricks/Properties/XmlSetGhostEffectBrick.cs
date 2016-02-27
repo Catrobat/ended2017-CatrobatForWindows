@@ -1,10 +1,24 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlSetGhostEffectBrick : XmlBrick
+    public partial class XmlSetGhostEffectBrick : XmlBrick, ISetGhostEffectBrick
     {
+        #region NativeInterface
+        IFormulaTree ISetGhostEffectBrick.Transparency
+        {
+            get
+            {
+                return Transparency == null ? null : Transparency.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula Transparency { get; set; }
 
         public XmlSetGhostEffectBrick() {}

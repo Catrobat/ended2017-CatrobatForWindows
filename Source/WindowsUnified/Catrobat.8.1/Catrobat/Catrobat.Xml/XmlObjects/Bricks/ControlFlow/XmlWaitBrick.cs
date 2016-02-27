@@ -1,15 +1,29 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlWaitBrick : XmlBrick
+    public partial class XmlWaitBrick : XmlBrick, IWaitBrick
     {
+        #region NativeInterface
+        IFormulaTree IWaitBrick.TimeToWaitInSeconds
+        {
+            get
+            {
+                return TimeToWaitInSeconds == null ? null : TimeToWaitInSeconds.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula TimeToWaitInSeconds { get; set; }
 
-        public XmlWaitBrick() {}
+        public XmlWaitBrick() { }
 
-        public XmlWaitBrick(XElement xElement) : base(xElement) {}
+        public XmlWaitBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
@@ -23,7 +37,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlWaitBrickType);
-            
+
             var xElement = TimeToWaitInSeconds.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.TimeToWaitInSeconds);
 

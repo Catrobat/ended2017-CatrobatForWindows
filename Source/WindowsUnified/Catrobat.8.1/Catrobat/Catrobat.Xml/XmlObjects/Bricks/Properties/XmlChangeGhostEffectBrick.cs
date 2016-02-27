@@ -1,15 +1,28 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlChangeGhostEffectBrick : XmlBrick
+    public partial class XmlChangeGhostEffectBrick : XmlBrick, IChangeGhostEffectByBrick
     {
+        #region NativeInterface
+        public IFormulaTree Transparency
+        {
+            get
+            {
+                return ChangeGhostEffect == null ? null : ChangeGhostEffect.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula ChangeGhostEffect { get; set; }
 
-        public XmlChangeGhostEffectBrick() {}
+        public XmlChangeGhostEffectBrick() { }
 
-        public XmlChangeGhostEffectBrick(XElement xElement) : base(xElement) {}
+        public XmlChangeGhostEffectBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
@@ -21,7 +34,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override XElement CreateXml()
         {
-           var xRoot = new XElement(XmlConstants.Brick);
+            var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeGhostEffectBrickType);
 
             var xElement = ChangeGhostEffect.CreateXml();

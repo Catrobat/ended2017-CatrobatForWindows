@@ -1,9 +1,14 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlShowBrick : XmlBrick
+    public partial class XmlShowBrick : XmlBrick, IShowBrick
     {
+        #region NativeInterface
+
+        #endregion
+
         public XmlShowBrick() {}
 
         public XmlShowBrick(XElement xElement) : base(xElement) {}

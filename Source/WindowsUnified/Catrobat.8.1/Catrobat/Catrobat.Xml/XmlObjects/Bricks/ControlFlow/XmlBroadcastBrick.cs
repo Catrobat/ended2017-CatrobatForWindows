@@ -1,10 +1,14 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlBroadcastBrick : XmlBrick , Catrobat_Player.NativeComponent.IBroadcastBrick
+    public partial class XmlBroadcastBrick : XmlBrick , IBroadcastBrick
     {
+        #region NativeInterface
         public string BroadcastMessage { get; set; }
+
+        #endregion
 
         public XmlBroadcastBrick() {}
 

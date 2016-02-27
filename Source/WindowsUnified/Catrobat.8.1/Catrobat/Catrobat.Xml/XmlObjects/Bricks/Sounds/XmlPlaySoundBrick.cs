@@ -1,9 +1,32 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
+using System;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
-    public partial class XmlPlaySoundBrick : XmlBrick
+    public partial class XmlPlaySoundBrick : XmlBrick, IPlaySoundBrick
     {
+        #region NativeInterface
+        public string Name
+        {
+            get
+            {
+                return (XmlSoundReference == null || XmlSoundReference.Sound == null) ? null : XmlSoundReference.Sound.Name;
+            }
+            set { }
+        }
+
+        public string FileName
+        {
+            get
+            {
+                return (XmlSoundReference == null || XmlSoundReference.Sound == null) ? null : XmlSoundReference.Sound.FileName;
+            }
+            set { }
+        }
+
+        #endregion
+
         internal XmlSoundReference XmlSoundReference { get; set; }
 
         public XmlSound Sound
@@ -32,14 +55,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
             }
         }
 
-
         public XmlPlaySoundBrick() { }
 
         public XmlPlaySoundBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot  != null && xRoot.Element(XmlConstants.Sound) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.Sound) != null)
             {
                 XmlSoundReference = new XmlSoundReference(xRoot.Element(XmlConstants.Sound));
             }

@@ -1,15 +1,28 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlChangeSizeByNBrick : XmlBrick
+    public partial class XmlChangeSizeByNBrick : XmlBrick, IChangeSizeByBrick
     {
+        #region NativeInterface
+        public IFormulaTree Scale
+        {
+            get
+            {
+                return Size == null ? null : Size.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula Size { get; set; }
 
-        public XmlChangeSizeByNBrick() {}
+        public XmlChangeSizeByNBrick() { }
 
-        public XmlChangeSizeByNBrick(XElement xElement) : base(xElement) {}
+        public XmlChangeSizeByNBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
@@ -22,7 +35,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         internal override XElement CreateXml()
         {
             var xRoot = new XElement(XmlConstants.Brick);
-            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeSizeByNBrickType);                
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeSizeByNBrickType);
 
             var xElement = Size.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.SizeChange);

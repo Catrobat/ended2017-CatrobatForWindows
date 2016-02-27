@@ -2,11 +2,34 @@
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat_Player.NativeComponent;
+using System;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 {
-    public partial class XmlChangeVariableBrick : XmlBrick
+    public partial class XmlChangeVariableBrick : XmlBrick, IChangeVariableBrick
     {
+        #region NativeInterface
+        IFormulaTree IVariableManagementBrick.VariableFormula
+        {
+            get
+            {
+                return VariableFormula == null ? null : VariableFormula.FormulaTree;
+            }
+            set{  }
+        }
+
+        public IUserVariable Variable
+        {
+            get
+            {
+                return UserVariable;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlUserVariable UserVariable { get; set; }
 
         public XmlFormula VariableFormula { get; set; }
@@ -24,7 +47,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
                 if (xRoot.Element(XmlConstants.UserVariable) != null)
                     UserVariable = new XmlUserVariable(xRoot.Element(XmlConstants.UserVariable));
-        }
+            }
         }
 
         internal override XElement CreateXml()

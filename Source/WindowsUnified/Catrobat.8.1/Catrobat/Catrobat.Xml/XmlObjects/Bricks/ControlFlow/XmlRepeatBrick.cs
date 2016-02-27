@@ -1,10 +1,34 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlRepeatBrick : XmlLoopBeginBrick
+    public partial class XmlRepeatBrick : XmlLoopBeginBrick, IRepeatBrick
     {
+        #region NativeInterface
+        IFormulaTree IRepeatBrick.TimesToRepeat
+        {
+            get
+            {
+                return TimesToRepeat == null ? null : TimesToRepeat.FormulaTree;
+            }
+            set { }
+        }
+
+        public IList<IBrick> Bricks
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula TimesToRepeat { get; set; }
 
         public XmlRepeatBrick() {}

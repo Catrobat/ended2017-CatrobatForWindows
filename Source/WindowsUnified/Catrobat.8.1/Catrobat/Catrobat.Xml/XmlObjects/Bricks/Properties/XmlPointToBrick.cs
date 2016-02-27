@@ -1,9 +1,23 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
+using System;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlPointToBrick : XmlBrick
+    public partial class XmlPointToBrick : XmlBrick, IPointToBrick
     {
+        #region NativeInterface
+        public IFormulaTree Rotation
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlSpriteReference PointedXmlSpriteReference { get; set; }
 
         public XmlSprite PointedSprite
@@ -31,7 +45,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
                     PointedXmlSpriteReference = null;
             }
         }
-
 
         public XmlPointToBrick() {}
 

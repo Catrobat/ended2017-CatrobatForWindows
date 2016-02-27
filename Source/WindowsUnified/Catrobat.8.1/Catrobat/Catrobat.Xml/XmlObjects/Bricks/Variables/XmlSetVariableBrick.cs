@@ -1,11 +1,34 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 {
-    public partial class XmlSetVariableBrick : XmlBrick
+    public partial class XmlSetVariableBrick : XmlBrick, ISetVariableBrick
     {
+        #region NativeInterface
+        IFormulaTree IVariableManagementBrick.VariableFormula
+        {
+            get
+            {
+                return VariableFormula == null ? null : VariableFormula.FormulaTree;
+            }
+            set { }
+        }
+
+        public IUserVariable Variable
+        {
+            get
+            {
+                return UserVariable;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlUserVariable UserVariable { get; set; }
 
         public XmlFormula VariableFormula { get; set; }

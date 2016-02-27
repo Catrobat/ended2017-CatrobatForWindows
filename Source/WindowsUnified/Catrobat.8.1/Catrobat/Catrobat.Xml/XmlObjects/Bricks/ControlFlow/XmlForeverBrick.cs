@@ -1,9 +1,24 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlForeverBrick : XmlLoopBeginBrick
+    public partial class XmlForeverBrick : XmlLoopBeginBrick, IForeverBrick
     {
+        #region NativeInterface
+        public IList<IBrick> Bricks
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlForeverBrick() {}
 
         public XmlForeverBrick(XElement xElement) : base(xElement) {}

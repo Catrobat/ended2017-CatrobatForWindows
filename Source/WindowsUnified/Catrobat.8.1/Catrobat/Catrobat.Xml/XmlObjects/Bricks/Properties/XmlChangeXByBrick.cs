@@ -1,10 +1,24 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlChangeXByBrick : XmlBrick
+    public partial class XmlChangeXByBrick : XmlBrick, IChangeXByBrick
     {
+        #region NativeInterface
+        public IFormulaTree OffsetX
+        {
+            get
+            {
+                return XMovement == null ? null : XMovement.FormulaTree;
+            }
+            set { }
+        }
+
+        #endregion
+
         public XmlFormula XMovement { get; set; }
 
         public XmlChangeXByBrick() {}
