@@ -60,7 +60,6 @@ namespace Catrobat.IDE.WindowsShared.Services
         public bool CheckSensors()
         {
             bool allSensorsWorking = true;
-            string returnValue = "The following sensors are not working correct: ";
 
             _accelerometerChecked = false;
             _compassChecked = false;

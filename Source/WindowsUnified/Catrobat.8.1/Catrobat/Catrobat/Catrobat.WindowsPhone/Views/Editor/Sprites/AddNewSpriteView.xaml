@@ -43,7 +43,7 @@
                TextChanged="TextBoxSpriteName_OnTextChanged" 
                MaxLength="{Binding Resources.Main_TextBoxLimit, 
                Source={StaticResource LocalizedStrings}}"/>
-    </StackPanel>
+            </StackPanel>
   </Grid>
 
   <Page.BottomAppBar>

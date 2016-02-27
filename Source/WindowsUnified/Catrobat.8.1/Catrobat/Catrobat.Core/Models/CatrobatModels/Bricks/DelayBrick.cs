@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((DelayBrick) other);
+            return base.TestEquals(other) && TestEquals((DelayBrick)other);
         }
 
         protected bool TestEquals(DelayBrick other)
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (DelayBrick) base.CloneInstance();
+            var result = (DelayBrick)base.CloneInstance();
             CloneMember(ref result._duration);
             return result;
         }

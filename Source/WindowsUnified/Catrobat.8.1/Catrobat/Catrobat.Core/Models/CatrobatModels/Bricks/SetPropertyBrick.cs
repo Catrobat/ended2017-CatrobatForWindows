@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((SetPositionXBrick) other);
+            return base.TestEquals(other) && TestEquals((SetPositionXBrick)other);
         }
 
         protected bool TestEquals(SetPositionXBrick other)
@@ -40,14 +40,14 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (SetPositionXBrick) base.CloneInstance();
+            var result = (SetPositionXBrick)base.CloneInstance();
             CloneMember(ref result._value);
             return result;
         }
 
         internal override object CloneInstance(CloneSpriteContext context)
         {
-            var result = (SetPositionXBrick) base.CloneInstance(context);
+            var result = (SetPositionXBrick)base.CloneInstance(context);
             CloneMember(ref result._value, context);
             return result;
         }
@@ -72,7 +72,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((SetPositionYBrick) other);
+            return base.TestEquals(other) && TestEquals((SetPositionYBrick)other);
         }
 
         protected bool TestEquals(SetPositionYBrick other)
@@ -86,14 +86,14 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (SetPositionYBrick) base.CloneInstance();
+            var result = (SetPositionYBrick)base.CloneInstance();
             CloneMember(ref result._value);
             return result;
         }
 
         internal override object CloneInstance(CloneSpriteContext context)
         {
-            var result = (SetPositionYBrick) base.CloneInstance(context);
+            var result = (SetPositionYBrick)base.CloneInstance(context);
             CloneMember(ref result._value, context);
             return result;
         }
@@ -125,7 +125,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((SetPositionBrick) other);
+            return base.TestEquals(other) && TestEquals((SetPositionBrick)other);
         }
 
         protected bool TestEquals(SetPositionBrick other)
@@ -139,7 +139,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (SetPositionBrick) base.CloneInstance();
+            var result = (SetPositionBrick)base.CloneInstance();
             CloneMember(ref result._valueX);
             CloneMember(ref result._valueY);
             return result;
@@ -147,7 +147,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance(CloneSpriteContext context)
         {
-            var result = (SetPositionBrick) base.CloneInstance(context);
+            var result = (SetPositionBrick)base.CloneInstance(context);
             CloneMember(ref result._valueX, context);
             CloneMember(ref result._valueY, context);
             return result;
@@ -165,10 +165,18 @@ namespace Catrobat.IDE.Core.Models.Bricks
         #region Properties
 
         private FormulaTree _percentage;
+        private string _sensorSupported;
+
         public FormulaTree Percentage
         {
             get { return _percentage; }
             set { Set(ref _percentage, value); }
+        }
+
+        public string SensorSupported
+        {
+            get { return _sensorSupported; }
+            set { Set(ref _sensorSupported, value); }
         }
 
         #endregion
@@ -177,7 +185,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((SetSizeBrick) other);
+            return base.TestEquals(other) && TestEquals((SetSizeBrick)other);
         }
 
         protected bool TestEquals(SetSizeBrick other)
@@ -191,14 +199,14 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (SetSizeBrick) base.CloneInstance();
+            var result = (SetSizeBrick)base.CloneInstance();
             CloneMember(ref result._percentage);
             return result;
         }
 
         internal override object CloneInstance(CloneSpriteContext context)
         {
-            var result = (SetSizeBrick) base.CloneInstance(context);
+            var result = (SetSizeBrick)base.CloneInstance(context);
             CloneMember(ref result._percentage, context);
             return result;
         }
@@ -223,7 +231,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((SetRotationBrick) other);
+            return base.TestEquals(other) && TestEquals((SetRotationBrick)other);
         }
 
         protected bool TestEquals(SetRotationBrick other)
@@ -237,14 +245,14 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (SetRotationBrick) base.CloneInstance();
+            var result = (SetRotationBrick)base.CloneInstance();
             CloneMember(ref result._value);
             return result;
         }
 
         internal override object CloneInstance(CloneSpriteContext context)
         {
-            var result = (SetRotationBrick) base.CloneInstance(context);
+            var result = (SetRotationBrick)base.CloneInstance(context);
             CloneMember(ref result._value, context);
             return result;
         }
@@ -269,7 +277,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((LookAtBrick) other);
+            return base.TestEquals(other) && TestEquals((LookAtBrick)other);
         }
 
         protected bool TestEquals(LookAtBrick other)
@@ -298,7 +306,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((SetBrightnessBrick) other);
+            return base.TestEquals(other) && TestEquals((SetBrightnessBrick)other);
         }
 
         protected bool TestEquals(SetBrightnessBrick other)
@@ -312,14 +320,14 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (SetBrightnessBrick) base.CloneInstance();
+            var result = (SetBrightnessBrick)base.CloneInstance();
             CloneMember(ref result._percentage);
             return result;
         }
 
         internal override object CloneInstance(CloneSpriteContext context)
         {
-            var result = (SetBrightnessBrick) base.CloneInstance(context);
+            var result = (SetBrightnessBrick)base.CloneInstance(context);
             CloneMember(ref result._percentage, context);
             return result;
         }
@@ -344,7 +352,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         protected override bool TestEquals(Brick other)
         {
-            return base.TestEquals(other) && TestEquals((SetTransparencyBrick) other);
+            return base.TestEquals(other) && TestEquals((SetTransparencyBrick)other);
         }
 
         protected bool TestEquals(SetTransparencyBrick other)
@@ -358,14 +366,14 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal override object CloneInstance()
         {
-            var result = (SetTransparencyBrick) base.CloneInstance();
+            var result = (SetTransparencyBrick)base.CloneInstance();
             CloneMember(ref result._percentage);
             return result;
         }
 
         internal override object CloneInstance(CloneSpriteContext context)
         {
-            var result = (SetTransparencyBrick) base.CloneInstance(context);
+            var result = (SetTransparencyBrick)base.CloneInstance(context);
             CloneMember(ref result._percentage, context);
             return result;
         }
