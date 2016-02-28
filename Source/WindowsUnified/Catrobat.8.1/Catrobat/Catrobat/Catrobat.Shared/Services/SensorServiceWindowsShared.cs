@@ -72,7 +72,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             CheckAccelaration();
             CheckCompass();
             CheckInclinometer();
-            CheckMicrophone();
+            //CheckMicrophone();
 
             _reportIntervall = reportIntervall;
 
@@ -143,7 +143,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 _compass.ReportInterval = reportInterval;
                 _compass.ReadingChanged += _compass_ReadingChanged;
 
-                while(!_compassChecked);
+                while (!_compassChecked) ;
 
                 _compass.ReadingChanged -= _compass_ReadingChanged;
             }
@@ -240,7 +240,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 _inclinometer.ReadingChanged += _inclinometer_ReadingChanged;
             }
 
-            if(_mediacapture != null)
+            if (_mediacapture != null)
             {
                 _storageFile = await KnownFolders.VideosLibrary.CreateFileAsync("test", CreationCollisionOption.GenerateUniqueName);
                 MediaEncodingProfile profile = MediaEncodingProfile.CreateM4a(AudioEncodingQuality.Auto);
@@ -279,7 +279,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     var properties = _storageFile.Properties;
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     // TODO: handle exception
                 }
@@ -427,7 +427,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 _compassEnabled = false;
             }
@@ -451,7 +451,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _accelerometerEnabled = false;
             }
@@ -475,7 +475,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 _inclinometerEnabled = false;
             }
