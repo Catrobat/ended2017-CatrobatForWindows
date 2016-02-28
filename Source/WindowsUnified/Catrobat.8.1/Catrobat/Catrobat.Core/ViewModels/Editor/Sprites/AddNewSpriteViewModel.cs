@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using Catrobat.Core.Resources.Localization;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Models.Scripts;
@@ -99,8 +100,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #endregion
 
-        #region Message Actions
-
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProgram = message.Content;
@@ -108,8 +107,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             this.CheckSensorSupportOfBricks();
         }
 
+        #region Sensors
+
         private void CheckSensorSupportOfBricks()
         {
+            bool supported = true;
+
             foreach (Sprite sprite in CurrentProgram.Sprites)
             {
                 foreach (Script script in sprite.Scripts)
@@ -118,75 +121,212 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                     {
                         if (brick.GetType().Equals(typeof(SetSizeBrick)))
                         {
-                            this.CheckSensorSupportOfSetSizeBrick(brick);
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetSizeBrick)brick).Percentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetPositionXBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetPositionXBrick)brick).Value);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetPositionYBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetPositionYBrick)brick).Value);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetPositionBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetPositionBrick)brick).ValueX);
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetPositionBrick)brick).ValueY);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetRotationBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetRotationBrick)brick).Value);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetBrightnessBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetBrightnessBrick)brick).Percentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetTransparencyBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetTransparencyBrick)brick).Percentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(AnimatePositionBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((AnimatePositionBrick)brick).Duration);
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((AnimatePositionBrick)brick).ToX);
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((AnimatePositionBrick)brick).ToY);
+                        }
+                        else if (brick.GetType().Equals(typeof(RepeatBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((RepeatBrick)brick).Count);
+                        }
+                        else if (brick.GetType().Equals(typeof(IfBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((IfBrick)brick).Condition);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangeBrightnessBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangeBrightnessBrick)brick).RelativePercentage);
                         }
                         else if (brick.GetType().Equals(typeof(ChangeSizeBrick)))
                         {
-                            this.CheckSensorSupportOfChangeSizeBrick(brick);
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangeSizeBrick)brick).RelativePercentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangePositionXBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangePositionXBrick)brick).RelativeValue);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangePositionYBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangePositionYBrick)brick).RelativeValue);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangeRotationBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangeRotationBrick)brick).RelativeValue);
+                        }
+                        else if (brick.GetType().Equals(typeof(MoveBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((MoveBrick)brick).Steps);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangeTransparencyBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangeTransparencyBrick)brick).RelativePercentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(DecreaseZOrderBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((DecreaseZOrderBrick)brick).RelativeValue);
+                        }
+                        else if (brick.GetType().Equals(typeof(DelayBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((DelayBrick)brick).Duration);
+                        }
+                        else if (brick.GetType().Equals(typeof(PlayNxtToneBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((PlayNxtToneBrick)brick).Duration);
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((PlayNxtToneBrick)brick).Frequency);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetNxtMotorSpeedBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetNxtMotorSpeedBrick)brick).Percentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangeNxtMotorAngleBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangeNxtMotorAngleBrick)brick).RelativeValue);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetVolumeBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetVolumeBrick)brick).Percentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangeVolumeBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangeVolumeBrick)brick).RelativePercentage);
+                        }
+                        else if (brick.GetType().Equals(typeof(SetVariableBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((SetVariableBrick)brick).Value);
+                        }
+                        else if (brick.GetType().Equals(typeof(ChangeVariableBrick)))
+                        {
+                            supported &= this.CheckSensorSupportOfBrickFormula(brick, ((ChangeVariableBrick)brick).RelativeValue);
                         }
                     }
                 }
             }
-        }
 
-        private void CheckSensorSupportOfChangeSizeBrick(Brick brick)
-        {
-            ChangeSizeBrick changeSizeBrick = (ChangeSizeBrick)brick;
-
-            if (changeSizeBrick.RelativePercentage.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
-                changeSizeBrick.RelativePercentage.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
-                changeSizeBrick.RelativePercentage.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
+            if (!supported)
             {
-                if (!ServiceLocator.SensorService.IsAccelarationEnabled())
-                {
-                    brick.SensorUnsupported = (int)Visibility.Visible;
-                    return;
-                }
-            }
-
-            foreach(FormulaTree child in changeSizeBrick.RelativePercentage.Children)
-            {
-                if(child.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
-                    child.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
-                    child.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
-                {
-                    if(!ServiceLocator.SensorService.IsAccelarationEnabled())
-                    {
-                        brick.SensorUnsupported = (int)Visibility.Visible;
-                        return;
-                    }
-                }
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get(AppResources.Main_MessageBoxSensorsMissing),
+                    AppResourcesHelper.Get(AppResources.Main_NotAllFeaturesSupported), delegate { /* no action */ }, MessageBoxOptions.Ok);
             }
         }
 
-        private void CheckSensorSupportOfSetSizeBrick(Brick brick)
+        private bool CheckSensorSupportOfBrickFormula(Brick brick, FormulaTree value)
         {
-            SetSizeBrick setSizeBrick = (SetSizeBrick)brick;
-
-            if (setSizeBrick.Percentage.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
-                setSizeBrick.Percentage.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
-                setSizeBrick.Percentage.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
+            if (!CheckAcceleration(brick, value) ||
+                !CheckCompass(brick, value) ||
+                !CheckInclinometer(brick, value) ||
+                !CheckMicrophone(brick, value))
             {
-                if (!ServiceLocator.SensorService.IsAccelarationEnabled())
+                return false;
+            }
+
+            foreach (FormulaTree child in value.Children)
+            {
+                if (!CheckAcceleration(brick, value) ||
+                !CheckCompass(brick, value) ||
+                !CheckInclinometer(brick, value) ||
+                !CheckMicrophone(brick, value))
                 {
-                    brick.SensorUnsupported = (int)Visibility.Visible;
-                    return;
+                    return false;
                 }
             }
 
-            foreach (FormulaTree child in setSizeBrick.Percentage.Children)
+            return true;
+        }
+
+        private bool CheckAcceleration(Brick brick, object value)
+        {
+            if (ServiceLocator.SensorService.IsAccelarationEnabled())
             {
-                if (child.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
-                    child.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
-                    child.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
-                {
-                    if (!ServiceLocator.SensorService.IsAccelarationEnabled())
-                    {
-                        brick.SensorUnsupported = (int)Visibility.Visible;
-                        return;
-                    }
-                }
+                return true;
             }
+
+            if (value.GetType().Equals(typeof(FormulaNodeAccelerationX)) ||
+                value.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
+                value.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
+            {
+                brick.SensorUnsupported = (int)Visibility.Visible;
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckCompass(Brick brick, object value)
+        {
+            if (ServiceLocator.SensorService.IsCompassEnabled())
+            {
+                return true;
+            }
+
+            if (value.GetType().Equals(typeof(FormulaNodeCompass)))
+            {
+                brick.SensorUnsupported = (int)Visibility.Visible;
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckInclinometer(Brick brick, object value)
+        {
+            if (ServiceLocator.SensorService.IsInclinationEnabled())
+            {
+                return true;
+            }
+
+            if (value.GetType().Equals(typeof(FormulaNodeInclinationX)) ||
+                value.GetType().Equals(typeof(FormulaNodeInclinationY)))
+            {
+                brick.SensorUnsupported = (int)Visibility.Visible;
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckMicrophone(Brick brick, object value)
+        {
+            if (ServiceLocator.SensorService.IsMicrophoneEnabled())
+            {
+                return true;
+            }
+
+            if (value.GetType().Equals(typeof(FormulaNodeLoudness)))
+            {
+                brick.SensorUnsupported = (int)Visibility.Visible;
+                return false;
+            }
+
+            return true;
         }
 
         #endregion

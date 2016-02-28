@@ -16,6 +16,7 @@ namespace Catrobat.IDE.Core.Services
         bool IsAccelarationEnabled();
         bool IsCompassEnabled();
         bool IsInclinationEnabled();
+        bool IsMicrophoneEnabled();
 
         double GetAccelerationX();
         double GetAccelerationY();

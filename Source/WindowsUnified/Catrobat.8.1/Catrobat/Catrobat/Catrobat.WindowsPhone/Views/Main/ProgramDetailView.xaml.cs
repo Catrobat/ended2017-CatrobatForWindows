@@ -23,13 +23,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
         private void CheckSensors()
         {
-            bool allSensorsWorking = ServiceLocator.SensorService.CheckSensors();
-
-            if (!allSensorsWorking)
-            {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get(AppResources.Main_MessageBoxSensorsMissing),
-                    AppResourcesHelper.Get(AppResources.Main_NotAllFeaturesSupported), delegate { /* no action */ }, MessageBoxOptions.Ok);
-            }
+            ServiceLocator.SensorService.CheckSensors();
         }
 
         //private void ViewModelOnPropertyChanged(object sender, 
