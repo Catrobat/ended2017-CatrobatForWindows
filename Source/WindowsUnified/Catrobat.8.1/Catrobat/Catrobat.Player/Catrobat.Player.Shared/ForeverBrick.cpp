@@ -6,7 +6,7 @@ using namespace std;
 using namespace ProjectStructure;
 
 ForeverBrick::ForeverBrick(Catrobat_Player::NativeComponent::IForeverBrick^ brick, Script* parent) :
-	ContainerBrick(TypeOfBrick::ContainerBrick, brick, parent)
+	ContainerBrick(TypeOfBrick::ContainerBrick, parent)
 {
 }
 

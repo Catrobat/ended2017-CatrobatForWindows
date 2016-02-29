@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlForeverLoopEndBrick : XmlLoopEndBrick
+    public partial class XmlForeverLoopEndBrick : XmlLoopEndBrick, IForeverEndBrick
     {
         public XmlForeverLoopEndBrick() {}
 

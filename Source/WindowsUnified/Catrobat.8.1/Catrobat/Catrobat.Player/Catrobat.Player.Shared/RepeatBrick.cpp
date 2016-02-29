@@ -6,7 +6,7 @@ using namespace std;
 using namespace ProjectStructure;
 
 RepeatBrick::RepeatBrick(Catrobat_Player::NativeComponent::IRepeatBrick^ brick, Script* parent) :
-	ContainerBrick(TypeOfBrick::ContainerBrick, brick, parent),
+	ContainerBrick(TypeOfBrick::ContainerBrick, parent),
 	m_timesToRepeat(make_shared<FormulaTree>(brick->TimesToRepeat))
 {
 }

@@ -72,15 +72,17 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IChangeVariableBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IChangeXByBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IChangeYByBrick.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)IContainerBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ICostumeBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IElseBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IfBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IForeverBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IForeverEndBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IFormulaTree.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IGlideBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IHeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IHideBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IIfBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IIfEndBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ILook.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IMoveNStepsBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)InclinationProvider.h" />
@@ -92,6 +94,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IPointToBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IRepeatBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IRepeatEndBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ISetGhostEffectBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ISetSizeToBrick.h" />

@@ -1,8 +1,9 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlIfLogicEndBrick : XmlBrick
+    public partial class XmlIfLogicEndBrick : XmlBrick, IIfEndBrick
     {
         internal XmlIfLogicBeginBrickReference IfLogicBeginBrickReference { get; set; }
 
