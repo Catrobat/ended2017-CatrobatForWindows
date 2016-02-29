@@ -22,7 +22,12 @@ namespace ProjectStructure
 		~IfBrick();
 
 		void Execute();
+		std::list<std::unique_ptr<Brick>> *ListPointer() override;
+
+		void ElseMode();
 	private:
+		bool m_elseMode;
+		std::list<std::unique_ptr<Brick>> m_alternateBrickList;
 		std::shared_ptr<FormulaTree> m_condition;
 	};
 }

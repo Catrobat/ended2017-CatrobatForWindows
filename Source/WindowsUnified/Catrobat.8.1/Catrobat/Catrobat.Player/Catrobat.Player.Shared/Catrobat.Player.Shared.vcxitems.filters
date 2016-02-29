@@ -346,7 +346,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IVariableManagementBrick.h">
       <Filter>NativeComponent\Interface\Bricks</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)IContainerBrick.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)IForeverEndBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IElseBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IIfEndBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IRepeatEndBrick.h">
       <Filter>NativeComponent\Interface\Bricks</Filter>
     </ClInclude>
   </ItemGroup>

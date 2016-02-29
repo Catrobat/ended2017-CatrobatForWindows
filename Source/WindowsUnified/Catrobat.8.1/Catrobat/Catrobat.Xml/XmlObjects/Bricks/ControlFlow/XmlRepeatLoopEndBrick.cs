@@ -1,10 +1,11 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlRepeatLoopEndBrick : XmlLoopEndBrick
+    public partial class XmlRepeatLoopEndBrick : XmlLoopEndBrick, IRepeatEndBrick
     {
-        public XmlRepeatLoopEndBrick() {}
+        public XmlRepeatLoopEndBrick() { }
 
         public XmlRepeatLoopEndBrick(XElement xElement) : base(xElement) { }
 
@@ -13,7 +14,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             if (xRoot != null)
             {
                 base.LoadFromCommonXML(xRoot);
-        }
+            }
         }
 
         internal override XElement CreateXml()

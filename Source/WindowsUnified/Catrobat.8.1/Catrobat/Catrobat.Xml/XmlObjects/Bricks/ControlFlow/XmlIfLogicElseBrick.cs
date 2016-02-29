@@ -1,8 +1,9 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlIfLogicElseBrick : XmlBrick
+    public partial class XmlIfLogicElseBrick : XmlBrick, IElseBrick
     {
         internal XmlIfLogicBeginBrickReference IfLogicBeginBrickReference { get; set; }
 
@@ -56,7 +57,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             }
         }
 
-        public XmlIfLogicElseBrick() {}
+        public XmlIfLogicElseBrick() { }
 
         public XmlIfLogicElseBrick(XElement xElement) : base(xElement) { }
 
@@ -72,7 +73,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 IfLogicEndBrickReference = new XmlIfLogicEndBrickReference(xRoot.Element("ifEndBrick"));
             }*/
         }
-        
+
 
         internal override XElement CreateXml()
         {

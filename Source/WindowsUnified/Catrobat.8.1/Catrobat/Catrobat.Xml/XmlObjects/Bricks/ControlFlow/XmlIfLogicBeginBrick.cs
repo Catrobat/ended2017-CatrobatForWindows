@@ -1,10 +1,33 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlIfLogicBeginBrick : XmlBrick
+    public partial class XmlIfLogicBeginBrick : XmlBrick, IIfBrick
     {
+        #region NativeInterface
+        public IFormulaTree Condition
+        {
+            get
+            {
+                return IfCondition == null ? null : IfCondition.FormulaTree;
+            }
+            set { }
+        }
+
+        public IList<IBrick> Bricks
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set { }
+        }
+        #endregion
+
         public XmlFormula IfCondition { get; set; }
 
         internal XmlIfLogicElseBrickReference IfLogicElseBrickReference { get; set; }
@@ -59,7 +82,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             }
         }
 
-        public XmlIfLogicBeginBrick() {}
+        public XmlIfLogicBeginBrick() { }
 
         public XmlIfLogicBeginBrick(XElement xElement) : base(xElement) { }
 
@@ -78,7 +101,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 IfLogicEndBrickReference = new XmlIfLogicEndBrickReference(xRoot.Element("ifEndBrick"));
             }*/
         }
-        
+
 
         internal override XElement CreateXml()
         {
@@ -101,9 +124,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 xRoot.Add(xFormulalist);
             }
 
-                //xRoot.Add(IfLogicElseBrickReference.CreateXml());
+            //xRoot.Add(IfLogicElseBrickReference.CreateXml());
 
-                //xRoot.Add(IfLogicEndBrickReference.CreateXml());
+            //xRoot.Add(IfLogicEndBrickReference.CreateXml());
 
             return xRoot;
         }

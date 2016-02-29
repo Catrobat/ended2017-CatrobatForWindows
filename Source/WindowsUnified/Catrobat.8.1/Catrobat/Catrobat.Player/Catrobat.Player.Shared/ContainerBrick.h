@@ -2,7 +2,6 @@
 
 #include "Brick.h"
 #include "Object.h"
-#include "IContainerBrick.h"
 
 #include <list>
 
@@ -12,9 +11,10 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		ContainerBrick(TypeOfBrick brickType, Catrobat_Player::NativeComponent::IContainerBrick^ brick, Script* parent);
-
+		ContainerBrick(TypeOfBrick brickType, Script* parent);
 		virtual void Execute() = 0;
+
+		virtual std::list<std::unique_ptr<Brick>> *ListPointer();
 	protected:
 		std::list<std::unique_ptr<Brick>> m_brickList;
 	};
