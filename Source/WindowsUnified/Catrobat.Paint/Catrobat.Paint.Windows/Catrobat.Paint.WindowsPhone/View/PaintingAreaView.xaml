@@ -11,7 +11,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
 
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
-        <Grid x:Name="GridWorkingSpace" IsHitTestVisible="True">
+    <Grid x:Name="GridWorkingSpace" IsHitTestVisible="True" ManipulationStarting="GridWorkingSpace_ManipulationStarting">
             <Grid x:Name="PaintingAreaCheckeredGrid" IsHitTestVisible="True">
                 <!--<Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
@@ -24,7 +24,7 @@
                         HorizontalAlignment="Left"
                         ManipulationMode="TranslateX, TranslateY, Scale"
                         VerticalAlignment="Top"
-                        ManipulationStarting="PaintingAreaCanvas_ManipulationStarting"/>
+                        />
 
                 <Canvas x:Name="EraserCanvas" 
                             Width="{Binding ElementName=PaintingAreaCanvas, Path=Width}" 
