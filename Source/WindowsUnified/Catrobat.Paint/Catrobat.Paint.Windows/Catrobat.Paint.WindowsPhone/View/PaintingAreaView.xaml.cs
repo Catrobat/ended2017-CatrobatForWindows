@@ -561,6 +561,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnImportPicture.Label = "Bild laden";
                 app_btnReset.Label = "Ausgangsposition";
 
+                app_btnBrushThickness.Name = "ThicknessProperties";
                 //TODO: David app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
@@ -605,6 +606,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Label = "Einstellungen";
                 app_btnReset.Label = "Ausgangsposition";
                 app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().EllipseSelectionControl.isModifiedEllipseMovement ? true : false;
+
+                app_btnBrushThickness.Name = "ThicknessProperties";
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
@@ -698,6 +701,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Label = "Einstellungen";
                 app_btnReset.Label = "Ausgangsposition";
                 app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+
+                app_btnBrushThickness.Name = "ThicknessProperties";
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
@@ -1289,20 +1294,32 @@ namespace Catrobat.Paint.WindowsPhone.View
             gridThicknessStateInPaintingAreaView = gridThicknessStateInPaintingAreaView == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             PocketPaintApplication.GetInstance().GrdThicknessControlState = gridThicknessStateInPaintingAreaView;
 
-            ToolSettingsTextConverter textConv = new ToolSettingsTextConverter();
-            sender.Label = (string)textConv.Convert(GrdThicknessControlVisibility, null, null, string.Empty);
-
-            ToolSettingsIconConverter iconConv = new ToolSettingsIconConverter();
-            var icon = sender.Icon as BitmapIcon;
-            icon.UriSource = (Uri)iconConv.Convert(GrdThicknessControlVisibility, null, null, string.Empty);
+            UpdateThicknessControlButton(sender, GrdThicknessControlVisibility);
         }
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateThicknessPropertiesButtonLayout((AppBarButton)sender);
+        }
+
+        private void UpdateThicknessPropertiesButtonLayout(AppBarButton sender)
         {
             visibilityGridEllRecControl = visibilityGridEllRecControl == Visibility.Collapsed
                 ? Visibility.Visible : Visibility.Collapsed;
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibilityGridEllRecControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Collapsed;
+
+            UpdateThicknessControlButton(sender, visibilityGridEllRecControl);
+        }
+
+        private void UpdateThicknessControlButton(AppBarButton sender, Visibility vis)
+        {
+            ToolSettingsTextConverter textConv = new ToolSettingsTextConverter();
+            sender.Label = (string)textConv.Convert(vis, null, null, string.Empty);
+
+            ToolSettingsIconConverter iconConv = new ToolSettingsIconConverter();
+            var icon = sender.Icon as BitmapIcon;
+            icon.UriSource = (Uri)iconConv.Convert(vis, null, null, string.Empty);
         }
 
         private void PaintingAreaCanvas_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -1754,11 +1771,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().flipY = 1;
         }
 
-        public AppBarButton getAppBarThicknessButton()
+        public AppBarButton GetAppBarButtonByName(string toolName)
         {
             AppBarButton appBarButton = null;
             CommandBar commandBar = (CommandBar)BottomAppBar;
-            string appBarName = "ThicknessButton";
+            string appBarName = toolName;
 
             for (int i = 0; i < commandBar.PrimaryCommands.Count; i++)
             {
@@ -1773,12 +1790,17 @@ namespace Catrobat.Paint.WindowsPhone.View
             return appBarButton;
         }
 
-        private void PaintingAreaCanvas_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
+        private void GridWorkingSpace_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
             if (GrdThicknessControlVisibility == Visibility.Visible)
             {
-                var button = getAppBarThicknessButton();
+                var button = GetAppBarButtonByName("ThicknessButton");
                 UpdateThicknessButtonLayout(button);
+            }
+            else if(visibilityGridEllRecControl == Visibility.Visible)
+            {
+                var button = GetAppBarButtonByName("ThicknessProperties");
+                UpdateThicknessPropertiesButtonLayout(button);
             }
         }
     }
