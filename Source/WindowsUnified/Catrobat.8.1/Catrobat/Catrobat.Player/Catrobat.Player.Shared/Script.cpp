@@ -84,7 +84,7 @@ Script::Script(TypeOfScript scriptType, Object* parent, Catrobat_Player::NativeC
 			usedList = &m_bricks;
 		}
 
-#pragma region  
+#pragma region ContainerBricks
 		auto foreverBrick = dynamic_cast<Catrobat_Player::NativeComponent::IForeverBrick^>(brick);
 		if (foreverBrick)
 		{
