@@ -15,6 +15,6 @@ SetSizeToBrick::SetSizeToBrick(Catrobat_Player::NativeComponent::ISetSizeToBrick
 
 void SetSizeToBrick::Execute()
 {
-	float scale = Interpreter::Instance()->EvaluateFormulaToFloat(m_scale.get(), m_parent->GetParent()) / 100;
+	float scale = Interpreter::Instance()->EvaluateFormulaToFloat(m_scale, m_parent->GetParent()) / 100;
 	m_parent->GetParent()->SetScale(scale, scale);
 }

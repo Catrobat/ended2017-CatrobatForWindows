@@ -18,7 +18,7 @@ RepeatBrick::~RepeatBrick()
 void RepeatBrick::Execute()
 {
 	int global = 0;
-	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat.get(), GetParent()->GetParent());
+	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat, GetParent()->GetParent());
 
 	while (global < times)
 	{

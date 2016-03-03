@@ -83,8 +83,8 @@ public:
 	FormulaTree(Catrobat_Player::NativeComponent::IFormulaTree^ formulaTree);
 
 	Type GetType();
-	FormulaTree *GetLeftChild();
-	FormulaTree *GetRightChild();
+	std::shared_ptr<FormulaTree> GetLeftChild();
+	std::shared_ptr<FormulaTree> GetRightChild();
 	std::string Value();
 
 	//returns Operator if m_type is set to OPERATOR, instead NO_OPERATOR

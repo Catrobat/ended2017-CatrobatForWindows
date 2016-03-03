@@ -17,5 +17,5 @@ void SetXBrick::Execute()
 {
 	float currentX, currentY;
 	m_parent->GetParent()->GetTranslation(currentX, currentY);
-	m_parent->GetParent()->SetTranslation(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX.get(), m_parent->GetParent()), currentY);
+	m_parent->GetParent()->SetTranslation(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent()), currentY);
 }

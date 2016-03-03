@@ -16,7 +16,7 @@ TurnLeftBrick::TurnLeftBrick(Catrobat_Player::NativeComponent::ITurnLeftBrick^ b
 void TurnLeftBrick::Execute()
 {
 	auto rotation = m_parent->GetParent()->GetRotation();
-	rotation -= Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation.get(), m_parent->GetParent());
+	rotation -= Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent());
 	rotation = rotation >= 0 ? rotation : 360 + rotation; //rotation has to be between 0 and 360
 	m_parent->GetParent()->SetRotation(rotation);
 }
