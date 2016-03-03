@@ -15,5 +15,5 @@ PointToBrick::PointToBrick(Catrobat_Player::NativeComponent::IPointToBrick^ bric
 
 void PointToBrick::Execute()
 {
-	m_parent->GetParent()->SetRotation(Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation.get(), m_parent->GetParent()));
+	m_parent->GetParent()->SetRotation(Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent()));
 }

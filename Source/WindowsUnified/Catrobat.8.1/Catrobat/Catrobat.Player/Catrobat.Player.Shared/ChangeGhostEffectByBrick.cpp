@@ -15,5 +15,6 @@ ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(Catrobat_Player::NativeCompon
 
 void ChangeGhostEffectByBrick::Execute()
 {
-	m_parent->GetParent()->SetTransparency(m_parent->GetParent()->GetTransparency() + (Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency.get(), GetParent()->GetParent()) / 100.f));
+	m_parent->GetParent()->SetTransparency(m_parent->GetParent()->GetTransparency() + 
+		(Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency, GetParent()->GetParent()) / 100.f));
 }

@@ -17,5 +17,5 @@ void ChangeYByBrick::Execute()
 {
 	float currentX, currentY;
 	m_parent->GetParent()->GetTranslation(currentX, currentY);
-	m_parent->GetParent()->SetTranslation(currentX, currentY - Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetY.get(), m_parent->GetParent()));
+	m_parent->GetParent()->SetTranslation(currentX, currentY - Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetY, m_parent->GetParent()));
 }

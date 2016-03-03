@@ -32,7 +32,7 @@ void MoveNStepsBrick::Execute()
 
 void MoveNStepsBrick::CalculateNewCoordinates(float &x, float &y)
 {
-	auto steps = Interpreter::Instance()->EvaluateFormula(m_steps.get(), m_parent->GetParent());
+	auto steps = Interpreter::Instance()->EvaluateFormula(m_steps, m_parent->GetParent());
 
 	if (!steps)
 	{

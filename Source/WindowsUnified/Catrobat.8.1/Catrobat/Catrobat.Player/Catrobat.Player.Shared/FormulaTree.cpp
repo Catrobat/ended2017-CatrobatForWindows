@@ -144,14 +144,14 @@ FormulaTree::FormulaTree(Catrobat_Player::NativeComponent::IFormulaTree^ formula
 	}
 }
 
-FormulaTree *FormulaTree::GetLeftChild()
+std::shared_ptr<FormulaTree> FormulaTree::GetLeftChild()
 {
-	return this->m_leftChild.get();
+	return this->m_leftChild;
 }
 
-FormulaTree *FormulaTree::GetRightChild()
+std::shared_ptr<FormulaTree> FormulaTree::GetRightChild()
 {
-	return this->m_rightChild.get();
+	return this->m_rightChild;
 }
 
 Type FormulaTree::GetType()

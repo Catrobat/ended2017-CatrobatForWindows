@@ -14,5 +14,5 @@ WaitBrick::WaitBrick(Catrobat_Player::NativeComponent::IWaitBrick^ brick, Script
 
 void WaitBrick::Execute()
 {
-	Concurrency::wait(1000 * Interpreter::Instance()->EvaluateFormulaToInt(m_timeToWaitInSeconds.get(), GetParent()->GetParent()));
+	Concurrency::wait(1000 * Interpreter::Instance()->EvaluateFormulaToInt(m_timeToWaitInSeconds, GetParent()->GetParent()));
 }

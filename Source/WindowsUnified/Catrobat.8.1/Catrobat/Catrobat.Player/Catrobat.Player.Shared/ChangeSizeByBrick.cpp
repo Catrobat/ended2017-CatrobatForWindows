@@ -17,6 +17,6 @@ void ChangeSizeByBrick::Execute()
 {
 	float scale;
 	m_parent->GetParent()->GetScale(scale, scale);
-	scale += Interpreter::Instance()->EvaluateFormulaToFloat(m_scale.get(), GetParent()->GetParent());
+	scale += Interpreter::Instance()->EvaluateFormulaToFloat(m_scale, GetParent()->GetParent());
 	m_parent->GetParent()->SetScale(scale, scale);
 }

@@ -16,7 +16,7 @@ PlaceAtBrick::PlaceAtBrick(Catrobat_Player::NativeComponent::IPlaceAtBrick^ bric
 
 void PlaceAtBrick::Execute()
 {
-	auto xPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX.get(), m_parent->GetParent());
-	auto yPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY.get(), m_parent->GetParent());
+	auto xPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent());
+	auto yPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent());
 	m_parent->GetParent()->SetTranslation(xPosition, yPosition);
 }

@@ -30,7 +30,7 @@ std::list<std::unique_ptr<Brick>> *IfBrick::ListPointer()
 
 void IfBrick::Execute()
 {
-	if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition.get(), GetParent()->GetParent()))
+	if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition, GetParent()->GetParent()))
 	{
 		for each (auto &brick in m_brickList)
 		{
