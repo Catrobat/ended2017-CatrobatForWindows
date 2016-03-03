@@ -67,7 +67,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
            var project = document.Element(XmlConstants.Program);
             ProgramHeader = new XmlProjectHeader(project.Element(XmlConstants.Header));
             SpriteList = new XmlSpriteList(project.Element(XmlConstants.ObjectList));
-            VariableList = new XmlVariableList(project.Element(XmlConstants.Variables));
+            if(project.Element(XmlConstants.Variables) != null) //for <0.94
+                VariableList = new XmlVariableList(project.Element(XmlConstants.Variables));
+            else //for >=0.94 (the android team promised)
+                VariableList = new XmlVariableList(project.Element(XmlConstants.Data));
 
             LoadReference();
             LoadBroadcastMessages();

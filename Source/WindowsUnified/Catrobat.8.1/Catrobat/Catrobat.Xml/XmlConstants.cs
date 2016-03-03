@@ -241,7 +241,8 @@ namespace Catrobat.IDE.Core
         public const string XmlObjectVariableListType = "objectVariableList";
         public const string XmlProgramVariableListType = "programVariableList";
         public const string Name = "name";
-        public const string Variables = "variables";
+        public const string Variables = "variables"; //for <0.94
+        public const string Data = "data"; //for >=0.94 (the android team promised)
         public const string Reference = "reference";
 
         #endregion
