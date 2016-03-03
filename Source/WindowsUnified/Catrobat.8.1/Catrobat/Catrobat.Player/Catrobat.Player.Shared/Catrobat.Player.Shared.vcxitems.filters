@@ -14,9 +14,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.h">
       <Filter>Content</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.h">
-      <Filter>Content</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\ShaderStructures.h">
       <Filter>Content</Filter>
     </ClInclude>
@@ -367,9 +364,6 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.cpp">
-      <Filter>Content</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.cpp">
       <Filter>Content</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />

@@ -49,7 +49,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Constants.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ContainerBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\ShaderStructures.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CostumeBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DDSLoader.h" />
@@ -168,7 +167,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CompassProvider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ContainerBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CostumeBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)DDSLoader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)DeviceInformation.cpp" />
