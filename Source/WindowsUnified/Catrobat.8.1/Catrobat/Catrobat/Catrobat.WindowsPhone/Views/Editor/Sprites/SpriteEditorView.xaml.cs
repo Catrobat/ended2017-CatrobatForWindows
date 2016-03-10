@@ -43,7 +43,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             ListViewLooks.ItemWidthPortrait = width;
             ListViewSounds.ItemWidthLandscape = height;
             ListViewSounds.ItemWidthPortrait = width;
-
+           
             CreateCommandBars();
 
             BottomAppBar = _commandBarActions;

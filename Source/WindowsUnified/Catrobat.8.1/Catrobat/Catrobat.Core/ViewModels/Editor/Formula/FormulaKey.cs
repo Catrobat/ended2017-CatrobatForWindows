@@ -3,12 +3,24 @@ using Catrobat.IDE.Core.Formulas.Editor;
 using System.ComponentModel;
 using Catrobat.IDE.Core.Models;
 using GalaSoft.MvvmLight;
+using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 {
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class FormulaKey : ObservableObject
     {
+        private bool _enabled = false;
+
+        public bool IsEnabled
+        {
+            get { return _enabled; }
+            set
+            {
+                _enabled = value;
+            }
+        }
+
         #region Members
 
         private FormulaEditorKey _key;
@@ -82,7 +94,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             get
             {
-                return "Key = " + Key + 
+                return "Key = " + Key +
                     (LocalVariable == null ? string.Empty : ", Variable = " + LocalVariable.Name) +
                     (GlobalVariable == null ? string.Empty : ", Variable = " + GlobalVariable.Name);
             }
@@ -94,7 +106,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             // auto-implemented by ReSharper
             return !ReferenceEquals(null, obj) &&
-                   (ReferenceEquals(this, obj) || obj.GetType() == GetType() && Equals((FormulaKey) obj));
+                   (ReferenceEquals(this, obj) || obj.GetType() == GetType() && Equals((FormulaKey)obj));
         }
 
         protected bool Equals(FormulaKey other)

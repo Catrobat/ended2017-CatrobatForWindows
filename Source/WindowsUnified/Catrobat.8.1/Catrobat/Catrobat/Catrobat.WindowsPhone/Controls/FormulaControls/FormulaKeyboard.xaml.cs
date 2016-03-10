@@ -46,7 +46,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanDelete
         {
-            get { return (bool) GetValue(CanDeleteProperty); }
+            get { return (bool)GetValue(CanDeleteProperty); }
             set { SetValue(CanDeleteProperty, value); }
         }
 
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanUndo
         {
-            get { return (bool) GetValue(CanUndoProperty); }
+            get { return (bool)GetValue(CanUndoProperty); }
             set { SetValue(CanUndoProperty, value); }
         }
 
@@ -68,7 +68,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanRedo
         {
-            get { return (bool) GetValue(CanRedoProperty); }
+            get { return (bool)GetValue(CanRedoProperty); }
             set { SetValue(CanRedoProperty, value); }
         }
 
@@ -79,7 +79,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanLeft
         {
-            get { return (bool) GetValue(CanLeftProperty); }
+            get { return (bool)GetValue(CanLeftProperty); }
             set { SetValue(CanLeftProperty, value); }
         }
 
@@ -90,7 +90,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanRight
         {
-            get { return (bool) GetValue(CanRightProperty); }
+            get { return (bool)GetValue(CanRightProperty); }
             set { SetValue(CanRightProperty, value); }
         }
 
@@ -101,7 +101,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanEvaluate
         {
-            get { return (bool) GetValue(CanEvaluateProperty); }
+            get { return (bool)GetValue(CanEvaluateProperty); }
             set { SetValue(CanEvaluateProperty, value); }
         }
 
@@ -112,14 +112,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool HasError
         {
-            get { return (bool) GetValue(HasErrorProperty); }
+            get { return (bool)GetValue(HasErrorProperty); }
             set { SetValue(HasErrorProperty, value); }
         }
 
         public static readonly DependencyProperty DecimalSeparatorProperty = DependencyProperty.Register("DecimalSeparator", typeof(string), typeof(FormulaKeyboard), new PropertyMetadata("."));
         public string DecimalSeparator
         {
-            get { return (string) GetValue(DecimalSeparatorProperty); }
+            get { return (string)GetValue(DecimalSeparatorProperty); }
             private set { SetValue(DecimalSeparatorProperty, value); }
         }
 
@@ -130,7 +130,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
         public KeyPressed KeyPressed;
         private void RaiseKeyPressed(FormulaKeyEventArgs e)
         {
-            if(KeyPressed != null) KeyPressed.Invoke(e);
+            if (KeyPressed != null) KeyPressed.Invoke(e);
         }
         public void RaiseKeyPressed(FormulaKey data)
         {
@@ -160,9 +160,22 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 
         private void CheckSensorKeys()
         {
+            if (KeysSensors == null || KeysSensors.Items == null || KeysSensors.Items.Count <= 0)
+            {
+                return;
+            }
+
             if (!ServiceLocator.SensorService.IsAccelarationEnabled())
             {
-
+                foreach (FormulaKey key in KeysSensors.Items)
+                {
+                    if (key.Key.Equals(FormulaEditorKey.AccelerationX) ||
+                        key.Key.Equals(FormulaEditorKey.AccelerationY) ||
+                        key.Key.Equals(FormulaEditorKey.AccelerationZ))
+                    {
+                        key.IsEnabled = false;
+                    }
+                }
             }
         }
 
@@ -197,7 +210,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
         {
             ShowMore();
         }
- 
+
         private void ButtonMoreBack_Click(object sender, RoutedEventArgs e)
         {
             ShowMain();
@@ -212,14 +225,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 
         private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var source = (Selector) sender;
+            var source = (Selector)sender;
             if (source.SelectedItem == null) return;
             //_viewModel.IsAddLocalVariableButtonVisible = false;
             //_viewModel.IsAddGlobalVariableButtonVisible = false;
             ShowMain();
-            var data = (FormulaKey) source.SelectedItem;
+            var data = (FormulaKey)source.SelectedItem;
 
-            if(!CheckSensorKeys(data))
+            if (!CheckSensorKeys(data))
             {
                 return;
             }
@@ -231,11 +244,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 
         private bool CheckSensorKeys(FormulaKey key)
         {
-            if(key.Key.Equals(FormulaEditorKey.AccelerationX) ||
+            if (key.Key.Equals(FormulaEditorKey.AccelerationX) ||
                 key.Key.Equals(FormulaEditorKey.AccelerationY) ||
                 key.Key.Equals(FormulaEditorKey.AccelerationZ))
             {
-                if(!ServiceLocator.SensorService.IsAccelarationEnabled())
+                if (!ServiceLocator.SensorService.IsAccelarationEnabled())
                 {
                     return false;
                 }
@@ -243,9 +256,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
                 return true;
             }
 
-            if(key.Key.Equals(FormulaEditorKey.Compass))
+            if (key.Key.Equals(FormulaEditorKey.Compass))
             {
-                if(!ServiceLocator.SensorService.IsCompassEnabled())
+                if (!ServiceLocator.SensorService.IsCompassEnabled())
                 {
                     return false;
                 }
@@ -253,10 +266,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
                 return true;
             }
 
-            if(key.Key.Equals(FormulaEditorKey.InclinationX) ||
+            if (key.Key.Equals(FormulaEditorKey.InclinationX) ||
                 key.Key.Equals(FormulaEditorKey.InclinationY))
             {
-                if(!ServiceLocator.SensorService.IsInclinationEnabled())
+                if (!ServiceLocator.SensorService.IsInclinationEnabled())
                 {
                     return false;
                 }
