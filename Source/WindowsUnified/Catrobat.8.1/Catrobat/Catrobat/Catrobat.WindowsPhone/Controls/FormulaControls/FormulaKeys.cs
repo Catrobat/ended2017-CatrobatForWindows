@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
+using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 {
