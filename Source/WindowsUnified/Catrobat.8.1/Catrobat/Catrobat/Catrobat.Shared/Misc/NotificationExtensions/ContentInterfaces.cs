@@ -2762,7 +2762,8 @@ namespace NotificationsExtensions
 
             /// <summary>
             /// IncomingCall action buttons will be displayed on the toast if one of the option flags (ShowVideoCommand/ShowVoiceCommand/ShowDeclineCommand) is set to true.
-            /// To enable IncomingCall toasts for an app, ensure that the Lock Screen Call extension is enabled in the application manifest.
+            /// To enable IncomingCall toasts for an app, ensure that the Lock Screen Call extension is enabled in the application 
+            /// fest.
             /// </summary>
             IIncomingCallCommands IncomingCallCommands { get; }
 

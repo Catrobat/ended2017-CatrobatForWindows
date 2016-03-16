@@ -111,7 +111,7 @@
 
         <!-- sensors -->
         <formulaControls:FormulaKeys x:Key="KeysSensors">
-            <formula:FormulaKey Key="AccelerationX" />
+            <formula:FormulaKey Key="AccelerationX" IsEnabled="false" />
             <formula:FormulaKey Key="AccelerationY" />
             <formula:FormulaKey Key="AccelerationZ" />
             <formula:FormulaKey Key="Compass" />
@@ -238,7 +238,9 @@
                 Content="{ Binding Resources.FormulaKeyboard_ParameterSeparator, Source={StaticResource LocalizedStrings}}" 
                 DataContext="{StaticResource FormulaEditorKeyParameterSeparator}" 
                 Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <RepeatButton Grid.Row="0" Grid.Column="4" Content="X" DataContext="{StaticResource FormulaEditorKeyDelete}" Style="{StaticResource StyleRepeatButton}" Click="KeyButton_OnClick" IsEnabled="{Binding CanDelete, ElementName=FormulaKeyboardXaml}" >
+                <RepeatButton Grid.Row="0" Grid.Column="4" Content="X" DataContext="{StaticResource FormulaEditorKeyDelete}" 
+                              Style="{StaticResource StyleRepeatButton}" Click="KeyButton_OnClick" 
+                              IsEnabled="{Binding CanDelete, ElementName=FormulaKeyboardXaml}" >
                     <RepeatButton.ContentTemplate>
                         <DataTemplate>
                             <Image VerticalAlignment="Center" Margin="0 0 0 0" Width="74" Height="74" Source="/Content/Images/LicensedIcons/ModernUIIcons/dark/appbar.clear.reflect.horizontal.png"></Image>
@@ -319,7 +321,7 @@
                     <ListView x:Name="KeysSensors"  ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                                <Setter Property="IsEnabled" Value="{Binding ElementName=KeysSensors, Path=IsEnabled, Mode=TwoWay}" />
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
