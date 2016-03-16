@@ -34,12 +34,12 @@
                                 Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <ProgressRing x:Name="CatrobatListViewProgressRing" Grid.Column="0" Grid.ColumnSpan="2" 
-                                      Background="Transparent" 
-                                      IsActive="True" Width="40" Height="40" 
-                                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
+                            Background="Transparent" 
+                            IsActive="True" Width="40" Height="40" 
+                            VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
                         <ScrollViewer
                             x:Name="ScrollViewer"
-                             Grid.Column="0"
+                            Grid.Column="0"
                             Grid.ColumnSpan="2" 
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Visible"
@@ -53,6 +53,7 @@
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Stretch"
                             Visibility="Collapsed" Background="#60FFFFFF" />
+                        <!-- clickable content to drag the bricks -->
                         <Canvas
                             x:Name="DragCanvas"
                             Grid.Column="1"
@@ -73,33 +74,29 @@
         <Setter
             Property="Template">
             <Setter.Value>
-                <ControlTemplate
-                    TargetType="catrobatListViewMisc1:CatrobatListViewItem">
-                    <Grid
-                                Background="{TemplateBinding Background}"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                <ControlTemplate TargetType="catrobatListViewMisc1:CatrobatListViewItem">
+                    <Grid Background="{TemplateBinding Background}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition
-                                        Width="*" />
-                            <ColumnDefinition
-                                        Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <ContentControl
-                                    x:Name="ContentContainer"
-                                    Grid.ColumnSpan="3"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Content="{TemplateBinding Content}"
-                                    ContentTemplate="{TemplateBinding ContentTemplate}"
-                                    Foreground="White"
+                            x:Name="ContentContainer"
+                            Grid.ColumnSpan="3"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Foreground="White"
                                     />
                         <Grid Grid.Column="0" 
-                                x:Name="GroupingGrid"
-                                Visibility="Collapsed"
-                                Background="Transparent"
-                                Width="30">
+                            x:Name="GroupingGrid"
+                            Visibility="Collapsed"
+                            Background="Transparent"
+                            Width="30">
                             <Canvas x:Name="GroupingMinCanvas" Margin="13,35,0,0" Visibility="Collapsed">
                                 <Path Fill="#7FFFFFFF" Stroke="Transparent" 
                                       Data="M0.5,0.5 L4.5,0.5 L4.5,13.6291 L17.6291,13.6291 L17.6291,17.6291 L0.629122,17.6291 L0.629122,17.5 L0.5,17.5 z"
@@ -119,84 +116,72 @@
                                 </Path>
                             </Canvas>
                             <ProgressRing x:Name="CatrobatListViewItemProgressRing" 
-                                      Background="Transparent" 
-                                      IsActive="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"
-                                          MinWidth="40" MinHeight="40"
-                                          RenderTransformOrigin="0.5,0.5">
+                                Background="Transparent" 
+                                IsActive="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"
+                                MinWidth="40" MinHeight="40"
+                                RenderTransformOrigin="0.5,0.5">
                                 <ProgressRing.RenderTransform>
                                     <CompositeTransform ScaleY="0.5" ScaleX="0.5"/>
                                 </ProgressRing.RenderTransform>
-
                             </ProgressRing>
                         </Grid>
 
                         <Canvas Grid.Column="2"
-                                        x:Name="SupportNotification"
-                                         Width="65" Height="35"
-                                        Margin="0 0 50 0"
-                                       Background="Transparent"
-                                        VerticalAlignment="Center">
-                            <Image Grid.Column="2" Visibility="{Binding SensorUnsupported}" Source="ms-appx:///Assets/Warning.png" Height="30" Width="30" />
-                        </Canvas>
-
-                        <Canvas Grid.Column="3"
-                                        x:Name="DragHandle"
-                                         Width="65" Height="35"
-                                       Background="Transparent"
-                                        VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
+                            x:Name="DragHandle"
+                            Width="95" Height="35"
+                            Background="Transparent"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
                             <!-- Drag Lines -->
-                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="#7FFFFFFF" HorizontalAlignment="Left" Height="4" Margin="15,5,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >
+                            <Image x:Name="SensorImage" Margin="0, 5, 0, 5" Grid.Column="2" Visibility="{Binding SensorUnsupported, TargetNullValue=false}" Source="ms-appx:///Assets/Warning.png" Height="25" Width="25" />
+                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="#7FFFFFFF" HorizontalAlignment="Right" Height="4" Margin="35,5,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >
                             </Path>
-                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="#7FFFFFFF" HorizontalAlignment="Left" Height="4" Margin="15,15,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="#7FFFFFFF" HorizontalAlignment="Right" Height="4" Margin="35,15,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >
                             </Path>
-                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="#7FFFFFFF" HorizontalAlignment="Left" Height="4" Margin="15,25,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="#7FFFFFFF" HorizontalAlignment="Right" Height="4" Margin="35,25,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >
                             </Path>
                         </Canvas>
-                        <Canvas Grid.Column="3"
-                                        x:Name="SelectionHandleUnselected"
-                                         Width="65" Height="42"
-                                       Background="Transparent"
-                                        VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                Visibility="Collapsed">
+                        <Canvas Grid.Column="2"
+                            x:Name="SelectionHandleUnselected"
+                            Width="95" Height="42"
+                            Background="Transparent"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Visibility="Collapsed">
                             <!-- Brick Selection Rectangle -->
-                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
-                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="49,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
-                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
-                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="32,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="69,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="32,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="32,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
                         </Canvas>
-                        <Canvas Grid.Column="3"
-                                        x:Name="SelectionHandleSelected"
-                                         Width="65" Height="42"
-                                       Background="Transparent"
-                                        VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                Visibility="Collapsed">
-                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
-                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="49,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
-                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
-                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
-                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="18.501,20.916,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.5,0.5" >
+                        <Canvas Grid.Column="2"
+                            x:Name="SelectionHandleSelected"
+                            Width="95" Height="42"
+                            Background="Transparent"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Visibility="Collapsed">
+                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="32,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="69,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="32,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="32,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="38.501,20.916,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.5,0.5" >
                                 <Path.RenderTransform>
                                     <CompositeTransform Rotation="45"/>
                                 </Path.RenderTransform>
                             </Path>
-                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="23.999,16.249,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="26" RenderTransformOrigin="0.5,0.5" >
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="43.999,16.249,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="26" RenderTransformOrigin="0.5,0.5" >
                                 <Path.RenderTransform>
                                     <CompositeTransform Rotation="-45"/>
                                 </Path.RenderTransform>
                             </Path>
-
                         </Canvas>
                         <Canvas Grid.Column="1"
-                                Grid.ColumnSpan="2"
-                                x:Name="ClickPreventerCanvas"
-                                Background="Transparent"
-                                Visibility="Collapsed" />
-
-
+                            Grid.ColumnSpan="2"
+                            x:Name="ClickPreventerCanvas"
+                            Background="Transparent"
+                            Visibility="Collapsed" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

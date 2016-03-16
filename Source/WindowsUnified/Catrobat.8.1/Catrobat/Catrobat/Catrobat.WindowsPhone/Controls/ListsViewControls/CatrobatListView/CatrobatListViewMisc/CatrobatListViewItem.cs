@@ -11,7 +11,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
 {
     public class CatrobatListViewItem : ListViewItem
     {
-
         #region controls
 
         private Canvas _dragHandle;

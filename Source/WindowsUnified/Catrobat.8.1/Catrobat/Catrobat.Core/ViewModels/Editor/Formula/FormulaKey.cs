@@ -10,9 +10,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class FormulaKey : ObservableObject
     {
-        private bool _enabled = false;
+        private string _enabled = "False";
 
-        public bool IsEnabled
+        public string IsEnabled
         {
             get { return _enabled; }
             set

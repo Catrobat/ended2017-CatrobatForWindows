@@ -173,10 +173,12 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
                         key.Key.Equals(FormulaEditorKey.AccelerationY) ||
                         key.Key.Equals(FormulaEditorKey.AccelerationZ))
                     {
-                        key.IsEnabled = false;
+                        key.IsEnabled = "False";
                     }
                 }
             }
+
+
         }
 
         private void FormulaChangedMessageAction(FormulaEvaluationResult result)

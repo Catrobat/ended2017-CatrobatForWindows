@@ -6,5 +6,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 {
     public class FormulaKeys : List<FormulaKey>
     {
+        public string IsEnabled = "False";
     }
 }

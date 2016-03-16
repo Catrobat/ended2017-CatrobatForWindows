@@ -266,6 +266,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             if (ServiceLocator.SensorService.IsAccelarationEnabled())
             {
+                //brick.SensorUnsupported = (int)Visibility.Visible; // TODO: remove this line
                 return true;
             }
 

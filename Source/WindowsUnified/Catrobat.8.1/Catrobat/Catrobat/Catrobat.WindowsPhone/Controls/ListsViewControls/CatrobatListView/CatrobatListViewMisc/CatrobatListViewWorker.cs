@@ -34,7 +34,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         private const double AutoScrollOffsetManual = 20;
         private const int AutoScrollMargin = 20;
         private const double YDifferenceBeforeRearrange = 10;
-        
+
         #endregion
 
         #region global_helpers
@@ -698,6 +698,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
                 Items[Items.IndexOf(_originalDragContent.Content)] = _tmpDragContentControl;
                 SetTmpDragContentHeight();
                 _manipulationCanvas.Children.Add(tmpItemClone);
+
                 Canvas.SetLeft(tmpItemClone, ActualWidth - tmpItemClone.Width);
 
                 SetYPositionTo(yPos);
@@ -710,9 +711,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         {
             CatrobatListViewItem tmpItemClone = new CatrobatListViewItem(_verticalItemMargin, this._reorderEnabled, this.GroupingEnabled, SelectionEnabled);
             tmpItemClone.Content = _draggingItem.Content;
-
-            tmpItemClone.ContentTemplate = this.ItemTemplate;
-            tmpItemClone.Style = this.ItemContainerStyle;
+            tmpItemClone.ContentTemplate = _draggingItem.ContentTemplate;
+            tmpItemClone.Style = _draggingItem.Style;
             tmpItemClone.Width = ActualWidth * ImageResizeFactor;
             tmpItemClone.IsGrouped = _draggingItem.IsGrouped;
             return tmpItemClone;
@@ -721,6 +721,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         private void SetYPositionTo(double y)
         {
             CatrobatListViewItem tmpDragClone = GetDraggingItemClone();
+
             if (tmpDragClone != null)
             {
                 Canvas.SetTop(tmpDragClone, y - (_draggingItem.OrigHeight * ImageResizeFactor) / 2);
@@ -787,7 +788,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         void item_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             _scrollViewer.Focus(FocusState.Pointer);
-            if(ItemTapped != null)
+            if (ItemTapped != null)
                 ItemTapped(this, new CatrobatListViewItemEventArgs(
                     (CatrobatListViewItem)sender));
         }
@@ -925,7 +926,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         {
             this.ItemTemplate = itemTemplate;
         }
-        
+
         internal void UpdateItemMargin(int value)
         {
             this._verticalItemMargin = value;
@@ -962,7 +963,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         #endregion
 
         #region help_methods
-        
+
         private void Autoscroll(double yVal)
         {
             double actualPositionPercent = yVal / _scrollViewer.RenderSize.Height * 100;
@@ -1007,7 +1008,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
 
     }
 
-  
+
 
     public class CatrobatListViewDragObject
     {
