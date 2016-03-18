@@ -321,7 +321,7 @@
                     <ListView x:Name="KeysSensors"  ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="IsEnabled" Value="{Binding ElementName=KeysSensors, Path=IsEnabled, Mode=TwoWay}" />
+                                <Setter Property="IsEnabled" Value="{Binding Path=IsEnabled, Mode=TwoWay}" />
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>

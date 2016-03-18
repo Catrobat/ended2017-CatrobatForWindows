@@ -512,8 +512,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         }
 
 
-
-
         private void SetTmpDragContentHeight()
         {
             var tmp = ContainerFromItem(_tmpDragContentControl) as CatrobatListViewItem;
@@ -556,7 +554,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
             }
             _dragging = CatrobatListViewDragStaus.PrepareDraggin;
             _draggingItem = tmpItem;
-
+            
             InitDragContentObject();
 
             if (_draggingItem.IsGrouped)
@@ -711,6 +709,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         {
             CatrobatListViewItem tmpItemClone = new CatrobatListViewItem(_verticalItemMargin, this._reorderEnabled, this.GroupingEnabled, SelectionEnabled);
             tmpItemClone.Content = _draggingItem.Content;
+            
             tmpItemClone.ContentTemplate = _draggingItem.ContentTemplate;
             tmpItemClone.Style = _draggingItem.Style;
             tmpItemClone.Width = ActualWidth * ImageResizeFactor;

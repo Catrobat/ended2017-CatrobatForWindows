@@ -165,7 +165,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
                 return;
             }
 
-            if (!ServiceLocator.SensorService.IsAccelarationEnabled())
+            if (ServiceLocator.SensorService.IsAccelarationEnabled())// TODO add !
             {
                 foreach (FormulaKey key in KeysSensors.Items)
                 {
@@ -176,6 +176,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
                         key.IsEnabled = "False";
                     }
                 }
+
+                //KeysSensors.Items.Add(new FormulaKey(FormulaEditorKey.And));
             }
 
 

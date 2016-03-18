@@ -18,6 +18,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             set
             {
                 _enabled = value;
+                RaisePropertyChanged(nameof(IsEnabled));
             }
         }
 
