@@ -55,7 +55,12 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override double EvaluateNumber()
         {
-            return ~((long) Child.EvaluateNumber());
+            if(Child.EvaluateNumber().Equals(0))
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()

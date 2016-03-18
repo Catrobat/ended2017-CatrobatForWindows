@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
     partial class FormulaNodeAdd
     {
-        protected override IFormulaToken CreateToken() 
+        protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreatePlusToken();
         }
@@ -177,6 +177,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
             return FormulaTokenFactory.CreateEqualsToken();
         }
 
+        public override double EvaluateNumber()
+        {
+            if (EvaluateLogic())
+            {
+                return 1;
+            }
+
+            return 0;
+        }
+
         public override bool EvaluateLogic()
         {
             try
@@ -196,7 +206,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return IsNumberT2L();
+            return true;
         }
     }
 
@@ -205,6 +215,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateNotEqualsToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            if (EvaluateLogic())
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()
@@ -226,7 +246,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return IsNumberT2L();
+            return true;
         }
     }
 
@@ -235,6 +255,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateGreaterToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            if (EvaluateLogic())
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()
@@ -249,7 +279,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return IsNumberN2L();
+            return true;
         }
     }
 
@@ -258,6 +288,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateGreaterEqualToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            if(EvaluateLogic())
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()
@@ -272,7 +312,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return IsNumberN2L();
+            return true;
         }
     }
 
@@ -281,6 +321,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateLessToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            if (EvaluateLogic())
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()
@@ -295,7 +345,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return IsNumberN2L();
+            return true;
         }
     }
 
@@ -304,6 +354,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateLessEqualToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            if (EvaluateLogic())
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()
@@ -318,7 +378,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return IsNumberN2L();
+            return true;
         }
     }
 
@@ -331,7 +391,12 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override double EvaluateNumber()
         {
-            return ((long) LeftChild.EvaluateNumber()) & ((long) RightChild.EvaluateNumber());
+            if (!LeftChild.EvaluateNumber().Equals(0) && !RightChild.EvaluateNumber().Equals(0))
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()
@@ -366,7 +431,12 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override double EvaluateNumber()
         {
-            return ((long)LeftChild.EvaluateNumber()) | ((long)RightChild.EvaluateNumber());
+            if (!LeftChild.EvaluateNumber().Equals(0) || !RightChild.EvaluateNumber().Equals(0))
+            {
+                return 1;
+            }
+
+            return 0;
         }
 
         public override bool EvaluateLogic()
