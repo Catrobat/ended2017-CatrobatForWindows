@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override void Append(StringBuilder sb)
         {
-            sb.Append((string) Serialize());
+            sb.Append((string)Serialize());
         }
 
         #endregion
@@ -141,6 +141,11 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
             return FormulaTokenFactory.CreateTrueToken();
         }
 
+        public override double EvaluateNumber()
+        {
+            return 1;
+        }
+
         public override bool EvaluateLogic()
         {
             return true;
@@ -153,7 +158,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return false;
+            return true;
         }
     }
 
@@ -163,7 +168,12 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
         {
             return FormulaTokenFactory.CreateFalseToken();
         }
-        
+
+        public override double EvaluateNumber()
+        {
+            return 0;
+        }
+
         public override bool EvaluateLogic()
         {
             return false;
@@ -176,7 +186,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override bool IsNumber()
         {
-            return false;
+            return true;
         }
     }
 

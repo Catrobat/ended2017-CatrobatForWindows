@@ -240,6 +240,7 @@ namespace Catrobat.IDE.Core.Formulas
 
                 // append digit
                 var digitToken = numberToken as FormulaNodeNumber;
+
                 if (digitToken != null)
                 {
                     numberTokens.Add(numberToken);
