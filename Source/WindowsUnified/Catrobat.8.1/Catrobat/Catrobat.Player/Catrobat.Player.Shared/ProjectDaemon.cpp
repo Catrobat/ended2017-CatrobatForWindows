@@ -17,6 +17,7 @@ using namespace Windows::Phone::UI::Input;
 using namespace Windows::Graphics::Display;
 using namespace std;
 using namespace ProjectStructure;
+using namespace Platform;
 
 #pragma region Singleton
 ProjectDaemon *ProjectDaemon::m_instance = NULL;
@@ -53,16 +54,17 @@ unique_ptr<Project> const & ProjectDaemon::GetProject()
 	return m_project;
 }
 
-bool ProjectDaemon::CreateNativeProject()
+bool ProjectDaemon::CreateNativeProject(String^ projectName)
 {
 	try
 	{
 		if (CSProject != nullptr)
 		{
+			m_projectName = projectName;
 			m_project = make_unique<Project>(CSProject);
 			if (m_project == nullptr) return false;
 			m_projectPath = Helper::StdString(Windows::Storage::ApplicationData::Current->LocalFolder->Path) +
-				"\\Projects\\" + m_project->GetHeader()->GetProgramName();
+				"\\Projects\\" + Helper::StdString(projectName);
 			return true;
 		}
 		return false;
@@ -76,5 +78,5 @@ bool ProjectDaemon::CreateNativeProject()
 bool ProjectDaemon::RestartProject()
 {
 	m_project.reset();
-	return CreateNativeProject();
+	return CreateNativeProject(m_projectName);
 }

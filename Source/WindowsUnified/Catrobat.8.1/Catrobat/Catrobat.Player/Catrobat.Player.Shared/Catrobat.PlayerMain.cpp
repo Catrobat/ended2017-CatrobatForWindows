@@ -47,7 +47,7 @@ namespace Catrobat_Player
 	/// Initialize Project loading and parsing
 	void Catrobat_PlayerMain::LoadProject(String^ projectName, Page^ playerPage)
 	{
-		if (ProjectDaemon::Instance()->CreateNativeProject())
+		if (ProjectDaemon::Instance()->CreateNativeProject(projectName))
 		{
 			m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
 				m_deviceResources));

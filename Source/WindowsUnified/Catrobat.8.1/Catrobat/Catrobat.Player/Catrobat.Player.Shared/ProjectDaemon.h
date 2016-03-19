@@ -15,7 +15,7 @@ namespace ProjectStructure
 		std::unique_ptr<ProjectStructure::Project> const & GetProject();
 		std::string GetProjectPath();
 
-		bool CreateNativeProject();
+		bool CreateNativeProject(Platform::String^ projectName);
 		bool RestartProject();
 		void ApplyDesiredRenderTargetSizeFromProject();
 
