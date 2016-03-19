@@ -134,7 +134,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                             <!-- Drag Lines -->
-                            <Image x:Name="SensorImage" Margin="0, 5, 0, 5" Grid.Column="2" Visibility="{Binding SensorUnsupported, TargetNullValue=false}" Source="ms-appx:///Assets/Warning.png" Height="25" Width="25" />
+                            <Image x:Name="SensorImage" Margin="0, 5, 0, 5" Grid.Column="2" Visibility="{Binding SensorUnsupported, FallbackValue=Collapsed}" Source="ms-appx:///Assets/Warning.png" Height="25" Width="25" />
                             <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="#7FFFFFFF" HorizontalAlignment="Right" Height="4" Margin="35,5,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >
                             </Path>
                             <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="#7FFFFFFF" HorizontalAlignment="Right" Height="4" Margin="35,15,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="35" >

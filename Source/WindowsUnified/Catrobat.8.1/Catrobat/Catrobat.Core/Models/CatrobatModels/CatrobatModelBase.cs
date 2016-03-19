@@ -3,9 +3,9 @@ namespace Catrobat.IDE.Core.Models.CatrobatModels
 {
     public abstract class CatrobatModelBase  : ModelBase
     {
-        private int _sensorUnsupported = (int)Visibility.Collapsed;
+        private Visibility _sensorUnsupported = Visibility.Collapsed;
 
-        public int SensorUnsupported
+        public Visibility SensorUnsupported
         {
             get { return _sensorUnsupported; }
             set { Set(ref _sensorUnsupported, value); }
