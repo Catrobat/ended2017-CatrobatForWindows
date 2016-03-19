@@ -274,7 +274,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 value.GetType().Equals(typeof(FormulaNodeAccelerationY)) ||
                 value.GetType().Equals(typeof(FormulaNodeAccelerationZ)))
             {
-                brick.SensorUnsupported = (int)Visibility.Visible;
+                brick.SensorUnsupported = Visibility.Visible;
                 return false;
             }
 
@@ -290,7 +290,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             if (value.GetType().Equals(typeof(FormulaNodeCompass)))
             {
-                brick.SensorUnsupported = (int)Visibility.Visible;
+                brick.SensorUnsupported = Visibility.Visible;
                 return false;
             }
 
@@ -307,7 +307,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             if (value.GetType().Equals(typeof(FormulaNodeInclinationX)) ||
                 value.GetType().Equals(typeof(FormulaNodeInclinationY)))
             {
-                brick.SensorUnsupported = (int)Visibility.Visible;
+                brick.SensorUnsupported = Visibility.Visible;
                 return false;
             }
 
@@ -323,7 +323,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             if (value.GetType().Equals(typeof(FormulaNodeLoudness)))
             {
-                brick.SensorUnsupported = (int)Visibility.Visible;
+                brick.SensorUnsupported = Visibility.Visible;
                 return false;
             }
 
