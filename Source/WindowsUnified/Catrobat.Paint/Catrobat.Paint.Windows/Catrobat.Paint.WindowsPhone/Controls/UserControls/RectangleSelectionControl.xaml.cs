@@ -17,6 +17,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         double _rectangleForMovementSize = 200.0;
         double _rectangleToDrawSize = 160.0;
         double _gridMainSize = 230.0;
+        public Grid m_mainGrid = null;
 
         public RectangleSelectionControl()
         {
@@ -29,6 +30,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             isModifiedRectangleMovement = false;
+
+            m_mainGrid = GridMainSelection;
         }
 
         public bool isModifiedRectangleMovement
@@ -559,6 +562,37 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 rectangleToDraw.StrokeThickness = value;
             }
+        }
+
+        private void rotationArrowTopLeft_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Rectangle: rotationArrowTopLeft_ManipulationDelta aka Rotation??");
+
+            //Point deltaTranslation = e.Delta.Translation;
+            //double deltaTranslationX = deltaTranslation.X * -1.0;
+            //double deltaTranslationY = deltaTranslation.Y * -1.0;
+            //double newHeightOfRectangleToDraw = rectangleToDraw.Height + deltaTranslationY;
+
+            //if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
+            //{
+            //    setHeightOfSelection(newHeightOfRectangleToDraw);
+            //    changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+            //        GridMainSelection.Margin.Top - deltaTranslationY,
+            //        GridMainSelection.Margin.Right,
+            //        GridMainSelection.Margin.Bottom);
+            //    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = newHeightOfRectangleToDraw;
+            //}
+
+            //double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
+            //if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
+            //{
+            //    setWidthOfSelection(newWidthOfRectangleToDraw);
+            //    changeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
+            //                        GridMainSelection.Margin.Top,
+            //                        GridMainSelection.Margin.Right,
+            //                        GridMainSelection.Margin.Bottom);
+            //    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = newWidthOfRectangleToDraw;
+            //}
         }
     }
 }
