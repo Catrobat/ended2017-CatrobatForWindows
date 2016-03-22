@@ -123,7 +123,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void TopCenterGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationY = (deltaTranslation.Y) * -1.0;
@@ -139,7 +139,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellRightTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void TopRightGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationX = deltaTranslation.X;
@@ -167,7 +167,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void CenterRightGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationX = deltaTranslation.X;
@@ -183,7 +183,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellRightBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void BottomRightGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationX = deltaTranslation.X;
@@ -212,7 +212,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellCenterBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void BottomCenterGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationY = deltaTranslation.Y;
@@ -228,7 +228,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void BottomLeftGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationX = (deltaTranslation.X) * -1.0;
@@ -257,7 +257,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void CenterLeftGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationX = (deltaTranslation.X) * -1.0;
@@ -564,35 +564,33 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void rotationArrowTopLeft_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void TopLeftGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Rectangle: rotationArrowTopLeft_ManipulationDelta aka Rotation??");
+            Point deltaTranslation = e.Delta.Translation;
+            double deltaTranslationX = deltaTranslation.X * -1.0;
+            double deltaTranslationY = deltaTranslation.Y * -1.0;
+            double newHeightOfRectangleToDraw = rectangleToDraw.Height + deltaTranslationY;
 
-            //Point deltaTranslation = e.Delta.Translation;
-            //double deltaTranslationX = deltaTranslation.X * -1.0;
-            //double deltaTranslationY = deltaTranslation.Y * -1.0;
-            //double newHeightOfRectangleToDraw = rectangleToDraw.Height + deltaTranslationY;
+            if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
+            {
+                setHeightOfSelection(newHeightOfRectangleToDraw);
+                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                    GridMainSelection.Margin.Top - deltaTranslationY,
+                    GridMainSelection.Margin.Right,
+                    GridMainSelection.Margin.Bottom);
+                PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = newHeightOfRectangleToDraw;
+            }
 
-            //if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
-            //{
-            //    setHeightOfSelection(newHeightOfRectangleToDraw);
-            //    changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
-            //        GridMainSelection.Margin.Top - deltaTranslationY,
-            //        GridMainSelection.Margin.Right,
-            //        GridMainSelection.Margin.Bottom);
-            //    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = newHeightOfRectangleToDraw;
-            //}
-
-            //double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
-            //if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
-            //{
-            //    setWidthOfSelection(newWidthOfRectangleToDraw);
-            //    changeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
-            //                        GridMainSelection.Margin.Top,
-            //                        GridMainSelection.Margin.Right,
-            //                        GridMainSelection.Margin.Bottom);
-            //    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = newWidthOfRectangleToDraw;
-            //}
+            double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
+            if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
+            {
+                setWidthOfSelection(newWidthOfRectangleToDraw);
+                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
+                                    GridMainSelection.Margin.Top,
+                                    GridMainSelection.Margin.Right,
+                                    GridMainSelection.Margin.Bottom);
+                PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = newWidthOfRectangleToDraw;
+            }
         }
     }
 }
