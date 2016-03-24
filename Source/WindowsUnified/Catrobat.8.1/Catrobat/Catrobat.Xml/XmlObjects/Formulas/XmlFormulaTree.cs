@@ -29,6 +29,43 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         public XmlFormulaTree RightChild { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlFormulaTree t = obj as XmlFormulaTree;
+            if ((object)t == null)
+            {
+                return false;
+            }
+
+            return this.Equals(t);
+            }
+
+        public bool Equals(XmlFormulaTree t)
+        {
+            bool type = this.VariableType.Equals(t.VariableType);
+            bool value = this.VariableValue.Equals(t.VariableValue);
+            bool left = false;
+            if ((this.LeftChild == null) && (t.LeftChild == null))
+                left = true;
+            else if ((this.LeftChild != null) && (t.LeftChild != null))
+                left = this.LeftChild.Equals(t.LeftChild);
+            else left = false;
+
+            bool right = false;
+            if ((this.RightChild == null) && (t.RightChild == null))
+                right = true;
+            else if ((this.RightChild != null) && (t.RightChild != null))
+                right = this.RightChild.Equals(t.RightChild);
+            else right = false;
+
+            return type && value && left && right;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ LeftChild.GetHashCode() ^ RightChild.GetHashCode();
+        }
+
         public XmlFormulaTree()
         {
         }

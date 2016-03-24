@@ -10,6 +10,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
     {
         public XmlFormulaTree FormulaTree { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlFormula f = obj as XmlFormula;
+            if ((object)f == null)
+            {
+                return false;
+            }
+
+            return this.Equals(f);
+        }
+
+        public bool Equals(XmlFormula f)
+        {
+            return this.FormulaTree.Equals(f.FormulaTree);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public XmlFormula()
         {
         }
