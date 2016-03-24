@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,8 +17,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         bool _isModifiedRectangleMovement;
         double _rectangleForMovementSize = 200.0;
         double _rectangleToDrawSize = 160.0;
-        double _gridMainSize = 230.0;
+        double _gridMainSize = 290.0;
         public Grid m_mainGrid = null;
+
+        private Boolean m_isRotating = false;
 
         public RectangleSelectionControl()
         {
@@ -25,9 +28,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             GridMainSelection.RenderTransform = _transformGridMain = new TransformGroup();
 
-            rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
-            rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
+            //rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            //rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            //rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             isModifiedRectangleMovement = false;
 
@@ -103,8 +106,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
             {
-                setHeightOfSelection(newHeightOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetHeightOfControl(newHeightOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                     GridMainSelection.Margin.Top - deltaTranslationY,
                     GridMainSelection.Margin.Right,
                     GridMainSelection.Margin.Bottom);
@@ -114,8 +117,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
             if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
             {
-                setWidthOfSelection(newWidthOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
+                SetWidthOfControl(newWidthOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
                                     GridMainSelection.Margin.Top,
                                     GridMainSelection.Margin.Right,
                                     GridMainSelection.Margin.Bottom);
@@ -130,8 +133,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newHeightOfRectangleToDraw = heightOfRectangleToDraw + deltaTranslationY;
             if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
             {
-                setHeightOfSelection(newHeightOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetHeightOfControl(newHeightOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                                     GridMainSelection.Margin.Top - deltaTranslationY,
                                     GridMainSelection.Margin.Right,
                                     GridMainSelection.Margin.Bottom);
@@ -147,8 +150,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newHeightOfRectangleToDraw = rectangleToDraw.Height + deltaTranslationY;
             if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
             {
-                setHeightOfSelection(newHeightOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetHeightOfControl(newHeightOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                     GridMainSelection.Margin.Top - deltaTranslationY,
                     GridMainSelection.Margin.Right,
                     GridMainSelection.Margin.Bottom);
@@ -158,8 +161,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
             if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
             {
-                setWidthOfSelection(newWidthOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetWidthOfControl(newWidthOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                                     GridMainSelection.Margin.Top,
                                     GridMainSelection.Margin.Right - deltaTranslationX,
                                     GridMainSelection.Margin.Bottom);
@@ -171,15 +174,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             Point deltaTranslation = e.Delta.Translation;
             double deltaTranslationX = deltaTranslation.X;
-            double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
-            if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
+            double newWidthRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
+            if (shouldWidthOfSelectionChanged(newWidthRectangleToDraw))
             {
-                setWidthOfSelection(newWidthOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetWidthOfControl(newWidthRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                                                 GridMainSelection.Margin.Top,
                                                 GridMainSelection.Margin.Right - deltaTranslationX,
                                                 GridMainSelection.Margin.Bottom);
-                PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = newWidthOfRectangleToDraw;
+                PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = newWidthRectangleToDraw;
             }
         }
 
@@ -192,19 +195,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
             {
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                                 GridMainSelection.Margin.Top,
                                 GridMainSelection.Margin.Right,
                                 GridMainSelection.Margin.Bottom - deltaTranslation.Y);
-                setHeightOfSelection(newHeightOfRectangleToDraw);
+                SetHeightOfControl(newHeightOfRectangleToDraw);
                 PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = newHeightOfRectangleToDraw;
             }
 
             double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
             if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
             {
-                setWidthOfSelection(newWidthOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetWidthOfControl(newWidthOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                                     GridMainSelection.Margin.Top,
                                     GridMainSelection.Margin.Right - deltaTranslationX,
                                     GridMainSelection.Margin.Bottom);
@@ -219,8 +222,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newHeightOfRectangleToDraw = heightOfRectangleToDraw + deltaTranslationY;
             if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
             {
-                setHeightOfSelection(newHeightOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetHeightOfControl(newHeightOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                                     GridMainSelection.Margin.Top,
                                     GridMainSelection.Margin.Right,
                                     GridMainSelection.Margin.Bottom - deltaTranslationY);
@@ -237,8 +240,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
             {
-                setHeightOfSelection(newHeightOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetHeightOfControl(newHeightOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                                 GridMainSelection.Margin.Top,
                                 GridMainSelection.Margin.Right,
                                 GridMainSelection.Margin.Bottom - deltaTranslationY);
@@ -248,8 +251,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
             if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
             {
-                setWidthOfSelection(rectangleToDraw.Width + deltaTranslationX);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
+                SetWidthOfControl(rectangleToDraw.Width + deltaTranslationX);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
                                     GridMainSelection.Margin.Top,
                                     GridMainSelection.Margin.Right,
                                     GridMainSelection.Margin.Bottom);
@@ -264,8 +267,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
             if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
             {
-                setWidthOfSelection(rectangleToDraw.Width + deltaTranslationX);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
+                SetWidthOfControl(rectangleToDraw.Width + deltaTranslationX);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
                                     GridMainSelection.Margin.Top,
                                     GridMainSelection.Margin.Right,
                                     GridMainSelection.Margin.Bottom);
@@ -447,13 +450,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             return null;
         }
 
-        public void setHeightOfSelection(double value)
+        public void SetHeightOfControl(double newHeightRectangleToDraw)
         {
-            if (value >= 1)
+            //TODO 1 is maybe too small?
+            if (newHeightRectangleToDraw >= 1)
             {
-                GridMainSelection.Height = value + 70.0;
-                rectRectangleForMovement.Height = value + 30.0;
-                rectRectangleToDraw.Height = value;
+                GridMainSelection.Height = newHeightRectangleToDraw + (GridMainSelection.Height - rectangleToDraw.Height);
+                rectRectangleForMovement.Height = newHeightRectangleToDraw + (rectRectangleForMovement.Height - rectangleToDraw.Height);
+                rectRectangleToDraw.Height = newHeightRectangleToDraw;
             }
         }
 
@@ -470,13 +474,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             
         }
 
-        public void setWidthOfSelection(double width)
+        public void SetWidthOfControl(double newWidthRectangleToDraw)
         {
-            if (width >= 1)
+            //TODO 1 is maybe too small?
+            if (newWidthRectangleToDraw >= 1)
             {
-                GridMainSelection.Width = width + 70.0;
-                rectRectangleForMovement.Width = width + 30.0;
-                rectRectangleToDraw.Width = width;
+                GridMainSelection.Width = newWidthRectangleToDraw + (GridMainSelection.Width - rectangleToDraw.Width);
+                rectRectangleForMovement.Width = newWidthRectangleToDraw + (rectRectangleForMovement.Width - rectangleToDraw.Width);
+                rectRectangleToDraw.Width = newWidthRectangleToDraw;
             }
         }
         public double widthOfRectangleToDraw
@@ -491,7 +496,21 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void changeMarginOfGridMainSelection(double leftMargin, double topMargin, double rightMargin, double bottomMargin)
+        public Boolean HitRotationArrow(Point point)
+        {
+
+            System.Collections.Generic.IEnumerable<UIElement> rotationArrows =
+                VisualTreeHelper.FindElementsInHostCoordinates(point, rotationArrowTopRight);
+                                        
+            if (rotationArrows.Count() != 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void ChangeMarginOfGridMainSelection(double leftMargin, double topMargin, double rightMargin, double bottomMargin)
         {        
             GridMainSelection.Margin = new Thickness(leftMargin, topMargin, rightMargin, bottomMargin);
         }
@@ -573,8 +592,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (shouldHeightOfSelectionChanged(newHeightOfRectangleToDraw))
             {
-                setHeightOfSelection(newHeightOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
+                SetHeightOfControl(newHeightOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left,
                     GridMainSelection.Margin.Top - deltaTranslationY,
                     GridMainSelection.Margin.Right,
                     GridMainSelection.Margin.Bottom);
@@ -584,8 +603,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double newWidthOfRectangleToDraw = rectangleToDraw.Width + deltaTranslationX;
             if (shouldWidthOfSelectionChanged(newWidthOfRectangleToDraw))
             {
-                setWidthOfSelection(newWidthOfRectangleToDraw);
-                changeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
+                SetWidthOfControl(newWidthOfRectangleToDraw);
+                ChangeMarginOfGridMainSelection(GridMainSelection.Margin.Left - deltaTranslationX,
                                     GridMainSelection.Margin.Top,
                                     GridMainSelection.Margin.Right,
                                     GridMainSelection.Margin.Bottom);

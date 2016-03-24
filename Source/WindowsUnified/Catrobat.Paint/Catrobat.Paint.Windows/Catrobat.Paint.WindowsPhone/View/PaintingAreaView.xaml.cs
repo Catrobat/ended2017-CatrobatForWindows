@@ -779,6 +779,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnStampPaste);
                 cmdBar.PrimaryCommands.Add(app_btnStampClear);
                 cmdBar.PrimaryCommands.Add(app_btnResetSelection);
+
+                loadManipulationPaintingAreaCanvasEvents();
+                unloadPointerEvents();
             }
             else
             {

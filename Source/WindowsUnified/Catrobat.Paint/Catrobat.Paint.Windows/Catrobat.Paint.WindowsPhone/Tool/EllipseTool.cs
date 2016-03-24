@@ -27,8 +27,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            RotateTransform rotateTransform = new RotateTransform();
-            rotateTransform = arg as RotateTransform;
+            RotateTransform rotateTransform = arg as RotateTransform;
 
             TranslateTransform lastTranslateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl.getLastTranslateTransformation();
             RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl.getLastRotateTransformation();
