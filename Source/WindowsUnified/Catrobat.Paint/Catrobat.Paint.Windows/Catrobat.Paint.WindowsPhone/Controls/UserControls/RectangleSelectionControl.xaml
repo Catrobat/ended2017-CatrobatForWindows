@@ -6,28 +6,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     ManipulationMode="All"
-    d:DesignHeight="230"
-    d:DesignWidth="230"
+    d:DesignHeight="290"
+    d:DesignWidth="290"
     mc:Ignorable="d"
     >
 
     <Grid
         x:Name="GridMainSelection"
-        Height="230"
+        Height="290"
         Margin="0,0,0,0"
-        Width="230"
+        Width="290"
         >
 
         <Rectangle
             x:Name="rectRectangleToDraw"
             Fill="Black"
             Height="160"
-            HorizontalAlignment="Left"
-            Margin="35,35,35,35"
+            HorizontalAlignment="Center"
             Stroke="Gray"
             StrokeLineJoin="Miter"
             StrokeThickness="3"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             Width="160"
             />
 
@@ -50,6 +49,7 @@
             HorizontalAlignment="Center"
             ManipulationDelta="BottomCenterGrid_OnManipulationDelta"
             ManipulationMode="TranslateY"
+            Margin="0,0,0,30"
             VerticalAlignment="Bottom"
             Width="60"
             >
@@ -81,6 +81,7 @@
             HorizontalAlignment="Left"
             ManipulationDelta="CenterLeftGrid_OnManipulationDelta"
             ManipulationMode="TranslateX"
+            Margin="30,0,0,0"
             VerticalAlignment="Center"
             Width="35"
             >
@@ -115,6 +116,7 @@
             HorizontalAlignment="Left"
             ManipulationDelta="BottomLeftGrid_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
+            Margin="30,0,0,30"
             VerticalAlignment="Bottom"
             Width="60"
             >
@@ -133,6 +135,7 @@
             HorizontalAlignment="Left"
             ManipulationDelta="TopLeftGrid_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
+            Margin="30,30,0,0"
             VerticalAlignment="Top"
             Width="60"
             >
@@ -158,6 +161,7 @@
             HorizontalAlignment="Right"
             ManipulationDelta="CenterRightGrid_OnManipulationDelta"
             ManipulationMode="TranslateX"
+            Margin="0,0,30,0"
             VerticalAlignment="Center"
             Width="35"
             >
@@ -194,6 +198,7 @@
             HorizontalAlignment="Right"
             ManipulationDelta="BottomRightGrid_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
+            Margin="0,0,30,30"
             VerticalAlignment="Bottom"
             Width="60"
             >
@@ -220,6 +225,7 @@
             HorizontalAlignment="Right"
             ManipulationDelta="TopRightGrid_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
+            Margin="0,30,30,0"
             VerticalAlignment="Top"
             Width="60"
             >
@@ -244,6 +250,7 @@
             HorizontalAlignment="Center"
             ManipulationDelta="TopCenterGrid_OnManipulationDelta"
             ManipulationMode="TranslateY"
+            Margin="0,30,0,0"
             VerticalAlignment="Top"
             Width="60"
             >
@@ -275,14 +282,13 @@
         <userControls:RotationArrowsShape
             x:Name="rotationArrowTopLeft"
             HorizontalAlignment="Left"
-            Margin="-30,-30,0,0"
             VerticalAlignment="Top"
             />
 
         <userControls:RotationArrowsShape
             x:Name="rotationArrowTopRight"
             HorizontalAlignment="Right"
-            Margin="0,-30,-80,0"
+            Margin="0,0,-50,0"
             VerticalAlignment="Top"
             >
             <userControls:RotationArrowsShape.RenderTransform>
@@ -295,7 +301,7 @@
         <userControls:RotationArrowsShape
             x:Name="rotationArrowBottomLeft"
             HorizontalAlignment="Left"
-            Margin="-30,0,0,-80"
+            Margin="0,0,0,-50"
             VerticalAlignment="Bottom"
             >
             <userControls:RotationArrowsShape.RenderTransform>
@@ -308,7 +314,7 @@
         <userControls:RotationArrowsShape
             x:Name="rotationArrowBottomRight"
             HorizontalAlignment="Right"
-            Margin="0,0,-80,-80"
+            Margin="0,0,-50,-50"
             VerticalAlignment="Bottom"
             >
             <userControls:RotationArrowsShape.RenderTransform>
