@@ -34,6 +34,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlFormula YPosition { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlPlaceAtBrick b = obj as XmlPlaceAtBrick;
+            if ((object)b == null)
+            {
+                return false;
+            }
+
+            return this.XPosition.Equals(b.XPosition) && this.YPosition.Equals(b.YPosition);
+        }
+
+        public bool Equals(XmlPlaceAtBrick b)
+        {
+            return this.XPosition.Equals(b.XPosition) && this.YPosition.Equals(b.YPosition);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ YPosition.GetHashCode() ^ XPosition.GetHashCode();
+        }
+
         public XmlPlaceAtBrick() {}
 
         public XmlPlaceAtBrick(XElement xElement) : base(xElement) {}

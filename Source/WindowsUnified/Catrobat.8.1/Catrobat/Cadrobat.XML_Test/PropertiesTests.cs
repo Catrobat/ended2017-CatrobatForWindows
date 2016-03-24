@@ -9,7 +9,7 @@ using System.IO;
 namespace Catrobat.XML_Test
 {
     [TestClass]
-    public class PropertiesTests
+    public class PropertiesTest
     {
         [TestMethod]
         public void XmlPlaceAtBrickTest()
