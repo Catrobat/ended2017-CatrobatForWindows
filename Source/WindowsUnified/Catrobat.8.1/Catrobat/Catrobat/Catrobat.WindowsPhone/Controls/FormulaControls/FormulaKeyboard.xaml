@@ -111,7 +111,7 @@
 
         <!-- sensors -->
         <formulaControls:FormulaKeys x:Key="KeysSensors">
-            <formula:FormulaKey Key="AccelerationX" IsEnabled="false" />
+            <formula:FormulaKey Key="AccelerationX" />
             <formula:FormulaKey Key="AccelerationY" />
             <formula:FormulaKey Key="AccelerationZ" />
             <formula:FormulaKey Key="Compass" />
@@ -318,13 +318,7 @@
                     <ListView ItemsSource="{StaticResource KeysConstants}"  SelectionChanged="ListBox_OnSelectionChanged" />
                 </PivotItem>
                 <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Sensors, Source={StaticResource LocalizedStrings}}">
-                    <ListView x:Name="KeysSensors"  ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" >
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="IsEnabled" Value="{Binding Path=IsEnabled, Mode=TwoWay}" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                    <formulaControls:SensorKeyListView x:Name="KeysSensors" ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" />
                 </PivotItem>
                 <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Properties, Source={StaticResource LocalizedStrings}}">
                     <ListView ItemsSource="{StaticResource KeysProperties}"  SelectionChanged="ListBox_OnSelectionChanged" />

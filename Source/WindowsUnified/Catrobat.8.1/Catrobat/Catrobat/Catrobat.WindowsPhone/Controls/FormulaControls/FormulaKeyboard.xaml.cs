@@ -165,22 +165,28 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
                 return;
             }
 
-            if (ServiceLocator.SensorService.IsAccelarationEnabled())// TODO add !
+            foreach (FormulaKey key in KeysSensors.Items)
             {
-                foreach (FormulaKey key in KeysSensors.Items)
-                {
-                    if (key.Key.Equals(FormulaEditorKey.AccelerationX) ||
+                if (key.Key.Equals(FormulaEditorKey.AccelerationX) ||
                         key.Key.Equals(FormulaEditorKey.AccelerationY) ||
                         key.Key.Equals(FormulaEditorKey.AccelerationZ))
-                    {
-                        key.IsEnabled = "False";
-                    }
+                {
+                    key.Enabled = ServiceLocator.SensorService.IsAccelarationEnabled();
                 }
-
-                //KeysSensors.Items.Add(new FormulaKey(FormulaEditorKey.And));
+                else if (key.Key.Equals(FormulaEditorKey.InclinationX) ||
+                        key.Key.Equals(FormulaEditorKey.InclinationY))
+                {
+                    key.Enabled = ServiceLocator.SensorService.IsInclinationEnabled();
+                }
+                else if (key.Key.Equals(FormulaEditorKey.Loudness))
+                {
+                    key.Enabled = ServiceLocator.SensorService.IsMicrophoneEnabled();
+                }
+                else if (key.Key.Equals(FormulaEditorKey.Compass))
+                {
+                    key.Enabled = ServiceLocator.SensorService.IsCompassEnabled();
+                }
             }
-
-
         }
 
         private void FormulaChangedMessageAction(FormulaEvaluationResult result)
