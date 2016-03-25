@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
+    x:Name="DrawingGrid"
     ManipulationMode="All"
     d:DesignHeight="290"
     d:DesignWidth="290"
@@ -221,6 +222,7 @@
 
         <Grid
             x:Name="TopRightGrid"
+            Background="GreenYellow"
             Height="35"
             HorizontalAlignment="Right"
             ManipulationDelta="TopRightGrid_OnManipulationDelta"
@@ -285,18 +287,49 @@
             VerticalAlignment="Top"
             />
 
-        <userControls:RotationArrowsShape
-            x:Name="rotationArrowTopRight"
+        <Grid
+            Background="Red"
+            Height="50"
             HorizontalAlignment="Right"
-            Margin="0,0,-50,0"
+            ManipulationCompleted="RotationArrow_OnManipulationCompleted"
+            ManipulationDelta="RotationArrow_OnManipulationDelta"
+            ManipulationMode="TranslateX, TranslateY"
+            ManipulationStarted="RotationArrow_OnManipulationStarted"
+            Margin="0,30,-45,0"
             VerticalAlignment="Top"
+            Width="75"
+            />
+
+        <Grid
+            Background="Red"
+            Height="50"
+            HorizontalAlignment="right"
+            IsHitTestVisible="True"
+            ManipulationCompleted="RotationArrow_OnManipulationCompleted"
+            ManipulationDelta="RotationArrow_OnManipulationDelta"
+            ManipulationMode="TranslateX, TranslateY"
+            ManipulationStarted="RotationArrow_OnManipulationStarted"
+            Margin="0,-20,-45,0"
+            VerticalAlignment="Top"
+            Width="120"
             >
-            <userControls:RotationArrowsShape.RenderTransform>
-                <CompositeTransform
-                    Rotation="90"
-                    />
-            </userControls:RotationArrowsShape.RenderTransform>
-        </userControls:RotationArrowsShape>
+
+            <userControls:RotationArrowsShape
+                x:Name="rotationArrowTopRight"
+                HorizontalAlignment="Left"
+                Margin="75,0,-5,-20"
+                UseLayoutRounding="False"
+                VerticalAlignment="Bottom"
+                d:LayoutRounding="Auto"
+                >
+                <userControls:RotationArrowsShape.RenderTransform>
+                    <CompositeTransform
+                        Rotation="90"
+                        />
+                </userControls:RotationArrowsShape.RenderTransform>
+            </userControls:RotationArrowsShape>
+        </Grid>
+
 
         <userControls:RotationArrowsShape
             x:Name="rotationArrowBottomLeft"

@@ -48,8 +48,8 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
                 // TODO: @Karl: implement rotation for the rectangle tool
-                rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.m_mainGrid.Width / 2.0;
-                rotateCenterPoint.Y = PocketPaintApplication.GetInstance().RectangleSelectionControl.m_mainGrid.Height / 2.0;
+                rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Width / 2.0;
+                rotateCenterPoint.Y = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Height / 2.0;
 
                 rotate.CenterX = rotateCenterPoint.X;
                 rotate.CenterY = rotateCenterPoint.Y;
