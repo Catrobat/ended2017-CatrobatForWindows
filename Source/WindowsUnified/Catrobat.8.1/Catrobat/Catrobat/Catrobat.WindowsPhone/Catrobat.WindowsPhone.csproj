@@ -96,6 +96,7 @@
     <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
       <DependentUpon>FormulaViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\SensorKeyListView.cs" />
     <Compile Include="Controls\FormulaControls\Templates\FormulaTokenStyleCollection.cs" />
     <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplate.cs" />
     <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplateCollection.cs" />
