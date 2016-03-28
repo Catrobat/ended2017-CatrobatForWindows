@@ -13,7 +13,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private double _rotationTest = 0;
         private Boolean m_switch = false;
         private int m_count = 0;
-        private Boolean m_isRotating = false;
 
         public RectangleTool()
         {
@@ -22,44 +21,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleDown(object arg)
         {
-            m_isRotating = PocketPaintApplication.GetInstance().RectangleSelectionControl.HitRotationArrow((Point) arg);
         }
 
         public override void HandleMove(object arg)
         {
-            System.Diagnostics.Debug.WriteLine("Rectangle: HandleMove aka Rotation??");
-            return;
-            RotateTransform rotateTest = new RotateTransform();
-
-            m_count++;
-            if (m_switch)
-            {
-                rotateTest.Angle = 0;
-                
-
-            }
-            else
-            {
-                rotateTest.Angle = 45;
-            }
-
-            if (m_count == 2)
-            {
-                m_switch = !m_switch;
-                m_count = 0;
-            }
-
-            //PocketPaintApplication.GetInstance().RectangleSelectionControl.m_mainGrid.RenderTransform = rotateTest;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.addTransformation(rotateTest);
 
         }
 
         public override void HandleUp(object arg)
         {
-            if (m_isRotating)
-            {
-                m_isRotating = false;
-            }
         }
 
         public override void Draw(object o)
