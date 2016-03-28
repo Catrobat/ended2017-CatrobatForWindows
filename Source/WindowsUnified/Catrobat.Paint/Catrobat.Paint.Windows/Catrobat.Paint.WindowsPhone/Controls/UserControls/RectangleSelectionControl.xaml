@@ -18,22 +18,10 @@
         Margin="0,0,0,0"
         Width="290"
         >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition
-                Width="151*"
-                />
-            <ColumnDefinition
-                Width="54*"
-                />
-            <ColumnDefinition
-                Width="86*"
-                />
-        </Grid.ColumnDefinitions>
 
         <Rectangle
             x:Name="rectRectangleToDraw"
             Fill="Black"
-            Grid.ColumnSpan="3"
             Height="160"
             HorizontalAlignment="Center"
             Margin="65"
@@ -48,7 +36,6 @@
             x:Name="rectRectangleForMovement"
             DoubleTapped="rectEllipseForMovement_DoubleTapped"
             Fill="#01FFFFFF"
-            Grid.ColumnSpan="3"
             Height="200"
             ManipulationDelta="rectEllipseForMovement_ManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
@@ -60,12 +47,10 @@
 
         <Grid
             x:Name="BottomCenterGrid"
-            Grid.ColumnSpan="2"
             Height="65"
             HorizontalAlignment="Center"
             ManipulationDelta="BottomCenterGrid_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
-            Margin="95,0,9.444,0"
             VerticalAlignment="Bottom"
             Width="100"
             >
@@ -173,12 +158,10 @@
 
         <Grid
             x:Name="TopCenterGrid"
-            Grid.ColumnSpan="2"
             Height="65"
             HorizontalAlignment="Center"
             ManipulationDelta="TopCenterGrid_OnManipulationDelta"
             ManipulationMode="TranslateY"
-            Margin="95,0,9.444,0"
             VerticalAlignment="Top"
             Width="100"
             >
@@ -210,10 +193,8 @@
             Background="Red"
             Height="50"
             HorizontalAlignment="Left"
-            ManipulationCompleted="RotationArrow_OnManipulationCompleted"
             ManipulationDelta="RotationTopLeft_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
-            ManipulationStarted="RotationArrow_OnManipulationStarted"
             Margin="-45,30,0,0"
             VerticalAlignment="Top"
             Width="75"
@@ -223,10 +204,8 @@
             Background="Red"
             Height="50"
             HorizontalAlignment="Left"
-            ManipulationCompleted="RotationArrow_OnManipulationCompleted"
             ManipulationDelta="RotationTopLeft_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
-            ManipulationStarted="RotationArrow_OnManipulationStarted"
             Margin="-45,-20,0,0"
             VerticalAlignment="Top"
             Width="120"
@@ -256,8 +235,6 @@
 
         <Grid
             x:Name="BottomRightGrid"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
             Height="35"
             HorizontalAlignment="Right"
             ManipulationDelta="BottomRightGrid_OnManipulationDelta"
@@ -286,8 +263,6 @@
         <Grid
             x:Name="TopRightGrid"
             Background="GreenYellow"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
             Height="35"
             HorizontalAlignment="Right"
             ManipulationDelta="TopRightGrid_OnManipulationDelta"
@@ -313,12 +288,10 @@
 
         <Grid
             x:Name="CenterRightGrid"
-            Grid.Column="2"
             Height="100"
             HorizontalAlignment="Right"
             ManipulationDelta="CenterRightGrid_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
-            Margin="0,95"
             VerticalAlignment="Center"
             Width="65"
             >
@@ -350,13 +323,10 @@
 
         <Grid
             Background="Red"
-            Grid.Column="2"
             Height="50"
             HorizontalAlignment="Right"
-            ManipulationCompleted="RotationArrow_OnManipulationCompleted"
             ManipulationDelta="RotationTopRight_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
-            ManipulationStarted="RotationArrow_OnManipulationStarted"
             Margin="0,30,-45,0"
             VerticalAlignment="Top"
             Width="75"
@@ -364,13 +334,10 @@
 
         <Grid
             Background="Red"
-            Grid.Column="2"
             Height="50"
             HorizontalAlignment="right"
-            ManipulationCompleted="RotationArrow_OnManipulationCompleted"
             ManipulationDelta="RotationTopRight_OnManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
-            ManipulationStarted="RotationArrow_OnManipulationStarted"
             Margin="0,-20,-45,0"
             VerticalAlignment="Top"
             Width="120"
@@ -393,7 +360,6 @@
 
         <userControls:RotationArrowsShape
             x:Name="rotationArrowBottomRight"
-            Grid.Column="2"
             HorizontalAlignment="Right"
             Margin="0,0,-50,-50"
             VerticalAlignment="Bottom"
