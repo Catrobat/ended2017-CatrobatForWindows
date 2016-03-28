@@ -46,20 +46,19 @@
 
         <Grid
             x:Name="BottomCenterGrid"
-            Height="35"
+            Height="65"
             HorizontalAlignment="Center"
             ManipulationDelta="BottomCenterGrid_OnManipulationDelta"
             ManipulationMode="TranslateY"
-            Margin="0,0,0,30"
             VerticalAlignment="Bottom"
-            Width="60"
+            Width="100"
             >
             <Ellipse
                 x:Name="ellCenterBottom"
                 Fill="LightSkyBlue"
                 Height="30"
                 HorizontalAlignment="Center"
-                Margin="0,0,0,5"
+                Margin="0,0,0,35"
                 RenderTransformOrigin="0.5,0.5"
                 Stretch="Fill"
                 Stroke="Transparent"
@@ -78,19 +77,18 @@
 
         <Grid
             x:Name="CenterLeftGrid"
-            Height="60"
+            Height="100"
             HorizontalAlignment="Left"
             ManipulationDelta="CenterLeftGrid_OnManipulationDelta"
             ManipulationMode="TranslateX"
-            Margin="30,0,0,0"
             VerticalAlignment="Center"
-            Width="35"
+            Width="65"
             >
             <Ellipse
                 Fill="LightSkyBlue"
                 Height="30"
                 HorizontalAlignment="Left"
-                Margin="5,0,0,0"
+                Margin="35,0,0,0"
                 RenderTransformOrigin="0.5,0.5"
                 Stretch="Fill"
                 Stroke="Transparent"
@@ -158,20 +156,19 @@
 
         <Grid
             x:Name="CenterRightGrid"
-            Height="60"
+            Height="100"
             HorizontalAlignment="Right"
             ManipulationDelta="CenterRightGrid_OnManipulationDelta"
-            ManipulationMode="TranslateX"
-            Margin="0,0,30,0"
+            ManipulationMode="TranslateX, TranslateY"
             VerticalAlignment="Center"
-            Width="35"
+            Width="65"
             >
             <Ellipse
                 x:Name="ellRightCenter"
-                Fill="LightSkyBlue"
+                Fill="BlueViolet"
                 Height="30"
                 HorizontalAlignment="Right"
-                Margin="0,0,5,0"
+                Margin="0,0,35,0"
                 RenderTransformOrigin="0.5,0.5"
                 Stretch="Fill"
                 Stroke="Transparent"
@@ -248,19 +245,18 @@
 
         <Grid
             x:Name="TopCenterGrid"
-            Height="35"
+            Height="65"
             HorizontalAlignment="Center"
             ManipulationDelta="TopCenterGrid_OnManipulationDelta"
             ManipulationMode="TranslateY"
-            Margin="0,30,0,0"
             VerticalAlignment="Top"
-            Width="60"
+            Width="100"
             >
             <Ellipse
                 Fill="LightSkyBlue"
                 Height="30"
                 HorizontalAlignment="Center"
-                Margin="0,5,0,0"
+                Margin="0,35,0,0"
                 RenderTransformOrigin="0.5,0.5"
                 Stretch="Fill"
                 Stroke="Transparent"
