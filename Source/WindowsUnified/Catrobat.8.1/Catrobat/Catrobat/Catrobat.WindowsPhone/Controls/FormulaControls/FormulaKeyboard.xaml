@@ -318,7 +318,7 @@
                     <ListView ItemsSource="{StaticResource KeysConstants}"  SelectionChanged="ListBox_OnSelectionChanged" />
                 </PivotItem>
                 <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Sensors, Source={StaticResource LocalizedStrings}}">
-                    <formulaControls:SensorKeyListView x:Name="KeysSensors" ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" />
+                    <formulaControls:SensorKeyListView x:Name="SensorKeys" ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" />
                 </PivotItem>
                 <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Properties, Source={StaticResource LocalizedStrings}}">
                     <ListView ItemsSource="{StaticResource KeysProperties}"  SelectionChanged="ListBox_OnSelectionChanged" />

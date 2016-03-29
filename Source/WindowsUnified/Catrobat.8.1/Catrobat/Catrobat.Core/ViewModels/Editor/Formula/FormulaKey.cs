@@ -14,7 +14,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         public bool Enabled
         {
-            get { return _enabled; }
+            get
+            {
+                return _enabled;
+            }
             set
             {
                 _enabled = value;
@@ -120,6 +123,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             // no readonly fields
             return 0;
+        }
+
+        public override string ToString()
+        {
+            return _key.ToString();
         }
 
         #endregion

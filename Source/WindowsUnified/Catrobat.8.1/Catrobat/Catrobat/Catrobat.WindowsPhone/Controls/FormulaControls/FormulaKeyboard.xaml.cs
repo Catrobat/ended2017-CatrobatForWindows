@@ -160,21 +160,21 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 
         private void CheckSensorKeys()
         {
-            if (KeysSensors == null || KeysSensors.Items == null || KeysSensors.Items.Count <= 0)
+            if (SensorKeys == null || SensorKeys.Items == null || SensorKeys.Items.Count <= 0)
             {
                 return;
             }
 
-            foreach (FormulaKey key in KeysSensors.Items)
+            foreach (FormulaKey key in SensorKeys.Items)
             {
                 if (key.Key.Equals(FormulaEditorKey.AccelerationX) ||
-                        key.Key.Equals(FormulaEditorKey.AccelerationY) ||
-                        key.Key.Equals(FormulaEditorKey.AccelerationZ))
+                    key.Key.Equals(FormulaEditorKey.AccelerationY) ||
+                    key.Key.Equals(FormulaEditorKey.AccelerationZ))
                 {
                     key.Enabled = ServiceLocator.SensorService.IsAccelarationEnabled();
                 }
                 else if (key.Key.Equals(FormulaEditorKey.InclinationX) ||
-                        key.Key.Equals(FormulaEditorKey.InclinationY))
+                    key.Key.Equals(FormulaEditorKey.InclinationY))
                 {
                     key.Enabled = ServiceLocator.SensorService.IsInclinationEnabled();
                 }
