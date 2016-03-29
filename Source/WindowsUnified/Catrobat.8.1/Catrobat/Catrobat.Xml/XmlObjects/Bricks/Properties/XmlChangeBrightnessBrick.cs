@@ -7,6 +7,22 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
     {
         public XmlFormula ChangeBrightness { get; set; }
 
+        public override bool Equals(System.Object obj)        {
+            XmlChangeBrightnessBrick b = obj as XmlChangeBrightnessBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.ChangeBrightness.Equals(b.ChangeBrightness);
+        }
+
+        public bool Equals(XmlChangeBrightnessBrick b)        {
+            return this.Equals((XmlBrick)b) && this.ChangeBrightness.Equals(b.ChangeBrightness);
+        }
+
+        public override int GetHashCode()        {
+            return base.GetHashCode() ^ ChangeBrightness.GetHashCode();
+        }
+
         public XmlChangeBrightnessBrick() { }
 
         public XmlChangeBrightnessBrick(XElement xElement) : base(xElement) { }

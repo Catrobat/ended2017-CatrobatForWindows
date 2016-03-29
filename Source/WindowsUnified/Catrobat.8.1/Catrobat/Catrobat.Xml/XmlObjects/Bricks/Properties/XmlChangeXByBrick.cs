@@ -21,6 +21,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlFormula XMovement { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlChangeXByBrick b = obj as XmlChangeXByBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.XMovement.Equals(b.XMovement);
+        }
+
+        public bool Equals(XmlChangeXByBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.XMovement.Equals(b.XMovement);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ XMovement.GetHashCode();
+        }
+
         public XmlChangeXByBrick() {}
 
         public XmlChangeXByBrick(XElement xElement) : base(xElement) {}

@@ -42,12 +42,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
                 return false;
             }
 
-            return this.XPosition.Equals(b.XPosition) && this.YPosition.Equals(b.YPosition);
+            return this.Equals(b) && this.XPosition.Equals(b.XPosition) && this.YPosition.Equals(b.YPosition);
         }
 
         public bool Equals(XmlPlaceAtBrick b)
         {
-            return this.XPosition.Equals(b.XPosition) && this.YPosition.Equals(b.YPosition);
+            return this.Equals((XmlBrick)b) && this.XPosition.Equals(b.XPosition) && this.YPosition.Equals(b.YPosition);
         }
 
         public override int GetHashCode()
