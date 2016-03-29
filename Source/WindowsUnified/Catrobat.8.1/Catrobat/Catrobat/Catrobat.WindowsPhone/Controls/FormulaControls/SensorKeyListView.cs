@@ -23,6 +23,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             binding.Source = item;
             binding.Path = new PropertyPath("Enabled");
             listViewItem.SetBinding(ListViewItem.IsEnabledProperty, binding);
+            listViewItem.SetValue(ListViewItem.FontSizeProperty, 30);
         }
     }
 }
