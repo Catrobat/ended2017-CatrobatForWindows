@@ -82,6 +82,7 @@ namespace Catrobat.Paint.WindowsPhone
 
         public EllipseSelectionControl EllipseSelectionControl { get; set; }
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
+        public RectangleShapeBaseControl RectangleShapeBaseControl { get; set; }
 
         public ImportImageSelectionControl ImportImageSelectionControl { get; set; }
 
@@ -132,13 +133,10 @@ namespace Catrobat.Paint.WindowsPhone
         public ToolBase ToolCurrent
         {
             get { return PaintData.toolCurrentSelected; }
-            private set
-            {
-                PaintData.toolCurrentSelected = value;
-            }
+            private set { PaintData.toolCurrentSelected = value; }
         }
-        public ToolBase ToolWhileMoveTool { get; private set; }
 
+        public ToolBase ToolWhileMoveTool { get; private set; }
 
         private PocketPaintApplication()
         {
@@ -282,5 +280,21 @@ namespace Catrobat.Paint.WindowsPhone
                     break;
             }
         }
+
+        #region HelperFunctions
+
+        public static double RadianToDegree(double angle)
+        {
+            // TODO: test this function
+            return angle * 180.0 / Math.PI;
+        }
+
+        public static double DegreeToRadian(double angle)
+        {                       
+            // TODO: test this function
+            return Math.PI * angle / 180.0;
+        }
+
+        #endregion
     }
 }

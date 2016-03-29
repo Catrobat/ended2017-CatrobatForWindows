@@ -1,56 +1,48 @@
 ﻿<UserControl
-    x:Class="Catrobat.Paint.WindowsPhone.Controls.UserControls.RectangleSelectionControl"
+    x:Class="Catrobat.Paint.WindowsPhone.Controls.UserControls.RectangleShapeBaseControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
+    x:Name="DrawingGrid"
     ManipulationMode="All"
     d:DesignHeight="290"
     d:DesignWidth="290"
     mc:Ignorable="d"
     >
 
-    <Grid>
-        <userControls:RectangleShapeBaseControl
-            x:Name="RectangleShapeBaseControl"
-            />
-
-        <Rectangle
-            x:Name="rectRectangleToDraw"
-            Fill="Black"
-            Height="160"
-            HorizontalAlignment="Center"
-            Margin="65"
-            Stroke="Gray"
-            StrokeLineJoin="Miter"
-            StrokeThickness="3"
-            VerticalAlignment="Center"
-            Width="160"
-            />
-    </Grid>
-
-
-
-    <!--<Grid
+    <Grid
         x:Name="GridMainSelection"
         Height="290"
         Margin="0,0,0,0"
         Width="290"
         >
 
-        <Rectangle
-            x:Name="rectRectangleToDraw"
-            Fill="Black"
+        <Grid
+            x:Name="AreaToDrawGrid"
             Height="160"
             HorizontalAlignment="Center"
             Margin="65"
-            Stroke="Gray"
-            StrokeLineJoin="Miter"
-            StrokeThickness="3"
             VerticalAlignment="Center"
             Width="160"
-            />
+            >
+
+            <!--<Rectangle
+                x:Name="AreaToDrawRectangle"
+                Fill="Black"
+                Height="{Binding ElementName=AreaToDrawGrid,
+                                 Path=Height}"
+                HorizontalAlignment="Center"
+                Stroke="Gray"
+                StrokeLineJoin="Miter"
+                StrokeThickness="3"
+                VerticalAlignment="Center"
+                Width="{Binding ElementName=AreaToDrawGrid,
+                                Path=Width}"
+                />-->
+
+        </Grid>
 
         <Rectangle
             x:Name="rectRectangleForMovement"
@@ -390,5 +382,5 @@
                     />
             </userControls:RotationArrowsShape.RenderTransform>
         </userControls:RotationArrowsShape>
-    </Grid>-->
+    </Grid>
 </UserControl>

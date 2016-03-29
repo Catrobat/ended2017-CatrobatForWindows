@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
-    class RectangleTool : ToolBase
+    internal class RectangleTool : RectangleShapeBaseTool
     {
         private Path _path;
         private double _rotationTest = 0;
@@ -17,19 +17,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
-        }
-
-        public override void HandleDown(object arg)
-        {
-        }
-
-        public override void HandleMove(object arg)
-        {
-
-        }
-
-        public override void HandleUp(object arg)
-        {
         }
 
         public override void Draw(object o)
@@ -89,7 +76,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             _path.StrokeThickness = strokeThickness;
-            _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
+            _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.StrokeLineJoinOfRectangleToDraw;
             _path.Data = myRectGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(_path);
 
@@ -107,11 +94,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
+            //RectangleShapeBaseControl.resetRectangleSelectionControl();
             PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
-        }
-
-        public override void ResetUsedElements()
-        {
         }
     }
 }
