@@ -48,32 +48,32 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
                 // TODO: @Karl: implement rotation for the rectangle tool
-                rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Width / 2.0;
-                rotateCenterPoint.Y = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Height / 2.0;
+                //rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Width / 2.0;
+                //rotateCenterPoint.Y = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Height / 2.0;
 
-                rotate.CenterX = rotateCenterPoint.X;
-                rotate.CenterY = rotateCenterPoint.Y;
+                //rotate.CenterX = rotateCenterPoint.X;
+                //rotate.CenterY = rotateCenterPoint.Y;
 
-                Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterCoordinateOfGridMain();
+                //Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterCoordinateOfGridMain();
 
-                if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) &&
-                    (lastPoint.X != point.X || lastPoint.Y != point.Y))
-                {
-                    double currentXLength = point.X - centerPoint.X;
-                    double currentYLength = point.Y - centerPoint.Y;
-                    double normalCurrentX = currentXLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
-                    double normalCurrentY = currentYLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
+                //if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) &&
+                //    (lastPoint.X != point.X || lastPoint.Y != point.Y))
+                //{
+                //    double currentXLength = point.X - centerPoint.X;
+                //    double currentYLength = point.Y - centerPoint.Y;
+                //    double normalCurrentX = currentXLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
+                //    double normalCurrentY = currentYLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
 
-                    double previousXLength = lastPoint.X - centerPoint.X;
-                    double previousYLength = lastPoint.Y - centerPoint.Y;
-                    double normalPreviousX = previousXLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
-                    double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
+                //    double previousXLength = lastPoint.X - centerPoint.X;
+                //    double previousYLength = lastPoint.Y - centerPoint.Y;
+                //    double normalPreviousX = previousXLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
+                //    double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
 
-                    double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
-                    double rotationAngle = deltaAngle * 360.0 / Math.PI;
+                //    double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
+                //    double rotationAngle = deltaAngle * 360.0 / Math.PI;
 
-                    rotate.Angle = rotationAngle;
-                }
+                //    rotate.Angle = rotationAngle;
+                //}
                 lastPoint = point;
             }
             else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse)

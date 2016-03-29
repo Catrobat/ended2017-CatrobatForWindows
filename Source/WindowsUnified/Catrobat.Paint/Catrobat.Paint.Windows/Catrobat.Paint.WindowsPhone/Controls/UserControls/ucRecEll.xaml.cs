@@ -179,7 +179,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeThicknessOfRectangleToDraw = strokeThickness;
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.StrokeThicknessOfRectangleToDraw = strokeThickness;
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
@@ -231,7 +231,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected = PenLineJoin.Round;
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
             {
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round; 
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.StrokeLineJoinOfRectangleToDraw = PenLineJoin.Round; 
             }
             else
             {
@@ -252,7 +252,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected = PenLineJoin.Miter;
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
             {
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.StrokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
             }
             else
             {
@@ -266,7 +266,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected = PenLineJoin.Bevel;
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
             {
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.StrokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
             }
             else
             {
