@@ -20,6 +20,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlFormula Size { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlChangeSizeByNBrick b = obj as XmlChangeSizeByNBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.Size.Equals(b.Size);
+        }
+
+        public bool Equals(XmlChangeSizeByNBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.Size.Equals(b.Size);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Size.GetHashCode();
+        }
+
         public XmlChangeSizeByNBrick() { }
 
         public XmlChangeSizeByNBrick(XElement xElement) : base(xElement) { }

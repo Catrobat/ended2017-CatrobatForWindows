@@ -4,6 +4,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlClearGraphicEffectBrick : XmlBrick
     {
+        public override bool Equals(System.Object obj)
+        {
+            XmlClearGraphicEffectBrick b = obj as XmlClearGraphicEffectBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b);
+        }
+
+        public bool Equals(XmlClearGraphicEffectBrick b)
+        {
+            return this.Equals((XmlBrick)b);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public XmlClearGraphicEffectBrick() {}
 
         public XmlClearGraphicEffectBrick(XElement xElement) : base(xElement) {}

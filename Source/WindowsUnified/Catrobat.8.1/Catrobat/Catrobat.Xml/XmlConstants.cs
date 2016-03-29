@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core
         public const string VariableChange = "VARIABLE_CHANGE";//v91: variableFormula
         public const string Variable = "VARIABLE";//variableFormula
         public const string ChangeBrightness = "CHANGE_BRIGHTNESS";//changeBrightness
-        public const string ChangeGhostEffect = "CHANGE_GHOSTEFFECT";//changeGhostEffect
+        public const string ChangeGhostEffect = "TRANSPARENCY_CHANGE";//changeGhostEffect
         public const string SizeChange = "SIZE_CHANGE"; //size
         public const string XPositionChange = "X_POSITION_CHANGE";//xMovement
         public const string YPositionChange = "Y_POSITION_CHANGE";//yMovement

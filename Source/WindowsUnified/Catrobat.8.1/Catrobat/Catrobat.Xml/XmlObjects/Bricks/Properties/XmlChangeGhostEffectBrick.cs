@@ -20,6 +20,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlFormula ChangeGhostEffect { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlChangeGhostEffectBrick b = obj as XmlChangeGhostEffectBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.ChangeGhostEffect.Equals(b.ChangeGhostEffect);
+        }
+
+        public bool Equals(XmlChangeGhostEffectBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.ChangeGhostEffect.Equals(b.ChangeGhostEffect);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ ChangeGhostEffect.GetHashCode();
+        }
+
         public XmlChangeGhostEffectBrick() { }
 
         public XmlChangeGhostEffectBrick(XElement xElement) : base(xElement) { }
