@@ -7,6 +7,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
     {
         public XmlFormula Steps { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlGoNStepsBackBrick b = obj as XmlGoNStepsBackBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.Steps.Equals(b.Steps);
+        }
+
+        public bool Equals(XmlGoNStepsBackBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.Steps.Equals(b.Steps);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Steps.GetHashCode();
+        }
+
         public XmlGoNStepsBackBrick()
         {
         }

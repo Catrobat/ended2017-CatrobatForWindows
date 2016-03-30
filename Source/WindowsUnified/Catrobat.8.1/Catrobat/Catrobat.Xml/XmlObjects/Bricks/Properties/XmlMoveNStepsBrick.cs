@@ -21,6 +21,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlFormula Steps { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlMoveNStepsBrick b = obj as XmlMoveNStepsBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.Steps.Equals(b.Steps);
+        }
+
+        public bool Equals(XmlMoveNStepsBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.Steps.Equals(b.Steps);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Steps.GetHashCode();
+        }
+
         public XmlMoveNStepsBrick() {}
 
         public XmlMoveNStepsBrick(XElement xElement) : base(xElement) {}

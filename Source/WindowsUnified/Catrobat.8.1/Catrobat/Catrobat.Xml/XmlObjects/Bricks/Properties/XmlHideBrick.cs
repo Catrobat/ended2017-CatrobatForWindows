@@ -9,6 +9,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         #endregion
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlHideBrick b = obj as XmlHideBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b);
+        }
+
+        public bool Equals(XmlHideBrick b)
+        {
+            return this.Equals((XmlBrick)b);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public XmlHideBrick() {}
 
         public XmlHideBrick(XElement xElement) : base(xElement) {}
