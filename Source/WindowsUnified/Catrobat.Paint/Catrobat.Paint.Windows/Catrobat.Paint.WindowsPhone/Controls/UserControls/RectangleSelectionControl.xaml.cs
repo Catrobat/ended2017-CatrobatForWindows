@@ -21,7 +21,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         double _rectangleForMovementSize = 200.0;
         double _rectangleToDrawSize = 160.0;
 
-        //public Rectangle rectangleToDraw { get; private set; }
+        public Rectangle rectangleToDraw { get; private set; }
 
         private enum Orientation
         {
@@ -31,81 +31,60 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public RectangleSelectionControl()
         {
             this.InitializeComponent();
+
+
+            for (int i = 0; i < RectangleShapeBaseControl.AreaToDraw.Children.Count; i++)
+            {
+                if (! (RectangleShapeBaseControl.AreaToDraw.Children[i] is Rectangle))
+                {
+                    RectangleShapeBaseControl.AreaToDraw.Children.RemoveAt(i);
+                    i--;
+                }
+                else
+                {
+                    rectangleToDraw = (Rectangle) RectangleShapeBaseControl.AreaToDraw.Children[i];
+                    rectangleToDraw.Visibility = Visibility.Visible;
+                }
+            }
             
-            //Rectangle toDraw = new Rectangle();
-            //Binding dependencyWidth = new Binding();
-            //dependencyWidth.Path = RectangleShapeBaseControl.AreaToDraw.Width;
-
-
-            //toDraw.Width = SetBinding();
-
-
-            //RectangleShapeBaseControl.AreaToDraw.Children.Add(rectRectangleToDraw);
-
-                //        <Rectangle
-                //x:Name="rectRectangleToDraw"
-                //Fill="Black"
-                //Height="{Binding ElementName=AreaToDrawGrid,
-                //                 Path=Height}"
-                //HorizontalAlignment="Center"
-                //Stroke="Gray"
-                //StrokeLineJoin="Miter"
-                //StrokeThickness="3"
-                //VerticalAlignment="Center"
-                //Width="{Binding ElementName=AreaToDrawGrid,
-                //                Path=Width}"
-                ///>
-
-
-            // TODO: adapt code
-            rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
-            rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
+            Debug.Assert(rectangleToDraw != null);
+            initRectangleToDraw();
         }
 
-        //public Rectangle rectangleToDraw
-        //{
-        //    get
-        //    {
-        //        return rectRectangleToDraw;
-        //    }
-        //    set
-        //    {
-        //        rectRectangleToDraw = value;
-        //    }
-        //}
+        private void initRectangleToDraw()
+        {
+            rectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            rectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            rectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;    
+        }
 
         // TODO: adapt this
-        public Rectangle rectangleToDraw
-        {
-            get { return rectRectangleToDraw; }
-            set { rectRectangleToDraw = value; }
-        }
+
 
         public bool isModifiedRectangleMovement { get; set; }
 
         public PenLineJoin StrokeLineJoinOfRectangleToDraw
         {
-            get { return rectRectangleToDraw.StrokeLineJoin; }
-            set { rectRectangleToDraw.StrokeLineJoin = value; }
+            get { return rectangleToDraw.StrokeLineJoin; }
+            set { rectangleToDraw.StrokeLineJoin = value; }
         }
 
         public double StrokeThicknessOfRectangleToDraw
         {
-            get { return rectRectangleToDraw.StrokeThickness; }
-            set { rectRectangleToDraw.StrokeThickness = value; }
+            get { return rectangleToDraw.StrokeThickness; }
+            set { rectangleToDraw.StrokeThickness = value; }
         }
 
         public Brush FillOfRectangleToDraw
         {
-            get { return rectRectangleToDraw.Fill; }
-            set { rectRectangleToDraw.Fill = value; }
+            get { return rectangleToDraw.Fill; }
+            set { rectangleToDraw.Fill = value; }
         }
 
         public Brush StrokeOfRectangleToDraw
         {
-            get { return rectRectangleToDraw.Stroke; }
-            set { rectRectangleToDraw.Stroke = value; }
+            get { return rectangleToDraw.Stroke; }
+            set { rectangleToDraw.Stroke = value; }
         }
 
         //public void resetRectangleSelectionControl()
@@ -145,9 +124,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         internal void resetRectangleSelectionControl()
         {
-            rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
-            rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
+            rectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            rectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            rectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
             StrokeLineJoinOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;   
     
             RectangleShapeBaseControl.resetRectangleSelectionControl();

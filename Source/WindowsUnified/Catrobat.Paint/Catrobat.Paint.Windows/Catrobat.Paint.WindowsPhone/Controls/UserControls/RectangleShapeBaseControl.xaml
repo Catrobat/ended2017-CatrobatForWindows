@@ -28,7 +28,7 @@
             Width="160"
             >
 
-            <!--<Rectangle
+            <Rectangle
                 x:Name="AreaToDrawRectangle"
                 Fill="Black"
                 Height="{Binding ElementName=AreaToDrawGrid,
@@ -38,9 +38,25 @@
                 StrokeLineJoin="Miter"
                 StrokeThickness="3"
                 VerticalAlignment="Center"
+                Visibility="Collapsed"
                 Width="{Binding ElementName=AreaToDrawGrid,
                                 Path=Width}"
-                />-->
+                />
+
+            <Ellipse
+                x:Name="AreaToDrawEllipse"
+                Fill="Black"
+                Height="{Binding ElementName=AreaToDrawGrid,
+                                 Path=Height}"
+                HorizontalAlignment="Center"
+                Stroke="Gray"
+                StrokeLineJoin="Miter"
+                StrokeThickness="3"
+                VerticalAlignment="Center"
+                Visibility="Collapsed"
+                Width="{Binding ElementName=AreaToDrawGrid,
+                                Path=Width}"
+                />
 
         </Grid>
 

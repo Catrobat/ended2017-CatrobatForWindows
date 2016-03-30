@@ -94,7 +94,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            //RectangleShapeBaseControl.resetRectangleSelectionControl();
             PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
         }
     }
