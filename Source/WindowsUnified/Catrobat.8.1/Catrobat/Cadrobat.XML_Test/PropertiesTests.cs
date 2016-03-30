@@ -105,6 +105,95 @@ namespace Catrobat.XML_Test
         }
 
         [TestMethod]
+        public void XmlComeToFrontBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"ComeToFrontBrick\"/>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlComeToFrontBrick(xRoot);
+
+            var referenceObject = new XmlComeToFrontBrick(xRoot);
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlGlideToBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"GlideToBrick\"> <formulaList> <formula category=\"Y_DESTINATION\"> <leftChild> <type>USER_VARIABLE</type> <value>Distance factor</value> </leftChild> <rightChild> <type>SENSOR</type> <value>Y_INCLINATION</value> </rightChild> <type>OPERATOR</type> <value>MULT</value> </formula> <formula category=\"X_DESTINATION\"> <leftChild> <type>USER_VARIABLE</type> <value>Distance factor</value> </leftChild> <rightChild> <type>SENSOR</type> <value>X_INCLINATION</value> </rightChild> <type>OPERATOR</type> <value>MULT</value> </formula> <formula category=\"DURATION_IN_SECONDS\"> <type>NUMBER</type> <value>1</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlGlideToBrick(xRoot);
+
+            var referenceObject = new XmlGlideToBrick()
+            {
+                DurationInSeconds = new XmlFormula(xRoot, XmlConstants.DurationInSeconds),
+                XDestination = new XmlFormula(xRoot, XmlConstants.XDestination),
+                YDestination = new XmlFormula(xRoot, XmlConstants.YDestination),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlGoNStepsBackBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"GoNStepsBackBrick\"> <formulaList> <formula category=\"STEPS\"> <type>NUMBER</type> <value>2</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlGoNStepsBackBrick(xRoot);
+
+            var referenceObject = new XmlGoNStepsBackBrick()
+            {
+                Steps = new XmlFormula(xRoot, XmlConstants.Steps),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlHideBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"HideBrick\"/>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlHideBrick(xRoot);
+
+            var referenceObject = new XmlHideBrick(xRoot);
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlIfOnEdgeBounceBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"IfOnEdgeBounceBrick\"/>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlIfOnEdgeBounceBrick(xRoot);
+
+            var referenceObject = new XmlIfOnEdgeBounceBrick(xRoot);
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlMoveNStepsBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"MoveNStepsBrick\"> <formulaList> <formula category=\"STEPS\"> <type>NUMBER</type> <value>20</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlMoveNStepsBrick(xRoot);
+
+            var referenceObject = new XmlMoveNStepsBrick()
+            {
+                Steps = new XmlFormula(xRoot, XmlConstants.Steps),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
         public void XmlPlaceAtBrickTest()
         {
             TextReader sr = new StringReader("<brick type=\"PlaceAtBrick\">  <formulaList>  <formula category=\"Y_POSITION\"> <rightChild> <type>NUMBER</type> <value>80</value> </rightChild> <type>OPERATOR</type> <value>MINUS</value>  </formula>  <formula category=\"X_POSITION\"> <rightChild> <type>NUMBER</type> <value>115</value> </rightChild> <type>OPERATOR</type> <value>MINUS</value>  </formula>  </formulaList>  </brick>");

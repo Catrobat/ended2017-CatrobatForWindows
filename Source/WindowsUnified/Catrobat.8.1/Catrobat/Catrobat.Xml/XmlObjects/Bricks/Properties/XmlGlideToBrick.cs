@@ -43,6 +43,30 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlFormula YDestination { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlGlideToBrick b = obj as XmlGlideToBrick;
+            if ((object)b == null)
+            {
+                return false;
+            }
+
+            return this.Equals(b) && this.XDestination.Equals(b.XDestination)
+                && this.YDestination.Equals(b.YDestination) && this.DurationInSeconds.Equals(b.DurationInSeconds);
+        }
+
+        public bool Equals(XmlGlideToBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.XDestination.Equals(b.XDestination)
+                && this.YDestination.Equals(b.YDestination) && this.DurationInSeconds.Equals(b.DurationInSeconds);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ YDestination.GetHashCode() 
+                ^ XDestination.GetHashCode();
+        }
+
         public XmlGlideToBrick() { }
 
         public XmlGlideToBrick(XElement xElement) : base(xElement) { }
