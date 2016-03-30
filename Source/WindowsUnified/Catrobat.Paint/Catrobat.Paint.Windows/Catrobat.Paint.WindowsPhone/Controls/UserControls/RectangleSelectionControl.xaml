@@ -15,22 +15,7 @@
         <userControls:RectangleShapeBaseControl
             x:Name="RectangleShapeBaseControl"
             />
-
-        <Rectangle
-            x:Name="rectRectangleToDraw"
-            Fill="Black"
-            Height="160"
-            HorizontalAlignment="Center"
-            Margin="65"
-            Stroke="Gray"
-            StrokeLineJoin="Miter"
-            StrokeThickness="3"
-            VerticalAlignment="Center"
-            Width="160"
-            />
     </Grid>
-
-
 
     <!--<Grid
         x:Name="GridMainSelection"
@@ -392,3 +377,4 @@
         </userControls:RotationArrowsShape>
     </Grid>-->
 </UserControl>
+
