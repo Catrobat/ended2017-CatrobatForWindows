@@ -9,6 +9,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
      internal abstract class RectangleShapeBaseTool : ToolBase
     {
+         public RectangleShapeBaseControl RectangleShapeBase { get; protected set; }
+
          public override void HandleDown(object arg)
          {
              
@@ -25,11 +27,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         }
 
          public override void Draw(object o)
-         {
-             
-         }
-
-         public override void ResetDrawingSpace()
          {
              
          }

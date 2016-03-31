@@ -82,7 +82,6 @@ namespace Catrobat.Paint.WindowsPhone
 
         public EllipseSelectionControl EllipseSelectionControl { get; set; }
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
-        public RectangleShapeBaseControl RectangleShapeBaseControl { get; set; }
 
         public ImportImageSelectionControl ImportImageSelectionControl { get; set; }
 

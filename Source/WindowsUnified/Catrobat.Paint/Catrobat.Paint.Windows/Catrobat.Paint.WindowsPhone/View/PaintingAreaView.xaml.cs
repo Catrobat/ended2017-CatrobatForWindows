@@ -3,6 +3,7 @@ using Catrobat.Paint.WindowsPhone.Listener;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.Ui;
 using System;
+using System.Diagnostics;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Phone.UI.Input;
@@ -699,8 +700,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnBrushThickness.Label = "Einstellungen";
+
                 app_btnReset.Label = "Ausgangsposition";
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+                Debug.Assert(
+                            ((RectangleShapeBaseTool)PocketPaintApplication.GetInstance().ToolCurrent)
+                            .RectangleShapeBase != null);
+                app_btnReset.IsEnabled = ((RectangleShapeBaseTool) PocketPaintApplication.GetInstance().ToolCurrent)
+                                         .RectangleShapeBase.IsModifiedRectangleForMovement;
 
                 app_btnBrushThickness.Name = "ThicknessProperties";
 
