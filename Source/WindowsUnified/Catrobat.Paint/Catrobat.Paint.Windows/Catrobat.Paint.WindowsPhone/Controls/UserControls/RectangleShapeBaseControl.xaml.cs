@@ -155,42 +155,46 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectEllipseForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            //var coord = e.GetPosition(PocketPaintApplication.GetInstance().GridWorkingSpace);
-            //var coord2 = e.GetPosition(rectangleToDraw);
+            Debug.Assert(AreaToDraw.Children.Count == 1);
+            UIElement elementToDraw = AreaToDraw.Children[0];
 
-            //var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+            var coord = e.GetPosition(PocketPaintApplication.GetInstance().GridWorkingSpace);
+            //var coord2 = e.GetPosition(elementToDraw);
+            var coord2 = e.GetPosition(AreaToDraw);
 
-            //switch(angle)
-            //{
-            //    case 0:
-            //        coord.X -= coord2.X;
-            //        coord.Y -= coord2.Y;
-            //        coord.X += (rectangleToDraw.Width / 2);
-            //        coord.Y += (rectangleToDraw.Height / 2);
-            //        break;
-            //    case 90:
-            //        coord.X -= coord2.Y;
-            //        coord.Y -= (rectangleToDraw.Width - coord2.X);
-            //        coord.X += (rectangleToDraw.Width / 2);
-            //        coord.Y += (rectangleToDraw.Height / 2);
-            //        break;
-            //    case 180:
-            //        coord.X += coord2.X;
-            //        coord.Y += coord2.Y;
-            //        coord.X -= (rectangleToDraw.Width / 2);
-            //        coord.Y -= (rectangleToDraw.Height / 2);
-            //        break;
-            //    case 270:
-            //        coord.X -= (rectangleToDraw.Height - coord2.Y);
-            //        coord.Y -= coord2.X;
-            //        coord.X += (rectangleToDraw.Width / 2);
-            //        coord.Y += (rectangleToDraw.Height / 2);
-            //        break;
-            //}
-            
+            var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
 
-            
-            //PocketPaintApplication.GetInstance().ToolCurrent.Draw(coord);
+            switch (angle)
+            {
+                case 0:
+                    coord.X -= coord2.X;
+                    coord.Y -= coord2.Y;
+                    coord.X += (AreaToDraw.Width / 2);
+                    coord.Y += (AreaToDraw.Height / 2);
+                    break;
+                case 90:
+                    coord.X -= coord2.Y;
+                    coord.Y -= (AreaToDraw.Width - coord2.X);
+                    coord.X += (AreaToDraw.Width / 2);
+                    coord.Y += (AreaToDraw.Height / 2);
+                    break;
+                case 180:
+                    coord.X += coord2.X;
+                    coord.Y += coord2.Y;
+                    coord.X -= (AreaToDraw.Width / 2);
+                    coord.Y -= (AreaToDraw.Height / 2);
+                    break;
+                case 270:
+                    coord.X -= (AreaToDraw.Height - coord2.Y);
+                    coord.Y -= coord2.X;
+                    coord.X += (AreaToDraw.Width / 2);
+                    coord.Y += (AreaToDraw.Height / 2);
+                    break;
+            }
+
+
+
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(coord);
         }
 
         private void resizeWidth(double deltaX, double deltaY, Orientation orientation)
