@@ -7,6 +7,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
     {
         public XmlFormula Degrees { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlPointInDirectionBrick b = obj as XmlPointInDirectionBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.Degrees.Equals(b.Degrees);
+        }
+
+        public bool Equals(XmlPointInDirectionBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.Degrees.Equals(b.Degrees);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Degrees.GetHashCode();
+        }
+
         public XmlPointInDirectionBrick() {}
 
         public XmlPointInDirectionBrick(XElement xElement) : base(xElement) {}

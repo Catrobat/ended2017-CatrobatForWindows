@@ -46,6 +46,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             }
         }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlPointToBrick b = obj as XmlPointToBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.PointedXmlSpriteReference.Equals(b.PointedXmlSpriteReference);
+            //TODO: && this.PointedSprite.Equals(b.PointedSprite)
+        }
+
+        public bool Equals(XmlPointToBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.PointedXmlSpriteReference.Equals(b.PointedXmlSpriteReference);
+            //TODO: && this.PointedSprite.Equals(b.PointedSprite)
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ PointedXmlSpriteReference.GetHashCode();
+        }
+
         public XmlPointToBrick() {}
 
         public XmlPointToBrick(XElement xElement) : base(xElement) {}

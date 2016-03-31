@@ -9,6 +9,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public XmlSprite Sprite { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlSpriteReference r = obj as XmlSpriteReference;
+            if ((object)r == null)
+            {
+                return false;
+            }
+
+            return this.Equals(r);
+        }
+
+        public bool Equals(XmlSpriteReference r)
+        {
+            return _reference.Equals(r._reference); //TODO: && Sprite.Equals(f.Sprite)
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ _reference.GetHashCode(); //TODO: ^ Sprite.GetHashCode();
+        }
+
         public XmlSpriteReference()
         {
         }
