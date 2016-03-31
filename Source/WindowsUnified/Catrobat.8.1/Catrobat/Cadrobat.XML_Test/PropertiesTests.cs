@@ -209,5 +209,23 @@ namespace Catrobat.XML_Test
 
             Assert.AreEqual(referenceObject, testObject);
         }
+
+        [TestMethod]
+        public void XmlPointInDirectionBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"PointInDirectionBrick\"> <formulaList> <formula category=\"DEGREES\"> <type>USER_VARIABLE</type> <value>Airplane&apos;s direction</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlPointInDirectionBrick(xRoot);
+
+            var referenceObject = new XmlPointInDirectionBrick()
+            {
+                Degrees = new XmlFormula(xRoot, XmlConstants.Degrees),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+
     }
 }
