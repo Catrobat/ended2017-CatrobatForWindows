@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlSpriteReference PointedXmlSpriteReference { get; set; }
 
-        public XmlSprite PointedSprite
+        public XmlSprite PointedSprite //TODO: outdated?
         {
             get
             {
@@ -52,14 +52,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             if ((object)b == null)
                 return false;
 
-            return this.Equals(b) && this.PointedXmlSpriteReference.Equals(b.PointedXmlSpriteReference);
-            //TODO: && this.PointedSprite.Equals(b.PointedSprite)
+            return this.Equals(b) && this.PointedXmlSpriteReference.Equals(b.PointedXmlSpriteReference)
+                ;//&& this.PointedSprite.Equals(b.PointedSprite);
         }
 
         public bool Equals(XmlPointToBrick b)
-        {
-            return this.Equals((XmlBrick)b) && this.PointedXmlSpriteReference.Equals(b.PointedXmlSpriteReference);
-            //TODO: && this.PointedSprite.Equals(b.PointedSprite)
+        {           //TODO: maybe find a possibility to check basic brick equals also
+                    // but as it creates xml output it would ned to create also the reference, 
+                    // which usually needs a whole insatntiated programme. so it might be a good idea to seperate it
+            return /*this.Equals((XmlBrick)b) &&*/ this.PointedXmlSpriteReference.Equals(b.PointedXmlSpriteReference)
+                ;//&& this.PointedSprite.Equals(b.PointedSprite);
         }
 
         public override int GetHashCode()
@@ -73,12 +75,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot != null && xRoot.Attribute(XmlConstants.Type).Value == XmlConstants.XmlPointToBrickType)
+            /*if (xRoot != null && xRoot.Attribute(XmlConstants.Type).Value == XmlConstants.XmlPointToBrickType)
             {
                 PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.Object));//.Element(XmlConstants.XmlPointToBrickType));
-        }
-            //if (xRoot.Element(XmlConstants.PointedObject) != null)
-            //    PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.PointedObject));
+            }*/
+            if (xRoot.Element(XmlConstants.PointedObject) != null)
+                PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.PointedObject));
         }
 
         internal override XElement CreateXml()

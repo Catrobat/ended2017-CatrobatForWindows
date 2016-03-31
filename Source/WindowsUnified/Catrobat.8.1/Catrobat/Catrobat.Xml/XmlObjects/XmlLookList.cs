@@ -10,6 +10,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
     {
         public List<XmlLook> Looks { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlLookList l = obj as XmlLookList;
+            if ((object)l == null)
+            {
+                return false;
+            }
+
+            return this.Equals(l);
+        }
+
+        public bool Equals(XmlLookList l)
+        {
+            return this.Looks.Equals(l.Looks);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Looks.GetHashCode();
+        }
+
         public XmlLookList()
         {
             Looks = new List<XmlLook>();

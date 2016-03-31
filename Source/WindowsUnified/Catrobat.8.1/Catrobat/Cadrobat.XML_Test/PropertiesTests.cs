@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using System.IO;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.XML_Test
 {
@@ -222,6 +223,29 @@ namespace Catrobat.XML_Test
             {
                 Degrees = new XmlFormula(xRoot, XmlConstants.Degrees),
             };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlPointToBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"PointToBrick\"> <pointedObject reference=\"../../../../../../object[2]/scriptList/script[3]/brickList/brick/pointedObject\"/> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlPointToBrick(xRoot);
+
+            TextReader spriteSr = new StringReader("<object name=\"Airplane\"> <lookList></lookList> <soundList> </soundList> <scriptList> <script type=\"WhenScript\"> <brickList> </brickList> </script> </scriptList> </object>");
+            var SpriteXRoot = XElement.Load(spriteSr);
+
+            testObject.PointedXmlSpriteReference.Sprite = new XmlSprite(SpriteXRoot);
+
+            var referenceObject = new XmlPointToBrick()
+            {
+                PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.PointedObject)),
+            };
+
+            referenceObject.PointedXmlSpriteReference.Sprite = new XmlSprite(SpriteXRoot);
 
             Assert.AreEqual(referenceObject, testObject);
         }

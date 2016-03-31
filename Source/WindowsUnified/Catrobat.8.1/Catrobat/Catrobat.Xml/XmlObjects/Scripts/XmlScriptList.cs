@@ -8,6 +8,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
     {
         public List<XmlScript> Scripts { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlScriptList s = obj as XmlScriptList;
+            if ((object)s == null)
+            {
+                return false;
+            }
+
+            return this.Equals(s);
+        }
+
+        public bool Equals(XmlScriptList s)
+        {
+            return this.Scripts.Equals(s.Scripts);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Scripts.GetHashCode();
+        }
+
         public XmlScriptList()
         {
             Scripts = new List<XmlScript>();

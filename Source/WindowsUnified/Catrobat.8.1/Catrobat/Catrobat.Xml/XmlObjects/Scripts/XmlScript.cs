@@ -21,6 +21,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         public XmlBrickList Bricks { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlScript s = obj as XmlScript;
+            if ((object)s == null)
+            {
+                return false;
+            }
+
+            return this.Equals(s);
+        }
+
+        public bool Equals(XmlScript s)
+        {
+            return this.Bricks.Equals(s.Bricks);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Bricks.GetHashCode();
+        }
+
         protected XmlScript()
         {
             Bricks = new XmlBrickList();

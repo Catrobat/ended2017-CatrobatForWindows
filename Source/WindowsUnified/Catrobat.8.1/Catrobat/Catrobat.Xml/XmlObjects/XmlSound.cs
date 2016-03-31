@@ -9,6 +9,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public string Name { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlSound s = obj as XmlSound;
+            if ((object)s == null)
+            {
+                return false;
+            }
+
+            return this.Equals(s);
+        }
+
+        public bool Equals(XmlSound s)
+        {
+            return this.FileName.Equals(s.FileName) && this.Name.Equals(s.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ FileName.GetHashCode() ^ Name.GetHashCode();
+        }
+
         public XmlSound() {}
 
         public XmlSound(string name)

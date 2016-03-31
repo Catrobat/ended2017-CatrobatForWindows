@@ -7,6 +7,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
     {
         public List<XmlUserVariable> UserVariables;
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlUserVariableList l = obj as XmlUserVariableList;
+            if ((object)l == null)
+            {
+                return false;
+            }
+
+            return this.Equals(l);
+        }
+
+        public bool Equals(XmlUserVariableList l)
+        {
+            return this.UserVariables.Equals(l.UserVariables);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ UserVariables.GetHashCode();
+        }
+
         public XmlUserVariableList() {UserVariables = new List<XmlUserVariable>();}
 
         public XmlUserVariableList(XElement xElement)

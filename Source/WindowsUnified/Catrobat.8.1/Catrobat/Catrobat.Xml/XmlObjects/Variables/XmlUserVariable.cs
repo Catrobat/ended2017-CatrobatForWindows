@@ -21,6 +21,30 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         public uint VariableNum { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlUserVariable v = obj as XmlUserVariable;
+            if ((object)v == null)
+            {
+                return false;
+            }
+
+            return this.Equals(v);
+        }
+
+        public bool Equals(XmlUserVariable v)
+        {
+            return this.Set.Equals(v.Set) && this.Name.Equals(v.Name)
+                && this.ObjectNum.Equals(v.ObjectNum) && this.ScriptNum.Equals(v.ScriptNum) 
+                && this.BrickNum.Equals(v.BrickNum) && this.VariableNum.Equals(v.VariableNum);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Set.GetHashCode() ^ ObjectNum.GetHashCode()
+                ^ ScriptNum.GetHashCode() ^ BrickNum.GetHashCode() ^ VariableNum.GetHashCode();
+        }
+
         public XmlUserVariable() 
         {
             Set = false;
