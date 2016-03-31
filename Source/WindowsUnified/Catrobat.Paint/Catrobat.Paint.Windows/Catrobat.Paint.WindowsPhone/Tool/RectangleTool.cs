@@ -17,13 +17,14 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
+            this.RectangleShapeBase = PocketPaintApplication.GetInstance().RectangleSelectionControl.RectangleShapeBase;
         }
 
         public override void Draw(object o)
         {
             var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
-            Rectangle rectangleToDraw = PocketPaintApplication.GetInstance().RectangleSelectionControl.rectangleToDraw;
+            Rectangle rectangleToDraw = PocketPaintApplication.GetInstance().RectangleSelectionControl.RectangleToDraw;
 
             var coordinate = (Point)o;
             //coordinate.X += strokeThickness / 2.0;
@@ -61,7 +62,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             RectangleGeometry myRectGeometry = new RectangleGeometry();
             myRectGeometry.Rect = rect;
 
-            RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().RectangleSelectionControl.getLastRotateTransformation();
+            RotateTransform lastRotateTransform = this.RectangleShapeBase.GetLastRotateTransformation();
             if (lastRotateTransform != null)
             {
                 RotateTransform rotateTransform = new RotateTransform();
@@ -94,7 +95,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.ResetRectangleSelectionControl();
         }
     }
 }

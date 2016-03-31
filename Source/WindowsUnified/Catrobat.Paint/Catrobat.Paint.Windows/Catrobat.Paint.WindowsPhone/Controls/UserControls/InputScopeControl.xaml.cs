@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Catrobat.Paint.WindowsPhone.Tool;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -134,10 +136,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 {
                     if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                     {
-                        if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-                        {
-                            PocketPaintApplication.GetInstance().RectangleSelectionControl.SetHeightOfControl(currentValue);
-                        }
+                        Debug.Assert(
+                            ((RectangleShapeBaseTool) PocketPaintApplication.GetInstance().ToolCurrent)
+                                .RectangleShapeBase != null);
+                        ((RectangleShapeBaseTool) PocketPaintApplication.GetInstance().ToolCurrent)
+                            .RectangleShapeBase.SetHeightOfControl(currentValue);
+        
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                     {
@@ -154,10 +158,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 {
                     if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                     {
-                        if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-                        {
-                            PocketPaintApplication.GetInstance().RectangleSelectionControl.SetWidthOfControl(currentValue);
-                        }
+                        Debug.Assert(
+                                     ((RectangleShapeBaseTool) PocketPaintApplication.GetInstance().ToolCurrent)
+                                     .RectangleShapeBase != null);
+                        ((RectangleShapeBaseTool)PocketPaintApplication.GetInstance().ToolCurrent)
+                            .RectangleShapeBase.SetWidthOfControl(currentValue);
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                     {
