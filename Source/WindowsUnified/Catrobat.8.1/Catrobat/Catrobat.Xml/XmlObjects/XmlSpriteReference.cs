@@ -22,12 +22,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public bool Equals(XmlSpriteReference r)
         {
-            return _reference.Equals(r._reference); //TODO: && Sprite.Equals(f.Sprite)
+            return _reference.Equals(r._reference);// && Sprite.Equals(r.Sprite);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode() ^ _reference.GetHashCode(); //TODO: ^ Sprite.GetHashCode();
+            return base.GetHashCode() ^ _reference.GetHashCode()
+                ;//^ Sprite.GetHashCode();
         }
 
         public XmlSpriteReference()

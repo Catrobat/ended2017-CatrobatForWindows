@@ -8,6 +8,28 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
     {
         public List<XmlSound> Sounds { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlLookList s = obj as XmlLookList;
+            if ((object)s == null)
+            {
+                return false;
+            }
+
+            return this.Equals(s);
+        }
+
+        public bool Equals(XmlLookList s)
+        {
+            return this.Sounds.Equals(s.Looks);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Sounds.GetHashCode();
+        }
+
+
         public XmlSoundList()
         {
             Sounds = new List<XmlSound>();

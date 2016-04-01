@@ -13,6 +13,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         #endregion
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlLook l = obj as XmlLook;
+            if ((object)l == null)
+            {
+                return false;
+            }
+
+            return this.Equals(l);
+        }
+
+        public bool Equals(XmlLook l)
+        {
+            return this.FileName.Equals(l.FileName) && this.Name.Equals(l.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ FileName.GetHashCode() ^ Name.GetHashCode();
+        }
+
         public XmlLook() { }
 
         public XmlLook(string name)

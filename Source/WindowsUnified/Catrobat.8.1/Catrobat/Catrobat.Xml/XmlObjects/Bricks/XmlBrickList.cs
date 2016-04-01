@@ -14,6 +14,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
     {
         public List<XmlBrick> Bricks { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlBrickList l = obj as XmlBrickList;
+            if ((object)l == null)
+            {
+                return false;
+            }
+
+            return this.Equals(l);
+        }
+
+        public bool Equals(XmlBrickList l)
+        {
+            return this.Bricks.Equals(l.Bricks);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Bricks.GetHashCode();
+        }
+
         public XmlBrickList()
         {
             Bricks = new List<XmlBrick>();

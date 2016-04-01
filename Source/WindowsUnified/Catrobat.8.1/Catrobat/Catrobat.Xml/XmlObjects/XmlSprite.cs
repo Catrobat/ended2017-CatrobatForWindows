@@ -50,6 +50,31 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public XmlSoundList Sounds { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlSprite s = obj as XmlSprite;
+            if ((object)s == null)
+            {
+                return false;
+            }
+
+            return this.Equals(s);
+        }
+
+        public bool Equals(XmlSprite s)
+        {
+            return this.Name.Equals(s.Name) && this.Variables.Equals(s.Variables)
+                && this.Looks.Equals(s.Looks) && this.Scripts.Equals(s.Scripts)
+                && this.Sounds.Equals(s.Sounds);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Name.GetHashCode() ^ Variables.GetHashCode()
+                ^ Looks.GetHashCode() ^ Scripts.GetHashCode() ^ Sounds.GetHashCode();
+        }
+
+
         public XmlSprite()
         {
             Scripts = new XmlScriptList();
