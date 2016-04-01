@@ -48,8 +48,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             myEllipseGeometry.RadiusX = width / 2.0;
             myEllipseGeometry.RadiusY = height / 2.0;
 
-            RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl
-                .getLastRotateTransformation();
+            RotateTransform lastRotateTransform = this.RectangleShapeBase.GetLastRotateTransformation();
             if (lastRotateTransform != null)
             {
                 RotateTransform rotateTransform = new RotateTransform();
