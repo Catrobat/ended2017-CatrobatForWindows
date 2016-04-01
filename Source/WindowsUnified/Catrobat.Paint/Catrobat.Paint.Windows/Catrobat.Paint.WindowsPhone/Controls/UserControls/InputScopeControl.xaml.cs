@@ -134,19 +134,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 if (currentButton.Name.Equals("btnHeightValue"))
                 {
-                    if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+                    
+                    if (PocketPaintApplication.GetInstance().ToolCurrent is RectangleShapeBaseTool)
                     {
                         Debug.Assert(
                             ((RectangleShapeBaseTool) PocketPaintApplication.GetInstance().ToolCurrent)
                                 .RectangleShapeBase != null);
                         ((RectangleShapeBaseTool) PocketPaintApplication.GetInstance().ToolCurrent)
                             .RectangleShapeBase.SetHeightOfControl(currentValue);
-        
-                    }
-                    else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
-                    {
-                        if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
-                            PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(currentValue, false);
                     }
                     else
                     {
@@ -156,18 +151,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
                 else if (currentButton.Name.Equals("btnWidthValue"))
                 {
-                    if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+                    if (PocketPaintApplication.GetInstance().ToolCurrent is RectangleShapeBaseTool)
                     {
                         Debug.Assert(
                                      ((RectangleShapeBaseTool) PocketPaintApplication.GetInstance().ToolCurrent)
                                      .RectangleShapeBase != null);
                         ((RectangleShapeBaseTool)PocketPaintApplication.GetInstance().ToolCurrent)
                             .RectangleShapeBase.SetWidthOfControl(currentValue);
-                    }
-                    else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
-                    {
-                        if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
-                            PocketPaintApplication.GetInstance().EllipseSelectionControl.changeWidthOfDrawingSelection(currentValue, false);
                     }
                     else
                     {

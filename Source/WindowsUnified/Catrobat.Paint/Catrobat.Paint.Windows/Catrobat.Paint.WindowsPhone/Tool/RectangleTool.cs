@@ -7,14 +7,15 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
-    internal class RectangleTool : RectangleShapeBaseTool
+    public class RectangleTool : RectangleShapeBaseTool
     {
         private Path m_path;
 
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
-            this.RectangleShapeBase = PocketPaintApplication.GetInstance().RectangleSelectionControl.RectangleShapeBase;
+            this.RectangleShapeBase = PocketPaintApplication.GetInstance().RectangleSelectionControl
+                .RectangleShapeBase;
         }
 
         public override void Draw(object o)

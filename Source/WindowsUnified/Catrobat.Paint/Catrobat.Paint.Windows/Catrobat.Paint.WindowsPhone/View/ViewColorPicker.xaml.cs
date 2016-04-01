@@ -168,7 +168,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.strokeColorSelected = current_solid_brush;
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.StrokeOfRectangleToDraw = current_solid_brush;
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeOfEllipseToDraw = current_solid_brush;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.StrokeOfEllipseToDraw = current_solid_brush;
                 PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeStrokeOfDrawingShape(current_color);
             }
             else
@@ -177,7 +177,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().PaintData.colorSelected = current_solid_brush;
 
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.FillOfRectangleToDraw = current_solid_brush;
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.fillOfEllipseToDraw = current_solid_brush;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.FillOfEllipseToDraw = current_solid_brush;
             }
 
             if (PocketPaintApplication.GetInstance().isBrushTool)

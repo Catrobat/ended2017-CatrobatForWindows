@@ -183,7 +183,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
-                    PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeThicknessOfEllipseToDraw = strokeThickness;
+                    PocketPaintApplication.GetInstance().EllipseSelectionControl.StrokeThicknessOfEllipseToDraw = strokeThickness;
                 }
                 else
                 {

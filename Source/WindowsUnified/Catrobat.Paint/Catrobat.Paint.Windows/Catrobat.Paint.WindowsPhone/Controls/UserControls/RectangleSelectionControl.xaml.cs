@@ -16,8 +16,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
     public sealed partial class RectangleSelectionControl : UserControl
     {
-        TransformGroup m_transformGridMain;
-
         public RectangleShapeBaseControl RectangleShapeBase { get; private set; }
         public Rectangle RectangleToDraw { get; private set; }
 
