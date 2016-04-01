@@ -6,11 +6,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     ManipulationMode="All"
-    d:DesignHeight="230"
-    d:DesignWidth="230"
+    d:DesignHeight="290"
+    d:DesignWidth="290"
     mc:Ignorable="d"
     >
 
+    <Grid>
+        <userControls:RectangleShapeBaseControl
+            x:Name="RectangleShapeBaseControl"
+            />
+    </Grid>
+
+    <!--
     <Grid
         x:Name="GridMain"
         Height="230"
@@ -242,4 +249,5 @@
             </userControls:RotationArrowsShape.RenderTransform>
         </userControls:RotationArrowsShape>
     </Grid>
+    -->
 </UserControl>

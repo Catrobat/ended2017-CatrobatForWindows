@@ -7,7 +7,7 @@ using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
-     internal abstract class RectangleShapeBaseTool : ToolBase
+     public abstract class RectangleShapeBaseTool : ToolBase
     {
          public RectangleShapeBaseControl RectangleShapeBase { get; protected set; }
 
@@ -29,6 +29,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
          public override void Draw(object o)
          {
              
+         }
+
+         public override void ResetDrawingSpace()
+         {
+
          }
 
          public override void ResetUsedElements()

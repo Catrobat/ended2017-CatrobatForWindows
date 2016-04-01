@@ -6,75 +6,31 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
-    class EllipseTool : ToolBase
+    class EllipseTool : RectangleShapeBaseTool
     {
-        private Path _path;
+        private Path m_path;
 
         public EllipseTool()
         {
-            _path = null;
+            m_path = null;
+
             this.ToolType = ToolType.Ellipse;
-            if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
+            this.RectangleShapeBase = PocketPaintApplication.GetInstance().RectangleSelectionControl
+                .RectangleShapeBase;
+
+            if (PocketPaintApplication.GetInstance() != null 
+                && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcEllipseSelectionControl = Visibility.Visible;
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcEllipseSelectionControl 
+                    = Visibility.Visible;
             }
-        }
-
-        public override void HandleDown(object arg)
-        {
-            System.Diagnostics.Debug.WriteLine("Ellipse: HandleDown!");
-        }
-
-        public override void HandleMove(object arg)
-        {
-            RotateTransform rotateTransform = arg as RotateTransform;
-
-            TranslateTransform lastTranslateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl.getLastTranslateTransformation();
-            RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl.getLastRotateTransformation();
-
-            if (lastTranslateTransform != null && lastRotateTransform == null)
-            {
-                TranslateTransform originTranslateTransform = new TranslateTransform();
-                originTranslateTransform.X = (lastTranslateTransform.X * -1.0);
-                originTranslateTransform.Y = (lastTranslateTransform.Y * -1.0);
-
-                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(originTranslateTransform);
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(rotateTransform);
-                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(lastTranslateTransform);
-            }
-            else if (lastTranslateTransform == null && lastRotateTransform != null)
-            {
-                rotateTransform.Angle += lastRotateTransform.Angle;
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(rotateTransform);
-            }
-            else if (lastTranslateTransform != null && lastRotateTransform != null)
-            {
-                TranslateTransform originTranslateTransform = new TranslateTransform();
-                originTranslateTransform.X = (lastTranslateTransform.X * -1.0);
-                originTranslateTransform.Y = (lastTranslateTransform.Y * -1.0);
-
-                rotateTransform.Angle += lastRotateTransform.Angle;
-
-                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(originTranslateTransform);
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(rotateTransform);
-                //PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(lastTranslateTransform);
-            }
-            else
-            {
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.addTransformation(rotateTransform);
-            }          
-        }
-
-        public override void HandleUp(object arg)
-        {
-            System.Diagnostics.Debug.WriteLine("Ellipse: HandleUp!");
         }
 
         public override void Draw(object o)
         {
             var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
-            Ellipse ellipseToDraw = PocketPaintApplication.GetInstance().EllipseSelectionControl.ellipseToDraw;
+            Ellipse ellipseToDraw = PocketPaintApplication.GetInstance().EllipseSelectionControl.EllipseToDraw;
 
             var coordinate = (Point)o;
             //coordinate.X += strokeThickness / 2.0;
@@ -92,7 +48,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             myEllipseGeometry.RadiusX = width / 2.0;
             myEllipseGeometry.RadiusY = height / 2.0;
 
-            RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl.getLastRotateTransformation();
+            RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().EllipseSelectionControl
+                .getLastRotateTransformation();
             if (lastRotateTransform != null)
             {
                 RotateTransform rotateTransform = new RotateTransform();
@@ -103,24 +60,25 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 myEllipseGeometry.Transform = rotateTransform;
             }
 
-            _path = new Path();
-            _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            _path.StrokeThickness = strokeThickness;
-            _path.StrokeLineJoin = PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfRectangleToDraw;
-            _path.Data = myEllipseGeometry;
-            PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(_path);
+            m_path = new Path();
+            m_path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            m_path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            m_path.StrokeThickness = strokeThickness;
+            m_path.StrokeLineJoin = PocketPaintApplication.GetInstance().EllipseSelectionControl
+                .StrokeLineJoinOfEllipseToDraw;
+            m_path.Data = myEllipseGeometry;
+            PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(m_path);
 
             var rectangleGeometry = new RectangleGeometry
             {
                 Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
             };
-            _path.Clip = rectangleGeometry;
-            _path.InvalidateArrange();
-            _path.InvalidateMeasure();
+            m_path.Clip = rectangleGeometry;
+            m_path.InvalidateArrange();
+            m_path.InvalidateMeasure();
 
-            CommandManager.GetInstance().CommitCommand(new EllipseCommand(_path)); 
+            CommandManager.GetInstance().CommitCommand(new EllipseCommand(m_path)); 
         }
 
         public override void ResetDrawingSpace()
@@ -128,8 +86,5 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PocketPaintApplication.GetInstance().EllipseSelectionControl.resetEllipseSelectionControl();
         }
 
-        public override void ResetUsedElements()
-        {
-        }
     }
 }

@@ -605,8 +605,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnBrushThickness.Label = "Einstellungen";
+
                 app_btnReset.Label = "Ausgangsposition";
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().EllipseSelectionControl.isModifiedEllipseMovement ? true : false;
+                Debug.Assert(
+                            ((RectangleShapeBaseTool)PocketPaintApplication.GetInstance().ToolCurrent)
+                            .RectangleShapeBase != null);
+                app_btnReset.IsEnabled = ((RectangleShapeBaseTool)PocketPaintApplication.GetInstance().ToolCurrent)
+                                         .RectangleShapeBase.IsModifiedRectangleForMovement;
 
                 app_btnBrushThickness.Name = "ThicknessProperties";
 
