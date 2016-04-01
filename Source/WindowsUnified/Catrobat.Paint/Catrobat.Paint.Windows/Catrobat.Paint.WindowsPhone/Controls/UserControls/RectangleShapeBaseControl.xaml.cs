@@ -15,17 +15,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     public sealed partial class RectangleShapeBaseControl : UserControl
     {
         TransformGroup m_transformGridMain;
-        double m_gridMainSize = 290.0;
-        double m_rectangleForMovementSize = 200.0;
-        double m_areaToDrawSize = 160.0;
-        
+        double m_defaultGridMainSize = 290.0;
+        double m_defaultRectangleForMovementSize = 200.0;
+        double m_defaultAreaToDrawSize = 160.0;
 
         private float m_rotation;
         private readonly double m_minWidthRectangleToDraw = 20;
         private readonly double m_minHeightRectangleToDraw = 20;
 
-
-        //public Grid MainGrid { get; private set; }
         public Grid AreaToDraw { get; private set; }
 
     private enum Orientation
@@ -465,69 +462,33 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void ResetRectangleShapeBaseControl()
         {
-            PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.lastPoint = new Point(0.0, 0.0);
-
-            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = m_areaToDrawSize;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = m_areaToDrawSize;
-
-            m_transformGridMain.Children.Clear();
+            GridMainSelection.Width = m_defaultGridMainSize;
+            GridMainSelection.Height = m_defaultGridMainSize;
             GridMainSelection.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
 
-            GridMainSelection.Width = m_gridMainSize;
-            GridMainSelection.Height = m_gridMainSize;
+            rectRectangleForMovement.Width = m_defaultRectangleForMovementSize;
+            rectRectangleForMovement.Height = m_defaultRectangleForMovementSize;
 
-            AreaToDrawGrid.Width = m_areaToDrawSize;
-            AreaToDrawGrid.Height = m_areaToDrawSize;
-            rectRectangleForMovement.Width = m_rectangleForMovementSize;
-            rectRectangleForMovement.Height = m_rectangleForMovementSize;
+            AreaToDrawGrid.Width = m_defaultAreaToDrawSize;
+            AreaToDrawGrid.Height = m_defaultAreaToDrawSize;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = m_defaultAreaToDrawSize;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = m_defaultAreaToDrawSize;
 
-            RotateTransform rotate = new RotateTransform();
-            var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
-            rotate.Angle = -angle;
-            Point point = new Point(0.5, 0.5);
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransformOrigin = point;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransform = rotate;
+            m_transformGridMain.Children.Clear();
+            m_rotation = 0;
 
             IsModifiedRectangleForMovement = false;
-            m_rotation = 0;
+
+
+            // TODO: evaluate if the outcommented code is maybe needed?
+            //PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.lastPoint = new Point(0.0, 0.0);
+            //RotateTransform rotate = new RotateTransform();
+            //var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+            //rotate.Angle = -angle;
+            //Point point = new Point(0.5, 0.5);
+            //PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransformOrigin = point;
+            //PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransform = rotate;
         }
-
-        // TODO: adapt
-        //public Brush fillOfRectangleToDraw
-        //{
-        //    get
-        //    {
-        //        return rectangleToDraw.Fill;
-        //    }
-        //    set
-        //    {
-        //        rectangleToDraw.Fill = value;
-        //    }
-        //}
-
-        //public Brush strokeOfRectangleToDraw
-        //{
-        //    get
-        //    {
-        //        return rectangleToDraw.Stroke;
-        //    }
-        //    set
-        //    {
-        //        rectangleToDraw.Stroke = value;
-        //    }
-        //}
-
-        //public double strokeThicknessOfRectangleToDraw
-        //{
-        //    get
-        //    {
-        //        return rectangleToDraw.StrokeThickness;
-        //    }
-        //    set
-        //    {
-        //        rectangleToDraw.StrokeThickness = value;
-        //    }
-        //}
 
         private void TopLeftGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {

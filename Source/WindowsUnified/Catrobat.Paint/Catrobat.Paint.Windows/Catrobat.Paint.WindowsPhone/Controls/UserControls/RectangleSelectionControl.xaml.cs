@@ -68,10 +68,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void ResetRectangleSelectionControl()
         {
-            FillOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.colorSelected;
-            StrokeOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            StrokeThicknessOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
-            StrokeLineJoinOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
+            // TODO: evaluate if the outcommented code is maybe needed?
+            //FillOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            //StrokeOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            //StrokeThicknessOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
+            //StrokeLineJoinOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
 
             RectangleShapeBaseControl.ResetRectangleShapeBaseControl();
         }
