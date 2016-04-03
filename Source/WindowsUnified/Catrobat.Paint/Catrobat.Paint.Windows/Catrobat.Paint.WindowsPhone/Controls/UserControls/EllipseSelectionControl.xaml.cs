@@ -45,8 +45,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             this.InitializeComponent();
 
             RectangleShapeBase = RectangleShapeBaseControl;
-            
-            //PocketPaintApplication.GetInstance().EllipseSelectionControl = this;
 
             for (int i = 0; i < RectangleShapeBaseControl.AreaToDraw.Children.Count; i++)
             {
@@ -67,11 +65,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void resetEllipseSelectionControl()
         {
-            // TODO: evaluate if the outcommented code is maybe needed?
-            //FillOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.colorSelected;
-            //StrokeOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            //StrokeThicknessOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
-            //StrokeLineJoinOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
+            FillOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            StrokeOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            StrokeThicknessOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
+            StrokeLineJoinOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
 
             RectangleShapeBaseControl.ResetRectangleShapeBaseControl();
         }

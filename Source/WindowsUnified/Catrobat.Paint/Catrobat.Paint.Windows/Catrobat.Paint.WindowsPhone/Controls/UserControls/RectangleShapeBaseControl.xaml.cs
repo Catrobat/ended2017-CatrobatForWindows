@@ -479,8 +479,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             IsModifiedRectangleForMovement = false;
 
-
-            // TODO: evaluate if the outcommented code is maybe needed?
+            // TODO: evaluate if the outcommented code is needed
             //PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.lastPoint = new Point(0.0, 0.0);
             //RotateTransform rotate = new RotateTransform();
             //var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
@@ -488,6 +487,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //Point point = new Point(0.5, 0.5);
             //PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransformOrigin = point;
             //PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransform = rotate;
+
+            //PocketPaintApplication.GetInstance().EllipseSelectionControl.RenderTransformOrigin = point;
+            //PocketPaintApplication.GetInstance().EllipseSelectionControl.RenderTransform = rotate;
         }
 
         private void TopLeftGrid_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
