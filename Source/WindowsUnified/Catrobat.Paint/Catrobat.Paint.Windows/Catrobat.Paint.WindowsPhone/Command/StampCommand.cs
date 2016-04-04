@@ -28,7 +28,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
             try
             {
                 StampTool stampTool = (StampTool)PocketPaintApplication.GetInstance().ToolCurrent;
-                stampTool.stampPaste(_xCoordinateOnWorkingSpace, _yCoordinateOnWorkingSpace, _stampedImage);
+                stampTool.StampPaste(_xCoordinateOnWorkingSpace, _yCoordinateOnWorkingSpace, _stampedImage);
                 return true;
             }
             catch (Exception exception)

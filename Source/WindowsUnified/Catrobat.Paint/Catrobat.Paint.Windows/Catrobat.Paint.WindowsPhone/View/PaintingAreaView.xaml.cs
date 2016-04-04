@@ -846,7 +846,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btnStampPaste_Click(object sender, RoutedEventArgs e)
         {
-            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampPaste();
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).StampPaste();
         }
 
         public bool isAppBarButtonSelected(string nameOfAppbarbutton)
@@ -885,12 +885,12 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
             }
 
-            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampClear();
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).StampClear();
         }
 
         void app_btnStampCopy_Click(object sender, RoutedEventArgs e)
         {
-            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampCopy();
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).StampCopy();
             CommandBar cmdBar = (CommandBar)BottomAppBar;
 
             for (int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
