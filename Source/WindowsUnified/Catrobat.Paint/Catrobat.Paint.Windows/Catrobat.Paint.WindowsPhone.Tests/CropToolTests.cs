@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.System.Threading;
-using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
-using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.View;
 using Windows.UI.Xaml.Media;
 
@@ -25,9 +20,9 @@ namespace Catrobat.Paint.WindowsPhone.Tests
 
         [TestInitialize]
         [Timeout(2000)]
-        public void Init()
+        public async void Init()
         {
-            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                 CoreDispatcherPriority.Normal,
                 () =>
                 {

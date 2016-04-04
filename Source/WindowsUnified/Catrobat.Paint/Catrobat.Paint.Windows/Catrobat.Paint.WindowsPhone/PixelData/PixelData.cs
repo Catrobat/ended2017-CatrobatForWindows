@@ -87,12 +87,13 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             {
                 if (pixles != null)
                 {
-                    byte[] PixelsBitmap = new byte[PocketPaintApplication.GetInstance().Bitmap.PixelHeight *
-                                                   PocketPaintApplication.GetInstance().Bitmap.PixelWidth *
-                                                   4];
+                    int pixelWidth = PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+                    int pixelHeight = PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
 
-                    double NormfactorX = PocketPaintApplication.GetInstance().Bitmap.PixelWidth / (double)width;
-                    double NormfactorY = PocketPaintApplication.GetInstance().Bitmap.PixelHeight / (double)height;
+                    byte[] PixelsBitmap = new byte[pixelWidth * pixelHeight * 4];
+
+                    double NormfactorX = pixelWidth / (double)width;
+                    double NormfactorY = pixelHeight / (double)height;
 
                         for (int i = 0; i < height; i++)
                         {
@@ -105,7 +106,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                                 int intX = (int)Math.Round(doubleX, 0);
                                 int intY = (int)Math.Round(doubleY, 0);
 
-                                int intTemp = intY * PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+                                int intTemp = intY * pixelWidth;
                                 int intXTemp = intTemp + intX;
                                 int intValue = intXTemp * 4;
                                 if (intValue >= PixelsBitmap.Length)
