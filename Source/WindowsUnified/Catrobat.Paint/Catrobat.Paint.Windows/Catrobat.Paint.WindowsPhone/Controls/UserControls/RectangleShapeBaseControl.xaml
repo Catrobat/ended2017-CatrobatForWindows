@@ -61,7 +61,7 @@
         </Grid>
 
         <Rectangle
-            x:Name="rectRectangleForMovement"
+            x:Name="MovementRectangle"
             DoubleTapped="rectEllipseForMovement_DoubleTapped"
             Fill="#01FFFFFF"
             Height="200"
@@ -361,10 +361,12 @@
             />
 
         <Grid
+            x:Name="TopRightRotationGrid"
             Background="Red"
             Height="50"
             HorizontalAlignment="right"
             ManipulationDelta="RotationTopRight_OnManipulationDelta"
+            ManipulationStarted="RotationTopRight_OnManipulationStarted"
             ManipulationMode="TranslateX, TranslateY"
             Margin="0,-20,-45,0"
             VerticalAlignment="Top"
