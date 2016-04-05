@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Windows.UI.Core;
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
@@ -15,43 +14,43 @@ namespace Catrobat.Paint.WindowsPhone.Tests
     [TestClass]
     public class CropToolTests
     {
-        private PocketPaintApplication app;
-        private CropControl sut;
+        private PocketPaintApplication _app;
+        private CropControl _sut;
 
         [TestInitialize]
         [Timeout(2000)]
-        public async void Init()
+        public void Init()
         {
-            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                 CoreDispatcherPriority.Normal,
                 () =>
                 {
-                    app = PocketPaintApplication.GetInstance();
-                    PaintingAreaView view = new PaintingAreaView();
+                    _app = PocketPaintApplication.GetInstance();
+                    new PaintingAreaView();
                     //app.CropControl = new CropControl();
-                    sut = app.CropControl;
+                    _sut = _app.CropControl;
                 });
-            while (sut == null) { }
+            while (_sut == null) { }
         }
 
         [TestCleanup]
         public void CleanUp()
         {
-            sut = null;
-            app = null;
+            _sut = null;
+            _app = null;
         }
 
         [TestMethod]
         [TestCategory("SetControlSize")]
         public async Task SetControlSizeTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 var height = 300;
                 var width = 160;
 
-                sut.SetControlSize(height, width);
-                Grid grid = sut.Content as Grid;
+                _sut.SetControlSize(height, width);
+                Grid grid = _sut.Content as Grid;
                 if (grid != null)
                 {
                     Assert.AreEqual(grid.Width, width);
@@ -64,10 +63,10 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetControlSize")]
         public async Task SetControlSizeMaxValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 Assert.ThrowsException<ArgumentException>(() =>
-                    sut.SetControlSize(double.MaxValue, double.MaxValue));
+                    _sut.SetControlSize(double.MaxValue, double.MaxValue));
 
             });
         }
@@ -76,10 +75,10 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetControlSize")]
         public async Task SetControlSizeMinValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 Assert.ThrowsException<ArgumentException>(() =>
-                sut.SetControlSize(double.MinValue, double.MinValue));
+                _sut.SetControlSize(double.MinValue, double.MinValue));
 
             });
         }
@@ -88,13 +87,13 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetRectangleForMovementSize")]
         public async Task SetRectangleForMovementSizeTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 var height = 300;
                 var width = 160;
 
-                sut.SetRectangleForMovementSize(height, width);
-                var maingrid = sut.Content as Grid;
+                _sut.SetRectangleForMovementSize(height, width);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -123,10 +122,10 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetRectangleForMovementSize")]
         public async Task SetRectangleForMovementSizeMaxValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 Assert.ThrowsException<ArgumentException>(() =>
-                    sut.SetRectangleForMovementSize(double.MaxValue, double.MaxValue));
+                    _sut.SetRectangleForMovementSize(double.MaxValue, double.MaxValue));
 
             });
         }
@@ -135,10 +134,10 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetRectangleForMovementSize")]
         public async Task SetRectangleForMovementSizeMinValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 Assert.ThrowsException<ArgumentException>(() =>
-                sut.SetRectangleForMovementSize(double.MinValue, double.MinValue));
+                _sut.SetRectangleForMovementSize(double.MinValue, double.MinValue));
 
             });
         }
@@ -147,11 +146,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCornerRectangles")]
         public async Task SetHeightOfVerticalCornerRectanglesTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 20.0;
-                sut.SetHeightOfVerticalCornerRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCornerRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -181,12 +180,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCornerRectangles")]
         public async Task SetHeightOfVerticalCornerRectanglesHighValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 31.0;
                 double maxValue = 30.0;
-                sut.SetHeightOfVerticalCornerRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCornerRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -216,12 +215,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCornerRectangles")]
         public async Task SetHeightOfVerticalCornerRectanglesLowValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 4.0;
                 double minValue = 5.0;
-                sut.SetHeightOfVerticalCornerRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCornerRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -251,11 +250,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCornerRectangles")]
         public async Task SetHeightOfVerticalCornerRectanglesMaxValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double maxValue = 30.0;
-                sut.SetHeightOfVerticalCornerRectangles(double.MaxValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCornerRectangles(double.MaxValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -285,11 +284,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCornerRectangles")]
         public async Task SetHeightOfVerticalCornerRectanglesMinValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double minValue = 5.0;
-                sut.SetHeightOfVerticalCornerRectangles(double.MinValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCornerRectangles(double.MinValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -319,11 +318,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCenterRectangles")]
         public async Task SetHeightOfVerticalCenterRectanglesTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 20.0;
-                sut.SetHeightOfVerticalCenterRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCenterRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -351,12 +350,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCenterRectangles")]
         public async Task SetHeightOfVerticalCenterRectanglesHighValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 121.0;
                 double maxValue = 120.0;
-                sut.SetHeightOfVerticalCenterRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCenterRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -384,12 +383,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCenterRectangles")]
         public async Task SetHeightOfVerticalCenterRectanglesLowValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 4.0;
                 double minValue = 5.0;
-                sut.SetHeightOfVerticalCenterRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCenterRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -417,11 +416,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCenterRectangles")]
         public async Task SetHeightOfVerticalCenterRectanglesMaxValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double maxValue = 120.0;
-                sut.SetHeightOfVerticalCenterRectangles(double.MaxValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCenterRectangles(double.MaxValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -449,11 +448,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetHeightOfVerticalCenterRectangles")]
         public async Task SetHeightOfVerticalCenterRectanglesMinValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double minValue = 5.0;
-                sut.SetHeightOfVerticalCenterRectangles(double.MinValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetHeightOfVerticalCenterRectangles(double.MinValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -481,11 +480,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCenterRectangles")]
         public async Task SetWidthOfHorizontalCenterRectanglesTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 120.0;
-                sut.SetWidthOfHorizontalCenterRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCenterRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -513,12 +512,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCenterRectangles")]
         public async Task SetWidthOfHorizontalCenterRectanglesHighValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 121.0;
                 double maxValue = 120.0;
-                sut.SetWidthOfHorizontalCenterRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCenterRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -546,12 +545,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCenterRectangles")]
         public async Task SetWidthOfHorizontalCenterRectanglesLowValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 4.0;
                 double minValue = 120.0;
-                sut.SetWidthOfHorizontalCenterRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCenterRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -579,11 +578,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCenterRectangles")]
         public async Task SetWidthOfHorizontalCenterRectanglesMaxValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double maxValue = 120.0;
-                sut.SetWidthOfHorizontalCenterRectangles(double.MaxValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCenterRectangles(double.MaxValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -611,11 +610,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCenterRectangles")]
         public async Task SetWidthOfHorizontalCenterRectanglesMinValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double minValue = 120.0;
-                sut.SetWidthOfHorizontalCenterRectangles(double.MinValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCenterRectangles(double.MinValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -643,11 +642,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCornerRectangles")]
         public async Task SetWidthOfHorizontalCornerRectanglesTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 120.0;
-                sut.SetWidthOfHorizontalCornerRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCornerRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -677,12 +676,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCornerRectangles")]
         public async Task SetWidthOfHorizontalCornerRectanglesHighValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 121.0;
                 double maxValue = 120.0;
-                sut.SetWidthOfHorizontalCornerRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCornerRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -712,12 +711,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCornerRectangles")]
         public async Task SetWidthOfHorizontalCornerRectanglesLowValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double value = 4.0;
                 double minValue = 120.0;
-                sut.SetWidthOfHorizontalCornerRectangles(value);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCornerRectangles(value);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -747,11 +746,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCornerRectangles")]
         public async Task SetWidthOfHorizontalCornerRectanglesMaxValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double maxValue = 120.0;
-                sut.SetWidthOfHorizontalCornerRectangles(double.MaxValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCornerRectangles(double.MaxValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -781,11 +780,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetWidthOfHorizontalCornerRectangles")]
         public async Task SetWidthOfHorizontalCornerRectanglesMinValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 double minValue = 120.0;
-                sut.SetWidthOfHorizontalCornerRectangles(double.MinValue);
-                var maingrid = sut.Content as Grid;
+                _sut.SetWidthOfHorizontalCornerRectangles(double.MinValue);
+                var maingrid = _sut.Content as Grid;
                 if (maingrid != null)
                 {
                     foreach (var uiElement1 in maingrid.Children)
@@ -815,16 +814,18 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetCropControlPosition")]
         public async Task SetCropControlPositionTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 var height = 470;
                 var width = 290;
-                TranslateTransform trans = new TranslateTransform();
-                trans.X = 60;
-                trans.Y = 100;
+                TranslateTransform trans = new TranslateTransform
+                {
+                    X = 60,
+                    Y = 100
+                };
 
-                sut.SetCropControlPosition(height, width, trans);
-                Grid grid = sut.Content as Grid;
+                _sut.SetCropControlPosition(height, width, trans);
+                Grid grid = _sut.Content as Grid;
                 if (grid != null)
                 {
                     Assert.AreEqual(grid.Width, width);
@@ -856,14 +857,16 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetCropControlPosition")]
         public async Task SetCropControlPositionMaxValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
-                TranslateTransform trans = new TranslateTransform();
-                trans.X = 60;
-                trans.Y = 100;
+                TranslateTransform trans = new TranslateTransform
+                {
+                    X = 60,
+                    Y = 100
+                };
 
                 Assert.ThrowsException<ArgumentException>(() =>
-                    sut.SetCropControlPosition(double.MaxValue, double.MaxValue, trans));
+                    _sut.SetCropControlPosition(double.MaxValue, double.MaxValue, trans));
 
             });
         }
@@ -872,14 +875,16 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetCropControlPosition")]
         public async Task SetCropControlPositionMinValueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
-                TranslateTransform trans = new TranslateTransform();
-                trans.X = 60;
-                trans.Y = 100;
+                TranslateTransform trans = new TranslateTransform
+                {
+                    X = 60,
+                    Y = 100
+                };
 
                 Assert.ThrowsException<ArgumentException>(() =>
-                sut.SetCropControlPosition(double.MinValue, double.MinValue, trans));
+                _sut.SetCropControlPosition(double.MinValue, double.MinValue, trans));
 
             });
         }
@@ -888,10 +893,10 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("SetCropControlPosition")]
         public async Task SetCropControlPositionTransNullTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 Assert.ThrowsException<ArgumentException>(() =>
-                sut.SetCropControlPosition(470, 290, null));
+                _sut.SetCropControlPosition(470, 290, null));
 
             });
         }
@@ -900,13 +905,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("ResetAppBarButtonRectangleSelectionControl")]
         public async Task ResetAppBarButtonRectangleSelectionControlTrueTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
-                bool value = true;
-                sut.ResetAppBarButtonRectangleSelectionControl(value);
+                _sut.ResetAppBarButtonRectangleSelectionControl(true);
                 AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
 
-                Assert.AreEqual(appBarButtonReset.IsEnabled, value);
+                Assert.AreEqual(appBarButtonReset.IsEnabled, true);
                 
 
             });
@@ -916,13 +920,12 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("ResetAppBarButtonRectangleSelectionControl")]
         public async Task ResetAppBarButtonRectangleSelectionControlFalseTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
-                bool value = false;
-                sut.ResetAppBarButtonRectangleSelectionControl(value);
+                _sut.ResetAppBarButtonRectangleSelectionControl(false);
                 AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
 
-                Assert.AreEqual(appBarButtonReset.IsEnabled, value);
+                Assert.AreEqual(appBarButtonReset.IsEnabled, false);
                 
             });
         }
@@ -931,9 +934,9 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("GetHeightOfRectangleCropSelection")]
         public async Task GetHeightOfRectangleCropSelectionInfinityTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
-                double value = sut.GetHeightOfRectangleCropSelection();
+                double value = _sut.GetHeightOfRectangleCropSelection();
                 Assert.AreEqual(Double.IsInfinity(value), true);
             });
         }
@@ -942,9 +945,9 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("GetWidthOfRectangleCropSelection")]
         public async Task GetWidthOfRectangleCropSelectionInfinityTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
-                double value = sut.GetWidthOfRectangleCropSelection();
+                double value = _sut.GetWidthOfRectangleCropSelection();
                 Assert.AreEqual(Double.IsInfinity(value), true);
             });
         }
@@ -953,11 +956,11 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("HasElementsPaintingAreaViews")]
         public async Task HasElementsPaintingAreaViewsTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 bool result = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0;
 
-                bool value = sut.HasPaintingAreaViewElements();
+                bool value = _sut.HasPaintingAreaViewElements();
                 Assert.AreEqual(value, result);
             });
         }
@@ -966,32 +969,32 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         [TestCategory("HasElementsPaintingAreaViews")]
         public async Task HasElementsPaintingAreaViewsNotTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
                 bool result = !(PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0);
 
-                bool value = sut.HasPaintingAreaViewElements();
+                bool value = _sut.HasPaintingAreaViewElements();
                 Assert.AreNotEqual(value, result);
             });
         }
 
         [TestMethod]
         [TestCategory("GetXYOffsetBetweenPaintingAreaAndCropControlSelection")]
-        public async Task GetXYOffsetBetweenPaintingAreaAndCropControlSelectionTest()
+        public async Task GetXyOffsetBetweenPaintingAreaAndCropControlSelectionTest()
         {
-            await ExecuteOnUIThread(() =>
+            await ExecuteOnUiThread(() =>
             {
-                Point value = new Point(0.0, 0.0);
-                value = sut.GetXYOffsetBetweenPaintingAreaAndCropControlSelection();
+                Point value;
+                value = _sut.GetXYOffsetBetweenPaintingAreaAndCropControlSelection();
                 Assert.AreNotEqual(value, null);
                 Assert.AreNotEqual(value.X, 0.0);
                 Assert.AreNotEqual(value.Y, 0.0);
             });
         }
 
-        public IAsyncAction ExecuteOnUIThread(DispatchedHandler action)
+        public IAsyncAction ExecuteOnUiThread(DispatchedHandler action)
         {
-            return Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, action);
+            return Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, action);
         }
 
     }
