@@ -44,7 +44,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         PixelData.PixelData _pixelData = new PixelData.PixelData();
 
-        public Point LeftTopNullPointStampSelection { get; }
+        public Point LeftTopNullPointStampSelection { get; set; }
 
         double _heightOfRectangle;
         double _widthOfRectangle;
