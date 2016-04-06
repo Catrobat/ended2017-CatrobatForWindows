@@ -1,20 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using Windows.Foundation;
+﻿using System.Diagnostics;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
-using Catrobat.Paint.WindowsPhone.Tool;
 
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
 
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
-    public sealed partial class RectangleSelectionControl : UserControl
+    public sealed partial class RectangleSelectionControl
     {
         public RectangleShapeBaseControl RectangleShapeBase { get; private set; }
         public Rectangle RectangleToDraw { get; private set; }
