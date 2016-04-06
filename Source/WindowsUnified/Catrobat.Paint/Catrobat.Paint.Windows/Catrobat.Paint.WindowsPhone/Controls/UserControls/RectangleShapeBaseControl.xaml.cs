@@ -121,8 +121,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 yVal += lastTranslateTransform.Y;
             }
 
-            translateTransform.X = xVal;
-            translateTransform.Y = yVal;
+                translateTransform.X = xVal;
+                translateTransform.Y = yVal;
             addTransformation(translateTransform);
         }
 
@@ -387,17 +387,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (paintingAreaView != null)
             {
                 var appBarButtonReset = paintingAreaView.getAppBarResetButton();
-                if (appBarButtonReset != null)
-                {
-                    appBarButtonReset.IsEnabled = isActivated;
-                }
+            if (appBarButtonReset != null)
+            {
+                appBarButtonReset.IsEnabled = isActivated;
             }
+        }
         }
 
         public TranslateTransform GetLastTranslateTransformation()
-        {
-            return m_TransformGridMain.Children.OfType<TranslateTransform>().Select(t => new TranslateTransform
             {
+            return m_TransformGridMain.Children.OfType<TranslateTransform>().Select(t => new TranslateTransform
+                {
                 X = t.X, 
                 Y = t.Y
             }).FirstOrDefault();
@@ -406,7 +406,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public RotateTransform GetLastRotateTransformation()
         {
             return m_TransformGridMain.Children.OfType<RotateTransform>().Select(t => new RotateTransform
-            {
+                    {
                 CenterX = t.CenterX, 
                 CenterY = t.CenterY, 
                 Angle = t.Angle
@@ -502,40 +502,47 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             resizeWidth(e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Left);
         }
 
-        private void RotationTopRight_OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            Point topRightGrid = GetCenterCoordinateOfFrameworkElement(TopRightRotationGrid);
-            topRightGrid.X -= TopRightRotationGrid.Width/2;
-            topRightGrid.Y -= TopRightRotationGrid.Height / 2;
-
-            m_RotationStartingPoint.X = topRightGrid.X + e.Position.X;
-            m_RotationStartingPoint.Y = topRightGrid.Y + e.Position.Y;
-        }
-
         private void RotationTopRight_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("RotationArrowTopRight_OnManipulationDelta");
             Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Right);
+            //System.Diagnostics.Debug.WriteLine("Position: "+ e.Position.X +", "+ e.Position.Y);
         }
 
         private void RotationTopLeft_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Left);
+            System.Diagnostics.Debug.WriteLine("Position: " + e.Position.X + ", " + e.Position.Y);
         }
 
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
         {
+            Point topRightGrid = GetCenterCoordinateOfFrameworkElement(TopRightRotationGrid);
+            topRightGrid.X -= TopRightRotationGrid.Width / 2;
+            topRightGrid.Y -= TopRightRotationGrid.Height / 2;
+
+            m_RotationStartingPoint.X = topRightGrid.X + position.X;
+            m_RotationStartingPoint.Y = topRightGrid.Y + position.Y;
+
+            //System.Diagnostics.Debug.WriteLine("--------\nDeltaX: " + deltaX + ", DeltaY: " + deltaY);
+            //System.Diagnostics.Debug.WriteLine("e.Position.X: " + position.X + ", e.Position.Y: " + position.Y);
+            //System.Diagnostics.Debug.WriteLine("--------\nStarting Point: " + (m_rotationStartingPoint.X - deltaX) + ", " + (m_rotationStartingPoint.Y - deltaY));
+            //System.Diagnostics.Debug.WriteLine("Position: " + m_rotationStartingPoint.X + ", " + m_rotationStartingPoint.Y);
+
             //var transform = AreaToDrawGrid.TransformToVisual(GridMainSelection);
             //Point absolutePosition = transform.TransformPoint(new Point(0, 0));
+
+            //absolutePosition.X += AreaToDrawGrid.Width / 2;
+            //absolutePosition.Y += AreaToDrawGrid.Height / 2;
 
             // TODO: check if translation of X & Y should be addeds
 
             Point centerPoint = GetCenterCoordinateOfGridMain();
 
-            double previousXLength = m_RotationStartingPoint.X - centerPoint.X;
-            double previousYLength = m_RotationStartingPoint.Y - centerPoint.Y;
-            double currentXLength = m_RotationStartingPoint.X + deltaX - centerPoint.X;
-            double currentYLength = m_RotationStartingPoint.Y + deltaY - centerPoint.Y;
+            double previousXLength = m_RotationStartingPoint.X - deltaX - centerPoint.X;
+            double previousYLength = m_RotationStartingPoint.Y - deltaY - centerPoint.Y;
+            double currentXLength = m_RotationStartingPoint.X - centerPoint.X;
+            double currentYLength = m_RotationStartingPoint.Y - centerPoint.Y;
 
             //previousXLength *= -1;
             //previousYLength *= -1;
