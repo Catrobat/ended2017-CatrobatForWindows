@@ -6,23 +6,23 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
 
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
 
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
-    public sealed partial class RectangleShapeBaseControl : UserControl
+    public sealed partial class RectangleShapeBaseControl
     {
-        TransformGroup m_transformGridMain;
-        double m_defaultGridMainSize = 290.0;
-        double m_defaultRectangleForMovementSize = 200.0;
-        double m_defaultAreaToDrawSize = 160.0;
+        private const double m_DefaultGridMainSize = 290.0;
+        private const double m_DefaultRectangleForMovementSize = 200.0;
+        private const double m_DefaultAreaToDrawSize = 160.0;
+        private const double m_MinWidthRectangleToDraw = 20;
+        private const double m_MinHeightRectangleToDraw = 20;
 
-        private float m_rotation;
-        private Point m_rotationStartingPoint;
-        private readonly double m_minWidthRectangleToDraw = 20;
-        private readonly double m_minHeightRectangleToDraw = 20;
+        private readonly TransformGroup m_TransformGridMain;
+
+        private float m_RotationAngle;
+        private Point m_RotationStartingPoint;
 
         public Grid AreaToDraw { get; private set; }
 
@@ -33,50 +33,26 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public RectangleShapeBaseControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            GridMainSelection.RenderTransform = m_transformGridMain = new TransformGroup();
-            //MainGrid = GridMainSelection;
             AreaToDraw = AreaToDrawGrid;
+
+            GridMainSelection.RenderTransform = m_TransformGridMain = new TransformGroup();
+            m_RotationAngle = 0;
 
             IsModifiedRectangleForMovement = false;
         }
 
         public bool IsModifiedRectangleForMovement { get; set; }
 
-        //public Rectangle rectangleForMovement
-        //{
-        //    get
-        //    {
-        //        return rectRectangleForMovement;
-        //    }
-        //    set
-        //    {
-        //        rectRectangleForMovement = value;
-        //    }
-        //}
-
-        //public PenLineJoin strokeLineJoinOfRectangleToDraw
-        //{
-        //    get
-        //    {
-        //        return rectRectangleToDraw.StrokeLineJoin;
-        //    }
-        //    set
-        //    {
-        //        rectRectangleToDraw.StrokeLineJoin = value;
-        //    }
-        //}
-
-
-        public bool shouldHeightOfSelectionChanged(double heightOfSelection)
+        public bool ShouldHeightOfSelectionChanged(double heightOfSelection)
         {
-            bool result = heightOfSelection >= 1.0 ? true : false;
+            var result = heightOfSelection >= 1.0;
             return result;
         }
-        public bool shouldWidthOfSelectionChanged(double widthOfSelection)
+        public bool ShouldWidthOfSelectionChanged(double widthOfSelection)
         {
-            bool result = widthOfSelection >= 1.0 ? true : false;
+            var result = widthOfSelection >= 1.0;
             return result;
         }
 
@@ -120,34 +96,33 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectEllipseForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            TranslateTransform translateTransform = new TranslateTransform();
+            var translateTransform = new TranslateTransform();
 
-            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
-            RotateTransform lastRotateTransform = GetLastRotateTransformation();
+            // TODO: Fix bug of translation when rotated in certain positions. remove then the comments
+            //RotateTransform lastRotateTransform = GetLastRotateTransformation();
 
-            double xVal = e.Delta.Translation.X;
-            double yVal = e.Delta.Translation.Y;           
+            //var deltaX = e.Delta.Translation.X;
+            //var deltaY = e.Delta.Translation.Y;
+            //var rotationRadian = PocketPaintApplication.DegreeToRadian(m_RotationAngle);
+            //var deltaXCorrected = Math.Cos(-rotationRadian) * (deltaX)
+            //        - Math.Sin(-rotationRadian) * (deltaY);
+            //var deltaYCorrected = Math.Sin(-rotationRadian) * (deltaX)
+            //        + Math.Cos(-rotationRadian) * (deltaY);
+            //var xVal = deltaXCorrected;
+            //var yVal = deltaYCorrected;
 
-            if (lastTranslateTransform != null && lastRotateTransform == null)
+            var xVal = e.Delta.Translation.X;
+            var yVal = e.Delta.Translation.Y;
+
+            var lastTranslateTransform = GetLastTranslateTransformation();
+            if (lastTranslateTransform != null)
             {
-                translateTransform.X = xVal + lastTranslateTransform.X;
-                translateTransform.Y = yVal + lastTranslateTransform.Y;
+                xVal += lastTranslateTransform.X;
+                yVal += lastTranslateTransform.Y;
             }
-            else if (lastTranslateTransform == null && lastRotateTransform != null)
-            {
-                translateTransform.X = xVal;
-                translateTransform.Y = yVal;
-            }
-            else if (lastTranslateTransform != null && lastRotateTransform != null)
-            {
-                translateTransform.X = xVal + lastTranslateTransform.X;
-                translateTransform.Y = yVal + lastTranslateTransform.Y;
-            }
-            else
-            {
-                translateTransform.X = xVal;
-                translateTransform.Y = yVal;
-            }
+
+            translateTransform.X = xVal;
+            translateTransform.Y = yVal;
             addTransformation(translateTransform);
         }
 
@@ -199,7 +174,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             Debug.Assert(orientation == Orientation.Left || orientation == Orientation.Right);
 
-            float rotation = m_rotation;
+            float rotation = m_RotationAngle;
             while (rotation < 0)
             {
                 rotation += 360;
@@ -219,10 +194,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
 
             double newWidthRectangleToDraw = AreaToDrawGrid.Width + deltaXCorrected;
-            if (newWidthRectangleToDraw < m_minWidthRectangleToDraw)
+            if (newWidthRectangleToDraw < m_MinWidthRectangleToDraw)
             {
-                newWidthRectangleToDraw = m_minWidthRectangleToDraw;
-                deltaXCorrected = m_minWidthRectangleToDraw - AreaToDrawGrid.Width;
+                newWidthRectangleToDraw = m_MinWidthRectangleToDraw;
+                deltaXCorrected = m_MinWidthRectangleToDraw - AreaToDrawGrid.Width;
             }
 
             // TODO: maximum width?
@@ -263,7 +238,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             Debug.Assert(orientation == Orientation.Top || orientation == Orientation.Bottom);
 
-            float rotation = m_rotation;
+            float rotation = m_RotationAngle;
             while (rotation < 0)
             {
                 rotation += 360;
@@ -281,10 +256,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
 
             double newHeightRectangleToDraw = AreaToDrawGrid.Height + deltaYCorrected;
-            if (newHeightRectangleToDraw < m_minHeightRectangleToDraw)
+            if (newHeightRectangleToDraw < m_MinHeightRectangleToDraw)
             {
-                newHeightRectangleToDraw = m_minHeightRectangleToDraw;
-                deltaYCorrected = m_minHeightRectangleToDraw - AreaToDrawGrid.Height;
+                newHeightRectangleToDraw = m_MinHeightRectangleToDraw;
+                deltaYCorrected = m_MinHeightRectangleToDraw - AreaToDrawGrid.Height;
             }
 
             // TODO: maximum height?
@@ -325,7 +300,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double halfScreenHeight = Window.Current.Bounds.Height / 2.0;
             double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
 
-            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            TranslateTransform lastTranslateTransform = GetLastTranslateTransformation();
             RotateTransform lastRotateTransform = GetLastRotateTransformation();
 
             double offsetX;
@@ -365,7 +340,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double halfScreenHeight = Window.Current.Bounds.Height / 2.0;
             double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
 
-            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            TranslateTransform lastTranslateTransform = GetLastTranslateTransformation();
             RotateTransform lastRotateTransform = GetLastRotateTransformation();
 
             double offsetX;
@@ -392,15 +367,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void addTransformation(Transform currentTransform)
         {
-            for (int i = 0; i < m_transformGridMain.Children.Count; i++)
+            for (int i = 0; i < m_TransformGridMain.Children.Count; i++)
             {
-                if (m_transformGridMain.Children[i].GetType() == currentTransform.GetType())
+                if (m_TransformGridMain.Children[i].GetType() == currentTransform.GetType())
                 {
-                    m_transformGridMain.Children.RemoveAt(i);
+                    m_TransformGridMain.Children.RemoveAt(i);
                 }
             }
 
-            m_transformGridMain.Children.Add(currentTransform);
+            m_TransformGridMain.Children.Add(currentTransform);
 
             resetAppBarButtonRectangleSelectionControl(true);
             IsModifiedRectangleForMovement = true;
@@ -408,48 +383,34 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void resetAppBarButtonRectangleSelectionControl(bool isActivated)
         {
-            AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
-            if (appBarButtonReset != null)
+            var paintingAreaView = PocketPaintApplication.GetInstance().PaintingAreaView;
+            if (paintingAreaView != null)
             {
-                appBarButtonReset.IsEnabled = isActivated;
+                var appBarButtonReset = paintingAreaView.getAppBarResetButton();
+                if (appBarButtonReset != null)
+                {
+                    appBarButtonReset.IsEnabled = isActivated;
+                }
             }
         }
 
-        public TranslateTransform getLastTranslateTransformation()
+        public TranslateTransform GetLastTranslateTransformation()
         {
-            for (int i = 0; i < m_transformGridMain.Children.Count; i++)
+            return m_TransformGridMain.Children.OfType<TranslateTransform>().Select(t => new TranslateTransform
             {
-                if (m_transformGridMain.Children[i].GetType() == typeof(TranslateTransform))
-                {
-                    TranslateTransform translateTransform = new TranslateTransform();
-                    translateTransform.X = ((TranslateTransform)m_transformGridMain.Children[i]).X;
-                    translateTransform.Y = ((TranslateTransform)m_transformGridMain.Children[i]).Y;
-
-                    return translateTransform;
-                }
-            }
-
-            return null;
+                X = t.X, 
+                Y = t.Y
+            }).FirstOrDefault();
         }
 
         public RotateTransform GetLastRotateTransformation()
         {
-            foreach (Transform t in m_transformGridMain.Children)
+            return m_TransformGridMain.Children.OfType<RotateTransform>().Select(t => new RotateTransform
             {
-                if (t is RotateTransform)
-                {
-                    RotateTransform rotateTransform = new RotateTransform
-                    {
-                        CenterX = ((RotateTransform) t).CenterX,
-                        CenterY = ((RotateTransform) t).CenterY,
-                        Angle = ((RotateTransform) t).Angle
-                    };
-
-                    return rotateTransform;
-                }
-            }
-
-            return null;
+                CenterX = t.CenterX, 
+                CenterY = t.CenterY, 
+                Angle = t.Angle
+            }).FirstOrDefault();
         }
 
         public void SetHeightOfControl(double newHeightRectangleToDraw)
@@ -505,20 +466,20 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void ResetRectangleShapeBaseControl()
         {
-            GridMainSelection.Width = m_defaultGridMainSize;
-            GridMainSelection.Height = m_defaultGridMainSize;
+            GridMainSelection.Width = m_DefaultGridMainSize;
+            GridMainSelection.Height = m_DefaultGridMainSize;
             GridMainSelection.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
 
-            MovementRectangle.Width = m_defaultRectangleForMovementSize;
-            MovementRectangle.Height = m_defaultRectangleForMovementSize;
+            MovementRectangle.Width = m_DefaultRectangleForMovementSize;
+            MovementRectangle.Height = m_DefaultRectangleForMovementSize;
 
-            AreaToDrawGrid.Width = m_defaultAreaToDrawSize;
-            AreaToDrawGrid.Height = m_defaultAreaToDrawSize;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = m_defaultAreaToDrawSize;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = m_defaultAreaToDrawSize;
+            AreaToDrawGrid.Width = m_DefaultAreaToDrawSize;
+            AreaToDrawGrid.Height = m_DefaultAreaToDrawSize;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = m_DefaultAreaToDrawSize;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = m_DefaultAreaToDrawSize;
 
-            m_transformGridMain.Children.Clear();
-            m_rotation = 0;
+            m_TransformGridMain.Children.Clear();
+            m_RotationAngle = 0;
 
             IsModifiedRectangleForMovement = false;
 
@@ -547,10 +508,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             topRightGrid.X -= TopRightRotationGrid.Width/2;
             topRightGrid.Y -= TopRightRotationGrid.Height / 2;
 
-            m_rotationStartingPoint.X = topRightGrid.X + e.Position.X;
-            m_rotationStartingPoint.Y = topRightGrid.Y + e.Position.Y;
-
-            return;
+            m_RotationStartingPoint.X = topRightGrid.X + e.Position.X;
+            m_RotationStartingPoint.Y = topRightGrid.Y + e.Position.Y;
         }
 
         private void RotationTopRight_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -566,23 +525,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
         {
-            
-
-            
-            var transform = AreaToDrawGrid.TransformToVisual(GridMainSelection);
-            Point absolutePosition = transform.TransformPoint(new Point(0, 0));
-
-            absolutePosition.X += AreaToDrawGrid.Width / 2;
-            absolutePosition.Y += AreaToDrawGrid.Height / 2;
+            //var transform = AreaToDrawGrid.TransformToVisual(GridMainSelection);
+            //Point absolutePosition = transform.TransformPoint(new Point(0, 0));
 
             // TODO: check if translation of X & Y should be addeds
 
             Point centerPoint = GetCenterCoordinateOfGridMain();
 
-            double previousXLength = m_rotationStartingPoint.X - centerPoint.X;
-            double previousYLength = m_rotationStartingPoint.Y - centerPoint.Y;
-            double currentXLength = m_rotationStartingPoint.X + deltaX - centerPoint.X;
-            double currentYLength = m_rotationStartingPoint.Y + deltaY - centerPoint.Y;
+            double previousXLength = m_RotationStartingPoint.X - centerPoint.X;
+            double previousYLength = m_RotationStartingPoint.Y - centerPoint.Y;
+            double currentXLength = m_RotationStartingPoint.X + deltaX - centerPoint.X;
+            double currentYLength = m_RotationStartingPoint.Y + deltaY - centerPoint.Y;
 
             //previousXLength *= -1;
             //previousYLength *= -1;
@@ -598,16 +551,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double rotationAngleCurrent = Math.Atan2(currentYLength, currentXLength);
             double deltaAngle = -(rotationAnglePrevious - rotationAngleCurrent);
 
-            m_rotation += (float) PocketPaintApplication.RadianToDegree(deltaAngle) + 360;
-            m_rotation %= 360;
+            m_RotationAngle += (float) PocketPaintApplication.RadianToDegree(deltaAngle) + 360;
+            m_RotationAngle %= 360;
 
             //if (orientation == Orientation.Left)
             //{
             //    m_rotation = m_rotation * -1;
             //}
 
-            if (m_rotation > 180)
-                m_rotation = m_rotation - 360;
+            if (m_RotationAngle > 180)
+                m_RotationAngle = m_RotationAngle - 360;
 
             //while (m_rotation < 0)
             //{
@@ -615,7 +568,25 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //}
 
 
-            RotateTransform rt = new RotateTransform { Angle = m_rotation, CenterX = absolutePosition.X, CenterY = absolutePosition.Y };
+            var translateTransform = GetLastTranslateTransformation();
+            var defaultCenter = new Point
+            {
+                X = GridMainSelection.Width/2,
+                Y = GridMainSelection.Height/2
+            };
+
+            if (translateTransform != null)
+            {
+                defaultCenter.X += translateTransform.X;
+                defaultCenter.Y += translateTransform.Y;     
+            }
+
+            var rt = new RotateTransform
+            {
+                Angle = m_RotationAngle,
+                CenterX = defaultCenter.X,
+                CenterY = defaultCenter.Y
+            };
             addTransformation(rt);
 
             // Paintroid code:

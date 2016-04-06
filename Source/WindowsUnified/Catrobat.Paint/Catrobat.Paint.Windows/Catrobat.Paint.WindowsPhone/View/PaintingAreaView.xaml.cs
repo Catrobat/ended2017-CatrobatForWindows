@@ -62,6 +62,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             LayoutRoot.Height = Window.Current.Bounds.Height;
             LayoutRoot.Width = Window.Current.Bounds.Width;
+            PocketPaintApplication.GetInstance().PaintingAreaView = this;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().GridWorkingSpace = GridWorkingSpace;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
@@ -78,7 +79,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
             PocketPaintApplication.GetInstance().ProgressRing = progressRing;
-            PocketPaintApplication.GetInstance().PaintingAreaView = this;
             loadManipulationEraserCanvasEvents();
 
             Spinner.SpinnerGrid = SpinnerGrid;
