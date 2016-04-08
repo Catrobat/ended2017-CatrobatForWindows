@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
@@ -52,7 +53,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
             var xRoot = new XElement(XmlConstants.Entry);
 
             xRoot.Add(XmlSpriteReference.CreateXml());
-            xRoot.Add(VariableList.CreateXml());
+            if (VariableList.UserVariables.Count > 0)
+                xRoot.Add(VariableList.CreateXml());
 
             return xRoot;
         }

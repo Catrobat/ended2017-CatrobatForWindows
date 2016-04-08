@@ -228,7 +228,7 @@ namespace Catrobat.XML_Test
         }
 
         [TestMethod]
-        public void XmlPointToBrickTest()
+        public void XmlPointToBrickReferencedObjectTest()
         {
             TextReader sr = new StringReader("<brick type=\"PointToBrick\"> <pointedObject reference=\"../../../../../../object[2]/scriptList/script[3]/brickList/brick/pointedObject\"/> </brick>");
             var xRoot = XElement.Load(sr);
@@ -250,6 +250,58 @@ namespace Catrobat.XML_Test
             Assert.AreEqual(referenceObject, testObject);
         }
 
+        //TODO: implement
+        /*[TestMethod]
+        public void XmlPointToBrickRealObjectTest()
+         */
+
+        [TestMethod]
+        public void XmlSetBrightnessBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"SetBrightnessBrick\">  <formulaList>  <formula category=\"BRIGHTNESS\">  <type>NUMBER</type>  <value>50.0</value>  </formula>  </formulaList>  </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlSetBrightnessBrick(xRoot);
+
+            var referenceObject = new XmlSetBrightnessBrick()
+            {
+                Brightness = new XmlFormula(xRoot, XmlConstants.Brightness),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlSetGhostEffectBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"SetGhostEffectBrick\">  <formulaList>  <formula category=\"TRANSPARENCY\">  <type>NUMBER</type>  <value>0</value>  </formula>  </formulaList>  </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlSetGhostEffectBrick(xRoot);
+
+            var referenceObject = new XmlSetGhostEffectBrick()
+            {
+                Transparency = new XmlFormula(xRoot, XmlConstants.Transparency),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlSetSizeToBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"SetSizeToBrick\">  <formulaList>  <formula category=\"SIZE\">  <type>NUMBER</type>  <value>20</value>  </formula>  </formulaList>  </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlSetSizeToBrick(xRoot);
+
+            var referenceObject = new XmlSetSizeToBrick()
+            {
+                Size = new XmlFormula(xRoot, XmlConstants.Size),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
 
     }
 }
