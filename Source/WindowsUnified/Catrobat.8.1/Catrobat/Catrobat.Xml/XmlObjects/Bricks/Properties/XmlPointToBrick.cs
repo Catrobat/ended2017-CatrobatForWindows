@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlSpriteReference PointedXmlSpriteReference { get; set; }
 
-        public XmlSprite PointedSprite //TODO: outdated?
+        public XmlSprite PointedSprite //TODO: should be used if th pointed object appears later than ta actual - to instantiate the object inside this one like xstream (java) does
         {
             get
             {

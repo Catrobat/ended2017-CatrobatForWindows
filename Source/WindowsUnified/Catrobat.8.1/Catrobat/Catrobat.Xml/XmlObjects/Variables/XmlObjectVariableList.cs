@@ -34,8 +34,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
             foreach (XmlObjectVariableEntry entry in ObjectVariableEntries)
             {
-                if(entry.VariableList.UserVariables.Count > 0)
-                    xRoot.Add(entry.CreateXml());
+                xRoot.Add(entry.CreateXml());
             }
 
             XmlParserTempProjectHelper.inObjectVarList = false;

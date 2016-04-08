@@ -21,6 +21,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlFormula Transparency { get; set; }
 
+        public override bool Equals(System.Object obj)
+        {
+            XmlSetGhostEffectBrick b = obj as XmlSetGhostEffectBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.Transparency.Equals(b.Transparency);
+        }
+
+        public bool Equals(XmlSetGhostEffectBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.Transparency.Equals(b.Transparency);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Transparency.GetHashCode();
+        }
+
         public XmlSetGhostEffectBrick() {}
 
         public XmlSetGhostEffectBrick(XElement xElement) : base(xElement) {}

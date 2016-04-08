@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Core", "Catrobat.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Test", "Catrobat.Test", "{084E9821-E283-40F0-BECE-8A6722B4F0A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.XML_Test", "Cadrobat.XML_Test\Catrobat.XML_Test.csproj", "{E139CD96-941B-41C0-82B9-D7A2D3B12A05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.XML_Test", "Catrobat.XML_Test\Catrobat.XML_Test.csproj", "{E139CD96-941B-41C0-82B9-D7A2D3B12A05}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -69,10 +69,10 @@ Global
 		SccProjectTopLevelParentUniqueName7 = Catrobat.sln
 		SccProjectName7 = Catrobat.Core
 		SccLocalPath7 = Catrobat.Core
-		SccProjectUniqueName8 = Cadrobat.XML_Test\\Catrobat.XML_Test.csproj
+		SccProjectUniqueName8 = Catrobat.XML_Test\\Catrobat.XML_Test.csproj
 		SccProjectTopLevelParentUniqueName8 = Catrobat.sln
-		SccProjectName8 = Cadrobat.XML_Test
-		SccLocalPath8 = Cadrobat.XML_Test
+		SccProjectName8 = Catrobat.XML_Test
+		SccLocalPath8 = Catrobat.XML_Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

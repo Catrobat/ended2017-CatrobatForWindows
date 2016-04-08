@@ -7,8 +7,8 @@
     <ProjectGuid>{E139CD96-941B-41C0-82B9-D7A2D3B12A05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cadrobat.XML_Test</RootNamespace>
-    <AssemblyName>Cadrobat.XML_Test</AssemblyName>
+    <RootNamespace>Catrobat.XML_Test</RootNamespace>
+    <AssemblyName>Catrobat.XML_Test</AssemblyName>
     <DefaultLanguage>de-DE</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

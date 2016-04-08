@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public bool Equals(XmlSpriteReference r)
         {
-            return _reference.Equals(r._reference);// && Sprite.Equals(r.Sprite);
+            return _reference.Equals(r._reference);// && Sprite.Equals(r.Sprite); - would need a whole instantiated programme
         }
 
         public override int GetHashCode()
