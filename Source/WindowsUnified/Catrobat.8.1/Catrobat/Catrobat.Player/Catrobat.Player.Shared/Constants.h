@@ -151,4 +151,13 @@ namespace Constants
         static const wchar_t* GridAxesYBottomName                =       L"GridAxesYBottom";
         static const wchar_t* SwapChainPanelName                 =       L"SwapChainPanel";
 	};
+
+	namespace Sound
+	{
+		// Little-endian, therefore backwards spelled
+		static const uint32 fourccDATA							 =		 'atad'; // "data" chunk FOURCC
+		static const uint32 fourccFMT							 =		 ' tmf'; // "fmt" chunk FOURCC
+		static const uint32 fourccRIFF							 =		 'FFIR'; // "RIFF" chunk FOURCC
+		static const uint32 fourccWAVE							 =		 'EVAW'; // File type
+	};
 };

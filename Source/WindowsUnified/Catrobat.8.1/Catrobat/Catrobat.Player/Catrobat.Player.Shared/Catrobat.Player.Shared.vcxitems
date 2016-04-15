@@ -61,6 +61,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeFatalException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GlideToBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RiffReader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SoundManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Helper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HideBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
@@ -138,6 +140,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TurnRightBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UserVariable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)VariableManagementBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)VoiceCallback.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WASAPIAudio.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h" />
@@ -199,6 +202,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)PointToBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Project.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectDaemon.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RiffReader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SoundManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)RepeatBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Script.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.cpp" />
