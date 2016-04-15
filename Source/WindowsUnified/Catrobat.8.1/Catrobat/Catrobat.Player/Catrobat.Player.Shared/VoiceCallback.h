@@ -10,13 +10,13 @@ public:
 	~VoiceCallback(){ CloseHandle(hBufferEndEvent); }
 
 	//Called when the voice has just finished playing a contiguous audio stream.
-	void OnStreamEnd() { SetEvent(hBufferEndEvent); }
+	STDMETHOD_(void, OnStreamEnd)() { SetEvent(hBufferEndEvent); }
 
 	//Unused methods are stubs
-	void OnVoiceProcessingPassEnd() { }
-	void OnVoiceProcessingPassStart(UINT32 SamplesRequired) {    }
-	void OnBufferEnd(void * pBufferContext)    { }
-	void OnBufferStart(void * pBufferContext) {    }
-	void OnLoopEnd(void * pBufferContext) {    }
-	void OnVoiceError(void * pBufferContext, HRESULT Error) { }
+	STDMETHOD_(void, OnVoiceProcessingPassEnd)() { }
+	STDMETHOD_(void, OnVoiceProcessingPassStart)(UINT32 SamplesRequired) {    }
+	STDMETHOD_(void, OnBufferEnd)(void * pBufferContext)    { }
+	STDMETHOD_(void, OnBufferStart)(void * pBufferContext) {    }
+	STDMETHOD_(void, OnLoopEnd)(void * pBufferContext) {    }
+	STDMETHOD_(void, OnVoiceError)(void * pBufferContext, HRESULT Error) { }
 };
