@@ -355,6 +355,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IRepeatEndBrick.h">
       <Filter>NativeComponent\Interface\Bricks</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SoundManager.h">
+      <Filter>Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)RiffReader.h">
+      <Filter>Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VoiceCallback.h">
+      <Filter>Sounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -568,6 +577,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Header.cpp">
       <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SoundManager.cpp">
+      <Filter>Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RiffReader.cpp">
+      <Filter>Sounds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

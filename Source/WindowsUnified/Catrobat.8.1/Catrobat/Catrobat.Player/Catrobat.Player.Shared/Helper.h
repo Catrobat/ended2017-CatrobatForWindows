@@ -8,5 +8,6 @@ public:
     static Platform::String^ PlatformString(std::string input);
     static std::string RetrieveClassName(std::string input);
     static bool ConvertStringToDouble(std::string s, double* d);
+	static std::wstring ConvertStringToLPCWSTR(const std::string& s);
 };
 

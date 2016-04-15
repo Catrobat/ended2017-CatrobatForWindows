@@ -37,3 +37,15 @@ bool Helper::ConvertStringToDouble(std::string s, double* d)
     
     return true;
 }
+
+std::wstring Helper::ConvertStringToLPCWSTR(const std::string& s)
+{
+	int len;
+	int slength = (int)s.length() + 1;
+	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
+	wchar_t* buf = new wchar_t[len];
+	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
+	std::wstring r = std::wstring(buf);
+	delete[] buf;
+	return r;
+}
