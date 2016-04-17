@@ -465,7 +465,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(rectRectangleToDraw.Height), Convert.ToInt32(rectRectangleToDraw.Width));
         }
 
-        private void rectRectangleForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void rectRectangleForMovement_Tapped(object sender, TappedRoutedEventArgs e)
         {
             double coordinateX = 0.0;
             double coordianteY = 0.0;

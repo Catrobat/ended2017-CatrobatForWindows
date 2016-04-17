@@ -953,11 +953,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void rectRectangleStampSelection_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).StampPaste();
-        }
-
         public void ResetAppBarButtonRectangleSelectionControl(bool activated)
         {
             AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
@@ -1047,6 +1042,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void SetSourceImageStamp(ImageSource imageSource)
         {
             imgStampedImage.Source = imageSource;
+        }
+
+        private void rectRectangleStampSelection_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).StampPaste();
         }
     }
 }

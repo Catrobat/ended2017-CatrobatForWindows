@@ -126,7 +126,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             addTransformation(translateTransform);
         }
 
-        private void rectEllipseForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void rectEllipseForMovement_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Debug.Assert(AreaToDraw.Children.Count == 1);
             UIElement elementToDraw = AreaToDraw.Children[0];
