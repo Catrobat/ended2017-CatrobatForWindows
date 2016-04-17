@@ -62,7 +62,6 @@
 
         <Rectangle
             x:Name="MovementRectangle"
-            DoubleTapped="rectEllipseForMovement_DoubleTapped"
             Fill="#01FFFFFF"
             Height="200"
             ManipulationDelta="rectEllipseForMovement_ManipulationDelta"
@@ -70,6 +69,7 @@
             Margin="45"
             Stroke="LightSkyBlue"
             StrokeThickness="5"
+            Tapped="rectEllipseForMovement_Tapped"
             Width="200"
             />
 

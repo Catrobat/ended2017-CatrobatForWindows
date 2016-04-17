@@ -20,10 +20,10 @@
         >
         <Grid
             x:Name="GridRectangle"
-            DoubleTapped="rectRectangleStampSelection_DoubleTapped"
             HorizontalAlignment="Left"
             ManipulationDelta="rectRectangleStampSelection_ManipulationDelta"
             ManipulationMode="TranslateX, TranslateY"
+            Tapped="rectRectangleStampSelection_Tapped"
             VerticalAlignment="Top"
             >
             <Rectangle

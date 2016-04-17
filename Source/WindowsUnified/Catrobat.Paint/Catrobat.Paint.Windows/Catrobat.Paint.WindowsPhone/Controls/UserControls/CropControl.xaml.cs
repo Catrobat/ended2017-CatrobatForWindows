@@ -796,7 +796,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             SetIsModifiedRectangleMovement = true;
         }
 
-        private void rectRectangleCropSelection_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void rectRectangleCropSelection_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(new Point());
         }

@@ -37,7 +37,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static int rotateCounter;
         static bool flipVertical;
         static bool flipHorizontal;
-        static bool isDoubleTapLoaded;
+        static bool isTapLoaded;
         static bool isFullscreen;
         static bool isPointerEventLoaded;
         static int zoomCounter;
@@ -49,7 +49,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             rotateCounter = 0;
             flipHorizontal = false;
             flipHorizontal = false;
-            isDoubleTapLoaded = false;
+            isTapLoaded = false;
             isFullscreen = false;
             isPointerEventLoaded = false;
             zoomCounter = 0;
@@ -80,6 +80,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
             PocketPaintApplication.GetInstance().ProgressRing = progressRing;
             loadManipulationEraserCanvasEvents();
+
+            //PocketPaintApplication.GetInstance().ToolName = ucToolName;
 
             Spinner.SpinnerGrid = SpinnerGrid;
             Spinner.SpinnerStoryboard = new Storyboard();
@@ -335,7 +337,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             await statusBar.ShowAsync();
         }
 
-        void PaintingAreaCanvas_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        void PaintingAreaCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PocketPaintApplication currentPPA = PocketPaintApplication.GetInstance();
             if(currentPPA != null)
@@ -489,7 +491,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             cmdBar.Background = appBarBackgroundColor;
 
             loadPointerEvents();
-            unloadDoubleTapEvent();
+            unloadTapEvent();
             unloadManipulationPaintingAreaCanvasEvents();
 
             if ("barCursor" == type || "barStandard" == type)
@@ -521,7 +523,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     app_btnResetCursor.Click += ((CursorTool)PocketPaintApplication.GetInstance().ToolCurrent).app_btnResetCursor_Click;
 
                     cmdBar.PrimaryCommands.Add(app_btnResetCursor);
-                    loadDoubleTapEvent();
+                    loadTapEvent();
                     loadManipulationPaintingAreaCanvasEvents();
                     unloadPointerEvents();
                 }
@@ -1432,21 +1434,21 @@ namespace Catrobat.Paint.WindowsPhone.View
                 return;
         }
 
-        private void loadDoubleTapEvent()
+        private void loadTapEvent()
         {
-            if (PocketPaintApplication.GetInstance() != null && !isDoubleTapLoaded)
+            if (PocketPaintApplication.GetInstance() != null && !isTapLoaded)
             {
-                PaintingAreaCanvas.DoubleTapped += PaintingAreaCanvas_DoubleTapped;
-                isDoubleTapLoaded = true;
+                PaintingAreaCanvas.Tapped += PaintingAreaCanvas_Tapped;
+                isTapLoaded = true;
             }
         }
 
-        private void unloadDoubleTapEvent()
+        private void unloadTapEvent()
         {
-            if (PocketPaintApplication.GetInstance() != null && isDoubleTapLoaded)
+            if (PocketPaintApplication.GetInstance() != null && isTapLoaded)
             {
-                PaintingAreaCanvas.DoubleTapped -= PaintingAreaCanvas_DoubleTapped;
-                isDoubleTapLoaded = false;
+                PaintingAreaCanvas.Tapped -= PaintingAreaCanvas_Tapped;
+                isTapLoaded = false;
             }
         }
 
