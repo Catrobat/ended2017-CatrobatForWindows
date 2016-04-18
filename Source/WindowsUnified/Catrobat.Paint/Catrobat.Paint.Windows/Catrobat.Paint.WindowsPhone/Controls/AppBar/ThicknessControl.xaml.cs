@@ -90,7 +90,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         public void checkAndSetPenLineCap(PenLineCap penLineCap)
         {
             SolidColorBrush brushGray = new SolidColorBrush(Colors.Gray);
-            SolidColorBrush brushWhite = new SolidColorBrush(Colors.White);
+            SolidColorBrush brushWhite = new SolidColorBrush(Colors.Black);
             if (penLineCap == PenLineCap.Round)
             {
                 BtnRoundImage.BorderBrush = brushWhite;

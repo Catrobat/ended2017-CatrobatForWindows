@@ -147,7 +147,7 @@
                 <Slider x:Name="sldBlue" Background="Black" Foreground="#FF0046FF" Height="40" Margin="-15,406,0,0" Maximum="255"
                         ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="215"/>
 
-                <Slider x:Name="sldAlpha" Background="Black" Foreground="White" Height="40" Margin="-15,446,0,0" Maximum="255" 
+                <Slider x:Name="sldAlpha" Background="Black" Foreground="Gray" Height="40" Margin="-15,446,0,0" Maximum="255" 
                         ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="215"/>
 
                 <TextBox x:Name="tbRedText" Background="{x:Null}" BorderThickness="0" Foreground="Red" Height="63" HorizontalAlignment="Left"
@@ -167,15 +167,15 @@
                          IsHitTestVisible="False" Margin="314,446,0,0" TextWrapping="Wrap" Text="0" 
                          VerticalAlignment="Top" Width="47"/>
 
-                <TextBox x:Name="tbAlpha" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="39" HorizontalAlignment="Left"
+                <TextBox x:Name="tbAlpha" Background="{x:Null}" BorderThickness="0" Foreground="Black" Height="39" HorizontalAlignment="Left"
                          IsHitTestVisible="False" Margin="0,450,0,0" Text="Alpha" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="73"/>
 
-                <TextBox x:Name="tbArgb" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="39" HorizontalAlignment="Left"
+                <TextBox x:Name="tbArgb" Background="{x:Null}" BorderThickness="0" Foreground="Black" Height="39" HorizontalAlignment="Left"
                          IsHitTestVisible="False" Margin="0,492,0,0" Text="ARGB" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="73"/>
 
-                <TextBox x:Name="tbArgbValue" Background="White" BorderThickness="0" Foreground="Black" Height="31" HorizontalAlignment="Left"
+                <TextBox x:Name="tbArgbValue" BorderBrush="Black" Background="White" BorderThickness="2" Foreground="Black" Height="31" HorizontalAlignment="Left"
                          IsReadOnly="True" Margin="85,491,0,0" Text="00000000" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="130"/>
                 <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="White" Text="#" Margin="61,489,309,0" MinHeight="1" MinWidth="1" />
@@ -191,7 +191,7 @@
                 <TextBox x:Name="tbRedValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
                          IsHitTestVisible="False" Margin="314,326,-11,0" Text="0" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="97"/>
-                <Button x:Name="btnChangeHexValue" Background="Transparent" BorderBrush="Transparent" BorderThickness="4" Content="Ändern" Margin="216,500,0,82" Click="btnChangeHexValue_Click" Height="44">
+                <Button x:Name="btnChangeHexValue" Foreground="Black"  Background="Transparent" BorderBrush="Transparent" BorderThickness="4" Content="Ändern" Margin="216,500,0,82" Click="btnChangeHexValue_Click" Height="44">
                     <Button.RenderTransform>
                         <CompositeTransform ScaleY="0.7" ScaleX="0.7"/>
                     </Button.RenderTransform>
