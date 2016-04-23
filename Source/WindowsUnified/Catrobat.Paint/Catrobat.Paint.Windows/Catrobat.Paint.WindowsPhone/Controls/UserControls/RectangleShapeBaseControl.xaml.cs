@@ -386,21 +386,21 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             m_TransformGridMain.Children.Add(currentTransform);
 
-            resetAppBarButtonRectangleSelectionControl(true);
+            ResetAppBarButtonRectangleSelectionControl(true);
             IsModifiedRectangleForMovement = true;
         }
 
-        public void resetAppBarButtonRectangleSelectionControl(bool isActivated)
+        public void ResetAppBarButtonRectangleSelectionControl(bool isActivated)
         {
             var paintingAreaView = PocketPaintApplication.GetInstance().PaintingAreaView;
             if (paintingAreaView != null)
             {
                 var appBarButtonReset = paintingAreaView.getAppBarResetButton();
-            if (appBarButtonReset != null)
-            {
-                appBarButtonReset.IsEnabled = isActivated;
+                if (appBarButtonReset != null)
+                {
+                    appBarButtonReset.IsEnabled = isActivated;
+                }
             }
-        }
         }
 
         public TranslateTransform GetLastTranslateTransformation()
@@ -493,6 +493,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             m_CenterPointRotation.X = GridMainSelection.Width / 2;
             m_CenterPointRotation.Y = GridMainSelection.Height / 2;
 
+            ResetAppBarButtonRectangleSelectionControl(false);
             IsModifiedRectangleForMovement = false;
 
             // TODO: evaluate if the outcommented code is needed
