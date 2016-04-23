@@ -18,7 +18,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private const double m_DefaultAreaToDrawSize = 160.0;
         private const double m_MinWidthRectangleToDraw = 20;
         private const double m_MinHeightRectangleToDraw = 20;
-
+        private Point m_CenterPointRotation;
         private readonly TransformGroup m_TransformGridMain;
 
         private float m_RotationAngle;
@@ -39,6 +39,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             GridMainSelection.RenderTransform = m_TransformGridMain = new TransformGroup();
             m_RotationAngle = 0;
+
+            m_CenterPointRotation = new Point
+            {
+                X = GridMainSelection.Width / 2,
+                Y = GridMainSelection.Height / 2
+            };
 
             IsModifiedRectangleForMovement = false;
         }
@@ -114,6 +120,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             var xVal = e.Delta.Translation.X;
             var yVal = e.Delta.Translation.Y;
 
+            m_CenterPointRotation.X += xVal;
+            m_CenterPointRotation.Y += yVal;
+
             var lastTranslateTransform = GetLastTranslateTransformation();
             if (lastTranslateTransform != null)
             {
@@ -121,8 +130,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 yVal += lastTranslateTransform.Y;
             }
 
-                translateTransform.X = xVal;
-                translateTransform.Y = yVal;
+            translateTransform.X = xVal;
+            translateTransform.Y = yVal;
             addTransformation(translateTransform);
         }
 
@@ -481,6 +490,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             m_TransformGridMain.Children.Clear();
             m_RotationAngle = 0;
 
+            m_CenterPointRotation.X = GridMainSelection.Width / 2;
+            m_CenterPointRotation.Y = GridMainSelection.Height / 2;
+
             IsModifiedRectangleForMovement = false;
 
             // TODO: evaluate if the outcommented code is needed
@@ -506,13 +518,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             //System.Diagnostics.Debug.WriteLine("RotationArrowTopRight_OnManipulationDelta");
             Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Right);
-            //System.Diagnostics.Debug.WriteLine("Position: "+ e.Position.X +", "+ e.Position.Y);
+            System.Diagnostics.Debug.WriteLine("Position: "+ e.Position.X +", "+ e.Position.Y);
         }
 
         private void RotationTopLeft_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Left);
-            System.Diagnostics.Debug.WriteLine("Position: " + e.Position.X + ", " + e.Position.Y);
+            //System.Diagnostics.Debug.WriteLine("Position: " + e.Position.X + ", " + e.Position.Y);
         }
 
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
@@ -574,25 +586,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //    m_rotation += 360;
             //}
 
-
-            var translateTransform = GetLastTranslateTransformation();
-            var defaultCenter = new Point
-            {
-                X = GridMainSelection.Width/2,
-                Y = GridMainSelection.Height/2
-            };
-
-            if (translateTransform != null)
-            {
-                defaultCenter.X += translateTransform.X;
-                defaultCenter.Y += translateTransform.Y;     
-            }
-
             var rt = new RotateTransform
             {
                 Angle = m_RotationAngle,
-                CenterX = defaultCenter.X,
-                CenterY = defaultCenter.Y
+                CenterX = m_CenterPointRotation.X,
+                CenterY = m_CenterPointRotation.Y
             };
             addTransformation(rt);
 
