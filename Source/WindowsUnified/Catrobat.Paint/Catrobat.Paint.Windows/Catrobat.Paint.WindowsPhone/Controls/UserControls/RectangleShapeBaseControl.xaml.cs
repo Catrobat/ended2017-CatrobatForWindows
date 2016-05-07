@@ -518,8 +518,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void RotationTopRight_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("RotationArrowTopRight_OnManipulationDelta");
+            //System.Diagnostics.Debug.WriteLine("Position: " + e.Position.X + ", " + e.Position.Y);
             Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Right);
-            System.Diagnostics.Debug.WriteLine("Position: "+ e.Position.X +", "+ e.Position.Y);
+           
         }
 
         private void RotationTopLeft_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -531,16 +532,21 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
         {
             Point topRightGrid = GetCenterCoordinateOfFrameworkElement(TopRightRotationGrid);
+
             topRightGrid.X -= TopRightRotationGrid.Width / 2;
             topRightGrid.Y -= TopRightRotationGrid.Height / 2;
 
+            //maybe x and y coordinate of topRighGrid confused
             m_RotationStartingPoint.X = topRightGrid.X + position.X;
             m_RotationStartingPoint.Y = topRightGrid.Y + position.Y;
 
+            //System.Diagnostics.Debug.WriteLine("--------\ntopright: " + topRightGrid.X + ", " + topRightGrid.Y);
+
             //System.Diagnostics.Debug.WriteLine("--------\nDeltaX: " + deltaX + ", DeltaY: " + deltaY);
             //System.Diagnostics.Debug.WriteLine("e.Position.X: " + position.X + ", e.Position.Y: " + position.Y);
-            //System.Diagnostics.Debug.WriteLine("--------\nStarting Point: " + (m_rotationStartingPoint.X - deltaX) + ", " + (m_rotationStartingPoint.Y - deltaY));
-            //System.Diagnostics.Debug.WriteLine("Position: " + m_rotationStartingPoint.X + ", " + m_rotationStartingPoint.Y);
+            //System.Diagnostics.Debug.WriteLine("Position: " + m_RotationStartingPoint.X + ", " + m_RotationStartingPoint.Y);
+            //System.Diagnostics.Debug.WriteLine("--------\nEnd Point: " + (m_RotationStartingPoint.X + deltaX) + ", " + (m_RotationStartingPoint.Y + deltaY));
+            
 
             //var transform = AreaToDrawGrid.TransformToVisual(GridMainSelection);
             //Point absolutePosition = transform.TransformPoint(new Point(0, 0));
@@ -551,12 +557,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             // TODO: check if translation of X & Y should be addeds
 
             Point centerPoint = GetCenterCoordinateOfGridMain();
+            //System.Diagnostics.Debug.WriteLine("--------\ncenterX: " + centerPoint.X + ", centerY: " + centerPoint.Y);
 
-            double previousXLength = m_RotationStartingPoint.X - deltaX - centerPoint.X;
-            double previousYLength = m_RotationStartingPoint.Y - deltaY - centerPoint.Y;
-            double currentXLength = m_RotationStartingPoint.X - centerPoint.X;
-            double currentYLength = m_RotationStartingPoint.Y - centerPoint.Y;
+            double previousXLength = m_RotationStartingPoint.X - centerPoint.X;
+            double previousYLength = centerPoint.Y - m_RotationStartingPoint.Y;
 
+            double currentXLength = m_RotationStartingPoint.X + deltaX  - centerPoint.X;
+            double currentYLength = centerPoint.Y - m_RotationStartingPoint.Y + deltaY;
+
+            //System.Diagnostics.Debug.WriteLine("--------\nprevX: " + previousXLength + ", prevY: " + previousYLength);
+            //System.Diagnostics.Debug.WriteLine("--------\ncurrX: " + currentXLength + ", currY: " + currentYLength);
             //previousXLength *= -1;
             //previousYLength *= -1;
             //currentXLength *= -1;
@@ -586,7 +596,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //{
             //    m_rotation += 360;
             //}
-
+            System.Diagnostics.Debug.WriteLine("--------\ncurrX: " + m_RotationAngle);
             var rt = new RotateTransform
             {
                 Angle = m_RotationAngle,
