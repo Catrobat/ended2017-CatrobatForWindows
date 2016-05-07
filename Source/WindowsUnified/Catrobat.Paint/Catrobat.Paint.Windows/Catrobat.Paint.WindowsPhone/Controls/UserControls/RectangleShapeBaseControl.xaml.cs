@@ -537,8 +537,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             topRightGrid.Y -= TopRightRotationGrid.Height / 2;
 
             //maybe x and y coordinate of topRighGrid confused
-            m_RotationStartingPoint.X = topRightGrid.X + position.X;
-            m_RotationStartingPoint.Y = topRightGrid.Y + position.Y;
+            m_RotationStartingPoint.X = topRightGrid.Y + position.X;
+            m_RotationStartingPoint.Y = topRightGrid.X + position.Y;
 
             //System.Diagnostics.Debug.WriteLine("--------\ntopright: " + topRightGrid.X + ", " + topRightGrid.Y);
 
