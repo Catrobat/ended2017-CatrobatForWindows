@@ -50,7 +50,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public XmlSoundList Sounds { get; set; }
 
-        public override bool Equals(System.Object obj)
+        /*public override bool Equals(System.Object obj)
         {
             XmlSprite s = obj as XmlSprite;
             if ((object)s == null)
@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             }
 
             return this.Equals(s);
-        }
+        }*/
 
         public bool Equals(XmlSprite s)
         {
