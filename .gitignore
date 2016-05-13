@@ -1,0 +1,26 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/packages
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.XML_Test/obj/x86/Debug
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.XML_Test/obj/ARM/Debug
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat/Catrobat.WindowsPhone/obj
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat/Catrobat.WindowsPhone/bin/ARM/Debug
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.Core/bin
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.Xml/bin
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.Xml/obj
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/ARM/Debug/Catrobat.Player.WindowsPhone/Catrobat_Player.winmd
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/ARM/Debug/Catrobat.Player.WindowsPhone/Catrobat_Player.pri
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/ARM/Debug/Catrobat.Player.WindowsPhone/Catrobat_Player.pdb
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/ARM/Debug/Catrobat.Player.WindowsPhone/Catrobat_Player.lib
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/ARM/Debug/Catrobat.Player.WindowsPhone/Catrobat_Player.ilk
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/ARM/Debug/Catrobat.Player.WindowsPhone/Catrobat_Player.exp
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/ARM/Debug/Catrobat.Player.WindowsPhone/Catrobat_Player.dll
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/.vs/Catrobat/v14
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.Core/obj/ARM/Debug
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.Core/obj/x86/Debug
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.Player/Catrobat.Player.WindowsPhone/Test/Catrobat.54144ca7.tlog
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.Player/Catrobat.Player.WindowsPhone/Test
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.XML_Test/bin
+/Source/WindowsUnified/Catrobat.8.1/Catrobat/Catrobat.VC.db
