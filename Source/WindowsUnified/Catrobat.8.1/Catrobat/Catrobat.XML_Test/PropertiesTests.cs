@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core;

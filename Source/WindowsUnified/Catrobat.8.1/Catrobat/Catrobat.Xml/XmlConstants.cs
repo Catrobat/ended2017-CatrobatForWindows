@@ -64,6 +64,7 @@ namespace Catrobat.IDE.Core
         public const string TimesToRepeat = "TIMES_TO_REPEAT";//timesToRepeat
         public const string TimeToWaitInSeconds = "TIME_TO_WAIT_IN_SECONDS";//timeToWaitInSeconds 
         public const string Volume = "VOLUME";//volume
+        public const string VolumeChange = "VOLUME_CHANGE";
         public const string VariableChange = "VARIABLE_CHANGE";//v91: variableFormula
         public const string Variable = "VARIABLE";//variableFormula
         public const string ChangeBrightness = "CHANGE_BRIGHTNESS";//changeBrightness

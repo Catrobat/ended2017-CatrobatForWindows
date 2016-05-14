@@ -1,10 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
-using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
-using System.IO;
+﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
