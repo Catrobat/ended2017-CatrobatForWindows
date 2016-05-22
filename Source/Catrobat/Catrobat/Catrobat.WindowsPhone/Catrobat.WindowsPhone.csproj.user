@@ -10,7 +10,7 @@
     <DeviceId>20DCA81D-A315-40BC-9B83-B6A01D31DBC6</DeviceId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
-    <DeviceId>20DCA81D-A315-40BC-9B83-B6A01D31DBC6</DeviceId>
+    <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>
     <BackgroundTaskDebugEngines>{2E36F1D4-B23C-435D-AB41-18E608940038}</BackgroundTaskDebugEngines>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DebugEngines>{2E36F1D4-B23C-435D-AB41-18E608940038}</DebugEngines>
