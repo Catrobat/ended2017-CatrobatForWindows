@@ -531,71 +531,57 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
         {
+
             Point topRightGrid = GetCenterCoordinateOfFrameworkElement(TopRightRotationGrid);
 
-            topRightGrid.X -= TopRightRotationGrid.Width / 2;
-            topRightGrid.Y -= TopRightRotationGrid.Height / 2;
 
-            //maybe x and y coordinate of topRighGrid confused
-            m_RotationStartingPoint.X = topRightGrid.Y + position.X;
-            m_RotationStartingPoint.Y = topRightGrid.X + position.Y;
+            topRightGrid.Y -= TopRightRotationGrid.Width / 2;
+            topRightGrid.X -= TopRightRotationGrid.Height / 2;
 
-            //System.Diagnostics.Debug.WriteLine("--------\ntopright: " + topRightGrid.X + ", " + topRightGrid.Y);
+            //Point marginMax = new Point(TopRightRotationGrid.Width + topRightGrid.X, TopRightRotationGrid.Height + topRightGrid.Y);
+            //Point marginMin = topRightGrid;
 
-            //System.Diagnostics.Debug.WriteLine("--------\nDeltaX: " + deltaX + ", DeltaY: " + deltaY);
-            //System.Diagnostics.Debug.WriteLine("e.Position.X: " + position.X + ", e.Position.Y: " + position.Y);
-            //System.Diagnostics.Debug.WriteLine("Position: " + m_RotationStartingPoint.X + ", " + m_RotationStartingPoint.Y);
+            m_RotationStartingPoint.X = topRightGrid.X + position.X;
+            m_RotationStartingPoint.Y = topRightGrid.Y + position.Y;
+
+            System.Diagnostics.Debug.WriteLine("--------\nDeltaX: " + deltaX + ", DeltaY: " + deltaY);
+            System.Diagnostics.Debug.WriteLine("e.Position.X: " + position.X + ", e.Position.Y: " + position.Y);
+            System.Diagnostics.Debug.WriteLine("Position: " + m_RotationStartingPoint.X + ", " + m_RotationStartingPoint.Y);
             //System.Diagnostics.Debug.WriteLine("--------\nEnd Point: " + (m_RotationStartingPoint.X + deltaX) + ", " + (m_RotationStartingPoint.Y + deltaY));
-            
-
-            //var transform = AreaToDrawGrid.TransformToVisual(GridMainSelection);
-            //Point absolutePosition = transform.TransformPoint(new Point(0, 0));
-
-            //absolutePosition.X += AreaToDrawGrid.Width / 2;
-            //absolutePosition.Y += AreaToDrawGrid.Height / 2;
 
             // TODO: check if translation of X & Y should be addeds
 
             Point centerPoint = GetCenterCoordinateOfGridMain();
-            //System.Diagnostics.Debug.WriteLine("--------\ncenterX: " + centerPoint.X + ", centerY: " + centerPoint.Y);
+            System.Diagnostics.Debug.WriteLine("--------\ncenterX: " + centerPoint.X + ", centerY: " + centerPoint.Y);
 
             double previousXLength = m_RotationStartingPoint.X - centerPoint.X;
             double previousYLength = centerPoint.Y - m_RotationStartingPoint.Y;
 
+            System.Diagnostics.Debug.WriteLine("--------\npreviousXLength: " + previousXLength + ", previousYLength: " + previousYLength);
+
             double currentXLength = m_RotationStartingPoint.X + deltaX  - centerPoint.X;
             double currentYLength = centerPoint.Y - m_RotationStartingPoint.Y + deltaY;
 
-            //System.Diagnostics.Debug.WriteLine("--------\nprevX: " + previousXLength + ", prevY: " + previousYLength);
-            //System.Diagnostics.Debug.WriteLine("--------\ncurrX: " + currentXLength + ", currY: " + currentYLength);
-            //previousXLength *= -1;
-            //previousYLength *= -1;
-            //currentXLength *= -1;
-            //currentYLength *= -1;
-
-            //    double previousXLength = mPreviousEventCoordinate.x - deltaX - mToolPosition.x;
-            //    double previousYLength = mPreviousEventCoordinate.y - deltaY - mToolPosition.y;
-            //    double currentXLength = currentPoint.x - mToolPosition.x;
-            //    double currentYLength = currentPoint.y - mToolPosition.y;
+            System.Diagnostics.Debug.WriteLine("--------\ncurrentXLength: " + currentXLength + ", currentYLength: " + currentYLength);
 
             double rotationAnglePrevious = Math.Atan2(previousYLength, previousXLength);
+            System.Diagnostics.Debug.WriteLine("--------\nrotationAnglePrevious: " + rotationAnglePrevious );
+
             double rotationAngleCurrent = Math.Atan2(currentYLength, currentXLength);
+            System.Diagnostics.Debug.WriteLine("--------\nrotationAngleCurrent: " + rotationAngleCurrent);
+
             double deltaAngle = -(rotationAnglePrevious - rotationAngleCurrent);
 
-            m_RotationAngle += (float) PocketPaintApplication.RadianToDegree(deltaAngle) + 360;
-            m_RotationAngle %= 360;
+                
+            System.Diagnostics.Debug.WriteLine("--------\nangle: " + (float)PocketPaintApplication.RadianToDegree(deltaAngle));
 
-            //if (orientation == Orientation.Left)
-            //{
-            //    m_rotation = m_rotation * -1;
-            //}
+            //m_RotationAngle += (float) PocketPaintApplication.RadianToDegree(deltaAngle);
+            m_RotationAngle += (float)PocketPaintApplication.RadianToDegree(deltaAngle) + 360;
+            m_RotationAngle %= 360;
 
             if (m_RotationAngle > 180)
                 m_RotationAngle = m_RotationAngle - 360;
 
-            //while (m_rotation < 0)
-            //{
-            //    m_rotation += 360;
-            //}
             System.Diagnostics.Debug.WriteLine("--------\ncurrX: " + m_RotationAngle);
             var rt = new RotateTransform
             {
@@ -627,36 +613,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //    if (mBoxRotation > 180)
             //        mBoxRotation = -180 + (mBoxRotation - 180);
             //} 
-
-            // Previous Pocket Paint code:
-        //    rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Width / 2.0;
-        //    rotateCenterPoint.Y = PocketPaintApplication.GetInstance().RectangleSelectionControl.MainGrid.Height / 2.0;
-
-        //    rotate.CenterX = rotateCenterPoint.X;
-        //    rotate.CenterY = rotateCenterPoint.Y;
-
-        //    Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterCoordinateOfGridMain();
-
-        //    if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) &&
-        //        (lastPoint.X != point.X || lastPoint.Y != point.Y))
-        //    {
-        //        double currentXLength = point.X - centerPoint.X;
-        //        double currentYLength = point.Y - centerPoint.Y;
-        //        double normalCurrentX = currentXLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
-        //        double normalCurrentY = currentYLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
-
-        //        double previousXLength = lastPoint.X - centerPoint.X;
-        //        double previousYLength = lastPoint.Y - centerPoint.Y;
-        //        double normalPreviousX = previousXLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
-        //        double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
-
-        //        double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
-        //        double rotationAngle = deltaAngle * 360.0 / Math.PI;
-
-        //        rotate.Angle = rotationAngle;
-        //    }
         }
-
-
     }
 }
