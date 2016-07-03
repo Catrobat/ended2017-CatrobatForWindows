@@ -97,9 +97,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LoudnessCapture.h">
       <Filter>Formula</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WASAPIAudio.h">
-      <Filter>Formula</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)DeviceInformation.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -364,6 +361,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)VoiceCallback.h">
       <Filter>Sounds</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WASAPICapture.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AudioData.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceState.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -444,9 +453,6 @@
       <Filter>Formula</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LoudnessCapture.cpp">
-      <Filter>Formula</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WASAPIAudio.cpp">
       <Filter>Formula</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)DeviceInformation.cpp">
@@ -583,6 +589,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)RiffReader.cpp">
       <Filter>Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WASAPICapture.cpp">
+      <Filter>Formula</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

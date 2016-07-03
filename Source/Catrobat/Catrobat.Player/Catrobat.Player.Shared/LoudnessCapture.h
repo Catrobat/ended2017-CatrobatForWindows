@@ -1,31 +1,39 @@
 #pragma once
 
-#include "WASAPIAudio.h"
 #include <ppltasks.h>
 #include <time.h>
+#include "WASAPICapture.h"
+#include "DeviceState.h"
+#include "AudioData.h"
+
+using namespace Catrobat_Player;
 
 ref class LoudnessCapture sealed
 {
 public:
 
-	LoudnessCapture();
+    LoudnessCapture();
 
-	double GetLoudness();
-	bool StartCapture();
-	bool StopCapture();
+    double GetLoudness();
+    bool StartCapture();
+    bool StopCapture();
 
-	void UpdateLoudness(int value);
-	
-	double GetTimeSinceLastQuery();
+    void UpdateLoudness(int value);
 
 private:
 
-	double m_loudness;
-	WasapiComp::WASAPIAudio ^m_wasapiAudio;
-	bool m_isRecording;
-	clock_t m_timeLastQuery;
-	
-	void StartPeriodicCalculationLoudness();
-	Windows::System::Threading::ThreadPoolTimer^ m_timer;
+    double m_loudness;
+
+    // Handlers
+    void OnDeviceStateChange(Object^ sender, DeviceStateChangedEventArgs^ e);
+    void OnAudioDataReady(Object^ sender, AudioDataReadyEventArgs^ e);
+
+    Windows::Foundation::EventRegistrationToken     m_deviceStateChangeToken;
+    Windows::Foundation::EventRegistrationToken     m_audioDataReadyToken;
+
+    DeviceStateChangedEvent^                        m_StateChangedEvent;
+    ComPtr<WASAPICapture>                           m_spCapture;
+    Windows::UI::Core::CoreDispatcher^              m_CoreDispatcher;
+
 };
 

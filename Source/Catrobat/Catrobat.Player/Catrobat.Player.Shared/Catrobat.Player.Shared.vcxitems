@@ -26,6 +26,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)AccelerometerProvider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AudioData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BaseException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BasicTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Brick.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ChangeVariableBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChangeXByBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChangeYByBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\DeviceResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\DirectXHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\StepTimer.h" />
@@ -53,6 +55,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CostumeBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DDSLoader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DeviceInformation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceState.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ForeverBrick.h" />
@@ -142,7 +145,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)VariableManagementBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)VoiceCallback.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitBrick.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WASAPIAudio.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WASAPICapture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserFatalException.h" />
@@ -220,7 +223,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)UserVariable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)VariableManagementBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitBrick.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WASAPIAudio.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WASAPICapture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WhenScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserFatalException.cpp" />

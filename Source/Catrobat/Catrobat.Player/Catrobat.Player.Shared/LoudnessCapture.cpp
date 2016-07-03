@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "LoudnessCapture.h"
-
 #include "DeviceInformation.h"
 #include "PlayerException.h"
 
@@ -10,121 +9,144 @@
 
 using namespace std;
 
-using namespace WasapiComp;
 using namespace Windows::System;
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 using namespace Platform;
+using namespace Windows::UI::Core;
 
-LoudnessCapture::LoudnessCapture() 
+LoudnessCapture::LoudnessCapture() :
+    m_StateChangedEvent(nullptr),
+    m_spCapture(nullptr)
 {
-	m_wasapiAudio = ref new WASAPIAudio();
-	m_isRecording = false;
-	m_loudness = 0.0;
-	m_timeLastQuery = clock();
+    m_loudness = 0.0;
+    m_CoreDispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
+    // Initialize MF
+    HRESULT hr = MFStartup(MF_VERSION, MFSTARTUP_LITE);
+    if (!SUCCEEDED(hr))
+    {
+        ThrowIfFailed(hr);
+    }
 }
 
 double LoudnessCapture::GetLoudness()
 {
-	return m_loudness;
+    return m_loudness;
 }
 
 bool LoudnessCapture::StartCapture()
 {
-	if (DeviceInformation::IsRunningOnDevice())
-	{
-		if (!m_isRecording)
-		{
-			if (m_wasapiAudio->StartAudioCapture())
-			{
-				m_isRecording = true;
-				m_loudness = 0;
-				m_timeLastQuery = clock();
+    if (m_spCapture)
+    {
+        m_spCapture = nullptr;
+    }
+    // Create a new WASAPI capture instance
+    m_spCapture = Make<WASAPICapture, bool>(false);
 
-				StartPeriodicCalculationLoudness();
-				return true;
-			}
-		}
-	}
-	else
-	{
-		return false;
-		//throw new PlayerException("init WASAPI failed, Microphone is not supported");
-	}
-			
-	return false;
+    if (nullptr == m_spCapture)
+    {
+        OnDeviceStateChange(this, ref new DeviceStateChangedEventArgs(DeviceState::DeviceStateInError, E_OUTOFMEMORY));
+        return false;
+    }
+
+    // Register for events
+    m_deviceStateChangeToken = DeviceStateChangedEvent::StateChangedEvent += ref new DeviceStateChangedHandler(this, &LoudnessCapture::OnDeviceStateChange);
+    m_audioDataReadyToken = AudioDataReadyEvent::AudioDataReady += ref new AudioDataReadyHandler(this, &LoudnessCapture::OnAudioDataReady);
+
+    // Perform the initialization
+    m_spCapture->InitializeAudioDeviceAsync();
+
+    return true;
 }
 
 bool LoudnessCapture::StopCapture()
 {
-	if (m_isRecording)
-	{
-		if (m_wasapiAudio->StopAudioCapture())
-		{
-			m_isRecording = false;
-
-			m_timer->Cancel();
-			return true;
-		}
-	}
-
-	return false;
-}
-
-void LoudnessCapture::StartPeriodicCalculationLoudness()
-{
-	WasapiComp::WASAPIAudio^ wasapi = this->m_wasapiAudio;
-
-	TimeSpan delay;
-	delay.Duration = 10000000 / 4; 
-
-	m_timer = ThreadPoolTimer::CreatePeriodicTimer(
-		ref new TimerElapsedHandler([this, wasapi](ThreadPoolTimer^ source)
-	{
-		Platform::Array<byte>^ buffer = ref new Platform::Array<byte>(0); 
-		int size = wasapi->ReadBytes(&buffer);
-
-		double rms = 0;
-		unsigned short byte1 = 0;
-		unsigned short byte2 = 0;
-		short value = 0;
-		int volume = 0;
-		rms = (short)(byte1 | (byte2 << 8));
-
-		for (int i = 0; i < size; i += 2)
-		{
-			byte1 = buffer[i];
-			byte2 = buffer[i + 1];
-			value = (short)(byte1 | (byte2 << 8));
-			rms += std::pow(value, 2);
-		}
-
-		rms /= (double)(size / 2);
-		volume = (int)std::floor(std::sqrt(rms));
-
-		this->UpdateLoudness(volume);
-
-		// stops recording thread if last query takes place longer than 15 secounds
-		if (this->GetTimeSinceLastQuery() > 15)
-		{
-			this->StopCapture();
-		}
-
-	}), delay,
-		ref new TimerDestroyedHandler([&](ThreadPoolTimer ^ source)
-	{
-		this->UpdateLoudness(0);
-	}));
-	
+    if (m_spCapture)
+    {
+        m_spCapture->StopCaptureAsync();
+        return true;
+    }
+    return false;
 }
 
 void LoudnessCapture::UpdateLoudness(int value)
 {
-	this->m_loudness = value;
+    this->m_loudness = value;
 }
 
-double LoudnessCapture::GetTimeSinceLastQuery()
+void LoudnessCapture::OnDeviceStateChange(Object^ sender, DeviceStateChangedEventArgs^ e)
 {
-	return (double)(clock() - this->m_timeLastQuery) / CLOCKS_PER_SEC;
+    // Handle state specific messages
+    switch (e->State)
+    {
+    case DeviceState::DeviceStateInitialized:
+        m_spCapture->StartCaptureAsync();
+        break;
+
+    case DeviceState::DeviceStateCapturing:
+    case DeviceState::DeviceStateDiscontinuity:
+    case DeviceState::DeviceStateFlushing:
+        break;
+
+    case DeviceState::DeviceStateStopped:
+        // For the stopped state, completely tear down the audio device
+        m_spCapture = nullptr;
+
+        if (m_deviceStateChangeToken.Value != 0)
+        {
+            m_StateChangedEvent->StateChangedEvent -= m_deviceStateChangeToken;
+            m_StateChangedEvent = nullptr;
+            m_deviceStateChangeToken.Value = 0;
+        }
+        break;
+
+    case DeviceState::DeviceStateInError:
+        HRESULT hr = e->hr;
+
+        if (m_deviceStateChangeToken.Value != 0)
+        {
+            m_StateChangedEvent->StateChangedEvent -= m_deviceStateChangeToken;
+            m_StateChangedEvent = nullptr;
+            m_deviceStateChangeToken.Value = 0;
+        }
+
+        m_spCapture = nullptr;
+
+        wchar_t hrVal[11];
+        swprintf_s(hrVal, 11, L"0x%08x\0", hr);
+        String^ strHRVal = ref new String(hrVal);
+
+        // Specifically handle a couple of known errors
+        switch (hr)
+        {
+        case __HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND):
+            break;
+
+        case AUDCLNT_E_RESOURCES_INVALIDATED:
+            break;
+
+        case E_ACCESSDENIED:
+            break;
+
+        default:
+            break;
+        }
+    }
 }
 
+/// To measure the energy we use the Root-Mean-Square
+void LoudnessCapture::OnAudioDataReady(Object^ sender, AudioDataReadyEventArgs^ e)
+{
+    double rms = 0;
+    int volume = 0;
+
+    for (int i = 0; i < e->Size - 1; i += 1)
+    {
+        rms += std::pow(e->PcmData[i], 2);
+    }
+
+    rms /= (double)(e->Size / 2);
+    volume = (int)std::floor(std::sqrt(rms));
+
+    this->UpdateLoudness(volume);
+}
