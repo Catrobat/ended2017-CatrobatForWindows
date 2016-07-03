@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "LoudnessCapture.h"
-
 #include "DeviceInformation.h"
 #include "PlayerException.h"
 
@@ -20,9 +19,7 @@ LoudnessCapture::LoudnessCapture() :
     m_StateChangedEvent(nullptr),
     m_spCapture(nullptr)
 {
-    m_isRecording = false;
     m_loudness = 0.0;
-    m_timeLastQuery = clock();
     m_CoreDispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
     // Initialize MF
     HRESULT hr = MFStartup(MF_VERSION, MFSTARTUP_LITE);
@@ -77,11 +74,6 @@ void LoudnessCapture::UpdateLoudness(int value)
     this->m_loudness = value;
 }
 
-double LoudnessCapture::GetTimeSinceLastQuery()
-{
-    return (double)(clock() - this->m_timeLastQuery) / CLOCKS_PER_SEC;
-}
-
 void LoudnessCapture::OnDeviceStateChange(Object^ sender, DeviceStateChangedEventArgs^ e)
 {
     // Handle state specific messages
@@ -92,11 +84,7 @@ void LoudnessCapture::OnDeviceStateChange(Object^ sender, DeviceStateChangedEven
         break;
 
     case DeviceState::DeviceStateCapturing:
-        break;
-
     case DeviceState::DeviceStateDiscontinuity:
-        break;
-
     case DeviceState::DeviceStateFlushing:
         break;
 
@@ -146,26 +134,18 @@ void LoudnessCapture::OnDeviceStateChange(Object^ sender, DeviceStateChangedEven
     }
 }
 
+/// To measure the energy we use the Root-Mean-Square
 void LoudnessCapture::OnAudioDataReady(Object^ sender, AudioDataReadyEventArgs^ e)
 {
-    int size = e->Size;
-
     double rms = 0;
-    unsigned short byte1 = 0;
-    unsigned short byte2 = 0;
-    short value = 0;
     int volume = 0;
-    rms = (short)(byte1 | (byte2 << 8));
 
-    for (int i = 0; i < size - 1; i += 2)
+    for (int i = 0; i < e->Size - 1; i += 1)
     {
-        byte1 = e->PcmData[i];
-        byte2 = e->PcmData[i + 1];
-        value = (short)(byte1 | (byte2 << 8));
-        rms += std::pow(value, 2);
+        rms += std::pow(e->PcmData[i], 2);
     }
 
-    rms /= (double)(size / 2);
+    rms /= (double)(e->Size / 2);
     volume = (int)std::floor(std::sqrt(rms));
 
     this->UpdateLoudness(volume);
