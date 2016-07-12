@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core;
@@ -303,5 +302,84 @@ namespace Catrobat.XML_Test
             Assert.AreEqual(referenceObject, testObject);
         }
 
+        [TestMethod]
+        public void XmlSetXBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"SetXBrick\"> <formulaList> <formula category=\"X_POSITION\"> <type>NUMBER</type> <value>384</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlSetXBrick(xRoot);
+
+            var referenceObject = new XmlSetXBrick()
+            {
+                XPosition = new XmlFormula(xRoot, XmlConstants.XPosition),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlSetYBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"SetYBrick\"> <formulaList> <formula category=\"Y_POSITION\"> <type>NUMBER</type> <value>384</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlSetYBrick(xRoot);
+
+            var referenceObject = new XmlSetYBrick()
+            {
+                YPosition = new XmlFormula(xRoot, XmlConstants.YPosition),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlShowBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"ShowBrick\"/>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlShowBrick(xRoot);
+
+            var referenceObject = new XmlShowBrick();
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlTurnLeftBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"TurnLeftBrick\"> <formulaList> <formula category=\"TURN_LEFT_DEGREES\"> <leftChild> <type>NUMBER</type> <value>0.1</value> </leftChild> <rightChild> <type>NUMBER</type> <value>0.9</value> </rightChild> <type>FUNCTION</type> <value>RAND</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlTurnLeftBrick(xRoot);
+
+            var referenceObject = new XmlTurnLeftBrick()
+            {
+                Degrees = new XmlFormula(xRoot, XmlConstants.TurnLeftDegrees),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlTurnRightBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"TurnRightBrick\"> <formulaList> <formula category=\"TURN_RIGHT_DEGREES\"> <leftChild> <type>NUMBER</type> <value>0.1</value> </leftChild> <rightChild> <type>NUMBER</type> <value>0.9</value> </rightChild> <type>FUNCTION</type> <value>RAND</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlTurnRightBrick(xRoot);
+
+            var referenceObject = new XmlTurnRightBrick()
+            {
+                Degrees = new XmlFormula(xRoot, XmlConstants.TurnRightDegrees),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
     }
 }
+
+
