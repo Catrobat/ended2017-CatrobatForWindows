@@ -41,6 +41,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlShowBrickType);
 
+            //CreateCommonXML(xRoot);
+
             return xRoot;
         }
     }

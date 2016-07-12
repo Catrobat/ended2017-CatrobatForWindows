@@ -61,6 +61,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return this.Equals(s);
         }*/
 
+
         public bool Equals(XmlSprite s)
         {
             return this.Name.Equals(s.Name) && this.Variables.Equals(s.Variables)
