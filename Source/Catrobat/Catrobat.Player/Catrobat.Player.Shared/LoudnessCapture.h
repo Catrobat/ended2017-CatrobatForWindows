@@ -33,7 +33,7 @@ private:
 
     DeviceStateChangedEvent^                        m_StateChangedEvent;
     ComPtr<WASAPICapture>                           m_spCapture;
-    Windows::UI::Core::CoreDispatcher^              m_CoreDispatcher;
+    //Windows::UI::Core::CoreDispatcher^              m_CoreDispatcher;
 
 };
 
