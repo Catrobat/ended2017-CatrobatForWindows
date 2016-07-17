@@ -373,6 +373,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)DeviceState.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VibrationBrick.h">
+      <Filter>Objects\Bricks\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IVibrationBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -592,6 +598,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WASAPICapture.cpp">
       <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)VibrationBrick.cpp">
+      <Filter>Objects\Bricks\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
