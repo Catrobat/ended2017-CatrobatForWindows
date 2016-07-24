@@ -20,7 +20,7 @@ LoudnessCapture::LoudnessCapture() :
     m_spCapture(nullptr)
 {
     m_loudness = 0.0;
-    m_CoreDispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
+    //m_CoreDispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
     // Initialize MF
     HRESULT hr = MFStartup(MF_VERSION, MFSTARTUP_LITE);
     if (!SUCCEEDED(hr))
