@@ -18,6 +18,6 @@ void VibrationBrick::Execute()
     auto duration = Interpreter::Instance()->EvaluateFormulaToFloat(m_vibrateDuration, m_parent->GetParent());
     if (duration < 0 || duration > 5.0f) return;
     TimeSpan ts;
-    ts.Duration = duration;
+    ts.Duration = duration * 10000; // https://msdn.microsoft.com/library/windows/apps/br225996
     VibrationDevice::GetDefault()->Vibrate(ts);
 }
