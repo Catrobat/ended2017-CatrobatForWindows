@@ -25,6 +25,28 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlWaitBrick(XElement xElement) : base(xElement) { }
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlWaitBrick b = obj as XmlWaitBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.TimeToWaitInSeconds.Equals(b.TimeToWaitInSeconds);
+        }
+
+        public bool Equals(XmlWaitBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.TimeToWaitInSeconds.Equals(b.TimeToWaitInSeconds);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ TimeToWaitInSeconds.GetHashCode();
+        }
+        #endregion
+
+
         internal override void LoadFromXml(XElement xRoot)
         {
             if (xRoot != null)

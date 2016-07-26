@@ -57,6 +57,8 @@
 #include "ShowBrick.h"
 #include "ITurnLeftBrick.h"
 #include "TurnLeftBrick.h"
+#include "IVibrationBrick.h"
+#include "VibrationBrick.h"
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
@@ -298,6 +300,13 @@ Script::Script(TypeOfScript scriptType, Object* parent, Catrobat_Player::NativeC
 			usedList->push_back(std::unique_ptr<Brick>(make_unique<TurnLeftBrick>(turnLeftBrick, this)));
 			continue;
 		}
+
+        auto vibrationBrick = dynamic_cast<Catrobat_Player::NativeComponent::IVibrationBrick^>(brick);
+        if (vibrationBrick)
+        {
+            usedList->push_back(std::unique_ptr<Brick>(make_unique<VibrationBrick>(vibrationBrick, this)));
+            continue;
+        }
 	}
 }
 
