@@ -26,7 +26,7 @@ namespace Catrobat.XML_Test
             Assert.AreEqual(referenceObject, testObject);
         }
 
-                [TestMethod]
+        [TestMethod]
         public void XmlSetVolumeToBrickTest()
         {
             TextReader sr = new StringReader("<brick type=\"SetVolumeToBrick\"> <formulaList> <formula category=\"VOLUME\"> <type>NUMBER</type> <value>60.0</value> </formula> </formulaList> </brick>");
@@ -41,5 +41,42 @@ namespace Catrobat.XML_Test
 
             Assert.AreEqual(referenceObject, testObject);
         }
+
+        [TestMethod]
+        public void XmlSpeakBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"SpeakBrick\"> <formulaList> <formula category=\"SPEAK\"> <type>STRING</type> <value>Hello!</value> </formula> </formulaList> </brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlSpeakBrick(xRoot);
+
+            var referenceObject = new XmlSpeakBrick()
+            {
+                FText = new XmlFormula(xRoot, XmlConstants.Speak),
+            };
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        [TestMethod]
+        public void XmlStopAllSoundsBrickTest()
+        {
+            TextReader sr = new StringReader("<brick type=\"StopAllSoundsBrick\"></brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlStopAllSoundsBrick(xRoot);
+
+            var referenceObject = new XmlStopAllSoundsBrick();
+
+            Assert.AreEqual(referenceObject, testObject);
+        }
+
+        //TODO: implement
+        /*
+        [TestMethod]
+        public void XmlPlaySoundBrickTest()
+        {
+
+        }*/
     }
 }
