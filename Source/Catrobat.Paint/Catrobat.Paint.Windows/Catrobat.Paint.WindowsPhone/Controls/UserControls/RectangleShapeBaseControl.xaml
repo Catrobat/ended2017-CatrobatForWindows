@@ -55,7 +55,7 @@
                 Stroke="Gray"
                 StrokeLineJoin="Miter"
                 StrokeThickness="3"
-                Visibility="Collapsed"
+                Visibility="Visible"
                 />
 
         </Grid>

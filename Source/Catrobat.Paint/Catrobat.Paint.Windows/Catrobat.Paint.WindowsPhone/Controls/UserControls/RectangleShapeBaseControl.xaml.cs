@@ -31,7 +31,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
     private enum Orientation
         {
-            Top, Bottom, Left, Right    
+            Top, Bottom, Left, Right, TopLeft, TopRight, BottomRight, BottomLeft
         }
 
         public RectangleShapeBaseControl()
@@ -198,11 +198,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //double deltaYCorrected = Math.Sin(-rotationRadian) * (deltaX)
             //        + Math.Cos(-rotationRadian) * (deltaY);
 
+            System.Diagnostics.Debug.WriteLine("\ncorr1: " + deltaXCorrected);
             if (orientation == Orientation.Left)
             {
+                System.Diagnostics.Debug.WriteLine("\nhier");
                 deltaXCorrected = deltaXCorrected * -1;
             }
 
+            System.Diagnostics.Debug.WriteLine("\ncorr1: " + deltaXCorrected);
 
 
             double newWidthRectangleToDraw = AreaToDrawGrid.Width + deltaXCorrected;
@@ -293,16 +296,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                             GridMainSelection.Margin.Right,
                                             GridMainSelection.Margin.Bottom - deltaYBottom);
 
-            //var transform = rectRectangleToDraw.TransformToVisual(GridMainSelection);
-            //Point absolutePosition = transform.TransformPoint(new Point(0, 0));
-
-            //absolutePosition.X += rectRectangleToDraw.Width / 2;
-            //absolutePosition.Y += rectRectangleToDraw.Height / 2;
-
-            //RotateTransform rt;
-
-            //rt = new RotateTransform { Angle = m_rotation, CenterX = absolutePosition.X, CenterY = absolutePosition.Y };
-            //addTransformation(rt);
+ 
 
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = newHeightRectangleToDraw;
         }
@@ -527,23 +521,25 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (m_CornerPoint.X == 0.0 && m_CornerPoint.Y == 0.0)
             {
                 m_CornerPoint = GetCenterCoordinateOfFrameworkElement(TopRightRotationGrid);
-                m_CornerPoint.Y -= TopLeftRotationGrid.Width / 2;
-                m_CornerPoint.X -= TopLeftRotationGrid.Height / 2;
+                m_CornerPoint.Y -= TopRightRotationGrid.Width / 2;
+                m_CornerPoint.X -= TopRightRotationGrid.Height / 2;
             }
 
-            Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Right); 
+            Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.TopRight); 
         }
 
         private void RotationTopLeft_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
 
-            Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.Left);
+            Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.TopLeft);
         }
 
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
         {
             Point centerPoint = GetCenterCoordinateOfGridMain();
+            //System.Diagnostics.Debug.WriteLine("---\ncenter " + centerPoint);
             Point rotationEndPoint;
+            //m_CornerPoint = GetCornerCoordinate(orientation);
 
             m_RotationStartingPoint.X = m_CornerPoint.X + position.X;
             m_RotationStartingPoint.Y = m_CornerPoint.Y + position.Y;
@@ -555,7 +551,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             Point directionVectorToRotatedPoint = GetSubtractionOfPoints(rotationEndPoint, centerPoint);
 
-            System.Diagnostics.Debug.WriteLine("---\nst: " + m_CornerPoint);
+            //System.Diagnostics.Debug.WriteLine("---\nst: " + m_CornerPoint);
             double dot = directionVectorToOrigin.X*directionVectorToRotatedPoint.X +
                          directionVectorToOrigin.Y*directionVectorToRotatedPoint.Y;
 
@@ -564,7 +560,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             //System.Diagnostics.Debug.WriteLine("---\ncross " + cross + "\n dot: " + dot);
             float angle = (float)Math.Atan2(cross, dot);
-            System.Diagnostics.Debug.WriteLine("---\nangle " + m_RotationAngle);
+            //System.Diagnostics.Debug.WriteLine("---\nangle " + m_RotationAngle);
 
             m_RotationAngle += (float)PocketPaintApplication.RadianToDegree(angle) + 360;
             m_RotationAngle = m_RotationAngle % 360;
@@ -586,6 +582,25 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             m_CornerPoint.X += deltaX;
             m_CornerPoint.Y += deltaY;
 
+        }
+
+        private Point GetCornerCoordinate(Orientation orientation)
+        {
+            if (orientation == Orientation.TopRight)
+            {
+                m_CornerPoint = GetCenterCoordinateOfFrameworkElement(TopRightRotationGrid);
+                m_CornerPoint.Y -= TopRightRotationGrid.Width / 2;
+                m_CornerPoint.X -= TopRightRotationGrid.Height / 2;
+            } else if (orientation == Orientation.TopLeft)
+            {
+                m_CornerPoint = GetCenterCoordinateOfFrameworkElement(TopLeftRotationGrid);
+                m_CornerPoint.Y -= TopLeftRotationGrid.Width / 2;
+                m_CornerPoint.X -= TopLeftRotationGrid.Height / 2;
+
+            }
+
+            Point direction_vector = GetSubtractionOfPoints(m_CornerPoint, m_CenterPointRotation);
+            return p;
         }
 
         private Point GetSubtractionOfPoints(Point p1, Point p2)
