@@ -600,7 +600,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
 
             Point direction_vector = GetSubtractionOfPoints(m_CornerPoint, m_CenterPointRotation);
-            return p;
+            return direction_vector;
         }
 
         private Point GetSubtractionOfPoints(Point p1, Point p2)
