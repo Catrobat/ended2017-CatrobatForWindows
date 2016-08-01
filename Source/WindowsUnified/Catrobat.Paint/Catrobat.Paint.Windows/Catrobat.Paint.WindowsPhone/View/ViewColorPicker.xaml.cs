@@ -64,7 +64,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 fill_color = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             }
 
-            double fill_color_opacity = Convert.ToDouble(fill_color.Color.A);
+            double fill_color_opacity = fill_color != null ? Convert.ToDouble(fill_color.Color.A) : 1;
 
 
             if (PocketPaintApplication.GetInstance().PaintData.colorSelected != null)

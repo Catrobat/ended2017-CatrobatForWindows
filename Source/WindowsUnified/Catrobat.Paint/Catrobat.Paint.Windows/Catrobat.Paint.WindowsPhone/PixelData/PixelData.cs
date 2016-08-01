@@ -48,9 +48,11 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         private async Task<SolidColorBrush> GetPixelColor()
         {
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas,
-                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
-                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight);
+            var paintingCanvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
+
+            await retarbi.RenderAsync(paintingCanvas,
+                                (int)paintingCanvas.ActualWidth,
+                                (int)paintingCanvas.ActualHeight);
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             var pixels = WindowsRuntimeBufferExtensions.ToArray(buffer);
@@ -58,8 +60,11 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             var width = retarbi.PixelWidth;
             var height = retarbi.PixelHeight;
 
-            double NormfactorX = (double)width / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
-            double NormfactorY = (double)height / (double)PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
+            var bitmap = PocketPaintApplication.GetInstance().Bitmap;
+            if (bitmap == null)
+                return null;
+            double NormfactorX = (double)width / (double)bitmap.PixelWidth;
+            double NormfactorY = (double)height / (double)bitmap.PixelHeight;
 
             double doubleY = ((double)Y) * NormfactorY;
             double doubleX = ((double)X) * NormfactorX;

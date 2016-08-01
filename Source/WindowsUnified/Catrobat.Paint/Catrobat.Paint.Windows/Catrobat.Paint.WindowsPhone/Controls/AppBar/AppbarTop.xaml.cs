@@ -114,7 +114,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
         private void ColorChangedHere(SolidColorBrush color)
         {
-            if (color.Color != Colors.Transparent)
+            if(color != null && color.Color != Colors.Transparent)
             {
                 RecSelectedColor.Fill = color;
             }

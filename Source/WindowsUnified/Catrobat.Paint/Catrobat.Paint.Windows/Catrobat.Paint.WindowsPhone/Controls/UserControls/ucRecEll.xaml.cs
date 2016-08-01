@@ -145,7 +145,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void ColorFillChanged(SolidColorBrush color)
         {
             SolidColorBrush selected_color = new SolidColorBrush();
-            selected_color.Color = color.Color != Colors.Transparent ? color.Color : Colors.Transparent;
+            selected_color.Color = color != null && color.Color != Colors.Transparent ? color.Color : Colors.Transparent;
             rectFillColor.Fill = selected_color;
         }
 
