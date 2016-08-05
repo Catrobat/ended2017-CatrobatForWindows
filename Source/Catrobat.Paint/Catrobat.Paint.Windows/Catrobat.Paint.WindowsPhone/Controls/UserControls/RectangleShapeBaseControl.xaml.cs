@@ -517,14 +517,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void RotationTopRight_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-
-            //if (m_CornerPoint.X == 0.0 && m_CornerPoint.Y == 0.0)
-            //{
-            //    m_CornerPoint = GetCenterCoordinateOfFrameworkElement(TopRightRotationGrid);
-            //    m_CornerPoint.Y -= TopRightRotationGrid.Width / 2;
-            //    m_CornerPoint.X -= TopRightRotationGrid.Height / 2;
-            //}
-
             Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.TopRight); 
         }
 
@@ -532,6 +524,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
 
             Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.TopLeft);
+        }
+
+        private void RotationBottomLeft_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+
+            Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.BottomLeft);
+        }
+
+        private void RotationBottomRight_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+
+            Rotate(e.Position, e.Delta.Translation.X, e.Delta.Translation.Y, Orientation.BottomRight);
         }
 
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
@@ -577,11 +581,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 CenterY = m_CenterPointRotation.Y
             };
             addTransformation(rt);
-
-            //System.Diagnostics.Debug.WriteLine("---\ndelta " + deltaX + " y:" + deltaY);
-            //m_CornerPoint.X += deltaX;
-            //m_CornerPoint.Y += deltaY;
-
         }
 
         private Point GetCornerCoordinate(Orientation orientation, Point centerPoint)
@@ -596,6 +595,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 m_CornerPoint = GetCenterCoordinateOfFrameworkElement(TopLeftRotationGrid);
                 m_CornerPoint.Y -= TopLeftRotationGrid.Width / 2;
                 m_CornerPoint.X -= TopLeftRotationGrid.Height / 2;
+
+            } else if (orientation == Orientation.BottomLeft)
+            {
+                m_CornerPoint = GetCenterCoordinateOfFrameworkElement(BottomLeftRotationGrid);
+                m_CornerPoint.Y -= BottomLeftRotationGrid.Width / 2;
+                m_CornerPoint.X -= BottomLeftRotationGrid.Height / 2;
+
+            } else if (orientation == Orientation.BottomRight)
+            {
+                m_CornerPoint = GetCenterCoordinateOfFrameworkElement(BottomRightRotationGrid);
+                m_CornerPoint.Y -= BottomRightRotationGrid.Width / 2;
+                m_CornerPoint.X -= BottomRightRotationGrid.Height / 2;
 
             }
             //System.Diagnostics.Debug.WriteLine("---\ncorner.: " + m_CornerPoint + " " + centerPoint);
