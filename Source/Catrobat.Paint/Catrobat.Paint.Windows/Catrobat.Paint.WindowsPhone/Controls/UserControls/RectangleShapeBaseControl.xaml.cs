@@ -197,15 +197,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //double deltaYCorrected = Math.Sin(-rotationRadian) * (deltaX)
             //        + Math.Cos(-rotationRadian) * (deltaY);
 
-            System.Diagnostics.Debug.WriteLine("\ncorr1: " + deltaXCorrected);
             if (orientation == Orientation.Left)
             {
                 System.Diagnostics.Debug.WriteLine("\nhier");
                 deltaXCorrected = deltaXCorrected * -1;
             }
-
-            System.Diagnostics.Debug.WriteLine("\ncorr1: " + deltaXCorrected);
-
 
             double newWidthRectangleToDraw = AreaToDrawGrid.Width + deltaXCorrected;
             if (newWidthRectangleToDraw < m_MinWidthRectangleToDraw)
@@ -539,7 +535,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void Rotate(Point position, double deltaX, double deltaY, Orientation orientation)
         {
-            System.Diagnostics.Debug.WriteLine(position);
             Point rotationStartingPoint;
             Point rotationEndPoint;
 
