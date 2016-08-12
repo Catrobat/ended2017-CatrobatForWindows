@@ -37,25 +37,13 @@ namespace Catrobat.IDE.Core.Services.Common
         public async Task<string> FindUniqueName(string requestedName, List<string> nameList)
         {
             int counter = 0;
-            string uniqueName = "";
-            string currentName = requestedName;
-            while (counter <= nameList.Count)
+            string uniqueName = requestedName;
+
+            while (nameList.FirstOrDefault(stringToCheck => stringToCheck.Equals(uniqueName)) != null)
             {
-                if (counter != 0)
-                {
-                    currentName = requestedName + counter;
-                }
-
-                var match = nameList.FirstOrDefault(stringToCheck => stringToCheck.Equals(currentName));
-                if (match == null)
-                    break;
-
                 counter++;
-            }
-            uniqueName = requestedName;
-
-            if (counter != 0)
                 uniqueName = requestedName + counter;
+            }
 
             return uniqueName.Trim();
         }
