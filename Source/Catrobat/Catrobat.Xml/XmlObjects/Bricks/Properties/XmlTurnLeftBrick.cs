@@ -25,6 +25,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlTurnLeftBrick(XElement xElement) : base(xElement) { }
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlTurnLeftBrick b = obj as XmlTurnLeftBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.Degrees.Equals(b.Degrees);
+        }
+
+        public bool Equals(XmlTurnLeftBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.Degrees.Equals(b.Degrees);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ Degrees.GetHashCode();
+        }
+        #endregion
+
         internal override void LoadFromXml(XElement xRoot)
         {
             if (xRoot != null)

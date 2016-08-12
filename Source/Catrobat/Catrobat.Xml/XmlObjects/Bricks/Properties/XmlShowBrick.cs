@@ -13,6 +13,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlShowBrick(XElement xElement) : base(xElement) {}
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlShowBrick b = obj as XmlShowBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b);
+        }
+
+        public bool Equals(XmlShowBrick b)
+        {
+            return this.Equals((XmlBrick)b);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        #endregion
+
         internal override void LoadFromXml(XElement xRoot) {}
 
         internal override XElement CreateXml()

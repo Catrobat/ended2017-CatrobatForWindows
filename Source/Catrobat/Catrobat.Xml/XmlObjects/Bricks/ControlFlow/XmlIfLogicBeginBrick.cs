@@ -86,6 +86,28 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlIfLogicBeginBrick(XElement xElement) : base(xElement) { }
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlIfLogicBeginBrick b = obj as XmlIfLogicBeginBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.IfCondition.Equals(b.IfCondition);
+        }
+
+        public bool Equals(XmlIfLogicBeginBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.IfCondition.Equals(b.IfCondition);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ IfCondition.GetHashCode();
+        }
+        #endregion
+
+
         internal override void LoadFromXml(XElement xRoot)
         {
             if (xRoot != null)
