@@ -285,7 +285,7 @@ namespace Catrobat.Paint.WindowsPhone
         public static double RadianToDegree(double angle)
         {
             // TODO: test this function
-            return angle * 180.0 / Math.PI;
+            return angle * (180.0 / Math.PI);
         }
 
         public static double DegreeToRadian(double angle)
