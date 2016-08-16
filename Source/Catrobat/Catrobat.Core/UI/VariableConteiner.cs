@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Models;
-using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.UI
 {

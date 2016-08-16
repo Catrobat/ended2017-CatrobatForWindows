@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.Core.Resources.Localization;
-using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.UI
 {
