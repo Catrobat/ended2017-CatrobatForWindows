@@ -56,7 +56,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             set
             {
                 if (value == _lookName)
+                {
                     return;
+                } 
 
                 _lookName = value;
                 RaisePropertyChanged(() => LookName);

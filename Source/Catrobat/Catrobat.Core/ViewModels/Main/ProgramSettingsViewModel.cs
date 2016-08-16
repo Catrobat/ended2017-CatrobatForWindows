@@ -109,10 +109,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     var oldProgramPath = CurrentProgram.BasePath;
                     CurrentProgramHeader.ProjectName = ProgramName;
+                    CurrentProgram.Name = ProgramName;
                     CurrentProgram.Description = ProgramDescription;
-                    await CurrentProgram.Save();
                     
-                    var programChangedMessage1 = new GenericMessage<Program>(null);
+                    var programChangedMessage1 = new GenericMessage<Program>(CurrentProgram);
                         Messenger.Default.Send(programChangedMessage1, 
                             ViewModelMessagingToken.CurrentProgramChangedListener);
 
@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         await storage.RenameDirectoryAsync(oldProgramPath, ProgramName);
                     }
                     
-                    var programChangedMessage2 = new GenericMessage<Program>(null);
+                    var programChangedMessage2 = new GenericMessage<Program>(CurrentProgram);
                     Messenger.Default.Send(programChangedMessage2,
                         ViewModelMessagingToken.CurrentProgramChangedListener);
 

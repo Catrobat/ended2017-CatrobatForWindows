@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
+using System.Diagnostics;
 
 namespace Catrobat.IDE.Core
 {

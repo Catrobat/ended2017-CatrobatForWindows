@@ -106,6 +106,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
         public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
         {
+
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
