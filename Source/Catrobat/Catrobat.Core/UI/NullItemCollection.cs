@@ -155,7 +155,7 @@ namespace Catrobat.IDE.Core.UI
     [NotifyPropertyChangedInvocator]
     private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
-        PropertyChangedEventHandler handler = PropertyChanged;
+            PropertyChangedEventHandler handler = PropertyChanged;
         if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion

@@ -29,10 +29,11 @@
                  Text="{Binding Resources.Editor_LookName, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>
-      <TextBox Margin="0 0 0 0"
+            <!--Text="{Binding LookName, Mode=TwoWay}"-->
+            <TextBox Margin="0 0 0 0"
                HorizontalAlignment="Stretch"
                Name="TextBoxLookName"
-               Text="{Binding LookName, Mode=TwoWay}" 
+               
                TextChanged="TextBoxLookName_OnTextChanged" 
                MaxLength="{Binding Resources.Main_TextBoxLimit, 
                Source={StaticResource LocalizedStrings}}"/>

@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
+using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {

@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
@@ -52,10 +53,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             set
             {
                 if (value == _lookName)
+                {
                     return;
+                }
+                   
 
                 _lookName = value;
+                Debug.WriteLine("name before raisepropertychanged: " + _lookName);
                 RaisePropertyChanged(() => LookName);
+                Debug.WriteLine("name after raisepropertychanged: " + _lookName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }
@@ -176,7 +182,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             {
                 nameList.Add(lookItem.Name);
             }
-            LookName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
+            _lookName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.LookImageToSaveListener);
 

@@ -94,6 +94,7 @@ namespace Catrobat.IDE.Core.Models
 
         public Look(string name)
         {
+            Debug.WriteLine("incoming name: " + name);
             _name = name;
             _fileName = FileNameGenerationHelper.Generate() + _name;
         }

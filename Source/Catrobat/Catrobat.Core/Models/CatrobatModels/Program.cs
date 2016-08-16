@@ -149,18 +149,18 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Save(string path = null)
         {
-            if (path == null)
-                path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
+                if (path == null)
+                    path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
 
-            var programConverter = new ProgramConverter();
-            var xmlProgram= programConverter.Convert(this);
+                var programConverter = new ProgramConverter();
+                var xmlProgram = programConverter.Convert(this);
 
-            var xmlString = xmlProgram.ToXmlString();
+                var xmlString = xmlProgram.ToXmlString();
 
-            using (var storage = StorageSystem.GetStorage())
-            {
-                await storage.WriteTextFileAsync(path, xmlString);
-            }
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    await storage.WriteTextFileAsync(path, xmlString);
+                }
         }
 
         public void Undo()
