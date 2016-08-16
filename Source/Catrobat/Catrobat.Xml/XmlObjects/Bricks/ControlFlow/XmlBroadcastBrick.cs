@@ -14,6 +14,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlBroadcastBrick(XElement xElement) : base(xElement) {}
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlBroadcastBrick b = obj as XmlBroadcastBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.BroadcastMessage.Equals(b.BroadcastMessage);
+        }
+
+        public bool Equals(XmlBroadcastBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.BroadcastMessage.Equals(b.BroadcastMessage);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ BroadcastMessage.GetHashCode();
+        }
+        #endregion
+
         internal override void LoadFromXml(XElement xRoot)
         {
             if (xRoot != null && xRoot.Element(XmlConstants.BroadcastMessage) != null)

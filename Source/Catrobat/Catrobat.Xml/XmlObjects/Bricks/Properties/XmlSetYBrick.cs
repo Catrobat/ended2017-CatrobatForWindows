@@ -25,6 +25,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public XmlSetYBrick(XElement xElement) : base(xElement) {}
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlSetYBrick b = obj as XmlSetYBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.YPosition.Equals(b.YPosition);
+        }
+
+        public bool Equals(XmlSetYBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.YPosition.Equals(b.YPosition);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ YPosition.GetHashCode();
+        }
+        #endregion
+
         internal override void LoadFromXml(XElement xRoot)
         {
             if (xRoot != null)

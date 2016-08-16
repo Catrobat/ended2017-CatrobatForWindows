@@ -9,6 +9,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlForeverLoopEndBrick(XElement xElement) : base(xElement) { }
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlForeverLoopEndBrick b = obj as XmlForeverLoopEndBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b);
+        }
+
+        public bool Equals(XmlForeverLoopEndBrick b)
+        {
+            return this.Equals((XmlBrick)b);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        #endregion
+
         internal override void LoadFromXml(XElement xRoot)
         {
             if(xRoot != null)

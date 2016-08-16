@@ -49,20 +49,20 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         public string LookName
         {
-            get { return _lookName; }
+            get
+            {
+                return _lookName;
+            }
             set
             {
                 if (value == _lookName)
                 {
                     return;
-                }
-                   
+                } 
 
                 _lookName = value;
-                Debug.WriteLine("name before raisepropertychanged: " + _lookName);
                 RaisePropertyChanged(() => LookName);
-                Debug.WriteLine("name after raisepropertychanged: " + _lookName);
-                SaveCommand.RaiseCanExecuteChanged();
+                SaveCommand.RaiseCanExecuteChanged();        
             }
         }
 

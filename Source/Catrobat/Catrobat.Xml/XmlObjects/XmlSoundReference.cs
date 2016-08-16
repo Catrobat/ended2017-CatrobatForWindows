@@ -18,6 +18,29 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             LoadFromXml(xElement);
         }
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlSoundReference s = obj as XmlSoundReference;
+            if ((object)s == null)
+            {
+                return false;
+            }
+
+            return this.Equals(s);
+        }
+
+        public bool Equals(XmlSoundReference s)
+        {
+            return this._reference.Equals(s._reference) && this.Sound.Equals(s.Sound);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ _reference.GetHashCode() ^ Sound.GetHashCode();
+        }
+        #endregion
+
         internal override void LoadFromXml(XElement xRoot)
         {
             _reference = xRoot.Attribute(XmlConstants.Reference).Value;
