@@ -1,0 +1,3 @@
+[submodule "Submodules/CatrobatForWindowsSubPlayer"]
+	path = Submodules/CatrobatForWindowsSubPlayer
+	url = https://github.com/Catrobat/CatrobatForWindowsSubPlayer.git
