@@ -397,8 +397,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 programToDelete.IsDeleting = true;
                 deleteStartTime = DateTime.UtcNow;
 
-                _programsToDelete.Add(programNameToDelete);
-
                 if (_isDeleting)
                     return;
 
