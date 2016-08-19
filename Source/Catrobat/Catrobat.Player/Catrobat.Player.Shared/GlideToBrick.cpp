@@ -24,13 +24,13 @@ void GlideToBrick::Execute()
 
 	float currentX, currentY;
 	m_parent->GetParent()->GetTranslation(currentX, currentY);
-	float x_movement = (currentX - Interpreter::Instance()->EvaluateFormulaToFloat(m_xDestination, m_parent->GetParent())) / steps;
-	float y_movement = (currentY - Interpreter::Instance()->EvaluateFormulaToFloat(m_yDestination, m_parent->GetParent())) / steps;
+	float x_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_xDestination, m_parent->GetParent()) / steps;
+	float y_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_yDestination, m_parent->GetParent()) / steps;
 
 	for (int i = 0; i < steps; i++)
 	{
 		m_parent->GetParent()->GetTranslation(currentX, currentY);
-		m_parent->GetParent()->SetTranslation(currentX - x_movement, currentY - y_movement);
+		m_parent->GetParent()->SetTranslation(currentX + x_movement, currentY + y_movement);
 		Concurrency::wait(20); // 50 Hz
 	}
 }
