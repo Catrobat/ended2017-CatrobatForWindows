@@ -49,6 +49,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
+        public Program CurrentProgram
+        {
+            get { return _currentProgram; }
+            set
+            {
+                _currentProgram = value;
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    RaisePropertyChanged(() => CurrentProgram));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -70,10 +82,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Actions
 
+        private void CurrentProgramChangedAction(GenericMessage<Program> message)
+        {
+            CurrentProgram = message.Content;
+        }
+
         private async void SaveAction()
         {
             string validName = await ServiceLocator.ContextService.ConvertToValidFileName(SpriteName);
-            if (validName != SelectedSprite.Name)
+            if (validName != SelectedSprite.Name && (SelectedSprite != CurrentProgram.Sprites[0]))
             {
                 List<string> nameList = new List<string>();
                 foreach (var spriteItem in _currentProgram.Sprites)
@@ -126,6 +143,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                  ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this, 
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this,
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedAction);
         }
 
         public void ResetViewModel()
