@@ -12,7 +12,8 @@
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
-        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="10"/>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
 
@@ -30,8 +31,20 @@
         HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
         ItemWidthPortrait="370" ItemWidthLandscape="450"
             />-->
-            <catrobatListView:CatrobatListView x:Name="ListViewSprites"
+            <catrobatListView:CatrobatListView x:Name="ListViewBackground"
         Grid.Row="1"
+        ItemsSource="{Binding CurrentProgram.Background}"
+        SelectedItems="{Binding SelectedSprites}"                                        
+        ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+        ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
+        HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
+        ItemWidthPortrait="0" ItemWidthLandscape="0"
+            />
+        
+        <Rectangle x:Name="RectangleLine" Grid.Row="2" Fill="Black" Height="1" />
+
+            <catrobatListView:CatrobatListView x:Name="ListViewSprites"
+        Grid.Row="3"
         ItemsSource="{Binding CurrentProgram.Sprites}"
         SelectedItems="{Binding SelectedSprites}"                                        
         ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
@@ -40,7 +53,7 @@
         ItemWidthPortrait="0" ItemWidthLandscape="0"
             />
 
-            <TextBlock Grid.Row="1"
+            <TextBlock Grid.Row="3"
         Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
         Visibility="{Binding CurrentProgram.Sprites.Count, 
         Converter={StaticResource NativeIntZeroVisibilityConverter}}"

@@ -211,6 +211,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Program>>(this, 
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         private void RaisePropertiesChanges()
@@ -228,6 +231,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             RenameProgramCommand.RaiseCanExecuteChanged();
         }
 
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
+        {  
+            CurrentProgram = message.Content;
+        }
+
         public async override void NavigateTo()
         {
             if (CurrentProgram == null ||
@@ -242,9 +250,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     CurrentProgramHeader.ValidityState = ProgramState.Unknown;
                     RaisePropertiesChanges();
                 }
-
-                if (CurrentProgram != null)
-                    await CurrentProgram.Save();
 
                 var result = await ServiceLocator.ProgramValidationService.CheckProgram(
                     Path.Combine(StorageConstants.ProgramsPath, CurrentProgramHeader.ProjectName));
@@ -264,6 +269,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     });
 
                     CurrentProgram = newProgram;
+
+                    if (CurrentProgram != null && CurrentProgram.Background.Count == 0)
+                    {
+                        CurrentProgram.Background.Add(CurrentProgram.Sprites[0]);
+                        CurrentProgram.Sprites.RemoveAt(0);
+                    }
 
                     var projectChangedMessage = new GenericMessage<Program>(newProgram);
                     Messenger.Default.Send(projectChangedMessage,

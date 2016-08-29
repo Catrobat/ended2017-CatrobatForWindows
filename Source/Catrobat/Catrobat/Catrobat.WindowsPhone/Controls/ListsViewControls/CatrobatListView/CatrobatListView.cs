@@ -348,13 +348,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView
 
         void clvw_ItemDragCompletedEvent(object sender, CatrobatListViewEventArgs e)
         {
-            int actSourceIndex = Clvw.Items.IndexOf(e.GetTmpControl());
-            int actTargetIndex = ((IList)this.ItemsSource).IndexOf(e.GetOrignalContent().Content);
-            if (actTargetIndex == 0 || actSourceIndex == 0)
-            {
-                Clvw.ImportItemsSource(ItemsSource as IList);
-                return;
-            }
             this.ItemsSource.CollectionChanged -= ItemsSource_CollectionChanged;
             DragTransfer(e.GetTmpControl(), e.GetOrignalContent(), e.GetGroupedItems());
             this.ItemsSource.CollectionChanged += ItemsSource_CollectionChanged;
