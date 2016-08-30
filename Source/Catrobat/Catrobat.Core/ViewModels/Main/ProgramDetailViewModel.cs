@@ -100,7 +100,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_currentProgram == null)
                     return 0;
 
-                return _currentProgram.Sprites.Count;
+                return _currentProgram.Sprites.Count + 1; // The "+ 1" is for the background object
             }
         }
 
