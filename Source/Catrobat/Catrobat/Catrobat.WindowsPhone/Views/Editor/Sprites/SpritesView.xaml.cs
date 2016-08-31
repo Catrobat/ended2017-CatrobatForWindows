@@ -26,8 +26,11 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             double height = bounds.Height * 0.88;
             double width = bounds.Width * 0.95;
 
-            Rectangle line = this.FindName("RectangleLine") as Rectangle;
-            line.Width = (int)width;
+            Rectangle backgroundLine = this.FindName("BackgroundLine") as Rectangle;
+            backgroundLine.Width = (int) width - 80;
+
+            Rectangle spritesLine = this.FindName("SpritesLine") as Rectangle;
+            spritesLine.Width = (int)width - 80;
 
             CatrobatListView view = this.FindName("ListViewSprites") as CatrobatListView;
             view.ItemWidthLandscape = (int)height;
