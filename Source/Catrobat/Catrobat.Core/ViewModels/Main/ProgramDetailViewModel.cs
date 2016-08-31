@@ -100,7 +100,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_currentProgram == null)
                     return 0;
 
-                return _currentProgram.Sprites.Count + 1; // The "+ 1" is for the background object
+                return _currentProgram.Sprites.Count;
             }
         }
 
@@ -270,12 +270,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                     CurrentProgram = newProgram;
 
-                    if (CurrentProgram != null && CurrentProgram.Background.Count == 0)
-                    {
-                        CurrentProgram.Background.Add(CurrentProgram.Sprites[0]);
-                        CurrentProgram.Sprites.RemoveAt(0);
-                    }
-
                     var projectChangedMessage = new GenericMessage<Program>(newProgram);
                     Messenger.Default.Send(projectChangedMessage,
                         ViewModelMessagingToken.CurrentProgramChangedListener);
@@ -290,6 +284,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     });
                 }
             }
+
             if (_performedExport)
             {
                 await ServiceLocator.ProgramExportService.CleanUpExport();

@@ -276,6 +276,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             base.GoBackAction();
         }
 
+        public override void NavigateTo()
+        {
+            if (CurrentProgram != null && CurrentProgram.Background.Count == 0)
+            {
+                CurrentProgram.Background.Add(CurrentProgram.Sprites[0]);
+                CurrentProgram.Sprites.RemoveAt(0);
+            }
+        }
+
         #endregion
 
         #region MessageActions
