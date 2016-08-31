@@ -90,7 +90,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private async void SaveAction()
         {
             string validName = await ServiceLocator.ContextService.ConvertToValidFileName(SpriteName);
-            if (validName != SelectedSprite.Name && (SelectedSprite != CurrentProgram.Sprites[0]))
+            if (validName != SelectedSprite.Name)
             {
                 List<string> nameList = new List<string>();
                 foreach (var spriteItem in _currentProgram.Sprites)
