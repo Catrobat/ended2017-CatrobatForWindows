@@ -917,7 +917,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SelectedLooks = new ObservableCollection<Look>();
             SelectedLooks.CollectionChanged += SelectedLooksOnCollectionChanged;
             SelectedSounds = new ObservableCollection<Sound>();
-            SelectedSounds.CollectionChanged += SelectedSoundsOnCollectionChanged;
+            SelectedSounds.CollectionChanged += SelectedSoundsOnCollectionChanged;            
 
             RenameSpriteCommand = new RelayCommand(RenameSpriteAction);
 
@@ -972,16 +972,19 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void ScriptBricksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(() => IsScirptBricksEmpty);
+            CurrentProgram.Save();
         }
 
         private void LooksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(() => IsLooksEmpty);
+            CurrentProgram.Save();
         }
 
         private void SoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(() => IsSoundsEmpty);
+            CurrentProgram.Save();
         }
 
         private void SelectedActionsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)

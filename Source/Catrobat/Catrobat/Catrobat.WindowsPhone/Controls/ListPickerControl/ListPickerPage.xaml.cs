@@ -16,6 +16,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
     public partial class ListPickerPage
     {
 
+        private readonly SpriteEditorViewModel _spriteEditorviewModel = ServiceLocator.ViewModelLocator.SpriteEditorViewModel;
+
         private readonly NavigationHelper _navigationHelper;
         public NavigationHelper NavigationHelper
         {
@@ -103,7 +105,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
                 _skipNextSelectionChanged = false;
                 return;
             }
-            
+
+            _spriteEditorviewModel.CurrentProgram.Save();
+
             ListPicker.SelectedItem = ListBoxItems.SelectedItem;
             ServiceLocator.NavigationService.NavigateBack(this.GetType());
         }

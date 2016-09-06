@@ -128,9 +128,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             GoBackAction();
 
-            if (CurrentProgram != null)
-                await CurrentProgram.Save();
-
             string validName = await ServiceLocator.ContextService.ConvertToValidFileName(ProgramName);
             string uniqueName = await ServiceLocator.ContextService.FindUniqueProgramName(validName);
 

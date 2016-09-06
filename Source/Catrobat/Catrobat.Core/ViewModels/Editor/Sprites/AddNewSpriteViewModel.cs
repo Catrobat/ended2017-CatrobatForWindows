@@ -81,6 +81,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SpriteName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
             var sprite = new Sprite { Name = SpriteName };
             CurrentProgram.Sprites.Add(sprite);
+            CurrentProgram.Save();
 
             ResetViewModel();
             base.GoBackAction();

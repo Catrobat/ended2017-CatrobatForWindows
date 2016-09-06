@@ -167,10 +167,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProgram);
         }
 
-        private async void ShareLocalProgramAction()
+        private void ShareLocalProgramAction()
         {
-            await CurrentProgram.Save();
-
             //var message = new GenericMessage<LocalProgramHeader>(CurrentProgram.LocalProgramHeader);
             //Messenger.Default.Send(message, ViewModelMessagingToken.ShareProgramHeaderListener);
 
@@ -242,9 +240,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     CurrentProgramHeader.ValidityState = ProgramState.Unknown;
                     RaisePropertiesChanges();
                 }
-
-                if (CurrentProgram != null)
-                    await CurrentProgram.Save();
 
                 var result = await ServiceLocator.ProgramValidationService.CheckProgram(
                     Path.Combine(StorageConstants.ProgramsPath, CurrentProgramHeader.ProjectName));
