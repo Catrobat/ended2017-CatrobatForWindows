@@ -147,6 +147,11 @@ namespace Catrobat.IDE.Core.Models
             Name = newProgramName;
         }
 
+        public void SaveWithSaveHandler()
+        {
+            Catrobat.Core.Services.Common.SaveHandler.addSaveJob(this);
+        }
+
         public async Task Save(string path = null)
         {
             if (path == null)
