@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
     public partial class XmlPlaceAtBrick : XmlBrick, IPlaceAtBrick
     {
         #region NativeInterface
-        public IFormulaTree PositionY
+        public IFormulaTree PositionX
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             set { }
         }
 
-        public IFormulaTree PositionX
+        public IFormulaTree PositionY
         {
             get
             {
