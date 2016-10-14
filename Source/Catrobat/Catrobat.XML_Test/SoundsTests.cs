@@ -20,7 +20,7 @@ namespace Catrobat.XML_Test
 
             var referenceObject = new XmlChangeVolumeByBrick()
             {
-                Volume = new XmlFormula(xRoot, XmlConstants.VolumeChange),
+                VolumeXML = new XmlFormula(xRoot, XmlConstants.VolumeChange),
             };
 
             Assert.AreEqual(referenceObject, testObject);
@@ -36,7 +36,7 @@ namespace Catrobat.XML_Test
 
             var referenceObject = new XmlSetVolumeToBrick()
             {
-                Volume = new XmlFormula(xRoot, XmlConstants.Volume),
+                VolumeXML = new XmlFormula(xRoot, XmlConstants.Volume),
             };
 
             Assert.AreEqual(referenceObject, testObject);

@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
             return new ChangeVolumeBrick
             {
-                RelativePercentage = o.Volume == null ? null : formulaConverter.Convert(o.Volume, c)
+                RelativePercentage = o.VolumeXML == null ? null : formulaConverter.Convert(o.VolumeXML, c)
             };
         }
 
@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
             return new XmlChangeVolumeByBrick
             {
-                Volume = m.RelativePercentage == null ? null : formulaConverter.Convert(m.RelativePercentage, c)
+                VolumeXML = m.RelativePercentage == null ? null : formulaConverter.Convert(m.RelativePercentage, c)
             };
         }
     }
