@@ -17,7 +17,7 @@ namespace Catrobat.IDE.WindowsShared.Services
     {
         public List<string> SupportedFileTypes
         {
-            get { return new List<string> { ".mp3", ".wma", ".aac" }; }
+            get { return new List<string> { ".mp3", ".wma", ".aac", ".wav" }; }
         }
 
 

@@ -212,8 +212,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Program>>(this, 
-                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this,
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         private void RaisePropertiesChanges()

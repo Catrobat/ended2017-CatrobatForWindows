@@ -11,7 +11,6 @@ using System.Globalization;
 using System.Threading.Tasks;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 using Catrobat.Core.Resources.Localization;
-using Windows.Graphics.Display;
 
 namespace Catrobat.IDE.Core
 {
@@ -32,7 +31,6 @@ namespace Catrobat.IDE.Core
 
             //_app.InitializeInterfaces();
             //((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
-
             ServiceLocator.ViewModelLocator.RaiseAppPropertiesChanged();
 
             if (ViewModelBase.IsInDesignModeStatic)

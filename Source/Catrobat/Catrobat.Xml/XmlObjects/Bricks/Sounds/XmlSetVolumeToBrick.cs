@@ -1,43 +1,34 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
-    public partial class XmlSetVolumeToBrick : XmlBrick
+    public partial class XmlSetVolumeToBrick : XmlBrick, ISetVolumeToBrick
     {
-        public XmlFormula Volume { get; set; }
-
-        public XmlSetVolumeToBrick() {}
-
-        public XmlSetVolumeToBrick(XElement xElement) : base(xElement) {}
-
-        #region equals_and_gethashcode
-        public override bool Equals(System.Object obj)
+        #region NativeInterface
+        public IFormulaTree Volume
         {
-            XmlSetVolumeToBrick b = obj as XmlSetVolumeToBrick;
-            if ((object)b == null)
-                return false;
-
-            return this.Equals(b) && this.Volume.Equals(b.Volume);
+            get
+            {
+                return VolumeXML == null ? null : VolumeXML.FormulaTree;
+            }
+            set { }
         }
 
-        public bool Equals(XmlSetVolumeToBrick b)
-        {
-            return this.Equals((XmlBrick)b) && this.Volume.Equals(b.Volume);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode() ^ Volume.GetHashCode();
-        }
         #endregion
 
+        public XmlFormula VolumeXML { get; set; }
+
+        public XmlSetVolumeToBrick() { }
+
+        public XmlSetVolumeToBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {
             if (xRoot != null)
             {
-                Volume = new XmlFormula(xRoot, XmlConstants.Volume);
+                VolumeXML = new XmlFormula(xRoot, XmlConstants.Volume);
             }
         }
 
@@ -46,7 +37,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetVolumeToBrickType);
 
-            var xElement = Volume.CreateXml();
+            var xElement = VolumeXML.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Volume);
 
             var xFormulalist = new XElement(XmlConstants.FormulaList);
@@ -59,8 +50,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         public override void LoadReference()
         {
-            if (Volume != null)
-                Volume.LoadReference();
+            if (VolumeXML != null)
+                VolumeXML.LoadReference();
         }
     }
 }
