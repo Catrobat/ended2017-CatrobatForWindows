@@ -104,7 +104,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             CurrentProgram = message.Content;
 
-            this.CheckSensorSupportOfBricks();
+            if(CurrentProgram != null)
+                this.CheckSensorSupportOfBricks();
         }
 
         #region Sensors
