@@ -151,6 +151,7 @@
             />
             
             <HyperlinkButton 
+                x:Name="RenameButton"
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 Content="{Binding Resources.Editor_Rename, 

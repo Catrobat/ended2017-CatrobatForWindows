@@ -233,7 +233,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {  
-           CurrentProgram = message.Content;
+            CurrentProgram = message.Content;
         }
 
         public async override void NavigateTo()
@@ -250,9 +250,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     CurrentProgramHeader.ValidityState = ProgramState.Unknown;
                     RaisePropertiesChanges();
                 }
-
-                if (CurrentProgram != null)
-                    await CurrentProgram.Save();
 
                 var result = await ServiceLocator.ProgramValidationService.CheckProgram(
                     Path.Combine(StorageConstants.ProgramsPath, CurrentProgramHeader.ProjectName));
@@ -287,6 +284,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     });
                 }
             }
+
             if (_performedExport)
             {
                 await ServiceLocator.ProgramExportService.CleanUpExport();
