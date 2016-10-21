@@ -11,46 +11,67 @@
   <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid>
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition/>
-        <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition/>
       </Grid.RowDefinitions>
 
-      <Grid Margin="10 10 10 0">
-        <TextBlock Text="{Binding CurrentProgram.Name}" 
+            <Grid Margin="10 10 10 0">
+                <TextBlock Text="{Binding CurrentProgram.Name}" 
                    Style="{ThemeResource TextTitleNormalStyle}">
-        </TextBlock>
-      </Grid>
-        <!-- original <catrobatListView:CatrobatListView x:Name="ListViewSprites"
-        Grid.Row="1"
-        ItemsSource="{Binding CurrentProgram.Sprites}"
-        SelectedItems="{Binding SelectedSprites}"                                        
-        ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
-        ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
-        HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
-        ItemWidthPortrait="370" ItemWidthLandscape="450"
-            />-->
+                </TextBlock>
+            </Grid>
+        
+            <Grid Margin="30 10 10 0" Grid.Row="1">
+                <TextBlock Text="Background" 
+                   Style="{ThemeResource TextTitleNormalStyle}">
+                </TextBlock>
+            </Grid>
+            
+        <Rectangle x:Name="BackgroundLine" Margin="0 0 60 0"  Grid.Row="2" Fill="Black" Height="1" />
+            
+        <catrobatListView:CatrobatListView x:Name="ListViewBackground"
+                Grid.Row="3"
+                ItemsSource="{Binding CurrentProgram.Background}"
+                SelectedItems="{Binding SelectedSprites}"                                        
+                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+                ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
+                HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
+                ItemWidthPortrait="0" ItemWidthLandscape="0"
+            />
+            <Grid Margin="30 10 10 0" Grid.Row="4">
+                <TextBlock Text="Objects" 
+                   Style="{ThemeResource TextTitleNormalStyle}">
+                </TextBlock>
+            </Grid>
+
+            <Rectangle x:Name="SpritesLine" Margin="0 0 60 0" Grid.Row="5" Fill="Black" Height="1" />
+
             <catrobatListView:CatrobatListView x:Name="ListViewSprites"
-        Grid.Row="1"
-        ItemsSource="{Binding CurrentProgram.Sprites}"
-        SelectedItems="{Binding SelectedSprites}"                                        
-        ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
-        ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
-        HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
-        ItemWidthPortrait="0" ItemWidthLandscape="0"
+                Grid.Row="6"
+                ItemsSource="{Binding CurrentProgram.Sprites}"
+                SelectedItems="{Binding SelectedSprites}"                                        
+                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+                ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
+                HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
+                ItemWidthPortrait="0" ItemWidthLandscape="0"
             />
 
-            <TextBlock Grid.Row="1"
-        Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
-        Visibility="{Binding CurrentProgram.Sprites.Count, 
-        Converter={StaticResource NativeIntZeroVisibilityConverter}}"
-        Style="{ThemeResource TextNormalStyle}"
-        TextWrapping="Wrap"
-        TextAlignment="Center"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="6"
+                Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
+                Visibility="{Binding CurrentProgram.Sprites.Count, 
+                Converter={StaticResource NativeIntZeroVisibilityConverter}}"
+                Style="{ThemeResource TextNormalStyle}"
+                TextWrapping="Wrap"
+                TextAlignment="Center"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center" /> 
 
-    </Grid>
+        </Grid>
   </Grid>
   <Page.BottomAppBar>
     <controls:MultiModeEditorCommandBar RequestedTheme="Dark"

@@ -24,6 +24,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         public XmlSetVolumeToBrick(XElement xElement) : base(xElement) { }
 
+        #region equals_and_gethashcode
+        public override bool Equals(System.Object obj)
+        {
+            XmlSetVolumeToBrick b = obj as XmlSetVolumeToBrick;
+            if ((object)b == null)
+                return false;
+
+            return this.Equals(b) && this.VolumeXML.Equals(b.VolumeXML);
+        }
+
+        public bool Equals(XmlSetVolumeToBrick b)
+        {
+            return this.Equals((XmlBrick)b) && this.VolumeXML.Equals(b.VolumeXML);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ VolumeXML.GetHashCode();
+        }
+        #endregion
+
         internal override void LoadFromXml(XElement xRoot)
         {
             if (xRoot != null)
