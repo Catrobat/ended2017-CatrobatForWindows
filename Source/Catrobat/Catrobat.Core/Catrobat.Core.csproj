@@ -208,6 +208,8 @@
     <Compile Include="Models\IBrick.cs" />
     <Compile Include="Models\ITestEquatable.cs" />
     <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\OnlinePrograms\Category.cs" />
+    <Compile Include="Models\OnlinePrograms\Program.cs" />
     <Compile Include="Models\ProjectTemplateEntry.cs" />
     <Compile Include="Models\UploadHeader.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />
@@ -351,6 +353,9 @@
     <Compile Include="ViewModels\Main\AddNewProgramViewModel.cs" />
     <Compile Include="ViewModels\Main\InformationViewModel.cs" />
     <Compile Include="ViewModels\Main\MainViewModel.cs" />
+    <Compile Include="ViewModels\Main\OnlinePrograms\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Main\OnlinePrograms\ProgramsViewModel.cs" />
+    <Compile Include="ViewModels\Main\OnlinePrograms\ProgramViewModel.cs" />
     <Compile Include="ViewModels\Main\PlayerViewModel.cs" />
     <Compile Include="ViewModels\Main\ProgramDetailViewModel.cs" />
     <Compile Include="ViewModels\Main\ProgramExportViewModel.cs" />

@@ -8,6 +8,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
     {
         private string _screenshotBig;
         private string _screenshotSmall;
+        private string _featuredImage;
         private string _description;
 
         public string ProjectId { get; set; }
@@ -34,6 +35,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             {
                 _screenshotSmall = ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS") + value;
             } 
+        }
+        public string FeaturedImage
+        {
+          get
+          {
+            return _featuredImage;
+          }
+          set
+          {
+            _featuredImage = ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS") + value;
+          }
         }
         public string Author { get; set; }
         public string Description 

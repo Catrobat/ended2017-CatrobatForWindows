@@ -1,0 +1,39 @@
+﻿<UserControl
+  x:Class="Catrobat.Views.Main.OnlinePrograms.ProgramView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:Catrobat.Views.Main.OnlinePrograms"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:foundation="using:Windows.Foundation"
+  mc:Ignorable="d"
+  d:DesignHeight="300"
+  d:DesignWidth="300"
+  Margin="5">
+  <Button 
+    Command="{Binding ShowFullCommand}"           
+    HorizontalAlignment="Stretch"
+    MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
+    MinHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+    VerticalAlignment="Stretch">
+    <Button.Template>
+      <ControlTemplate>
+        <ContentPresenter/>
+      </ControlTemplate>
+    </Button.Template>
+    <Grid>
+      <Image Source="{Binding ImageSource}"/>
+      <Grid 
+        Background="{ThemeResource AppBarBackgroundBrush}" 
+        VerticalAlignment="Bottom"
+        Height="Auto">
+        <TextBlock
+          Foreground="White"
+          FontSize="16"
+          HorizontalAlignment="Center"
+          Text="{Binding Title}"       
+          TextTrimming="WordEllipsis"/>
+      </Grid>
+    </Grid>
+  </Button>
+</UserControl>

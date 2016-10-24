@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="API_BASE_ADDRESS" xml:space="preserve">
-    <value>https://catroid-test.catrob.at/api/</value>
-    <comment>testing: https://catroid-test.catrob.at/api/ release: https://pocketcode.org/api/</comment>
+    <value>https://share.catrob.at/pocketcode/api/</value>
+    <comment>testing: https://catroid-test.catrob.at/api/ release: https://pocketcode.org/api/actual value is working now</comment>
   </data>
   <data name="API_CHECK_TOKEN" xml:space="preserve">
     <value>checkToken/check.json</value>
@@ -172,14 +172,23 @@
   <data name="API_PARAM_USERNAME" xml:space="preserve">
     <value>username</value>
   </data>
+  <data name="API_FEATURED_PROJECTS" xml:space="preserve">
+    <value>projects/featured.json?limit={0}&amp;offset={1}</value>
+  </data>
   <data name="API_RECENT_PROJECTS" xml:space="preserve">
     <value>projects/recent.json?limit={0}&amp;offset={1}</value>
+  </data>
+  <data name="API_MOSTDOWNLOADED_PROJECTS" xml:space="preserve">
+    <value>projects/mostDownloaded.json?limit={0}&amp;offset={1}</value>
+  </data>
+  <data name="API_MOSTVIEWED_PROJECTS" xml:space="preserve">
+    <value>projects/mostViewed.json?limit={0}&amp;offset={1}</value>
   </data>
   <data name="API_REQUEST_LIMIT" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="API_SEARCH_PROJECTS" xml:space="preserve">
-    <value>projects/search.json?query={0}&amp;limit={1}&amp;offset={2}</value>
+    <value>projects/search.json?q={0}&amp;limit={1}&amp;offset={2}</value>
   </data>
   <data name="API_UPLOAD" xml:space="preserve">
     <value>upload/upload.json</value>

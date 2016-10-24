@@ -225,6 +225,27 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\CategoryView.xaml.cs">
+      <DependentUpon>CategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\FeaturedProgramsView.xaml.cs">
+      <DependentUpon>FeaturedProgramsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\FeaturedProgramView.xaml.cs">
+      <DependentUpon>FeaturedProgramView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\OnlineProgramsMainView.xaml.cs">
+      <DependentUpon>OnlineProgramsMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\OnlineProgramsView.xaml.cs">
+      <DependentUpon>OnlineProgramsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\ProgramsView.xaml.cs">
+      <DependentUpon>ProgramsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\ProgramView.xaml.cs">
+      <DependentUpon>ProgramView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\PlayerView.xaml.cs">
       <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
@@ -682,6 +703,34 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\CategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\FeaturedProgramsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\FeaturedProgramView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\OnlineProgramsMainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\OnlineProgramsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\ProgramsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\ProgramView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

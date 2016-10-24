@@ -1,0 +1,63 @@
+﻿<UserControl
+  x:Class="Catrobat.Views.Main.OnlinePrograms.CategoryView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:Catrobat.Views.Main.OnlinePrograms"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:controls="using:WinRTXamlToolkit.Controls"
+  mc:Ignorable="d"
+  d:DesignHeight="300"
+  d:DesignWidth="400"
+  Margin="0,5">
+  <UserControl.Resources>
+    <DataTemplate x:Key="ProgramTemplate">
+      <local:ProgramView/>
+    </DataTemplate>
+    <ControlTemplate 
+      x:Key="RoundButtonTemplate"
+      TargetType="Button">
+      <Border 
+        Background="White"
+        BorderBrush="Black"
+        BorderThickness="2.5"
+        CornerRadius="20"
+        Height="40"
+        Width="40">
+        <ContentPresenter 
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"/>
+      </Border>
+    </ControlTemplate>
+    <Style x:Key="RoundButtonStyle" TargetType="Button">
+      <Setter Property="Margin" Value="5"/>
+      <Setter Property="MinHeight" Value="0"/>
+      <Setter Property="MinWidth" Value="0"/>
+      <Setter Property="Template" Value="{StaticResource RoundButtonTemplate}"/>
+    </Style>
+  </UserControl.Resources>
+  <Grid>
+    <StackPanel>
+      <TextBlock 
+        FontSize="25"
+        Foreground="Gray"
+        Text="{Binding DisplayName}"
+        TextAlignment="Center"/>
+      <ListView   
+        ItemsSource="{Binding Programs}"
+        ItemTemplate="{StaticResource ProgramTemplate}"
+        Margin="-5">
+        <ListView.ItemsPanel>
+          <ItemsPanelTemplate>
+            <controls:UniformGrid Columns="2"/>
+          </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+      </ListView> 
+      <Button 
+        Command="{Binding ShowMoreCommand}"
+        Content="..."
+        HorizontalAlignment="Center"
+        Style="{StaticResource RoundButtonStyle}"/>
+    </StackPanel>
+  </Grid>
+</UserControl>
