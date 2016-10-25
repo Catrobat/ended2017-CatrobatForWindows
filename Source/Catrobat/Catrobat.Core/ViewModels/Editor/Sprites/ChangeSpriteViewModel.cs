@@ -58,18 +58,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public Program CurrentProgram
-        {
-            get { return _currentProgram; }
-            set
-            {
-                _currentProgram = value;
-
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    RaisePropertyChanged(() => CurrentProgram));
-            }
-        }
-
         #endregion
 
         #region Commands
