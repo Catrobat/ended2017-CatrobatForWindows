@@ -1386,4 +1386,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_MessageBoxSensorsMissing" xml:space="preserve">
     <value>Sensors Missing</value>
   </data>
+  <data name="Editor_MessageBoxBackgroundDeleteText" xml:space="preserve">
+    <value>Delete {0} selected {1}? (Background can't be deleted)</value>
+  </data>
 </root>
