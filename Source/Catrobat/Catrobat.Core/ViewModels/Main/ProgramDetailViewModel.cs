@@ -209,6 +209,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Program>>(this,
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         private void RaisePropertiesChanges()
@@ -224,6 +227,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             PlayCurrentProgramCommand.RaiseCanExecuteChanged();
             ShareLocalProgramCommand.RaiseCanExecuteChanged();
             RenameProgramCommand.RaiseCanExecuteChanged();
+        }
+
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
+        {  
+            CurrentProgram = message.Content;
         }
 
         public async override void NavigateTo()
@@ -274,6 +282,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     });
                 }
             }
+
             if (_performedExport)
             {
                 await ServiceLocator.ProgramExportService.CleanUpExport();

@@ -46,6 +46,13 @@ namespace Catrobat.IDE.Core.Models
             set { Set(ref _sprites, value); }
         }
 
+        private ObservableCollection<Sprite> _background = new ObservableCollection<Sprite>();
+        public ObservableCollection<Sprite> Background
+        {
+            get { return _background; }
+            set { Set(ref _background, value); }
+        }
+
         private ObservableCollection<GlobalVariable> _globalVariables = new ObservableCollection<GlobalVariable>();
         public ObservableCollection<GlobalVariable> GlobalVariables
         {
@@ -158,7 +165,13 @@ namespace Catrobat.IDE.Core.Models
                 path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
 
             var programConverter = new ProgramConverter();
-            var xmlProgram= programConverter.Convert(this);
+            if (Background != null && Background.Count != 0)
+            {
+                Sprites.Insert(0, Background[0]);
+                Background.RemoveAt(0);
+            }
+            
+            var xmlProgram = programConverter.Convert(this);
 
             var xmlString = xmlProgram.ToXmlString();
 

@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using System.Collections.Generic;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -134,6 +135,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (CreateEmptyProgram)
             {
                 CurrentProgram = await ServiceLocator.ContextService.CreateEmptyProgram(uniqueName);
+                string backgroundName = "Background";
+                var sprite = new Sprite { Name = backgroundName };
+                CurrentProgram.Sprites.Add(sprite);
             }
             else if (CreateTemplateProgram)
             {

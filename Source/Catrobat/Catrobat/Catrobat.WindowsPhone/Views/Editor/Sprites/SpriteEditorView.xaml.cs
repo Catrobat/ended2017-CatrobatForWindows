@@ -92,7 +92,15 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
+        { 
+
+            if (_viewModel.SelectedSprite == _viewModel.CurrentProgram.Background[0])
+            {
+                HyperlinkButton renameButton = this.FindName("RenameButton") as HyperlinkButton;
+                renameButton.Visibility = Visibility.Collapsed;
+            }
+            
+
             var playSoundButtonGroup = PlayPauseButtonGroupSounds;
             if (playSoundButtonGroup != null) playSoundButtonGroup.Stop();
 

@@ -7,6 +7,7 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.CatrobatListViewMisc;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView
