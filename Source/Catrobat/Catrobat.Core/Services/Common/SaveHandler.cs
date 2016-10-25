@@ -49,7 +49,7 @@ namespace Catrobat.Core.Services.Common
             while(true)
             {
                 // be productive
-                Debug.WriteLine("WOURKIN ON MAH SAVE JOBS");
+                Debug.WriteLine("WORKING ON SAVE JOBS");
 
                 while(_saveJobQueue != null && _saveJobQueue.Count > 0)
                 {
