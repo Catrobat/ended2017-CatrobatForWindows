@@ -165,6 +165,7 @@ namespace Catrobat.IDE.Core.Models
                 path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
 
             var programConverter = new ProgramConverter();
+
             if (Background != null && Background.Count != 0)
             {
                 Sprites.Insert(0, Background[0]);
