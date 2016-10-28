@@ -1,11 +1,22 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlGoNStepsBackBrick : XmlBrick
+    public partial class XmlGoNStepsBackBrick : XmlBrick, IGoNStepsBackBrick
     {
-        public XmlFormula Steps { get; set; }
+        #region NativeInterface
+        public IFormulaTree Steps
+        {
+            get
+            {
+                return StepsXML == null ? null: StepsXML.FormulaTree;
+            }
+            set { }
+        }
+        #endregion
+        public XmlFormula StepsXML { get; set; }
 
         public override bool Equals(System.Object obj)
         {
@@ -13,17 +24,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             if ((object)b == null)
                 return false;
 
-            return this.Equals(b) && this.Steps.Equals(b.Steps);
+            return this.Equals(b) && this.StepsXML.Equals(b.StepsXML);
         }
 
         public bool Equals(XmlGoNStepsBackBrick b)
         {
-            return this.Equals((XmlBrick)b) && this.Steps.Equals(b.Steps);
+            return this.Equals((XmlBrick)b) && this.StepsXML.Equals(b.StepsXML);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode() ^ Steps.GetHashCode();
+            return base.GetHashCode() ^ StepsXML.GetHashCode();
         }
 
         public XmlGoNStepsBackBrick()
@@ -38,7 +49,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                Steps = new XmlFormula(xRoot, XmlConstants.Steps);
+                StepsXML = new XmlFormula(xRoot, XmlConstants.Steps);
             }
         }
 
@@ -47,7 +58,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlGoNStepsBackBrickType);
             
-            var xElement = Steps.CreateXml();
+            var xElement = StepsXML.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Steps);
 
             var xFormulalist = new XElement(XmlConstants.FormulaList);
@@ -60,8 +71,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         public override void LoadReference()
         {
-            if (Steps != null)
-                Steps.LoadReference();
+            if (StepsXML != null)
+                StepsXML.LoadReference();
         }
     }
 }
