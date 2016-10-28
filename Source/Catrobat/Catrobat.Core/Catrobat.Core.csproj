@@ -233,6 +233,7 @@
     <Compile Include="Services\Common\ProgramGeneratorWhackAMole.cs" />
     <Compile Include="Services\Common\ProgramImportService.cs" />
     <Compile Include="Services\Common\ProgramValidationService.cs" />
+    <Compile Include="Services\Common\SaveHandler.cs" />
     <Compile Include="Services\Common\TraceService.cs" />
     <Compile Include="Services\Common\ZipService.cs" />
     <Compile Include="Services\IActionTemplateService.cs" />

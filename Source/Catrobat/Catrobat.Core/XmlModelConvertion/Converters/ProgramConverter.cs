@@ -80,7 +80,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             var globalVariableConverter = new VariableConverter<GlobalVariable>();
             var uploadHeaderConverter = new UploadHeaderConverter();
 
-            var localVariables = m.Sprites.ToReadOnlyDictionary(
+            var localVariables = m.SpritesMerged.ToReadOnlyDictionary(
                 keySelector: sprite => sprite,
                 elementSelector: sprite => sprite.LocalVariables.ToReadOnlyDictionary(
                     keySelector: variable => variable,
@@ -89,7 +89,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 keySelector: variable => variable,
                 elementSelector: variable => (XmlUserVariable)globalVariableConverter.Convert(variable, c));
             var contextBase = new XmlModelConvertBackContextBase(m, globalVariables);
-            var sprites = m.Sprites.ToReadOnlyDictionary(
+            var sprites = m.SpritesMerged.ToReadOnlyDictionary(
                 keySelector: sprite => sprite,
                 elementSelector: sprite =>
                 {
@@ -138,7 +138,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                     },
                     ObjectVariableList = new XmlObjectVariableList
                     {
-                        ObjectVariableEntries = m.Sprites.Select(sprite => new XmlObjectVariableEntry
+                        ObjectVariableEntries = m.SpritesMerged.Select(sprite => new XmlObjectVariableEntry
                         {
                             Sprite = sprites[sprite],
                             VariableList = new XmlUserVariableList
@@ -152,7 +152,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 },
                 SpriteList = new XmlSpriteList
                 {
-                    Sprites = m.Sprites.Select(sprite => sprites[sprite]).ToList()
+                    Sprites = m.SpritesMerged.Select(sprite => sprites[sprite]).ToList()
                 }
             };
             ServiceLocator.ContextService.UpdateProgramHeader(result);

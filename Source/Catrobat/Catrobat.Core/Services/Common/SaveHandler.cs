@@ -48,9 +48,6 @@ namespace Catrobat.Core.Services.Common
         {
             while(true)
             {
-                // be productive
-                Debug.WriteLine("WORKING ON SAVE JOBS");
-
                 while(_saveJobQueue != null && _saveJobQueue.Count > 0)
                 {
                     SaveJob actualJob;
@@ -63,11 +60,8 @@ namespace Catrobat.Core.Services.Common
                     await actualJob.ProgramToSave.Save();
                 }
 
-                // sleep
-                Debug.WriteLine("SLEEPING");
                 waitHandle.WaitOne();
                 waitHandle.Reset();
-                Debug.WriteLine("GOING TO WORK AGAIN");
             }
         }
         #endregion

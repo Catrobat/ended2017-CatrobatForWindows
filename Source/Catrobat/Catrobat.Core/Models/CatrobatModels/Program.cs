@@ -53,6 +53,13 @@ namespace Catrobat.IDE.Core.Models
             set { Set(ref _background, value); }
         }
 
+        private ObservableCollection<Sprite> _spritesMerged = new ObservableCollection<Sprite>();
+        public ObservableCollection<Sprite> SpritesMerged
+        {
+            get { return _spritesMerged; }
+            set { Set(ref _spritesMerged, value); }
+        }
+
         private ObservableCollection<GlobalVariable> _globalVariables = new ObservableCollection<GlobalVariable>();
         public ObservableCollection<GlobalVariable> GlobalVariables
         {
@@ -159,6 +166,21 @@ namespace Catrobat.IDE.Core.Models
             Catrobat.Core.Services.Common.SaveHandler.addSaveJob(this);
         }
 
+        public void MergeSpriteCollection()
+        {
+            SpritesMerged.Clear();
+
+            for (int count = 0; count < Sprites.Count; count++)
+            {
+                SpritesMerged.Add(Sprites[count]);
+            }
+
+            if (Background != null && Background.Count != 0)
+            {
+                SpritesMerged.Insert(0, Background[0]);
+            }
+        }
+
         public async Task Save(string path = null)
         {
             if (path == null)
@@ -166,12 +188,8 @@ namespace Catrobat.IDE.Core.Models
 
             var programConverter = new ProgramConverter();
 
-            if (Background != null && Background.Count != 0)
-            {
-                Sprites.Insert(0, Background[0]);
-                Background.RemoveAt(0);
-            }
-            
+            MergeSpriteCollection();
+
             var xmlProgram = programConverter.Convert(this);
 
             var xmlString = xmlProgram.ToXmlString();
