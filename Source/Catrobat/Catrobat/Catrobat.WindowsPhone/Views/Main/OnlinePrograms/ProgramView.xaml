@@ -22,7 +22,7 @@
       </ControlTemplate>
     </Button.Template>
     <Grid>
-      <Image Source="{Binding ImageSource}"/>
+      <Image Source="{Binding Program.Thumbnail}"/>
       <Grid 
         Background="{ThemeResource AppBarBackgroundBrush}" 
         VerticalAlignment="Bottom"
@@ -31,7 +31,7 @@
           Foreground="White"
           FontSize="16"
           HorizontalAlignment="Center"
-          Text="{Binding Title}"       
+          Text="{Binding Program.Name}"       
           TextTrimming="WordEllipsis"/>
       </Grid>
     </Grid>

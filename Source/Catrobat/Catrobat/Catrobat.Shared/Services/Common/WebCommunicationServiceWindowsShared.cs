@@ -85,9 +85,45 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             }
         }
 
+      public async Task<List<OnlineProgramHeader>> LoadOnlinePrograms(
+        string category, 
+        int offset, 
+        int count, 
+        CancellationToken token,
+        string additionalSearchText = null)
+      {
+          var httpClient = new HttpClient
+          {
+            BaseAddress = new Uri(ApplicationResourcesHelper.Get("API_BASE_ADDRESS"))
+          };
 
-        //old simple portable downloader
-        public async Task<Stream> DownloadAsync(string downloadUrl, string programName, CancellationToken taskCancellationToken)
+          string requestUri;
+
+          if (additionalSearchText != null)
+          {
+            var encodedSearchText = WebUtility.UrlEncode(additionalSearchText);
+            requestUri = string.Format(ApplicationResourcesHelper.Get(category), encodedSearchText,
+              count, offset);
+          }
+          else
+          {
+            requestUri = string.Format(ApplicationResourcesHelper.Get(category),
+              count, offset);
+          }
+
+          var httpResponse = await httpClient.GetAsync(requestUri, token);
+
+          httpResponse.EnsureSuccessStatusCode();
+
+          var jsonResult = await httpResponse.Content.ReadAsStringAsync();
+          var featuredPrograms = await Task.Run(() 
+            => JsonConvert.DeserializeObject<OnlineProgramOverview>(jsonResult));
+
+          return featuredPrograms.CatrobatProjects;
+      }
+
+      //old simple portable downloader
+    public async Task<Stream> DownloadAsync(string downloadUrl, string programName, CancellationToken taskCancellationToken)
         {
             using (var httpClient = new HttpClient())
             {

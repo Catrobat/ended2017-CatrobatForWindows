@@ -59,7 +59,7 @@
           <TextBox
             Grid.Column="0"
             PlaceholderText="search"
-            Text="{Binding Path=SearchText, Mode=TwoWay}"/>
+            Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
           <Button          
             Command="{Binding SearchCommand}"
             Content="S"
@@ -80,7 +80,7 @@
       </StackPanel>
       <Grid Grid.Row="1"
         Visibility="{Binding 
-              Path=IsInternetAvailable, 
+              Path=InternetAvailable, 
               Converter={StaticResource BoolVisibilityConverter}}">
         <ListView   
           ItemsSource="{Binding SearchResults}"
@@ -106,7 +106,7 @@
       </Grid>
       <Grid Grid.Row="1"
         Visibility="{Binding 
-              Path=IsInternetAvailable, 
+              Path=InternetAvailable, 
               Converter={StaticResource BoolVisibilityNegativeConverter}}">
         <TextBlock 
         FontSize="25"

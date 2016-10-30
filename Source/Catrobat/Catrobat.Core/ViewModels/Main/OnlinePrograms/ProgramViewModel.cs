@@ -14,56 +14,40 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
 {
   public class ProgramViewModel : ObservableObject
   {
-    private Program Program { get; set; }
+    #region private fields
 
-    public string Title
-    {
-      get { return Program.Title; }
-      set
-      {
-        if (Program.Title == value)
-        {
-          return;
-        }
 
-        Program.Title = value;
-        RaisePropertyChanged(nameof(Title));
-      }
-    }
 
-    public Uri ImageSource
-    {
-      get { return Program.ImageSource; }
-      set
-      {
-        if (Program.ImageSource == value)
-        {
-          return;
-        }
+    #endregion
 
-        Program.ImageSource = value;
-        RaisePropertyChanged(nameof(ImageSource));
-      }
-    }
+    #region public properties
+
+    public Program Program { get; }
+
+    #endregion
+
+    #region commands
+
+    public ICommand ShowFullCommand => new RelayCommand(ShowFull);
+
+    #endregion
+
+    #region construction
 
     public ProgramViewModel(Program program)
     {
       Program = program;
     }
 
-    public ICommand ShowFullCommand => new RelayCommand(ShowFull, CanShowFull);
+    #endregion
 
-    private bool CanShowFull()
-    {
-      return true;
-    }
+    #region private helpers
 
     private void ShowFull()
     {
-      //open new windows with clicked program infos in it
-
-
-      Title = "Clicked";
+      // TODO: open new window with clicked program infos in it
     }
+
+    #endregion
   }
 }

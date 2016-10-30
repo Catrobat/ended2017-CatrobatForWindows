@@ -20,6 +20,6 @@
         <ContentPresenter/>
       </ControlTemplate>
     </Button.Template>
-    <Image Source="{Binding ImageSource}"/>
+    <Image Source="{Binding Program.FeaturedImage}"/>
   </Button>
 </UserControl>

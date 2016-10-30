@@ -9,7 +9,8 @@
   mc:Ignorable="d"
   d:DesignHeight="300"
   d:DesignWidth="400"
-  Margin="0,5">
+  Margin="0,5"
+  Width="Auto">
   <UserControl.Resources>
     <DataTemplate x:Key="ProgramTemplate">
       <local:ProgramView/>
@@ -41,8 +42,10 @@
       <TextBlock 
         FontSize="25"
         Foreground="Gray"
-        Text="{Binding DisplayName}"
-        TextAlignment="Center"/>
+        Text="{Binding Category.DisplayName}"
+        TextAlignment="Center"
+        TextWrapping="WrapWholeWords"
+        Width="Auto"/>
       <ListView   
         ItemsSource="{Binding Programs}"
         ItemTemplate="{StaticResource ProgramTemplate}"

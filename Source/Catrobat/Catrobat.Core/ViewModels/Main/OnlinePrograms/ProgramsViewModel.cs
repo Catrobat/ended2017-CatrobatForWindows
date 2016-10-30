@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices.ComTypes;
@@ -12,62 +13,74 @@ using Catrobat.Core.Resources;
 using Catrobat.IDE.Core.CatrobatObjects;
 using GalaSoft.MvvmLight;
 using System.Net.NetworkInformation;
+using System.Threading;
 using Windows.Networking.Connectivity;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
 {
   public class ProgramsViewModel : ObservableObject
   {
+
+    #region private fields
+
     //always have as many CategoryOnlineNames as CategorySearchKeyWords
     private static readonly string[] CategoryOnlineNames = { "newest", "most downloaded", "most viewed" };
     private static readonly string[] CategorySearchKeyWords = { "API_RECENT_PROJECTS", "API_MOSTDOWNLOADED_PROJECTS", "API_MOSTVIEWED_PROJECTS" };
 
-    private bool _inSearchMode;
-    private bool _isInternetAvailable;
+    private const int InitialProgramOffset = 0;
+    private const int InitialNumberOfFeaturedPrograms = 10;
+    private const int InitialNumberOfSearchedPrograms = 10;
 
-    private string _searchText;
+    private bool inSearchMode_;
+    private string searchText_;
+    private bool internetAvailable_;
+
+    #endregion
+
+    #region public properties
 
     public bool InSearchMode
     {
-      get { return _inSearchMode; }
+      get { return inSearchMode_; }
       set
       {
-        if (_inSearchMode == value)
+        if (inSearchMode_ == value)
         {
           return;
         }
 
-        _inSearchMode = value;
+        inSearchMode_ = value;
         RaisePropertyChanged(nameof(InSearchMode));
       }
     }
 
-    public bool IsInternetAvailable
+    public bool InternetAvailable
     {
-      get { return _isInternetAvailable; }
+      get { return internetAvailable_; }
       set
       {
-        if (_isInternetAvailable == value)
+        if (internetAvailable_ == value)
         {
           return;
         }
 
-        _isInternetAvailable = value;
-        RaisePropertyChanged(nameof(IsInternetAvailable));
+        internetAvailable_ = value;
+        RaisePropertyChanged(nameof(InternetAvailable));
       }
     }
 
     public string SearchText
     {
-      get { return _searchText; }
+      get { return searchText_; }
       set
       {
-        if (_searchText == value)
+        if (searchText_ == value)
         {
           return;
         }
 
-        _searchText = value;
+        searchText_ = value;
         RaisePropertyChanged(nameof(SearchText));
       }
     }
@@ -78,117 +91,110 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
 
     public ObservableCollection<ProgramViewModel> SearchResults { get; set; }
 
+    #endregion
+
+    #region public helpers
+
+    public async Task<List<OnlineProgramHeader>> GetPrograms(int offset, int count, string category, CancellationToken cancellationToken, string additionalSearchText = null)
+    {
+      List<OnlineProgramHeader> header;
+
+      try
+      {
+        header = await ServiceLocator.WebCommunicationService.
+          LoadOnlinePrograms(category, offset, count,
+          cancellationToken, additionalSearchText);
+
+        InternetAvailable = true;
+      }
+      catch (Exception)
+      {
+        //There was probably no working internet connection
+        InternetAvailable = false;
+        header = new List<OnlineProgramHeader>();
+      }
+
+      return header;
+    }
+
+    #endregion
+
+    #region commands
+
     public ICommand SearchCommand => new RelayCommand(Search, CanSearch);
 
     public ICommand ExitSearchCommand => new RelayCommand(ExitSearch, CanExitSearch);
 
     public ICommand ReloadCommand => new RelayCommand(ReloadOnlinePrograms);
 
+    #endregion
+
+    #region construction
+
     public ProgramsViewModel()
     {
       InSearchMode = false;
       SearchText = "";
+      InternetAvailable = true;
+
       Categories = new ObservableCollection<CategoryViewModel>();
       FeaturedPrograms = new ObservableCollection<ProgramViewModel>();
+      SearchResults = new ObservableCollection<ProgramViewModel>();
 
-      for (int i = 0; i < CategoryOnlineNames.Length; ++i)
+      PropertyChanged += ProgramsViewModelPropertyChanged;
+
+      for (var i = 0; i < CategoryOnlineNames.Length; ++i)
       {
         Categories.Add(new CategoryViewModel(
-          new Category { DisplayName = CategoryOnlineNames[i], OnlineName = CategoryOnlineNames[i], SearchKeyWork = CategorySearchKeyWords[i] }, this));
-      }
-
-      LoadOnlinePrograms();
-
-      SearchResults = new ObservableCollection<ProgramViewModel>();
-    }
-
-    public static async Task<List<OnlineProgramHeader>> GetPrograms(int Offset, int Count, string CategorySearchKeyWords, string SearchText = null)
-    {
-      try
-      {
-        System.Threading.CancellationToken cToken = new System.Threading.CancellationToken();
-        HttpClient httpClient = new HttpClient();
-        httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("API_BASE_ADDRESS"));
-        HttpResponseMessage httpResponse = null;
-
-        if (SearchText != null)
-        {
-          var encodedSearchText = WebUtility.UrlEncode(SearchText);
-          httpResponse = await httpClient.GetAsync(
-                                  string.Format(ApplicationResourcesHelper.Get(CategorySearchKeyWords), encodedSearchText,
-                                  Count, Offset), cToken);
-        }
-        else
-        {
-          httpResponse = await httpClient.GetAsync(
-          string.Format(ApplicationResourcesHelper.Get(CategorySearchKeyWords),
-          Count, Offset), cToken);
-        }
-
-        httpResponse.EnsureSuccessStatusCode();
-
-        string jsonResult = await httpResponse.Content.ReadAsStringAsync();
-        var featuredPrograms = await Task.Run(() => Newtonsoft.Json.JsonConvert.DeserializeObject<OnlineProgramOverview>(jsonResult));
-
-        return featuredPrograms.CatrobatProjects;
-      }
-      catch (Exception)
-      {
-        //There was probably no working internet connection
-        return new List<OnlineProgramHeader>();
-      }
-      
-    }
-
-    private async void LoadOnlinePrograms()
-    {
-      if (FeaturedPrograms.Count == 0)
-      {
-        var featuredPrograms = await GetPrograms(0, 10, "API_FEATURED_PROJECTS");
-        IsInternetAvailable = featuredPrograms.Count != 0;
-
-        foreach (var project in featuredPrograms)
-        {
-          FeaturedPrograms.Add(new ProgramViewModel(
-            new Program
-            {
-              Title = project.ProjectName,
-              ImageSource = new Uri(project.FeaturedImage)
-            }));
-        }
-      }     
-
-      //Set 2 Progams for each Category
-      foreach (var category in Categories)
-      {
-        if (category.Programs.Count == 0)
-        {
-          var resultPrograms = await GetPrograms(0, 2, category.SearchKeyWord);
-          IsInternetAvailable = resultPrograms.Count != 0;
-
-          foreach (var project in resultPrograms)
+          new Category
           {
-            category.Programs.Add(
-              new ProgramViewModel(
-                new Program
-                {
-                  Title = project.ProjectName,
-                  ImageSource = new Uri(project.ScreenshotBig)
-                }));
-          }
-        }        
+            DisplayName = CategoryOnlineNames[i].ToUpper() + " PROGRAMS",
+            OnlineName = CategoryOnlineNames[i],
+            SearchKeyWord = CategorySearchKeyWords[i]
+          }, this));
+      }
+
+      LoadFeaturedPrograms();
+    }
+
+    private void ProgramsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+      if (e.PropertyName == nameof(SearchText))
+      {
+        // TODO: Add another state to show previous results while updating the search text
+        InSearchMode = false;
       }
     }
 
-    private void ReloadOnlinePrograms()
+    #endregion
+
+    #region private helpers
+
+    private async void LoadFeaturedPrograms()
     {
-      if (InSearchMode)
+      //TODO: Make use of the token?
+      var cancellationToken = new CancellationToken();
+
+      var featuredPrograms = await GetPrograms(InitialProgramOffset,
+        InitialNumberOfFeaturedPrograms, "API_FEATURED_PROJECTS",
+        cancellationToken);
+
+      foreach (var project in featuredPrograms)
       {
-        Search();
+        FeaturedPrograms.Add(
+          new ProgramViewModel(
+            new Program(project)));
       }
-      else
+    }
+
+    private void ResetPrograms()
+    {
+      FeaturedPrograms.Clear();
+      LoadFeaturedPrograms();
+
+      foreach (var categoryViewModel in Categories)
       {
-        LoadOnlinePrograms();
+        categoryViewModel.ResetPrograms();
       }
     }
 
@@ -204,18 +210,18 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
 
     private async void Search()
     {
-      var retrievedPrograms = await GetPrograms(0, 10, "API_SEARCH_PROJECTS", SearchText);
-      IsInternetAvailable = retrievedPrograms.Count != 0;
+      //TODO: Make use of the token
+      var cancellationToken = new CancellationToken();
 
-      foreach (var project in retrievedPrograms)
+      var retrievedPrograms = await GetPrograms(
+        InitialProgramOffset, InitialNumberOfSearchedPrograms, 
+        "API_SEARCH_PROJECTS", cancellationToken, SearchText);
+
+      foreach (var programHeader in retrievedPrograms)
       {
         SearchResults.Add(
-          new ProgramViewModel(
-            new Program
-            {
-              Title = project.ProjectName,
-              ImageSource = new Uri(project.ScreenshotBig)
-            }));
+            new ProgramViewModel(
+              new Program(programHeader)));
       }
 
       InSearchMode = true;
@@ -227,18 +233,34 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
       SearchText = "";
       InSearchMode = false;
 
-      bool ReloadPrograms = FeaturedPrograms.Count == 0;
+      //TODO: What is that doing? and why here? #ConfusedPatrik
+
+      var reloadPrograms = FeaturedPrograms.Count == 0;
 
       foreach (var category in Categories)
       {
         if (category.Programs.Count == 0)
-          ReloadPrograms = true;
+          reloadPrograms = true;
       }
 
-      if (ReloadPrograms)
+      if (reloadPrograms)
         ReloadOnlinePrograms();
       else
-        IsInternetAvailable = true;
+        InternetAvailable = true;
     }
+
+    private void ReloadOnlinePrograms()
+    {
+      if (InSearchMode)
+      {
+        Search();
+      }
+      else
+      {
+        ResetPrograms();
+      }
+    }
+
+    #endregion
   }
 }

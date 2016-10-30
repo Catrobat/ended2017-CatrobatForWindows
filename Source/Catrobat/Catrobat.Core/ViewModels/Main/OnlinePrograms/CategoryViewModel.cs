@@ -8,6 +8,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Threading;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.Core.Resources;
@@ -18,89 +19,66 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
 {
   public class CategoryViewModel : ObservableObject
   {
-    private Category Category { get; set; }
+    #region private 
 
-    private ProgramsViewModel _programsViewModel;
+    private readonly ProgramsViewModel programsViewModel_;
 
-    public string DisplayName
-    {
-      get { return Category.DisplayName; }
-      set
-      {
-        if (Category.DisplayName == value)
-        {
-          return;
-        }
+    #endregion
 
-        Category.DisplayName = value;
-        RaisePropertyChanged(nameof(DisplayName));
-      }
-    }
-
-    public string OnlineName
-    {
-      get { return Category.OnlineName; }
-      set
-      {
-        if (Category.OnlineName == value)
-        {
-          return;
-        }
-
-        Category.OnlineName = value;
-        RaisePropertyChanged(nameof(OnlineName));
-      }
-    }
-
-    public string SearchKeyWord
-    {
-      get { return Category.SearchKeyWork; }
-      set
-      {
-        if (Category.SearchKeyWork == value)
-        {
-          return;
-        }
-
-        Category.OnlineName = value;
-        RaisePropertyChanged(nameof(SearchKeyWord));
-      }
-    }
+    #region public properties
+    public Category Category { get; }
 
     public ObservableCollection<ProgramViewModel> Programs { get; set; }
 
-    public ICommand ShowMoreCommand => new RelayCommand(ShowMore, CanShowMore);
+    #endregion
+
+    #region public interfaces
+
+    public void ResetPrograms()
+    {
+      Programs.Clear();
+      ShowMore();
+    }
+
+    #endregion
+
+    #region commands
+
+    public ICommand ShowMoreCommand => new RelayCommand(ShowMore);
+
+    #endregion
+
+    #region construction
 
     public CategoryViewModel(Category category, ProgramsViewModel programsViewModel)
     {
       Category = category;
-      _programsViewModel = programsViewModel;
+      programsViewModel_ = programsViewModel;
+
       Programs = new ObservableCollection<ProgramViewModel>();
+      ShowMore();
     }
 
-    private bool CanShowMore()
-    {
-      //just for testing
-      {
-        return true;
-      }
-    }
+    #endregion
+
+    #region private helpers
 
     private async void ShowMore()
     {
-      var retrievedPrograms = await ProgramsViewModel.GetPrograms(Programs.Count, 2, SearchKeyWord);
-      _programsViewModel.IsInternetAvailable = retrievedPrograms.Count != 0;   
+      //TODO: Make use of the token?
+      var cancellationToken = new CancellationToken();
+
+      var retrievedPrograms = await programsViewModel_.GetPrograms(
+        Programs.Count, 2, Category.SearchKeyWord, cancellationToken);
 
       foreach (var project in retrievedPrograms)
       {
         Programs.Add(
            new ProgramViewModel(
-            new Program
-            {
-              Title = project.ProjectName,
-              ImageSource = new Uri(project.ScreenshotBig)
-            }));
+              new Program(project)));
       }
     }
+
+    #endregion
   }
 }

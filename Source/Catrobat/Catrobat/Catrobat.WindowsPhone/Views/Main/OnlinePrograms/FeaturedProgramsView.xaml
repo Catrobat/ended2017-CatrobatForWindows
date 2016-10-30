@@ -20,8 +20,9 @@
       <TextBlock 
         FontSize="25"
         Foreground="Gray"
-        Text="featured"
-        TextAlignment="Center"/>
+        Text="FEATURED"
+        TextAlignment="Center"
+        Width="Auto"/>
       <ListView     
             ItemsSource="{Binding}"
             ItemTemplate="{StaticResource ProgramsTemplate}"

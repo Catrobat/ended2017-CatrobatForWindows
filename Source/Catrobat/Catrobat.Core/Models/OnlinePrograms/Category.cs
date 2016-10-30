@@ -12,6 +12,6 @@ namespace Catrobat.Core.Models.OnlinePrograms
 
         public string OnlineName { get; set; }
 
-        public string SearchKeyWork { get; set; }
+        public string SearchKeyWord { get; set; }
     }
 }
