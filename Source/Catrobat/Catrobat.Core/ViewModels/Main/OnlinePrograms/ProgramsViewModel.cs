@@ -17,11 +17,10 @@ using System.Threading;
 using Windows.Networking.Connectivity;
 using Catrobat.IDE.Core.Services;
 
-namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
+namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 {
   public class ProgramsViewModel : ObservableObject
   {
-
     #region private fields
 
     //always have as many CategoryOnlineNames as CategorySearchKeyWords
@@ -85,11 +84,11 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
       }
     }
 
-    public ObservableCollection<ProgramViewModel> FeaturedPrograms { get; private set; }
+    public ObservableCollection<SimpleProgramViewModel> FeaturedPrograms { get; private set; }
 
     public ObservableCollection<CategoryViewModel> Categories { get; set; }
 
-    public ObservableCollection<ProgramViewModel> SearchResults { get; set; }
+    public ObservableCollection<SimpleProgramViewModel> SearchResults { get; set; }
 
     #endregion
 
@@ -137,24 +136,16 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
       SearchText = "";
       InternetAvailable = true;
 
-      Categories = new ObservableCollection<CategoryViewModel>();
-      FeaturedPrograms = new ObservableCollection<ProgramViewModel>();
-      SearchResults = new ObservableCollection<ProgramViewModel>();
+      FeaturedPrograms = new ObservableCollection<SimpleProgramViewModel>();
+      Categories = new ObservableCollection<CategoryViewModel>();      
+      SearchResults = new ObservableCollection<SimpleProgramViewModel>();
 
       PropertyChanged += ProgramsViewModelPropertyChanged;
 
-      for (var i = 0; i < CategoryOnlineNames.Length; ++i)
-      {
-        Categories.Add(new CategoryViewModel(
-          new Category
-          {
-            DisplayName = CategoryOnlineNames[i].ToUpper() + " PROGRAMS",
-            OnlineName = CategoryOnlineNames[i],
-            SearchKeyWord = CategorySearchKeyWords[i]
-          }, this));
-      }
+      
 
       LoadFeaturedPrograms();
+      InitializeCategories();
     }
 
     private void ProgramsViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -182,8 +173,22 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
       foreach (var project in featuredPrograms)
       {
         FeaturedPrograms.Add(
-          new ProgramViewModel(
+          new SimpleProgramViewModel(
             new Program(project)));
+      }
+    }
+
+    private void InitializeCategories()
+    {
+      for (var i = 0; i < CategoryOnlineNames.Length; ++i)
+      {
+        Categories.Add(new CategoryViewModel(
+          new Category
+          {
+            DisplayName = CategoryOnlineNames[i].ToUpper() + " PROGRAMS",
+            OnlineName = CategoryOnlineNames[i],
+            SearchKeyWord = CategorySearchKeyWords[i]
+          }, this));
       }
     }
 
@@ -220,7 +225,7 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
       foreach (var programHeader in retrievedPrograms)
       {
         SearchResults.Add(
-            new ProgramViewModel(
+            new SimpleProgramViewModel(
               new Program(programHeader)));
       }
 

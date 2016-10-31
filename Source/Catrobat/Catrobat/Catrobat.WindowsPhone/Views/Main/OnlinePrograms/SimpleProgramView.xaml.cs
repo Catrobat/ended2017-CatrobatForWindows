@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Catrobat.Views.Main.OnlinePrograms
 {
-  public sealed partial class ProgramView : UserControl
+  public sealed partial class SimpleProgramView : UserControl
   {
-    public ProgramView()
+    public SimpleProgramView()
     {
       this.InitializeComponent();
     }

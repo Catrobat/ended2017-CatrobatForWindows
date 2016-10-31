@@ -13,7 +13,7 @@
   Width="Auto">
   <UserControl.Resources>
     <DataTemplate x:Key="ProgramTemplate">
-      <local:ProgramView/>
+      <local:SimpleProgramView/>
     </DataTemplate>
     <ControlTemplate 
       x:Key="RoundButtonTemplate"

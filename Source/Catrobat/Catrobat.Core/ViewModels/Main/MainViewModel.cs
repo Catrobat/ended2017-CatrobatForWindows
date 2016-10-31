@@ -17,7 +17,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.Core.Resources;
-using Catrobat.Core.ViewModels.Main.OnlinePrograms;
+using Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {

@@ -12,7 +12,7 @@
     DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
 <UserControl.Resources>
   <DataTemplate x:Key="ResultTemplate">
-    <local:ProgramView/>
+      <local:SimpleProgramView/>
   </DataTemplate>
 </UserControl.Resources>
   <Grid>

@@ -354,8 +354,9 @@
     <Compile Include="ViewModels\Main\InformationViewModel.cs" />
     <Compile Include="ViewModels\Main\MainViewModel.cs" />
     <Compile Include="ViewModels\Main\OnlinePrograms\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Main\OnlinePrograms\DetailedProgramViewModel.cs" />
     <Compile Include="ViewModels\Main\OnlinePrograms\ProgramsViewModel.cs" />
-    <Compile Include="ViewModels\Main\OnlinePrograms\ProgramViewModel.cs" />
+    <Compile Include="ViewModels\Main\OnlinePrograms\SimpleProgramViewModel.cs" />
     <Compile Include="ViewModels\Main\PlayerViewModel.cs" />
     <Compile Include="ViewModels\Main\ProgramDetailViewModel.cs" />
     <Compile Include="ViewModels\Main\ProgramExportViewModel.cs" />

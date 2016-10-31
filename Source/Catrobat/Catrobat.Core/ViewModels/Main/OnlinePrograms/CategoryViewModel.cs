@@ -15,7 +15,7 @@ using Catrobat.Core.Resources;
 using Catrobat.IDE.Core.CatrobatObjects;
 using GalaSoft.MvvmLight;
 
-namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
+namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 {
   public class CategoryViewModel : ObservableObject
   {
@@ -28,7 +28,7 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
     #region public properties
     public Category Category { get; }
 
-    public ObservableCollection<ProgramViewModel> Programs { get; set; }
+    public ObservableCollection<SimpleProgramViewModel> Programs { get; set; }
 
     #endregion
 
@@ -55,7 +55,7 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
       Category = category;
       programsViewModel_ = programsViewModel;
 
-      Programs = new ObservableCollection<ProgramViewModel>();
+      Programs = new ObservableCollection<SimpleProgramViewModel>();
       ShowMore();
     }
 
@@ -73,8 +73,9 @@ namespace Catrobat.Core.ViewModels.Main.OnlinePrograms
 
       foreach (var project in retrievedPrograms)
       {
+        // TODO: Check if programs are already present and reload all to avoid duplicates!
         Programs.Add(
-           new ProgramViewModel(
+           new SimpleProgramViewModel(
               new Program(project)));
       }
     }

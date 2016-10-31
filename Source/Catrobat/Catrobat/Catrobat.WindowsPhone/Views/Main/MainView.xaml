@@ -51,7 +51,7 @@
         </HubSection.ContentTemplate>
       </HubSection>
 
-      <HubSection Name="HubSectionOnlinePrograms" Visibility="Collapsed">
+      <HubSection Name="HubSectionOnlinePrograms" Visibility="Visible">
         <HubSection.HeaderTemplate>
           <DataTemplate>
             <StackPanel Orientation="Horizontal">

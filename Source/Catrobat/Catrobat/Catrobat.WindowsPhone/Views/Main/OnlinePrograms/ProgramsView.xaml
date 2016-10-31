@@ -14,7 +14,7 @@
     Source={StaticResource Locator}}">
   <UserControl.Resources>
     <DataTemplate x:Key="SearchResultTemplate">
-      <local:ProgramView/>
+      <local:SimpleProgramView/>
     </DataTemplate>
     <DataTemplate x:Key="CategoryTemplate">
       <local:CategoryView/>
