@@ -58,6 +58,11 @@ namespace Catrobat.IDE.Core
             }
         }
 
+        public static void StopSaveThread()
+        {
+            Catrobat.Core.Services.Common.SaveHandler.StopSaveThread();
+        }
+
         private static async Task LoadContext()
         {
             await ServiceLocator.TraceService.LoadLocal();
@@ -148,7 +153,6 @@ namespace Catrobat.IDE.Core
             }
             catch (Exception e)
             {
-
                 throw;
             }
             //await ServiceLocator.TraceService.SaveLocal();

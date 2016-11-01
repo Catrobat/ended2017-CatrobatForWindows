@@ -183,21 +183,29 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Save(string path = null)
         {
-            if (path == null)
-                path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
-
-            var programConverter = new ProgramConverter();
-
-            MergeSpriteCollection();
-
-            var xmlProgram = programConverter.Convert(this);
-
-            var xmlString = xmlProgram.ToXmlString();
-
-            using (var storage = StorageSystem.GetStorage())
+            try
             {
-                await storage.WriteTextFileAsync(path, xmlString);
+                if (path == null)
+                    path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
+
+                var programConverter = new ProgramConverter();
+
+                MergeSpriteCollection();
+
+                var xmlProgram = programConverter.Convert(this);
+
+                var xmlString = xmlProgram.ToXmlString();
+
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    await storage.WriteTextFileAsync(path, xmlString);
+                }
             }
+            catch (System.Exception e)
+            {
+                Debug.WriteLine("Could not Save, Exception: " + e.Message);
+                return;
+            }     
         }
 
         public void Undo()

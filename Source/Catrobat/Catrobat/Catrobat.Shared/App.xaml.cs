@@ -124,6 +124,9 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.TraceService.Add(TraceType.Error, "Application crashed",
                 e.Message, stackTrace);
             ServiceLocator.TraceService.SaveLocal();
+
+            // Stop Save Thread
+            Core.App.StopSaveThread();
         }
     }
 }

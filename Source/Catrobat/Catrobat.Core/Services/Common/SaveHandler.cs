@@ -23,6 +23,7 @@ namespace Catrobat.Core.Services.Common
 
         private static Queue<SaveJob> _saveJobQueue = new Queue<SaveJob>();
         private static AutoResetEvent waitHandle = new AutoResetEvent(false);
+        private static bool running = true;
         #endregion
 
         #region public Methods
@@ -39,6 +40,11 @@ namespace Catrobat.Core.Services.Common
 
             // Wake up the Saving Task
             waitHandle.Set();
+        }
+
+        public static void StopSaveThread()
+        {
+            running = false;
         }
 
         #endregion
@@ -59,6 +65,10 @@ namespace Catrobat.Core.Services.Common
 
                     await actualJob.ProgramToSave.Save();
                 }
+
+                // To ensure that the thread will do all savejobs left before stopping
+                if (!running)
+                    break;
 
                 waitHandle.WaitOne();
                 waitHandle.Reset();

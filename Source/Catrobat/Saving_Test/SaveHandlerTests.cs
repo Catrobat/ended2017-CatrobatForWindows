@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Saving_Test
 {
@@ -48,6 +50,28 @@ namespace Saving_Test
                 Assert.IsNotNull(testprog_ref.Sprites[i]);
                 Assert.AreEqual(testprog.Sprites[i], testprog_ref.Sprites[i]);
             }
+        }
+        [TestMethod]
+        public void SaveHandlerStopTest()
+        {
+            var SaveHandlerTask = new Task(Catrobat.Core.Services.Common.SaveHandler.Execute);
+            SaveHandlerTask.Start();
+
+            // check if running
+
+            Debug.WriteLine("Running?: " + SaveHandlerTask.Status);
+
+            Assert.AreEqual(TaskStatus.Running, SaveHandlerTask.Status);
+
+            // stop
+
+            Catrobat.IDE.Core.App.StopSaveThread();
+
+            // lazy polling but it works
+            while (SaveHandlerTask.Status == TaskStatus.Running)
+            {}
+
+            Assert.AreNotEqual(TaskStatus.Running, SaveHandlerTask.Status);
         }
     }
 }
