@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Catrobat.Core.Services.Common
 {
-    class SaveHandler
+    public static class SaveHandler
     {
         #region public Members
         public struct SaveJob
@@ -32,7 +32,7 @@ namespace Catrobat.Core.Services.Common
             SaveJob newJob = new SaveJob();
             newJob.ProgramToSave = toSave;
 
-            lock(QueueLock)
+            lock (QueueLock)
             {
                 _saveJobQueue.Enqueue(newJob);
             }
@@ -46,9 +46,9 @@ namespace Catrobat.Core.Services.Common
         #region private Methods
         public static async void Execute()
         {
-            while(true)
+            while (true)
             {
-                while(_saveJobQueue != null && _saveJobQueue.Count > 0)
+                while (_saveJobQueue != null && _saveJobQueue.Count > 0)
                 {
                     SaveJob actualJob;
 
@@ -56,13 +56,18 @@ namespace Catrobat.Core.Services.Common
                     {
                         actualJob = _saveJobQueue.Dequeue();
                     }
-                    
+
                     await actualJob.ProgramToSave.Save();
                 }
 
                 waitHandle.WaitOne();
                 waitHandle.Reset();
             }
+        }
+
+        public static Queue<SaveJob> GetQueue()
+        {
+            return _saveJobQueue;
         }
         #endregion
     }
