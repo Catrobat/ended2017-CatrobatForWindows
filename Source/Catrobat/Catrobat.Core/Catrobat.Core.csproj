@@ -274,6 +274,8 @@
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="UI\Converters\BoolToSelectedPivotItemConverter.cs" />
+    <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\BoolToVisibilityInvertedConverter.cs" />
     <Compile Include="UI\Converters\BoolVisibilityConverter.cs" />
     <Compile Include="UI\Converters\BoolVisibilityNegativeConverter.cs" />
     <Compile Include="UI\Converters\DoubleStringConverter.cs" />
@@ -288,6 +290,7 @@
     <Compile Include="UI\Converters\NullVariableConverter.cs" />
     <Compile Include="UI\Converters\NullVisibilityConverter.cs" />
     <Compile Include="UI\Converters\SecondStringMillisecondConverter.cs" />
+    <Compile Include="UI\Converters\StringToUpperConverter.cs" />
     <Compile Include="UI\Converters\StringVisibilityConverter.cs" />
     <Compile Include="UI\Converters\UnixTimeDateTimeConverter.cs" />
     <Compile Include="UI\Converters\VariableButtonVisibilityConverter.cs" />

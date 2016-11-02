@@ -2,18 +2,201 @@
     x:Class="Catrobat.IDE.WindowsPhone.Views.Main.OnlinePrograms.DetailedProgramView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Catrobat.Views.Main.OnlinePrograms"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400"
+    xmlns:converters="using:Catrobat.IDE.Core.UI.Converters"
     DataContext="{Binding DetailedProgramViewModel, Source={StaticResource Locator}}">
-  <Grid>
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-      <TextBlock Foreground="Orange" Text="Program.Name:"/>
-      <TextBlock Foreground="Orange" Text="{Binding Program.Name}"/>
+  <views:ViewPageBase.Resources>
+    <converters:StringToUpperConverter x:Key="StringToUpperConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:BoolToVisibilityInvertedConverter x:Key="BoolToVisibilityInvertedConverter"/>
+    <Style TargetType="TextBlock" x:Key="TitleTextStyle">
+      <Setter Property="Foreground" Value="{ThemeResource OnlineProgramAlternativeForegroundBrush}"></Setter>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="DefaultTextStyle">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Foreground" Value="{ThemeResource OnlineProgramDefaultForegroundBrush}"></Setter>
+    </Style>
+    <Style TargetType="Button">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="FontWeight" Value="Thin"/>
+      <Setter Property="MinHeight" Value="0"/>
+      <Setter Property="MinWidth" Value="0"/>
+      <Setter Property="Height" Value="18"/>
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="{TemplateBinding Background}">
+              <Grid>
+                <ContentPresenter 
+                  Content="{TemplateBinding Content}" 
+                  HorizontalAlignment="Center"
+                  Margin="0"
+                  VerticalAlignment="Center"/>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="Button" x:Key="DownloadButtonStyle">
+      <Setter Property="FontSize" Value="24"/>
+      <Setter Property="FontWeight" Value="Thin"/>
+      <Setter Property="MinHeight" Value="0"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border 
+              CornerRadius="0"
+              BorderBrush="{ThemeResource OnlineProgramImageBorderBrush}"
+              BorderThickness="0"
+              Background="{ThemeResource OnlineProgramDownloadButtonBackgroundBrush}">
+              <Grid>
+                <ContentPresenter 
+                  Content="{TemplateBinding Content}" 
+                  Foreground="{ThemeResource OnlineProgramDownloadButtonForegroundBrush}"
+                  HorizontalAlignment="Center"
+                  Margin="16"
+                  VerticalAlignment="Center"/>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </views:ViewPageBase.Resources>
+  <ScrollViewer Background="{ThemeResource AppBackgroundBrush}">
+    <StackPanel Margin="10">
+      <TextBlock 
+        FontSize="30"
+        FontWeight="Bold"
+        Style="{StaticResource TitleTextStyle}"
+        Text="{Binding Program.Name, Converter={StaticResource StringToUpperConverter}}"
+        TextWrapping="WrapWholeWords"/>
+      <Border 
+        Margin="0,10,0,0"
+        Background="{ThemeResource OnlineProgramDefaultForegroundBrush}"
+        Height="2"/>
+      <Border 
+        BorderBrush="{ThemeResource OnlineProgramImageBorderBrush}"
+        BorderThickness="2"
+        Margin="20,30">
+        <Image Source="{Binding Program.Image}"/>
+      </Border>
+      <TextBlock 
+        FontSize="20"
+        FontWeight="SemiBold"
+        Text="DESCRIPTION"
+        Style="{StaticResource TitleTextStyle}"/>
+      <TextBlock 
+        FontSize="16"
+        Foreground="{ThemeResource OnlineProgramDefaultForegroundBrush}"
+        Margin="20,10"        
+        Text="{Binding Program.Description}"
+        TextWrapping="WrapWholeWords"/>
+      <Button
+        Command="{Binding DownloadCommand}"
+        Content="DOWNLOAD"
+        Style="{StaticResource DownloadButtonStyle}"/>
+      <Grid>
+        <Button
+        Command="{Binding ShowLinkCommand}"
+        Foreground="{ThemeResource OnlineProgramReportButtonBrush}"
+        Margin="0,10"
+          Visibility="{Binding LinkIsVisible, Converter={StaticResource BoolToVisibilityInvertedConverter}}">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock>[Link Symbol]</TextBlock>
+            <TextBlock Text="Link"/>
+          </StackPanel>
+        </Button>
+        <TextBox 
+          Text="{Binding Program.ProjectUrl}"
+          Visibility="{Binding LinkIsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+      </Grid>
+      
+      <Button  
+        Command="{Binding ReportCommand}"
+        Content="Report as inappropriate"
+        Foreground="{ThemeResource OnlineProgramReportButtonBrush}"/>
+      <StackPanel 
+        Orientation="Horizontal">
+        <StackPanel.Resources>
+          <Style
+            BasedOn="{StaticResource DefaultTextStyle}"
+            TargetType="TextBlock"/>
+        </StackPanel.Resources>
+        <TextBlock Text="Catrobat Language Version: "/>
+        <TextBlock Text="{Binding Program.Version}"/>
+      </StackPanel>
+      <Border 
+        Margin="0,10"
+        Background="{ThemeResource OnlineProgramDefaultForegroundBrush}"
+        Height="2"/>
+      <Grid 
+        DataContext="{Binding Program}"
+        Margin="20,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="5"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+          <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}"/>
+        </Grid.Resources>
+        <TextBlock 
+          Grid.Column="0" 
+          Grid.Row="0"
+          Text="[AuthorSymbol]"/>
+        <TextBlock 
+          Grid.Column="0" 
+          Grid.Row="1"
+          Text="[AgeSymbol]"/>
+        <TextBlock 
+          Grid.Column="0" 
+          Grid.Row="2"
+          Text="[SizeSymbol]"/>
+        <TextBlock 
+          Grid.Column="0" 
+          Grid.Row="3"
+          Text="[DownloadsSymbol]"/>
+        <TextBlock 
+          Grid.Column="0" 
+          Grid.Row="4"
+          Text="[ViewsSymbol]"/>
+
+        <TextBlock 
+          Grid.Column="2" 
+          Grid.Row="0"
+          Text="{Binding Author}"/>
+        <TextBlock 
+          Grid.Column="2" 
+          Grid.Row="1"
+          Text="{Binding UploadedString}"/>
+        <TextBlock 
+          Grid.Column="2" 
+          Grid.Row="2"
+          Text="{Binding FileSize}"/>
+        <TextBlock 
+          Grid.Column="2" 
+          Grid.Row="3"
+          Text="{Binding Downloads}"/>
+        <TextBlock 
+          Grid.Column="2" 
+          Grid.Row="4"
+          Text="{Binding Views}"/>
+      </Grid>
+      <Border 
+        Margin="0,10"
+        Background="{ThemeResource OnlineProgramDefaultForegroundBrush}"
+        Height="2"/>
+      <TextBlock>[MISSING: comments]</TextBlock>
     </StackPanel>
-  </Grid>
+  </ScrollViewer>
 </views:ViewPageBase>

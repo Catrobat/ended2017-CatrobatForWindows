@@ -12,7 +12,6 @@ namespace Catrobat.Core.Models.OnlinePrograms
   public class Program
   {
     #region public properties
-
     public string Author { get; set; }
 
     public string Description { get; set; }
@@ -23,17 +22,19 @@ namespace Catrobat.Core.Models.OnlinePrograms
 
     public Uri FeaturedImage { get; set; }
 
+    public double FileSize { get; set; }
+
     public uint Id { get; set; }
 
     public Uri Image { get; set; }
 
     public string Name { get; set; }
 
+    public Uri ProjectUrl { get; set; }
+
     public Uri Thumbnail { get; set; }
 
-    public TimeSpan? TimeSinceUpload => Uploaded != null 
-      ? DateTime.Now - Uploaded 
-      : null;
+    public string UploadedString { get; set; }
 
     public DateTime? Uploaded { get; set; }
 
@@ -56,6 +57,9 @@ namespace Catrobat.Core.Models.OnlinePrograms
       FeaturedImage = header.FeaturedImage != null 
         ? new Uri(header.FeaturedImage)
         : null;
+      FileSize = header.FileSize != null
+        ? double.Parse(header.FileSize)
+        : 0;
       Id = header.ProjectId != null 
         ? uint.Parse(header.ProjectId) 
         : 0;
@@ -63,12 +67,16 @@ namespace Catrobat.Core.Models.OnlinePrograms
         ? new Uri(header.ScreenshotBig)
         : null;
       Name = header.ProjectName;
+      ProjectUrl = header.ProjectUrl != null
+        ? new Uri(header.ProjectUrl)
+        : null;
       Thumbnail = header.ScreenshotSmall != null 
         ? new Uri(header.ScreenshotSmall) 
         : null;
       Uploaded = header.Uploaded != null
         ? FromUnixTime(header.Uploaded) 
         : (DateTime?)null;
+      UploadedString = header.UploadedString;
       Version = header.Version;
       Views = header.Views != null 
         ? uint.Parse(header.Views) 

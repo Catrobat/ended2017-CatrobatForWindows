@@ -47,10 +47,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     private void ShowFull()
     {
-      // TODO: open new window with clicked program infos in it
-      
       ServiceLocator.NavigationService.NavigateTo(typeof(DetailedProgramViewModel));
-      Messenger.Default.Send(new GenericMessage<SimpleProgramViewModel>(this), ViewModelMessagingToken.ShowDetailedOnlineProgram);
+      Messenger.Default.Send(new GenericMessage<Program>(Program), ViewModelMessagingToken.ShowDetailedOnlineProgram);
     }
 
     #endregion
