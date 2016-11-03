@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     #region private fields
 
     //always have as many CategoryOnlineNames as CategorySearchKeyWords
-    private static readonly string[] CategoryOnlineNames = { "newest", "most downloaded", "most viewed" };
+    private static readonly string[] CategoryOnlineNames = { "most recent", "most downloaded", "most viewed" };
     private static readonly string[] CategorySearchKeyWords = { "API_RECENT_PROJECTS", "API_MOSTDOWNLOADED_PROJECTS", "API_MOSTVIEWED_PROJECTS" };
 
     private const int InitialProgramOffset = 0;
@@ -143,8 +143,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
       PropertyChanged += ProgramsViewModelPropertyChanged;
 
-      
-
       LoadFeaturedPrograms();
       InitializeCategories();
     }
@@ -195,7 +193,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
         Categories.Add(new CategoryViewModel(
           new Category
           {
-            DisplayName = CategoryOnlineNames[i].ToUpper() + " PROGRAMS",
+            DisplayName = CategoryOnlineNames[i].ToUpper(),
             OnlineName = CategoryOnlineNames[i],
             SearchKeyWord = CategorySearchKeyWords[i]
           }, this));
