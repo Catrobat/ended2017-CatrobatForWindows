@@ -158,7 +158,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         
         private async void DownloadAction(OnlineProgramHeader programHeader)
         {
-            lock (_importLock)
+            /*lock (_importLock)
             {
                 if (IsImporting)
                 {
@@ -189,7 +189,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 {
                     lock (_importLock) { IsImporting = false; }
                 });
-            }
+            }*/
         }
 
         private void ReportAction()

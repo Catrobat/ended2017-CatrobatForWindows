@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
         // TODO: Check if programs are already present and reload all to avoid duplicates!
         Programs.Add(
            new SimpleProgramViewModel(
-              new Program(project)));
+              new ProgramInfo(project)));
       }
     }
 

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.Core.Models.OnlinePrograms;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -9,7 +9,7 @@ namespace Catrobat.IDE.Core.Services
     {
         void SetProgramStream(Stream programStream);
 
-        void SetDownloadHeader(OnlineProgramHeader programHeader);
+        void SetDownloadHeader(ProgramInfo programInfo);
 
         Task<ExtractProgramResult> ExtractProgram(CancellationToken taskCancellationToken);
 

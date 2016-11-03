@@ -174,7 +174,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       {
         FeaturedPrograms.Add(
           new SimpleProgramViewModel(
-            new Program(project)));
+            new ProgramInfo(project)));
       }
     }
 
@@ -226,7 +226,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       {
         SearchResults.Add(
             new SimpleProgramViewModel(
-              new Program(programHeader)));
+              new ProgramInfo(programHeader)));
       }
 
       InSearchMode = true;

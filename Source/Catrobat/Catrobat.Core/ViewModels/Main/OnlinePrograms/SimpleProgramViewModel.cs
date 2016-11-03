@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #region public properties
 
-    public Program Program { get; }
+    public ProgramInfo Program { get; }
 
     #endregion
 
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #region construction
 
-    public SimpleProgramViewModel(Program program)
+    public SimpleProgramViewModel(ProgramInfo program)
     {
       Program = program;
     }
@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     private void ShowFull()
     {
       ServiceLocator.NavigationService.NavigateTo(typeof(DetailedProgramViewModel));
-      Messenger.Default.Send(new GenericMessage<Program>(Program), ViewModelMessagingToken.ShowDetailedOnlineProgram);
+      Messenger.Default.Send(new GenericMessage<ProgramInfo>(Program), ViewModelMessagingToken.ShowDetailedOnlineProgram);
     }
 
     #endregion
