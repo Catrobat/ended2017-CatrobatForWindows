@@ -190,6 +190,9 @@
   <data name="API_SEARCH_PROJECTS" xml:space="preserve">
     <value>projects/search.json?q={0}&amp;limit={1}&amp;offset={2}</value>
   </data>
+  <data name="API_GET_PROJECT_BY_ID" xml:space="preserve">
+    <value>projects/getInfoById.json?id={0}</value>
+  </data>
   <data name="API_UPLOAD" xml:space="preserve">
     <value>upload/upload.json</value>
   </data>

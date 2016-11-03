@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices.ComTypes;
@@ -102,7 +103,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       {
         header = await ServiceLocator.WebCommunicationService.
           LoadOnlinePrograms(category, offset, count,
-          cancellationToken, additionalSearchText);
+            cancellationToken, additionalSearchText);
 
         InternetAvailable = true;
       }
@@ -166,15 +167,24 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       //TODO: Make use of the token?
       var cancellationToken = new CancellationToken();
 
-      var featuredPrograms = await GetPrograms(InitialProgramOffset,
+      var incompleteHeaders = await GetPrograms(InitialProgramOffset,
         InitialNumberOfFeaturedPrograms, "API_FEATURED_PROJECTS",
         cancellationToken);
 
-      foreach (var project in featuredPrograms)
+      foreach (var incompleteHeader in incompleteHeaders)
       {
+        var featuredProgramHeader = await GetPrograms(-1, -1, 
+          "API_GET_PROJECT_BY_ID", cancellationToken, 
+          incompleteHeader.ProjectId);
+
+        var completeHeader = featuredProgramHeader.First();
+        completeHeader.FeaturedImage = 
+          incompleteHeader.FeaturedImage.Replace(
+            ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS"), "");
+        
         FeaturedPrograms.Add(
           new SimpleProgramViewModel(
-            new ProgramInfo(project)));
+            new ProgramInfo(completeHeader)));
       }
     }
 
@@ -237,21 +247,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       SearchResults.Clear();
       SearchText = "";
       InSearchMode = false;
-
-      //TODO: What is that doing? and why here? #ConfusedPatrik
-
-      var reloadPrograms = FeaturedPrograms.Count == 0;
-
-      foreach (var category in Categories)
-      {
-        if (category.Programs.Count == 0)
-          reloadPrograms = true;
-      }
-
-      if (reloadPrograms)
-        ReloadOnlinePrograms();
-      else
-        InternetAvailable = true;
     }
 
     private void ReloadOnlinePrograms()
