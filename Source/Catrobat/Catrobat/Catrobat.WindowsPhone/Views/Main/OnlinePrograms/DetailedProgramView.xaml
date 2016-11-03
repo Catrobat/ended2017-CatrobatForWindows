@@ -91,7 +91,7 @@
       <TextBlock 
         FontSize="16"
         Foreground="{ThemeResource OnlineProgramDefaultForegroundBrush}"
-        Margin="20,10"        
+        Margin="20,10,20,20"        
         Text="{Binding Program.Description}"
         TextWrapping="WrapWholeWords"/>
       <Button
@@ -105,8 +105,23 @@
         Margin="0,10"
           Visibility="{Binding LinkIsVisible, Converter={StaticResource BoolToVisibilityInvertedConverter}}">
           <StackPanel Orientation="Horizontal">
-            <TextBlock>[Link Symbol]</TextBlock>
-            <TextBlock Text="Link"/>
+            <Viewbox 
+              Height="20"
+              Width="20" 
+              Stretch="Uniform">
+              <Viewbox.RenderTransform>
+                <TransformGroup>
+                  <RotateTransform Angle="-45" CenterX="10" CenterY="10"/>
+                  <TranslateTransform X="3" Y="-1.5"/>
+                </TransformGroup>
+              </Viewbox.RenderTransform>
+              <Path Fill="Black" 
+                Data="M 40 0 a 40 40 90 0 0 -40 40 l 0 40 a 40 40 90 0 0 40 40 l 120 0 a 40 40 90 0 0 40 -40 l 0 -20 l -40 30 l -110 0 a 20 20 90 0 1 -20 -20 l 0 -20 a 20 20 180 0 1 20 -20 l 50 0 l 0 -30 Z 
+                      M 120 60 l 0 -20 a 40 40 90 0 1 40 -40 l 120 0 a 40 40 90 0 1 40 40 l 0 40 a 40 40 90 0 1 -40 40 l -60 0 l 0 -30 l 50 0 a 20 20 90 0 0 20 -20 l 0 -20 a 20 20 90 0 0 -20 -20 l -110 0"/>
+            </Viewbox>
+            <TextBlock 
+              Text="Link" 
+              VerticalAlignment="Center"/>
           </StackPanel>
         </Button>
         <TextBox 
@@ -148,28 +163,138 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
-          <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}"/>
+          <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+          </Style>
+          <Style TargetType="Viewbox">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="0,5"></Setter>
+          </Style>
+          <Style TargetType="Path">
+            <Setter Property="Fill" Value="{ThemeResource OnlineProgramAlternativeForegroundBrush}"/>
+          </Style>
         </Grid.Resources>
-        <TextBlock 
+        <Viewbox
           Grid.Column="0" 
-          Grid.Row="0"
-          Text="[AuthorSymbol]"/>
-        <TextBlock 
+          Grid.Row="0">
+          <Path>
+            <Path.Data>
+              <GeometryGroup>
+                <EllipseGeometry
+                  Center="100 60"
+                  RadiusX="30"
+                  RadiusY="30"/>
+                <EllipseGeometry
+                  Center="100 100"
+                  RadiusX="100"
+                  RadiusY="100"/>
+                <PathGeometry>
+                  <PathGeometry.Figures>
+                    <PathFigure StartPoint="50 150">
+                      <LineSegment Point="150 150"/>
+                      <ArcSegment Point="50 150"
+                            Size="50 50"/>
+                    </PathFigure>
+                  </PathGeometry.Figures>
+                </PathGeometry>
+              </GeometryGroup>
+            </Path.Data>
+          </Path>
+        </Viewbox>
+        <Viewbox 
           Grid.Column="0" 
-          Grid.Row="1"
-          Text="[AgeSymbol]"/>
-        <TextBlock 
+          Grid.Row="1">
+          <Path>
+            <Path.Data>
+              <GeometryGroup>
+                <EllipseGeometry
+                  Center="100, 100"
+                  RadiusX="100"
+                  RadiusY="100">
+                </EllipseGeometry>
+                <RectangleGeometry Rect="90, 20 20, 90"/>
+                <RectangleGeometry Rect="110, 90 70, 20"/>
+              </GeometryGroup>
+            </Path.Data>
+          </Path>
+        </Viewbox>
+        <Viewbox 
           Grid.Column="0" 
-          Grid.Row="2"
-          Text="[SizeSymbol]"/>
-        <TextBlock 
+          Grid.Row="2">
+          <Path>
+            <Path.Data>
+              <GeometryGroup>
+                <EllipseGeometry
+              Center="100 100"
+              RadiusX="100"
+              RadiusY="100"/>
+                <RectangleGeometry Rect="50 35 100 130"/>
+                <PathGeometry>
+                  <PathGeometry.Figures>
+                    <PathFigure StartPoint="120 35">
+                      <LineSegment Point="150 35"/>
+                      <LineSegment Point="150 65"/>
+                    </PathFigure>
+                  </PathGeometry.Figures>
+                </PathGeometry>
+                <RectangleGeometry Rect="70 80 60 5"/>
+                <RectangleGeometry Rect="70 100 60 5"/>
+                <RectangleGeometry Rect="70 120 60 5"/>
+              </GeometryGroup>
+            </Path.Data>
+          </Path>
+        </Viewbox>
+        <Viewbox 
           Grid.Column="0" 
-          Grid.Row="3"
-          Text="[DownloadsSymbol]"/>
-        <TextBlock 
+          Grid.Row="3">
+          <Path>
+            <Path.Data>
+              <GeometryGroup>
+                <EllipseGeometry
+              Center="100 100"
+              RadiusX="100"
+              RadiusY="100"/>
+                <RectangleGeometry Rect="80 35 40 90"/>
+                <PathGeometry>
+                  <PathGeometry.Figures>
+                    <PathFigure StartPoint="50 125">
+                      <LineSegment Point="150 125"/>
+                      <LineSegment Point="100 170"/>
+                    </PathFigure>
+                  </PathGeometry.Figures>
+                </PathGeometry>
+              </GeometryGroup>
+            </Path.Data>
+          </Path>
+        </Viewbox>
+        <Viewbox 
           Grid.Column="0" 
-          Grid.Row="4"
-          Text="[ViewsSymbol]"/>
+          Grid.Row="4">
+          <Path>
+            <Path.Data>
+              <GeometryGroup FillRule="EvenOdd">
+                <EllipseGeometry
+              Center="100 100"
+              RadiusX="100"
+              RadiusY="100"/>
+                <EllipseGeometry 
+            Center="100 100"
+              RadiusX="20"
+              RadiusY="20"/>
+                <PathGeometry>
+                  <PathGeometry.Figures>
+                    <PathFigure StartPoint="30 100">
+                      <ArcSegment Point="170 100" Size="100 150"/>
+                      <ArcSegment Point="30 100" Size="100 150"/>
+                    </PathFigure>
+                  </PathGeometry.Figures>
+                </PathGeometry>
+              </GeometryGroup>
+            </Path.Data>
+          </Path>
+        </Viewbox>
 
         <TextBlock 
           Grid.Column="2" 
