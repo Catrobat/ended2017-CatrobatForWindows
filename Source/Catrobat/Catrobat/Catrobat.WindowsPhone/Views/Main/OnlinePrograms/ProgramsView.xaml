@@ -60,19 +60,17 @@
             Grid.Column="0"
             PlaceholderText="search"
             Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-          <Button          
+          <AppBarButton
             Command="{Binding SearchCommand}"
-            Content="S"
             Grid.Column="1"
-            Style="{StaticResource RoundButtonStyle}"
+            Icon="Find"
             Visibility="{Binding 
               Path=InSearchMode, 
               Converter={StaticResource BoolVisibilityNegativeConverter}}"/>
-          <Button 
-            Content="X"
+          <AppBarButton
             Command="{Binding ExitSearchCommand}"
             Grid.Column="1"
-            Style="{StaticResource RoundButtonStyle}"
+            Icon="Cancel"
             Visibility="{Binding 
               Path=InSearchMode, 
               Converter={StaticResource BoolVisibilityConverter}}"/>
@@ -82,19 +80,31 @@
         Visibility="{Binding 
               Path=InternetAvailable, 
               Converter={StaticResource BoolVisibilityConverter}}">
-        <ListView   
-          ItemsSource="{Binding SearchResults}"
-          ItemTemplate="{StaticResource SearchResultTemplate}"
-          Margin="-5"
-          Visibility="{Binding 
-            Path=InSearchMode, 
-            Converter={StaticResource BoolVisibilityConverter}}">
-          <ListView.ItemsPanel>
-            <ItemsPanelTemplate>
-              <toolkit:UniformGrid Columns="2"/>
-            </ItemsPanelTemplate>
-          </ListView.ItemsPanel>
-        </ListView>
+        <StackPanel Visibility="{Binding 
+          Path=InSearchMode, 
+          Converter={StaticResource BoolVisibilityConverter}}">
+          <ListView   
+            ItemsSource="{Binding SearchResults}"
+            ItemTemplate="{StaticResource SearchResultTemplate}"
+            Margin="-5"
+            Visibility="{Binding 
+              Path=NoSearchResults, 
+              Converter={StaticResource BoolVisibilityNegativeConverter}}">
+            <ListView.ItemsPanel>
+              <ItemsPanelTemplate>
+                <toolkit:UniformGrid Columns="2"/>
+              </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+          </ListView>
+          <TextBlock 
+            FontSize="25"
+            Foreground="Black"
+            Text="No Results found"
+            TextAlignment="Center"
+            Visibility="{Binding 
+              Path=NoSearchResults, 
+              Converter={StaticResource BoolVisibilityConverter}}"/>
+        </StackPanel>
         <StackPanel Visibility="{Binding 
           Path=InSearchMode, 
           Converter={StaticResource BoolVisibilityNegativeConverter}}">
@@ -106,18 +116,18 @@
       </Grid>
       <Grid Grid.Row="1"
         Visibility="{Binding 
-              Path=InternetAvailable, 
-              Converter={StaticResource BoolVisibilityNegativeConverter}}">
+          Path=InternetAvailable, 
+          Converter={StaticResource BoolVisibilityNegativeConverter}}">
         <TextBlock 
-        FontSize="25"
-        Foreground="Black"
-        Text="Check Internet Connection"
-        TextAlignment="Center"/>
-        <Button 
-            Content="R"
-            Command="{Binding ReloadCommand}"
-            HorizontalAlignment="Center"
-            Style="{StaticResource RoundButtonStyle}"/>
+          FontSize="25"
+          Foreground="Black"
+          Text="No Internet Connection"
+          TextAlignment="Center"/>
+        <AppBarButton
+          Command="{Binding ReloadCommand}"
+          HorizontalAlignment="Center"
+          Margin="50"
+          Icon="Refresh"/>
       </Grid>
     </Grid>
   </ScrollViewer>

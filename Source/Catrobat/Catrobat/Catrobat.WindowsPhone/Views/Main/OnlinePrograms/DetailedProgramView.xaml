@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
     xmlns:converters="using:Catrobat.IDE.Core.UI.Converters"
+    xmlns:onlinePrograms="using:Catrobat.IDE.WindowsPhone.Views.Main.OnlinePrograms"
     DataContext="{Binding DetailedProgramViewModel, Source={StaticResource Locator}}">
   <views:ViewPageBase.Resources>
     <converters:StringToUpperConverter x:Key="StringToUpperConverter"/>
@@ -169,6 +170,7 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
+          <onlinePrograms:StringFormatter x:Key="StringConverter" />
           <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -313,15 +315,21 @@
         <TextBlock 
           Grid.Column="2" 
           Grid.Row="2"
-          Text="{Binding FileSize}"/>
+          Text="{Binding FileSize,
+            Converter={StaticResource ResourceKey=StringConverter},
+            ConverterParameter='\{0:N2} MB'}"/>
         <TextBlock 
           Grid.Column="2" 
           Grid.Row="3"
-          Text="{Binding Downloads}"/>
+          Text="{Binding Downloads,
+            Converter={StaticResource ResourceKey=StringConverter},
+            ConverterParameter='\{0} downloads'}"/>
         <TextBlock 
           Grid.Column="2" 
           Grid.Row="4"
-          Text="{Binding Views}"/>
+          Text="{Binding Views,
+            Converter={StaticResource ResourceKey=StringConverter},
+            ConverterParameter='\{0} views'}"/>
       </Grid>
       <Border 
         Margin="0,10"

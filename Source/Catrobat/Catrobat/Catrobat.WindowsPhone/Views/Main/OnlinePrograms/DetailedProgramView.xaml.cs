@@ -24,4 +24,17 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main.OnlinePrograms
       this.InitializeComponent();
     }
   }
+
+  public class StringFormatter : IValueConverter
+  {
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+      return string.Format(parameter as string, value);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    {
+      return null;
+    }
+  }
 }

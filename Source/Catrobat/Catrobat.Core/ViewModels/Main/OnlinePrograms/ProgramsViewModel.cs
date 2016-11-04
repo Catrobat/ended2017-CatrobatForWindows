@@ -35,6 +35,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     private bool inSearchMode_;
     private string searchText_;
     private bool internetAvailable_;
+    private bool noSearchResults_;
 
     #endregion
 
@@ -52,6 +53,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
         inSearchMode_ = value;
         RaisePropertyChanged(nameof(InSearchMode));
+      }
+    }
+
+    public bool NoSearchResults
+    {
+      get { return noSearchResults_; }
+      set
+      {
+        if (noSearchResults_ == value)
+        {
+          return;
+        }
+
+        noSearchResults_ = value;
+        RaisePropertyChanged(nameof(NoSearchResults));
       }
     }
 
@@ -230,13 +246,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
         InitialProgramOffset, InitialNumberOfSearchedPrograms, 
         "API_SEARCH_PROJECTS", cancellationToken, SearchText);
 
-      foreach (var programHeader in retrievedPrograms)
+      if (retrievedPrograms.Count == 0)
       {
-        SearchResults.Add(
-            new SimpleProgramViewModel(
-              new ProgramInfo(programHeader)));
+        NoSearchResults = true;
       }
-
+      else
+      {
+        NoSearchResults = false;
+        foreach (var programHeader in retrievedPrograms)
+        {
+          SearchResults.Add(
+              new SimpleProgramViewModel(
+                new ProgramInfo(programHeader)));
+        }
+      }
+      
       InSearchMode = true;
     }
 

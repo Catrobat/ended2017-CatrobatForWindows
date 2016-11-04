@@ -237,12 +237,6 @@
     <Compile Include="Views\Main\OnlinePrograms\FeaturedProgramView.xaml.cs">
       <DependentUpon>FeaturedProgramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\OnlinePrograms\OnlineProgramsMainView.xaml.cs">
-      <DependentUpon>OnlineProgramsMainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\OnlinePrograms\OnlineProgramsView.xaml.cs">
-      <DependentUpon>OnlineProgramsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Main\OnlinePrograms\ProgramsView.xaml.cs">
       <DependentUpon>ProgramsView.xaml</DependentUpon>
     </Compile>
@@ -722,14 +716,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\OnlinePrograms\FeaturedProgramView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Main\OnlinePrograms\OnlineProgramsMainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Main\OnlinePrograms\OnlineProgramsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

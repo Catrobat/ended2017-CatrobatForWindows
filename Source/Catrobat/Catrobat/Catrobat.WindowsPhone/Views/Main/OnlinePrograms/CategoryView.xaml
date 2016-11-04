@@ -55,12 +55,23 @@
             <controls:UniformGrid Columns="2"/>
           </ItemsPanelTemplate>
         </ListView.ItemsPanel>
-      </ListView> 
+      </ListView>
       <Button 
         Command="{Binding ShowMoreCommand}"
-        Content="..."
         HorizontalAlignment="Center"
-        Style="{StaticResource RoundButtonStyle}"/>
+        Style="{StaticResource RoundButtonStyle}">
+        <Viewbox
+          HorizontalAlignment="Center"
+          Width="25"
+          Margin="0 3 0 0">
+          <Path
+            Stroke="Black"
+            StrokeThickness="4"
+            StrokeDashCap="Square"
+            Data="M 1.7 0 l 10 10 l 10 -10">
+            </Path>
+        </Viewbox>
+      </Button>
     </StackPanel>
   </Grid>
 </UserControl>
