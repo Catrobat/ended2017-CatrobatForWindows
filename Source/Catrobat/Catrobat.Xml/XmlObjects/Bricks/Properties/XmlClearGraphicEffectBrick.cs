@@ -1,8 +1,9 @@
 ﻿using System.Xml.Linq;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlClearGraphicEffectBrick : XmlBrick
+    public partial class XmlClearGraphicEffectBrick : XmlBrick, IClearGraphicEffectBrick
     {
         public override bool Equals(System.Object obj)
         {

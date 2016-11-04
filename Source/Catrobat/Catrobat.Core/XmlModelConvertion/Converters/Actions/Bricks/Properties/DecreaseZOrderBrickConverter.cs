@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
             return new DecreaseZOrderBrick
             {
-                RelativeValue = o.Steps == null ? null : formulaConverter.Convert(o.Steps, c)
+                RelativeValue = o.StepsXML == null ? null : formulaConverter.Convert(o.StepsXML, c)
             };
         }
 
@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
             return new XmlGoNStepsBackBrick
             {
-                Steps = m.RelativeValue == null ? new XmlFormula() : formulaConverter.Convert(m.RelativeValue, c)
+                StepsXML = m.RelativeValue == null ? new XmlFormula() : formulaConverter.Convert(m.RelativeValue, c)
             };
         }
     }

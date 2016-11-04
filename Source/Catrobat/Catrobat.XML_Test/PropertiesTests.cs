@@ -145,7 +145,7 @@ namespace Catrobat.XML_Test
 
             var referenceObject = new XmlGoNStepsBackBrick()
             {
-                Steps = new XmlFormula(xRoot, XmlConstants.Steps),
+                StepsXML = new XmlFormula(xRoot, XmlConstants.Steps),
             };
 
             Assert.AreEqual(referenceObject, testObject);
