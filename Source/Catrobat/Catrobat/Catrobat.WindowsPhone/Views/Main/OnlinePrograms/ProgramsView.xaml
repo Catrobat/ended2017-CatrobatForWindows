@@ -22,7 +22,7 @@
     <ControlTemplate 
       x:Key="RoundButtonTemplate"
       TargetType="Button">
-      <Border 
+      <Border
         Background="White"
         BorderBrush="Black"
         BorderThickness="2.5"
@@ -57,6 +57,8 @@
                Width="Auto"/>
           </Grid.ColumnDefinitions>
           <TextBox
+            InputScope="Search"
+            KeyDown="CheckKey"
             Grid.Column="0"
             PlaceholderText="search"
             Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
