@@ -22,6 +22,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     #region private 
 
     private readonly ProgramsViewModel programsViewModel_;
+    private int programOffset_;
 
     #endregion
 
@@ -67,17 +68,49 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     {
       //TODO: Make use of the token?
       var cancellationToken = new CancellationToken();
+      
+      while(true)
+      { 
+        var retrievedPrograms = await programsViewModel_.GetPrograms(
+        Programs.Count + programOffset_, 2, Category.SearchKeyWord, cancellationToken);
 
-      var retrievedPrograms = await programsViewModel_.GetPrograms(
-        Programs.Count, 2, Category.SearchKeyWord, cancellationToken);
+        if (CheckForDuplicates(retrievedPrograms))
+        {
+          programOffset_++;
+          continue;
+        }
 
-      foreach (var project in retrievedPrograms)
-      {
-        // TODO: Check if programs are already present and reload all to avoid duplicates!
-        Programs.Add(
-           new SimpleProgramViewModel(
+        foreach (var project in retrievedPrograms)
+        {
+          Programs.Add(
+            new SimpleProgramViewModel(
               new ProgramInfo(project)));
+        }
+        break;
       }
+    }
+
+    private bool CheckForDuplicates(List<OnlineProgramHeader> retrievedPrograms)
+    {
+      switch (Category.SearchKeyWord)
+      {
+        case "API_RECENT_PROJECTS":
+          if (Programs.Any(p => p.Program.Uploaded <= ProgramInfo.FromUnixTime(retrievedPrograms.First().Uploaded)))
+            return true;
+          break;
+
+        case "API_MOSTDOWNLOADED_PROJECTS":
+          if (Programs.Any(p => p.Program.Downloads <= Convert.ToUInt32(retrievedPrograms.First().Downloads)))
+            return true;
+          break;
+
+        case "API_MOSTVIEWED_PROJECTS":
+          if (Programs.Any(p => p.Program.Views <= Convert.ToUInt32(retrievedPrograms.First().Views)))
+            return true;
+          break;
+      }
+
+      return false;
     }
 
     #endregion
