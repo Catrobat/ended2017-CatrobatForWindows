@@ -167,8 +167,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     {
       if (e.PropertyName == nameof(SearchText))
       {
-        // TODO: Add another state to show previous results while updating the search text
-        InSearchMode = false;
+            // TODO: Add another state to show previous results while updating the search text
+            SearchResults.Clear();
+            InSearchMode = false;
       }
     }
 
@@ -239,8 +240,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     private async void Search()
     {
-      //TODO: Make use of the token
-      var cancellationToken = new CancellationToken();
+       //TODO: Make use of the token
+       var cancellationToken = new CancellationToken();
 
       var retrievedPrograms = await GetPrograms(
         InitialProgramOffset, InitialNumberOfSearchedPrograms, 

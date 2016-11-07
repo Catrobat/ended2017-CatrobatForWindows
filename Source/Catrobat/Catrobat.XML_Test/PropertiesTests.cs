@@ -4,6 +4,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using System.IO;
+using Windows.Networking.Connectivity;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.XML_Test
