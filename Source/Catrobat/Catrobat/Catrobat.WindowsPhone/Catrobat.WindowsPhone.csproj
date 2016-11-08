@@ -240,6 +240,9 @@
     <Compile Include="Views\Main\OnlinePrograms\ProgramsView.xaml.cs">
       <DependentUpon>ProgramsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\SearchTextBox.xaml.cs">
+      <DependentUpon>SearchTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\OnlinePrograms\SimpleProgramView.xaml.cs">
       <DependentUpon>SimpleProgramView.xaml</DependentUpon>
     </Compile>
@@ -722,6 +725,10 @@
     <Page Include="Views\Main\OnlinePrograms\ProgramsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\OnlinePrograms\SimpleProgramView.xaml">
       <Generator>MSBuild:Compile</Generator>

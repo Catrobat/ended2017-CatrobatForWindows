@@ -28,16 +28,5 @@ namespace Catrobat.Views.Main.OnlinePrograms
         {
             this.InitializeComponent();
         }
-
-        private void CheckKey(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == VirtualKey.Enter)
-            {
-                var viewModel = (ProgramsViewModel) DataContext;
-                viewModel.SearchCommand.Execute(null);
-            }
-        }
-
-
     }
 }
