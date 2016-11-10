@@ -6,7 +6,6 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
   xmlns:toolkit="using:WinRTXamlToolkit.Controls"
-    
   mc:Ignorable="d"
   d:DesignHeight="300"
   d:DesignWidth="400"
@@ -45,41 +44,27 @@
   <ScrollViewer>
     <Grid>
       <Grid.RowDefinitions>
-        <RowDefinition 
-        Height="Auto"/>
+        <RowDefinition Height="Auto"/>
         <RowDefinition/>
       </Grid.RowDefinitions>
-      <StackPanel  
-        Grid.Row="0">
+      <StackPanel Grid.Row="0">
         <Grid>
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition 
-               Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
           </Grid.ColumnDefinitions>
           <local:SearchTextBox
-             Height="40"
-             Grid.Column="0"
-             Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-             SearchCommand="{Binding SearchCommand}"/>
-          <AppBarButton
+            Grid.Column="0"
+            Height="40"
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+          <Button
             Command="{Binding SearchCommand}"
             Grid.Column="1"
-            Icon="Find"
-            Visibility="Collapsed"/>
-          <AppBarButton
-            Command="{Binding ExitSearchCommand}"
-            Grid.Column="1"
-            Icon="Cancel"
-            Visibility="Collapsed"/>
-          <!--{Binding 
-              Path=InSearchMode, 
-              Converter={StaticResource BoolVisibilityConverter}}-->
-          <Button
-            Grid.Column="1"
             Style="{StaticResource RoundButtonStyle}"
-            Visibility="{Binding Path=InSearchMode, Converter={StaticResource BoolVisibilityNegativeConverter}}"
-            Command="{Binding SearchCommand}">
+            Visibility="{Binding 
+              Path=InSearchMode, 
+              Converter={StaticResource BoolVisibilityNegativeConverter}}">
             <Viewbox
               Stretch="Uniform"
               Margin="7">
@@ -90,46 +75,47 @@
                 </TransformGroup>
               </Viewbox.RenderTransform>
               <Path
-                Fill="Black"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Stroke="Black"
-                StrokeThickness="20"
                 Data="M 0 300 a 70 70 90 0 1 70 -70 l 400 0 
                       a 300 300 90 0 1 300 -230 a 300 300 90 0 1 300 300 a 300 300 90 0 1 -300 300 a 300 300 90 0 1 -300 -230
                       l -400 0 a 70 70 90 0 1 -70 -70 Z
-                      M 540 300 a 230 230 90 0 1 230 -230 a 230 230 90 0 1 230 230 a 230 230 90 0 1 -230 230 a 230 230 90 0 1 -230 -230 Z">
+                      M 540 300 a 230 230 90 0 1 230 -230 a 230 230 90 0 1 230 230 a 230 230 90 0 1 -230 230 a 230 230 90 0 1 -230 -230 Z"
+                Fill="Black"
+                HorizontalAlignment="Center"
+                Stroke="Black"
+                StrokeThickness="20"
+                VerticalAlignment="Center">
               </Path>
             </Viewbox>
           </Button>
           <Button
+            Command="{Binding ExitSearchCommand}"
             Grid.Column="1"
             Style="{StaticResource RoundButtonStyle}"
             Visibility="{Binding 
-            Path=InSearchMode, 
-            Converter={StaticResource BoolVisibilityConverter}}"
-            Command="{Binding ExitSearchCommand}">
+              Path=InSearchMode, 
+              Converter={StaticResource BoolVisibilityConverter}}">
             <Viewbox
               Stretch="Fill"
               Margin="11 11 10 10">
               <Path
+                Data="M 0 0 l 100 100 M 0 100 l 100 -100"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 Stroke="Black"
                 StrokeThickness="23"
-                Data="M 0 0 l 100 100 M 0 100 l 100 -100">
+                VerticalAlignment="Center">
               </Path>
             </Viewbox>
           </Button>
         </Grid>
       </StackPanel>
-      <Grid Grid.Row="1"
+      <Grid 
+        Grid.Row="1"
         Visibility="{Binding 
-              Path=InternetAvailable, 
-              Converter={StaticResource BoolVisibilityConverter}}">
-        <StackPanel Visibility="{Binding 
-          Path=InSearchMode, 
+          Path=InternetAvailable, 
           Converter={StaticResource BoolVisibilityConverter}}">
+        <StackPanel Visibility="{Binding 
+            Path=InSearchMode, 
+            Converter={StaticResource BoolVisibilityConverter}}">
           <ListView   
             ItemsSource="{Binding SearchResults}"
             ItemTemplate="{StaticResource SearchResultTemplate}"
@@ -143,10 +129,10 @@
               </ItemsPanelTemplate>
             </ListView.ItemsPanel>
           </ListView>
-          <TextBlock 
-            Margin="0 20"
+          <TextBlock
             FontSize="25"
-            Foreground="Black"
+            Foreground="Black" 
+            Margin="0 20"
             Text="No Results found"
             TextAlignment="Center"
             Visibility="{Binding 
@@ -154,16 +140,17 @@
               Converter={StaticResource BoolVisibilityConverter}}"/>
         </StackPanel>
         <StackPanel Visibility="{Binding 
-          Path=InSearchMode, 
-          Converter={StaticResource BoolVisibilityNegativeConverter}}">
+            Path=InSearchMode, 
+            Converter={StaticResource BoolVisibilityNegativeConverter}}">
           <local:FeaturedProgramsView DataContext="{Binding FeaturedPrograms}"/>
           <ListView     
             ItemsSource="{Binding Categories}"
             ItemTemplate="{StaticResource CategoryTemplate}"/>
         </StackPanel>
       </Grid>
-      <Grid Grid.Row="1"
-          Visibility="{Binding 
+      <Grid 
+        Grid.Row="1"
+        Visibility="{Binding 
           Path=InternetAvailable, 
           Converter={StaticResource BoolVisibilityNegativeConverter}}">
         <TextBlock 
@@ -171,28 +158,22 @@
           Foreground="Black"
           Text="No Internet Connection"
           TextAlignment="Center"/>
-        <AppBarButton
-          Visibility="Collapsed"
-          Command="{Binding ReloadCommand}"
-          HorizontalAlignment="Center"
-          Margin="50"
-          Icon="Refresh"/>
         <Button
+          Command="{Binding ReloadCommand}"
+          HorizontalAlignment="Center"          
           Margin="0 60"
-          VerticalAlignment="Top"
-          HorizontalAlignment="Center"
           Style="{StaticResource RoundButtonStyle}"
-          Command="{Binding ReloadCommand}">
+          VerticalAlignment="Top">
           <Viewbox
-            Stretch="Uniform"
-            Margin="8">
+            Margin="8"
+            Stretch="Uniform">
             <Path
+              Data="M 250 150 a 100 100 90 0 1 -100 100 a 100 100 90 0 1 -100 -100 a 100 100 90 0 1 100 -100 l 0 55 l 80 -80 l -80 -80 l 0 55 a 150 150 90 0 0 -150 150 a 150 150 90 0 0 150 150 a 150 150 90 0 0 150 -150 Z"
+              Fill="Black"
               HorizontalAlignment="Center"
-              VerticalAlignment="Center"
               Stroke="Black"
               StrokeThickness="1"
-              Fill="Black"
-              Data="M 250 150 a 100 100 90 0 1 -100 100 a 100 100 90 0 1 -100 -100 a 100 100 90 0 1 100 -100 l 0 55 l 80 -80 l -80 -80 l 0 55 a 150 150 90 0 0 -150 150 a 150 150 90 0 0 150 150 a 150 150 90 0 0 150 -150 Z">
+              VerticalAlignment="Center">
             </Path>
           </Viewbox>
         </Button>

@@ -16,13 +16,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 {
   public class SimpleProgramViewModel : ObservableObject
   {
-    #region private fields
-
-
-
-    #endregion
-
-    #region public properties
+    #region properties
 
     public ProgramInfo Program { get; }
 
@@ -30,7 +24,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #region commands
 
-    public ICommand ShowFullCommand => new RelayCommand(ShowFull);
+    public ICommand ShowDetailedCommand => new RelayCommand(ShowDetailed);
 
     #endregion
 
@@ -45,10 +39,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #region private helpers
 
-    private void ShowFull()
+    private void ShowDetailed()
     {
       ServiceLocator.NavigationService.NavigateTo(typeof(DetailedProgramViewModel));
-      Messenger.Default.Send(new GenericMessage<ProgramInfo>(Program), ViewModelMessagingToken.ShowDetailedOnlineProgram);
+      Messenger.Default.Send(new GenericMessage<ProgramInfo>(Program), 
+        ViewModelMessagingToken.ShowDetailedOnlineProgram);
     }
 
     #endregion

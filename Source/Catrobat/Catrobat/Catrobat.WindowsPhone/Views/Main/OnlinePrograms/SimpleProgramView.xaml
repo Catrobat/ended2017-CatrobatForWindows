@@ -11,7 +11,7 @@
   d:DesignWidth="300"
   Margin="5">
   <Button 
-    Command="{Binding ShowFullCommand}"           
+    Command="{Binding ShowDetailedCommand}"           
     HorizontalAlignment="Stretch"
     MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" 
     MinHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
@@ -24,9 +24,9 @@
     <Grid>
       <Image Source="{Binding Program.Thumbnail}"/>
       <Grid 
-        Background="{ThemeResource AppBarBackgroundBrush}" 
-        VerticalAlignment="Bottom"
-        Height="Auto">
+        Background="{ThemeResource AppBarBackgroundBrush}"
+        Height="Auto"
+        VerticalAlignment="Bottom">
         <TextBlock
           Foreground="White"
           FontSize="16"

@@ -30,7 +30,9 @@
           VerticalAlignment="Center"/>
       </Border>
     </ControlTemplate>
-    <Style x:Key="RoundButtonStyle" TargetType="Button">
+    <Style 
+      x:Key="RoundButtonStyle" 
+      TargetType="Button">
       <Setter Property="Margin" Value="5"/>
       <Setter Property="MinHeight" Value="0"/>
       <Setter Property="MinWidth" Value="0"/>
@@ -52,7 +54,7 @@
         Margin="-5">
         <ListView.ItemsPanel>
           <ItemsPanelTemplate>
-            <controls:UniformGrid Columns="2"/>
+            <controls:UniformGrid Columns="{Binding ProgramsPerLine}"/>
           </ItemsPanelTemplate>
         </ListView.ItemsPanel>
       </ListView>

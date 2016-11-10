@@ -29,11 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Test", "Catrobat.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.XML_Test", "Catrobat.XML_Test\Catrobat.XML_Test.csproj", "{E139CD96-941B-41C0-82B9-D7A2D3B12A05}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D4DDA35-C5DF-4E22-B283-378C9F3A95FD}"
-	ProjectSection(SolutionItems) = preProject
-		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{ec31c574-6a2a-4056-bd46-4b58891acd8b}*SharedItemsImports = 13

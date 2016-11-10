@@ -15,9 +15,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
   {
     #region attributes 
 
-    private const int ProgramsPerLine = 2;
+    private const int _programsPerLine = 2;
 
     private readonly ProgramsViewModel _programsViewModel;
+
     private int _programOffset;
 
     #endregion
@@ -27,6 +28,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     public Category Category { get; }
 
     public ObservableCollection<SimpleProgramViewModel> Programs { get; set; }
+
+    public int ProgramsPerLine => _programsPerLine;
 
     #endregion
 

@@ -9,6 +9,6 @@
     KeyDown="CheckKey"
     InputScope="Search"
     PlaceholderText="search"
-    d:DesignHeight="300"
+    d:DesignHeight="40"
     d:DesignWidth="400">
 </TextBox>

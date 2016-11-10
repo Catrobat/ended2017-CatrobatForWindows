@@ -24,21 +24,19 @@
         TextAlignment="Center"
         Width="Auto"/>
       <ListView     
-            ItemsSource="{Binding}"
-            ItemTemplate="{StaticResource ProgramsTemplate}"
-            Margin="0">
+        ItemsSource="{Binding}"
+        ItemTemplate="{StaticResource ProgramsTemplate}"
+        Margin="0">
         <ListView.ItemsPanel>
           <ItemsPanelTemplate>
             <toolkit:UniformGrid 
-                  Columns="1" 
-                  Rows="1"/>
+              Columns="1" 
+              Rows="1"/>
           </ItemsPanelTemplate>
         </ListView.ItemsPanel>
         <ListView.ItemContainerStyle>
           <Style TargetType="ListViewItem">
-            <Setter 
-                  Property="Width"
-                  Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
           </Style>
         </ListView.ItemContainerStyle>
       </ListView>

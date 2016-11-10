@@ -4,25 +4,20 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.Core.Models.OnlinePrograms;
 using Catrobat.Core.Resources;
 using Catrobat.IDE.Core.CatrobatObjects;
 using GalaSoft.MvvmLight;
-using System.Net.NetworkInformation;
 using System.Threading;
-using Windows.Networking.Connectivity;
 using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 {
   public class ProgramsViewModel : ObservableObject
   {
-    #region private fields
+    #region attributes
 
     //always have as many CategoryOnlineNames as CategorySearchKeyWords
     private static readonly string[] CategoryOnlineNames = { "most recent", "most downloaded", "most viewed" };
@@ -39,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #endregion
 
-    #region public properties
+    #region properties
 
     public bool InSearchMode
     {
@@ -109,37 +104,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #endregion
 
-    #region public helpers
-
-    public async Task<List<OnlineProgramHeader>> GetPrograms(int offset, int count, string category, CancellationToken cancellationToken, string additionalSearchText = null)
-    {
-      List<OnlineProgramHeader> header;
-
-      try
-      {
-        header = await ServiceLocator.WebCommunicationService.
-          LoadOnlinePrograms(category, offset, count,
-            cancellationToken, additionalSearchText);
-
-        InternetAvailable = true;
-      }
-      catch (Exception)
-      {
-        //There was probably no working internet connection
-        InternetAvailable = false;
-        header = new List<OnlineProgramHeader>();
-      }
-
-      return header;
-    }
-
-    #endregion
-
     #region commands
 
-    public ICommand SearchCommand => new RelayCommand(Search, CanSearch);
+    public ICommand SearchCommand => new RelayCommand(Search);
 
-    public ICommand ExitSearchCommand => new RelayCommand(ExitSearch, CanExitSearch);
+    public ICommand ExitSearchCommand => new RelayCommand(ExitSearch);
 
     public ICommand ReloadCommand => new RelayCommand(ReloadOnlinePrograms);
 
@@ -167,10 +136,35 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     {
       if (e.PropertyName == nameof(SearchText))
       {
-            // TODO: Add another state to show previous results while updating the search text
-            SearchResults.Clear();
-            InSearchMode = false;
+        SearchResults.Clear();
+        InSearchMode = false;
       }
+    }
+
+    #endregion
+
+    #region public helpers
+
+    public async Task<List<OnlineProgramHeader>> GetPrograms(int offset, int count, string category, CancellationToken cancellationToken, string additionalSearchText = null)
+    {
+      List<OnlineProgramHeader> header;
+
+      try
+      {
+        header = await ServiceLocator.WebCommunicationService.
+          LoadOnlinePrograms(category, offset, count,
+            cancellationToken, additionalSearchText);
+
+        InternetAvailable = true;
+      }
+      catch (Exception)
+      {
+        //There was probably no working internet connection
+        InternetAvailable = false;
+        header = new List<OnlineProgramHeader>();
+      }
+
+      return header;
     }
 
     #endregion
@@ -179,7 +173,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     private async void LoadFeaturedPrograms()
     {
-      //TODO: Make use of the token?
       var cancellationToken = new CancellationToken();
 
       var incompleteHeaders = await GetPrograms(InitialProgramOffset,
@@ -228,24 +221,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       }
     }
 
-    private bool CanSearch()
-    {
-      return true;
-    }
-
-    private bool CanExitSearch()
-    {
-      return true;
-    }
-
     private async void Search()
     {
-       //TODO: Make use of the token
-       var cancellationToken = new CancellationToken();
-
       var retrievedPrograms = await GetPrograms(
         InitialProgramOffset, InitialNumberOfSearchedPrograms, 
-        "API_SEARCH_PROJECTS", cancellationToken, SearchText);
+        "API_SEARCH_PROJECTS", new CancellationToken(), SearchText);
 
       if (retrievedPrograms.Count == 0)
       {
