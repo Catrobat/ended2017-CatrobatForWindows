@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Catrobat.Core.Models.OnlinePrograms
+﻿namespace Catrobat.Core.Models.OnlinePrograms
 {
   public class Category
   {
-    #region public properties
+    #region properties
 
     public string DisplayName { get; set; }
 

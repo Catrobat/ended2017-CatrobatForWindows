@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.Devices.SmartCards;
 using Catrobat.Core.Models.OnlinePrograms;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Catrobat.Core.Resources.Localization;
@@ -19,10 +12,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
   {
     #region attributes
 
-    private bool linkIsVisible_;
-    private bool isImporting_;
-    private bool buttonDownloadEnabled_;
-    private readonly object importLock_ = new object();
+    private bool _linkIsVisible;
+    private bool _isDownloading;
+
+    private readonly object _importLock = new object();
     private MessageboxResult _cancelImportCallbackResult;
 
     #endregion
@@ -33,49 +26,31 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     public bool LinkIsVisible
     {
-      get { return linkIsVisible_; }
+      get { return _linkIsVisible; }
       set
       {
-        if (linkIsVisible_ == value)
+        if (_linkIsVisible == value)
         {
           return;
         }
 
-        linkIsVisible_ = value;
+        _linkIsVisible = value;
         RaisePropertyChanged(nameof(LinkIsVisible));
       }
     }
 
-    public bool ButtonDownloadIsEnabled
+    public bool IsDownloading
     {
-      get { return buttonDownloadEnabled_; }
+      get { return _isDownloading; }
       set
       {
-        if (buttonDownloadEnabled_ == value)
+        if (_isDownloading == value)
         {
           return;
         }
 
-        buttonDownloadEnabled_ = value;
-        RaisePropertyChanged(nameof(ButtonDownloadIsEnabled));
-        DownloadRelayCommand.RaiseCanExecuteChanged();
-        
-      }
-    }
-
-    public bool IsImporting
-    {
-      get { return isImporting_; }
-      set
-      {
-        if (isImporting_ == value)
-        {
-          return;
-        }
-
-        isImporting_ = value;
-        RaisePropertyChanged(nameof(IsImporting));
-        CancelDownloadRelayCommand.RaiseCanExecuteChanged();
+        _isDownloading = value;
+        RaisePropertyChanged(nameof(IsDownloading));
       }
     }
 
@@ -83,11 +58,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #region commands
 
-    public RelayCommand CancelDownloadRelayCommand { get; }
+    public ICommand DownloadCommand => new RelayCommand(Download);
 
-    public RelayCommand DownloadRelayCommand { get; }
-
-    public ICommand DownloadCommand => DownloadRelayCommand;
+    public ICommand CancelDownloadCommand => new RelayCommand(CancelDownload);
 
     public ICommand ReportCommand => new RelayCommand(Report);
 
@@ -95,27 +68,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #endregion
 
-    #region command can execute
-    private bool DownloadCommand_CanExecute()
-    {
-      return ButtonDownloadIsEnabled;
-    }
-
-    private bool CancelDownloadCommand_CanExecute()
-    {
-      return IsImporting;
-    }
-    #endregion
-
     #region construction
 
     public DetailedProgramViewModel()
     {
-      DownloadRelayCommand = new RelayCommand(Download, DownloadCommand_CanExecute);
-      CancelDownloadRelayCommand = new RelayCommand(CancelDownload, CancelDownloadCommand_CanExecute);
-      
       LinkIsVisible = false;
-      buttonDownloadEnabled_ = true;
 
       Messenger.Default.Register<GenericMessage<ProgramInfo>>(this,
                ViewModelMessagingToken.ShowDetailedOnlineProgram, ShowDetailedOnlineProgramMessageAction);
@@ -132,30 +89,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       Program = message.Content;
     }
 
-    private void Report()
-    {
-      
-    }
-
-    private void ShowLink()
-    {
-      LinkIsVisible = true;
-    }
-
     private async void Download()
     {
-      lock (importLock_)
+      // TODO: Taken from previous version, needs to be redone.
+      lock (_importLock)
       {
-        if (IsImporting)
+        if (IsDownloading)
         {
           ServiceLocator.NotifictionService.ShowMessageBox(
               AppResourcesHelper.Get("Main_OnlineProgramLoading"),
               AppResourcesHelper.Get("Main_OnlineProgramDownloadBusy"),
-              CancelImportCallback, MessageBoxOptions.Ok);
+              CancelImportCallback, MessageBoxOptions.OkCancel);
           return;
         }
 
-        IsImporting = true;
+        IsDownloading = true;
       }
 
       var message = new GenericMessage<string>(Program.Name);
@@ -173,24 +121,37 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       {
         ServiceLocator.DispatcherService.RunOnMainThread(() =>
         {
-          lock (importLock_) { IsImporting = false; }
+          lock (_importLock) { IsDownloading = false; }
         });
       }
     }
 
     private async void CancelDownload()
     {
+      // TODO: Taken from previous version, needs to be redone.
       await ServiceLocator.ProgramImportService.CancelImport();
+    }
+
+    private void Report()
+    {
+      // To be implemented.
+    }
+
+    private void ShowLink()
+    {
+      LinkIsVisible = true;
     }
 
     private void CancelImportCallback(MessageboxResult result)
     {
+      // TODO: Taken from previous version, needs to be redone.
       _cancelImportCallbackResult = result;
       if (_cancelImportCallbackResult == MessageboxResult.Cancel)
       {
         ServiceLocator.ProgramImportService.CancelImport();
       }
     }
+
     #endregion
   }
 }

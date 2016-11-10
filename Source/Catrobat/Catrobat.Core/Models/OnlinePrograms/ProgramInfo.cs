@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
+using System.Globalization;
 using Catrobat.IDE.Core.CatrobatObjects;
 
 namespace Catrobat.Core.Models.OnlinePrograms
@@ -59,7 +54,7 @@ namespace Catrobat.Core.Models.OnlinePrograms
         ? new Uri(header.FeaturedImage)
         : null;
       FileSize = header.FileSize != null
-        ? double.Parse(header.FileSize)
+        ? double.Parse(header.FileSize, NumberStyles.Any, new CultureInfo("en"))
         : 0;
       Id = header.ProjectId != null 
         ? uint.Parse(header.ProjectId) 
@@ -86,7 +81,7 @@ namespace Catrobat.Core.Models.OnlinePrograms
 
     #endregion
 
-    #region private helpers
+    #region helpers
 
     public static DateTime FromUnixTime(string unixTime)
     {

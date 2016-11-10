@@ -7,6 +7,7 @@
     xmlns:onlinePrograms="using:Catrobat.IDE.WindowsPhone.Views.Main.OnlinePrograms"
     DataContext="{Binding DetailedProgramViewModel, Source={StaticResource Locator}}">
   <views:ViewPageBase.Resources>
+    <converters:StringFormatConverter x:Key="StringFormatConverter"/>
     <converters:StringToUpperConverter x:Key="StringToUpperConverter"/>
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <converters:BoolToVisibilityInvertedConverter x:Key="BoolToVisibilityInvertedConverter"/>
@@ -170,7 +171,6 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
-          <onlinePrograms:StringFormatter x:Key="StringConverter" />
           <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextStyle}">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -182,6 +182,14 @@
           </Style>
           <Style TargetType="Path">
             <Setter Property="Fill" Value="{ThemeResource OnlineProgramAlternativeForegroundBrush}"/>
+          </Style>
+          <Style 
+              x:Key="UnitTextBlockStyle"
+              BasedOn="{StaticResource DefaultTextStyle}"
+              TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3, 0, 0, 0"/>
           </Style>
         </Grid.Resources>
         <Viewbox
@@ -312,24 +320,35 @@
           Grid.Column="2" 
           Grid.Row="1"
           Text="{Binding UploadedString}"/>
-        <TextBlock 
+        <StackPanel 
           Grid.Column="2" 
           Grid.Row="2"
-          Text="{Binding FileSize,
-            Converter={StaticResource ResourceKey=StringConverter},
-            ConverterParameter='\{0:N2} MB'}"/>
-        <TextBlock 
+          Orientation="Horizontal">
+          <TextBlock Text="{Binding FileSize,
+            Converter={StaticResource ResourceKey=StringFormatConverter},
+            ConverterParameter='\{0:N2}'}"/>
+          <TextBlock 
+            x:Uid="OnlineDetails_FileSize_Unit"
+            Style="{StaticResource UnitTextBlockStyle}"/>
+        </StackPanel>
+        <StackPanel 
           Grid.Column="2" 
           Grid.Row="3"
-          Text="{Binding Downloads,
-            Converter={StaticResource ResourceKey=StringConverter},
-            ConverterParameter='\{0} downloads'}"/>
-        <TextBlock 
+          Orientation="Horizontal">
+          <TextBlock Text="{Binding Downloads}"/>
+          <TextBlock 
+            x:Uid="OnlineDetails_Downloads_Unit"
+            Style="{StaticResource UnitTextBlockStyle}"/>
+        </StackPanel>
+        <StackPanel 
           Grid.Column="2" 
           Grid.Row="4"
-          Text="{Binding Views,
-            Converter={StaticResource ResourceKey=StringConverter},
-            ConverterParameter='\{0} views'}"/>
+          Orientation="Horizontal">
+          <TextBlock Text="{Binding Views}"/>
+          <TextBlock 
+            x:Uid="OnlineDetails_Views_Unit"
+            Style="{StaticResource UnitTextBlockStyle}"/>
+        </StackPanel>
       </Grid>
       <Border 
         Margin="0,10"

@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catrobat.Core.Models.OnlinePrograms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
-using System.Net.Http;
 using System.Threading;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
-using Catrobat.Core.Resources;
 using Catrobat.IDE.Core.CatrobatObjects;
 using GalaSoft.MvvmLight;
 
@@ -19,14 +13,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 {
   public class CategoryViewModel : ObservableObject
   {
-    #region private 
+    #region attributes 
+
+    private const int ProgramsPerLine = 2;
 
     private readonly ProgramsViewModel _programsViewModel;
     private int _programOffset;
 
     #endregion
 
-    #region public properties
+    #region properties
 
     public Category Category { get; }
 
@@ -34,7 +30,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     #endregion
 
-    #region public interfaces
+    #region interfaces
 
     public void ResetPrograms()
     {
@@ -70,7 +66,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       while(true)
       { 
         var retrievedPrograms = await _programsViewModel.GetPrograms(
-        Programs.Count + _programOffset, 2, Category.SearchKeyWord, new CancellationToken());
+          Programs.Count + _programOffset, ProgramsPerLine, 
+          Category.SearchKeyWord, new CancellationToken());
 
         if (CheckForDuplicates(retrievedPrograms))
         {
@@ -93,25 +90,17 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
       switch (Category.SearchKeyWord)
       {
         case "API_RECENT_PROJECTS":
-          if (Programs.Any(p => p.Program.Uploaded <= ProgramInfo.FromUnixTime(retrievedPrograms.First().Uploaded)))
-            return true;
-          break;
+          return Programs.Any(p => p.Program.Uploaded <= ProgramInfo.FromUnixTime(retrievedPrograms.First().Uploaded));
 
         case "API_MOSTDOWNLOADED_PROJECTS":
-          if (Programs.Any(p => p.Program.Downloads <= Convert.ToUInt32(retrievedPrograms.First().Downloads)))
-            return true;
-          break;
+          return Programs.Any(p => p.Program.Downloads <= Convert.ToUInt32(retrievedPrograms.First().Downloads));
 
         case "API_MOSTVIEWED_PROJECTS":
-          if (Programs.Any(p => p.Program.Views <= Convert.ToUInt32(retrievedPrograms.First().Views)))
-            return true;
-          break;
+          return Programs.Any(p => p.Program.Views <= Convert.ToUInt32(retrievedPrograms.First().Views));
 
         default:
           throw new Exception("Unknown Category.SearchKeyWord: " + Category.SearchKeyWord);
       }
-
-      return false;
     }
 
     #endregion

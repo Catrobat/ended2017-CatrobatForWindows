@@ -274,6 +274,7 @@
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="UI\Converters\BoolToSelectedPivotItemConverter.cs" />
+    <Compile Include="UI\Converters\StringFormatConverter.cs" />
     <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="UI\Converters\BoolToVisibilityInvertedConverter.cs" />
     <Compile Include="UI\Converters\BoolVisibilityConverter.cs" />

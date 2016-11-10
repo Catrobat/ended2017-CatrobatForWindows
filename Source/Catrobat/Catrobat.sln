@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat", "Catrobat", "{F4DC1FC7-F8C6-4531-A637-B99E4D3B6D9D}"
 EndProject
@@ -29,50 +29,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Test", "Catrobat.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.XML_Test", "Catrobat.XML_Test\Catrobat.XML_Test.csproj", "{E139CD96-941B-41C0-82B9-D7A2D3B12A05}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D4DDA35-C5DF-4E22-B283-378C9F3A95FD}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{ec31c574-6a2a-4056-bd46-4b58891acd8b}*SharedItemsImports = 13
 		..\..\Submodules\CatrobatForWindowsSubPlayer\Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{4b55f37f-21d4-40ee-8c6b-7fe0f32f61be}*SharedItemsImports = 9
 		..\..\Submodules\CatrobatForWindowsSubPlayer\Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{54144ca7-b859-4f79-b682-dad92b4e3353}*SharedItemsImports = 4
 		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{fbb3118e-1a31-47fa-bf90-bc92c3e1ba4a}*SharedItemsImports = 4
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Catrobat\\Catrobat.Shared\\Catrobat.Shared.projitems
-		SccProjectTopLevelParentUniqueName1 = Catrobat.sln
-		SccProjectName1 = Catrobat/Catrobat.Shared
-		SccLocalPath1 = Catrobat\\Catrobat.Shared
-		SccProjectUniqueName2 = Catrobat\\Catrobat.Shared\\Catrobat.Shared.shproj
-		SccProjectTopLevelParentUniqueName2 = Catrobat.sln
-		SccProjectName2 = Catrobat/Catrobat.Shared
-		SccLocalPath2 = Catrobat\\Catrobat.Shared
-		SccProjectUniqueName3 = Catrobat\\Catrobat.WindowsPhone\\Catrobat.WindowsPhone.csproj
-		SccProjectTopLevelParentUniqueName3 = Catrobat.sln
-		SccProjectName3 = Catrobat/Catrobat.WindowsPhone
-		SccLocalPath3 = Catrobat\\Catrobat.WindowsPhone
-		SccProjectUniqueName4 = Catrobat.Player\\Catrobat.Player.WindowsPhone\\Catrobat.Player.WindowsPhone.vcxproj
-		SccProjectTopLevelParentUniqueName4 = Catrobat.sln
-		SccProjectName4 = Catrobat.Player/Catrobat.Player.WindowsPhone
-		SccLocalPath4 = Catrobat.Player\\Catrobat.Player.WindowsPhone
-		SccProjectUniqueName5 = Catrobat.Player\\Catrobat.Player.Shared\\Catrobat.Player.Shared.vcxitems
-		SccProjectTopLevelParentUniqueName5 = Catrobat.sln
-		SccProjectName5 = Catrobat.Player/Catrobat.Player.Shared
-		SccLocalPath5 = Catrobat.Player\\Catrobat.Player.Shared
-		SccProjectUniqueName6 = Catrobat.Xml\\Catrobat.Xml.csproj
-		SccProjectTopLevelParentUniqueName6 = Catrobat.sln
-		SccProjectName6 = Catrobat.Xml
-		SccLocalPath6 = Catrobat.Xml
-		SccProjectUniqueName7 = Catrobat.Core\\Catrobat.Core.csproj
-		SccProjectTopLevelParentUniqueName7 = Catrobat.sln
-		SccProjectName7 = Catrobat.Core
-		SccLocalPath7 = Catrobat.Core
-		SccProjectUniqueName8 = Catrobat.XML_Test\\Catrobat.XML_Test.csproj
-		SccProjectTopLevelParentUniqueName8 = Catrobat.sln
-		SccProjectName8 = Catrobat.XML_Test
-		SccLocalPath8 = Catrobat.XML_Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

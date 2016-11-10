@@ -32,10 +32,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     private const int InitialNumberOfFeaturedPrograms = 10;
     private const int InitialNumberOfSearchedPrograms = 10;
 
-    private bool inSearchMode_;
-    private string searchText_;
-    private bool internetAvailable_;
-    private bool noSearchResults_;
+    private bool _inSearchMode;
+    private string _searchText;
+    private bool _internetAvailable;
+    private bool _noSearchResults;
 
     #endregion
 
@@ -43,60 +43,60 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 
     public bool InSearchMode
     {
-      get { return inSearchMode_; }
+      get { return _inSearchMode; }
       set
       {
-        if (inSearchMode_ == value)
+        if (_inSearchMode == value)
         {
           return;
         }
 
-        inSearchMode_ = value;
+        _inSearchMode = value;
         RaisePropertyChanged(nameof(InSearchMode));
       }
     }
 
     public bool NoSearchResults
     {
-      get { return noSearchResults_; }
+      get { return _noSearchResults; }
       set
       {
-        if (noSearchResults_ == value)
+        if (_noSearchResults == value)
         {
           return;
         }
 
-        noSearchResults_ = value;
+        _noSearchResults = value;
         RaisePropertyChanged(nameof(NoSearchResults));
       }
     }
 
     public bool InternetAvailable
     {
-      get { return internetAvailable_; }
+      get { return _internetAvailable; }
       set
       {
-        if (internetAvailable_ == value)
+        if (_internetAvailable == value)
         {
           return;
         }
 
-        internetAvailable_ = value;
+        _internetAvailable = value;
         RaisePropertyChanged(nameof(InternetAvailable));
       }
     }
 
     public string SearchText
     {
-      get { return searchText_; }
+      get { return _searchText; }
       set
       {
-        if (searchText_ == value)
+        if (_searchText == value)
         {
           return;
         }
 
-        searchText_ = value;
+        _searchText = value;
         RaisePropertyChanged(nameof(SearchText));
       }
     }
