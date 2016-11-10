@@ -12,6 +12,7 @@ namespace Catrobat.Core.Models.OnlinePrograms
   public class ProgramInfo
   {
     #region public properties
+
     public string Author { get; set; }
 
     public string Description { get; set; }

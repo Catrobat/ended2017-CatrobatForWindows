@@ -21,12 +21,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
   {
     #region private 
 
-    private readonly ProgramsViewModel programsViewModel_;
-    private int programOffset_;
+    private readonly ProgramsViewModel _programsViewModel;
+    private int _programOffset;
 
     #endregion
 
     #region public properties
+
     public Category Category { get; }
 
     public ObservableCollection<SimpleProgramViewModel> Programs { get; set; }
@@ -54,7 +55,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     public CategoryViewModel(Category category, ProgramsViewModel programsViewModel)
     {
       Category = category;
-      programsViewModel_ = programsViewModel;
+      _programsViewModel = programsViewModel;
 
       Programs = new ObservableCollection<SimpleProgramViewModel>();
       ShowMore();
@@ -65,18 +66,15 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
     #region private helpers
 
     private async void ShowMore()
-    {
-      //TODO: Make use of the token?
-      var cancellationToken = new CancellationToken();
-      
+    {     
       while(true)
       { 
-        var retrievedPrograms = await programsViewModel_.GetPrograms(
-        Programs.Count + programOffset_, 2, Category.SearchKeyWord, cancellationToken);
+        var retrievedPrograms = await _programsViewModel.GetPrograms(
+        Programs.Count + _programOffset, 2, Category.SearchKeyWord, new CancellationToken());
 
         if (CheckForDuplicates(retrievedPrograms))
         {
-          programOffset_++;
+          _programOffset++;
           continue;
         }
 
@@ -108,6 +106,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
           if (Programs.Any(p => p.Program.Views <= Convert.ToUInt32(retrievedPrograms.First().Views)))
             return true;
           break;
+
+        default:
+          throw new Exception("Unknown Category.SearchKeyWord: " + Category.SearchKeyWord);
       }
 
       return false;
