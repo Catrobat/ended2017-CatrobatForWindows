@@ -63,7 +63,15 @@ namespace Catrobat.Core.Services.Common
                         actualJob = _saveJobQueue.Dequeue();
                     }
 
-                    await actualJob.ProgramToSave.Save();
+                    try
+                    {
+                        await actualJob.ProgramToSave.Save();
+                    }
+                    catch(Exception e)
+                    {
+                        Debug.WriteLine("Could not Save, Exception: " + e.Message);
+                        continue;
+                    }
                 }
 
                 // To ensure that the thread will do all savejobs left before stopping

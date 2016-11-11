@@ -203,8 +203,7 @@ namespace Catrobat.IDE.Core.Models
             }
             catch (System.Exception e)
             {
-                Debug.WriteLine("Could not Save, Exception: " + e.Message);
-                return;
+                throw e;
             }     
         }
 

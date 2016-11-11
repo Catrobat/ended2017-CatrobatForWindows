@@ -17,7 +17,7 @@ namespace Saving_Test
             Catrobat.Core.Services.Common.SaveHandler.addSaveJob(testprog);
             Queue<Catrobat.Core.Services.Common.SaveHandler.SaveJob> testqueue = Catrobat.Core.Services.Common.SaveHandler.GetQueue();
 
-            Assert.IsTrue(testqueue.Count == 2);
+            Assert.IsTrue(testqueue.Count == 1);
         }
 
         [TestMethod]
@@ -68,10 +68,26 @@ namespace Saving_Test
             Catrobat.IDE.Core.App.StopSaveThread();
 
             // lazy polling but it works
+            var now = DateTime.Now.TimeOfDay;
             while (SaveHandlerTask.Status == TaskStatus.Running)
-            {}
+            {
+                var nownow = DateTime.Now.TimeOfDay;
+                if (nownow.Seconds >= now.Seconds + 5)
+                    break;
+            }
 
             Assert.AreNotEqual(TaskStatus.Running, SaveHandlerTask.Status);
+        }
+
+        [TestMethod]
+        public void SaveHandlerNullJobTest()
+        {
+            var SaveHandlerTask = new Task(Catrobat.Core.Services.Common.SaveHandler.Execute);
+            SaveHandlerTask.Start();
+
+            Catrobat.Core.Services.Common.SaveHandler.addSaveJob(null);
+
+
         }
     }
 }
