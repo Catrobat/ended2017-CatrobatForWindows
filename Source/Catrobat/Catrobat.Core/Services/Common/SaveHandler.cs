@@ -35,6 +35,7 @@ namespace Catrobat.Core.Services.Common
 
             lock (QueueLock)
             {
+                if (!_saveJobQueue.Contains(newJob))
                 _saveJobQueue.Enqueue(newJob);
             }
 
