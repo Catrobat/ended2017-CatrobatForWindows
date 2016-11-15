@@ -232,8 +232,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void DeleteSpriteAction()
         {
             var sprite = AppResourcesHelper.Get("Editor_ObjectSingular");
-            var messageContent = String.Format(AppResourcesHelper.Get("Editor_MessageBoxDeleteText"), 
-                SelectedSprites.Count, sprite);
+            string messageBoxText;
+            if (SelectedSprites.Contains(CurrentProgram.Sprites[0]))
+            {
+                SelectedSprites.Remove(CurrentProgram.Sprites[0]);
+                messageBoxText = "Editor_MessageBoxBackgroundDeleteText";
+            }
+            else
+            {
+                messageBoxText = "Editor_MessageBoxDeleteText";
+            }
+            var messageContent = String.Format(AppResourcesHelper.Get(messageBoxText),
+               SelectedSprites.Count, sprite);
             var messageHeader = String.Format(AppResourcesHelper.Get("Editor_MessageBoxDeleteHeader"), sprite);
 
             ServiceLocator.NotifictionService.ShowMessageBox(messageHeader,
@@ -264,6 +274,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             //SelectedSprites = new ObservableCollection<Sprite>();
             base.GoBackAction();
+        }
+
+        public override void NavigateTo()
+        {
+            if (CurrentProgram != null && CurrentProgram.Background.Count == 0)
+            {
+                CurrentProgram.Background.Add(CurrentProgram.Sprites[0]);
+                CurrentProgram.Sprites.RemoveAt(0);
+            }
         }
 
         #endregion

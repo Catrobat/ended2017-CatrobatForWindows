@@ -1,8 +1,9 @@
 ﻿using System.Xml.Linq;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlComeToFrontBrick : XmlBrick
+    public partial class XmlComeToFrontBrick : XmlBrick, IComeToFrontBrick
     {
         public override bool Equals(System.Object obj)
         {
