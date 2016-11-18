@@ -1,0 +1,184 @@
+﻿<UserControl
+  x:Class="Catrobat.Views.Main.OnlinePrograms.ProgramsView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:Catrobat.Views.Main.OnlinePrograms" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+  xmlns:toolkit="using:WinRTXamlToolkit.Controls"
+  mc:Ignorable="d"
+  d:DesignHeight="300"
+  d:DesignWidth="400"
+  DataContext="{Binding 
+    MainViewModel.OnlineProgramsViewModel, 
+    Source={StaticResource Locator}}">
+  <UserControl.Resources>
+    <DataTemplate x:Key="SearchResultTemplate">
+      <local:SimpleProgramView/>
+    </DataTemplate>
+    <DataTemplate x:Key="CategoryTemplate">
+      <local:CategoryView/>
+    </DataTemplate>
+    <ControlTemplate 
+      x:Key="RoundButtonTemplate"
+      TargetType="Button">
+      <Border
+        Background="White"
+        BorderBrush="Black"
+        BorderThickness="2.5"
+        CornerRadius="20"
+        Height="40"
+        Width="40">
+        <ContentPresenter 
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"/>
+      </Border>
+    </ControlTemplate>
+    <Style x:Key="RoundButtonStyle" TargetType="Button">
+      <Setter Property="Margin" Value="5"/>
+      <Setter Property="MinHeight" Value="0"/>
+      <Setter Property="MinWidth" Value="0"/>
+      <Setter Property="Template" Value="{StaticResource RoundButtonTemplate}"/>
+    </Style>
+  </UserControl.Resources>
+  <ScrollViewer>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <StackPanel Grid.Row="0">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <local:SearchTextBox
+            Grid.Column="0"
+            Height="40"
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+          <Button
+            Command="{Binding SearchCommand}"
+            Grid.Column="1"
+            Style="{StaticResource RoundButtonStyle}"
+            Visibility="{Binding 
+              Path=InSearchMode, 
+              Converter={StaticResource BoolVisibilityNegativeConverter}}">
+            <Viewbox
+              Stretch="Uniform"
+              Margin="7">
+              <Viewbox.RenderTransform>
+                <TransformGroup>
+                  <RotateTransform Angle="-45"/>
+                  <TranslateTransform X="-2" Y="9.5"/>
+                </TransformGroup>
+              </Viewbox.RenderTransform>
+              <Path
+                Data="M 0 300 a 70 70 90 0 1 70 -70 l 400 0 
+                      a 300 300 90 0 1 300 -230 a 300 300 90 0 1 300 300 a 300 300 90 0 1 -300 300 a 300 300 90 0 1 -300 -230
+                      l -400 0 a 70 70 90 0 1 -70 -70 Z
+                      M 540 300 a 230 230 90 0 1 230 -230 a 230 230 90 0 1 230 230 a 230 230 90 0 1 -230 230 a 230 230 90 0 1 -230 -230 Z"
+                Fill="Black"
+                HorizontalAlignment="Center"
+                Stroke="Black"
+                StrokeThickness="20"
+                VerticalAlignment="Center">
+              </Path>
+            </Viewbox>
+          </Button>
+          <Button
+            Command="{Binding ExitSearchCommand}"
+            Grid.Column="1"
+            Style="{StaticResource RoundButtonStyle}"
+            Visibility="{Binding 
+              Path=InSearchMode, 
+              Converter={StaticResource BoolVisibilityConverter}}">
+            <Viewbox
+              Stretch="Fill"
+              Margin="11 11 10 10">
+              <Path
+                Data="M 0 0 l 100 100 M 0 100 l 100 -100"
+                HorizontalAlignment="Center"
+                Stroke="Black"
+                StrokeThickness="23"
+                VerticalAlignment="Center">
+              </Path>
+            </Viewbox>
+          </Button>
+        </Grid>
+      </StackPanel>
+      <Grid 
+        Grid.Row="1"
+        Visibility="{Binding 
+          Path=InternetAvailable, 
+          Converter={StaticResource BoolVisibilityConverter}}">
+        <StackPanel Visibility="{Binding 
+            Path=InSearchMode, 
+            Converter={StaticResource BoolVisibilityConverter}}">
+          <ListView   
+            ItemsSource="{Binding SearchResults}"
+            ItemTemplate="{StaticResource SearchResultTemplate}"
+            Margin="-5"
+            Visibility="{Binding 
+              Path=NoSearchResults, 
+              Converter={StaticResource BoolVisibilityNegativeConverter}}">
+            <ListView.ItemsPanel>
+              <ItemsPanelTemplate>
+                <toolkit:UniformGrid Columns="2"/>
+              </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+          </ListView>
+          <TextBlock
+            FontSize="25"
+            Foreground="Black" 
+            Margin="0 20"
+            Text="No Results found"
+            TextAlignment="Center"
+            Visibility="{Binding 
+              Path=NoSearchResults, 
+              Converter={StaticResource BoolVisibilityConverter}}"/>
+        </StackPanel>
+        <StackPanel Visibility="{Binding 
+            Path=InSearchMode, 
+            Converter={StaticResource BoolVisibilityNegativeConverter}}">
+          <local:FeaturedProgramsView DataContext="{Binding FeaturedPrograms}"/>
+          <ListView     
+            ItemsSource="{Binding Categories}"
+            ItemTemplate="{StaticResource CategoryTemplate}"/>
+        </StackPanel>
+      </Grid>
+      <Grid 
+        Grid.Row="1"
+        Visibility="{Binding 
+          Path=InternetAvailable, 
+          Converter={StaticResource BoolVisibilityNegativeConverter}}">
+        <TextBlock 
+          FontSize="25"
+          Foreground="Black"
+          Text="No Internet Connection"
+          TextAlignment="Center"/>
+        <Button
+          Command="{Binding ReloadCommand}"
+          HorizontalAlignment="Center"          
+          Margin="0 60"
+          Style="{StaticResource RoundButtonStyle}"
+          VerticalAlignment="Top">
+          <Viewbox
+            Margin="8"
+            Stretch="Uniform">
+            <Path
+              Data="M 250 150 a 100 100 90 0 1 -100 100 a 100 100 90 0 1 -100 -100 a 100 100 90 0 1 100 -100 l 0 55 l 80 -80 l -80 -80 l 0 55 a 150 150 90 0 0 -150 150 a 150 150 90 0 0 150 150 a 150 150 90 0 0 150 -150 Z"
+              Fill="Black"
+              HorizontalAlignment="Center"
+              Stroke="Black"
+              StrokeThickness="1"
+              VerticalAlignment="Center">
+            </Path>
+          </Viewbox>
+        </Button>
+      </Grid>
+    </Grid>
+  </ScrollViewer>
+</UserControl>
+

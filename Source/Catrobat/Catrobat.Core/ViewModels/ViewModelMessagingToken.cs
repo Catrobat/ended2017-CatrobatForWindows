@@ -31,6 +31,7 @@
         FormulaEvaluated,
         ClearPageCache,
         ExportStreamChanged,
-        ToastNotificationActivated
+        ToastNotificationActivated,
+        ShowDetailedOnlineProgram
     }
 }

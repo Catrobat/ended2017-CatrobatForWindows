@@ -6,6 +6,7 @@
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
   xmlns:controls1="using:WinRTXamlToolkit.Controls"
+  xmlns:OnlinePrograms="using:Catrobat.Views.Main.OnlinePrograms"
   mc:Ignorable="d"
   NavigationCacheMode="Enabled"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
@@ -50,7 +51,7 @@
         </HubSection.ContentTemplate>
       </HubSection>
 
-      <HubSection Name="HubSectionOnlinePrograms">
+      <HubSection Name="HubSectionOnlinePrograms" Visibility="Collapsed">
         <HubSection.HeaderTemplate>
           <DataTemplate>
             <StackPanel Orientation="Horizontal">
@@ -183,6 +184,23 @@
         </HubSection.ContentTemplate>
       </HubSection>
 
+      <HubSection>
+        <HubSection.HeaderTemplate>
+          <DataTemplate>
+            <TextBlock 
+              Text="{Binding 
+                Path=Resources.Main_HeaderOnlinePrograms, 
+                Source={StaticResource LocalizedStrings}}" 
+              Style="{ThemeResource TextHubHeaderStyle}"/>
+          </DataTemplate>
+        </HubSection.HeaderTemplate>
+        <HubSection.ContentTemplate>
+          <DataTemplate>
+            <OnlinePrograms:ProgramsView Margin="0, -26, 0, 0"/>
+          </DataTemplate>
+        </HubSection.ContentTemplate>
+      </HubSection>
+      
       <HubSection Name="HubSectionAbout">
         <HubSection.Header>
           <TextBlock Text="{Binding Resources.Main_HeaderAbout, 

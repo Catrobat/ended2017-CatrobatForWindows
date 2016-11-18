@@ -225,6 +225,27 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\CategoryView.xaml.cs">
+      <DependentUpon>CategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\DetailedProgramView.xaml.cs">
+      <DependentUpon>DetailedProgramView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\FeaturedProgramsView.xaml.cs">
+      <DependentUpon>FeaturedProgramsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\FeaturedProgramView.xaml.cs">
+      <DependentUpon>FeaturedProgramView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\ProgramsView.xaml.cs">
+      <DependentUpon>ProgramsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\SearchTextBox.xaml.cs">
+      <DependentUpon>SearchTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlinePrograms\SimpleProgramView.xaml.cs">
+      <DependentUpon>SimpleProgramView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\PlayerView.xaml.cs">
       <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
@@ -685,6 +706,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Main\OnlinePrograms\CategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\DetailedProgramView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\FeaturedProgramsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\FeaturedProgramView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\ProgramsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\OnlinePrograms\SimpleProgramView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Main\PlayerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -797,6 +846,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <PRIResource Include="Resources\en-US\Resources.resw" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

@@ -20,6 +20,8 @@ namespace Catrobat.IDE.Core.Services
         
         Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(string filterText, int offset, int count, CancellationToken taskCancellationToken);
 
+        Task<List<OnlineProgramHeader>> LoadOnlinePrograms(string category, int offset, int count, CancellationToken token, string additionalSearchText = null);
+
         Task<Stream> DownloadAsync(string downloadUrl, string programName, CancellationToken taskCancellationToken);
 
         Task DownloadAsyncAlternativ(string downloadUrl, string programName);
