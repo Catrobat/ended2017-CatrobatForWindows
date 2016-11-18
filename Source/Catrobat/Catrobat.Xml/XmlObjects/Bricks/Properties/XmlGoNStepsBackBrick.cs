@@ -4,7 +4,7 @@ using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlGoNStepsBackBrick : XmlBrick//, //IGoNStepsBackBrick
+    public partial class XmlGoNStepsBackBrick : XmlBrick, IGoNStepsBackBrick
     {
         #region NativeInterface
         public IFormulaTree Steps
