@@ -35,7 +35,15 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public IList<IUserVariable> Variables
         {
-            get { return VariableList.ProgramVariableList.UserVariableReferences.Cast<IUserVariable>().ToList(); }
+            get
+            {
+                List<IUserVariable> userVariableList = new List<IUserVariable>();
+                foreach (XmlUserVariableReference varReference in VariableList.ProgramVariableList.UserVariableReferences)
+                {
+                    userVariableList.Add(varReference.UserVariable);
+                }
+                return userVariableList;
+            }
             set { }
         }
 
