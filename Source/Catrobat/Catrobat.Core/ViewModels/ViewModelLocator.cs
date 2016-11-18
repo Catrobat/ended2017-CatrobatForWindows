@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
 using System.ComponentModel;
@@ -65,7 +66,8 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<ProgramExportViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<InformationViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<PlayerViewModel>(TypeCreationMode.Normal);
-            }
+                ServiceLocator.Register<DetailedProgramViewModel>(TypeCreationMode.Normal);
+      }
 
         }
 
@@ -513,9 +515,20 @@ namespace Catrobat.IDE.Core.ViewModels
             }
         }
 
-        #endregion
+        [SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public DetailedProgramViewModel DetailedProgramViewModel
+        {
+          get
+          {
+            return ServiceLocator.GetInstance<DetailedProgramViewModel>();
+          }
+        }
 
-        public static void Cleanup()
+    #endregion
+
+    public static void Cleanup()
         {
         }
 

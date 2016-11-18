@@ -1045,7 +1045,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>My programs</value>
   </data>
   <data name="Main_HeaderOnlinePrograms" xml:space="preserve">
-    <value>pocketcode.org</value>
+    <value>Online</value>
   </data>
   <data name="Main_HeaderSettings" xml:space="preserve">
     <value>settings</value>

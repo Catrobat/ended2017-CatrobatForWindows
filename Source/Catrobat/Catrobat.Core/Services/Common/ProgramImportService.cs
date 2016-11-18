@@ -16,13 +16,14 @@ using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Messaging;
 using Catrobat.Core.Resources.Localization;
+using Catrobat.Core.Models.OnlinePrograms;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class ProgramImportService : IProgramImportService
     {
         private Stream _programStream;
-        private OnlineProgramHeader _onlineProgramHeader;
+        private ProgramInfo _onlineProgram;
         private string _programName;
         private CancellationTokenSource _cancellationTokenSource;
         private MessageboxResult _missingFilesCallbackResult;
@@ -32,10 +33,10 @@ namespace Catrobat.IDE.WindowsShared.Services
             _programStream = programStream;
         }
 
-        public void SetDownloadHeader(OnlineProgramHeader programHeader)
+        public void SetDownloadHeader(ProgramInfo program)
         {
-            _onlineProgramHeader = programHeader;
-            _programName = _onlineProgramHeader.ProjectName;
+            _onlineProgram = program;
+            _programName = _onlineProgram.Name;
         }
 
         public async Task<ExtractProgramResult> ExtractProgram(CancellationToken taskCancellationToken)
@@ -44,29 +45,29 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             try
             {
-                if (_programStream == null && _onlineProgramHeader == null)
+                if (_programStream == null && _onlineProgram == null)
                     throw new Exception(
                         "SetProgramStream or SetDownloadHeader have to be called before calling StartImportProgram.");
 
-                if (_programStream == null && _onlineProgramHeader == null)
+                if (_programStream == null && _onlineProgram == null)
                     throw new Exception("SetProgramStream and SetDownloadHeader cannot be used together.");
 
                 // old simple portable downloader
                 var cancellationTokenSource = new CancellationTokenSource();
-                if (_onlineProgramHeader != null)
+                if (_onlineProgram != null)
                 {
                     _programStream = await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsync(
-                        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName, cancellationTokenSource.Token), taskCancellationToken);
+                        _onlineProgram.DownloadUrl, _onlineProgram.Name, cancellationTokenSource.Token), taskCancellationToken);
                 }
                 // new downloader
-                //if (_onlineProgramHeader != null)
+                //if (_onlineProgram != null)
                 //{
                 //    await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsyncAlternativ(
-                //        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName), taskCancellationToken);
+                //        _onlineProgram.DownloadUrl, _onlineProgram.ProjectName), taskCancellationToken);
                 //}
                 //using (var storage = StorageSystem.GetStorage())
                 //{
-                //    var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramImportZipPath, _onlineProgramHeader.ProjectName + ".catrobat"),
+                //    var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramImportZipPath, _onlineProgram.ProjectName + ".catrobat"),
                 //            StorageFileMode.Open, StorageFileAccess.Read); 
                 //    await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
                 //       stream, StorageConstants.TempProgramImportPath);

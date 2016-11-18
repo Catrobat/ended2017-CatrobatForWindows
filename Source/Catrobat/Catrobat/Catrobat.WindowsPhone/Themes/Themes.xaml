@@ -5,6 +5,13 @@
 
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key="Default">
+      
+      <!-- Default Colors -->
+      <Color x:Key="PocketCodeLightTurquoiseColor">#FF19A5B4</Color>
+      <Color x:Key="PocketCodeDarkTurquoiseColor">#FF008C96</Color>
+      <Color x:Key="PocketCodeLightOrangeColor">#FFFFE6C8</Color>
+      <Color x:Key="PocketCodeDarkOrangeColor">#FFFF7800</Color>
+      
       <!-- Accent colors and brushes -->
       <Color x:Key="Accent1Color">#FF880088</Color>
       <Color x:Key="Accent2Color">#FF8899AA</Color>
@@ -14,35 +21,18 @@
       <SolidColorBrush x:Key="Accent2Brush" Color="{ThemeResource Accent2Color}" />
       <SolidColorBrush x:Key="Accent3Brush" Color="{ThemeResource Accent3Color}" />
 
-
-
       <!-- Brushes -->
-      <Color x:Key="AppBackgroundColor">#FFFFFFFF</Color>
-      <SolidColorBrush x:Key="AppBackgroundBrush" Color="{ThemeResource AppBackgroundColor}" />
 
-      <Color x:Key="AppBarBackgroundColor">#FF19a5b8</Color>
-      <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="{ThemeResource AppBarBackgroundColor}" />
-
-      <Color x:Key="FormulaBackgroundColor">#FF000000</Color>
-      <SolidColorBrush x:Key="FormulaBackgroundBrush" Color="{ThemeResource FormulaBackgroundColor}" />
-
-      <Color x:Key="OnlineProgramsBackgroundColor">#FF99AACC</Color>
-      <SolidColorBrush x:Key="OnlineProgramsBackgroundBrush" Color="{ThemeResource OnlineProgramsBackgroundColor}" />
-
-      <Color x:Key="ProcessIconBackgroundColor">#FF667799</Color>
-      <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="{ThemeResource ProcessIconBackgroundColor}" />
-
-      <Color x:Key="BrickBorderColor">#FFFFFFFF</Color>
-      <SolidColorBrush x:Key="BrickBorderBrush" Color="{ThemeResource BrickBorderColor}" />
-
-      <Color x:Key="BrickForegroundColor">#FFFFFFFF</Color>
-      <SolidColorBrush x:Key="BrickForegroundBrush" Color="{ThemeResource BrickForegroundColor}" />
-
+      
+      <SolidColorBrush x:Key="AppBackgroundBrush" Color="White" />
+      <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="{ThemeResource PocketCodeLightTurquoiseColor}" />
+      <SolidColorBrush x:Key="FormulaBackgroundBrush" Color="Black" />
+      <SolidColorBrush x:Key="OnlineProgramsBackgroundBrush" Color="#FF99AACC" />
+      <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="#FF667799" />
+      <SolidColorBrush x:Key="BrickBorderBrush" Color="White" />
+      <SolidColorBrush x:Key="BrickForegroundBrush" Color="White" />
       <SolidColorBrush x:Key="HyperLinkForegroundBrush" Color="{ThemeResource Accent1Color}" />
-
-      <Color x:Key="TextSubtileColor">#FF888888</Color>
-      <SolidColorBrush x:Key="TextSubtileBrush" Color="{ThemeResource TextSubtileColor}" />
-
+      <SolidColorBrush x:Key="TextSubtileBrush" Color="#FF888888" />
 
       <!-- Action Brushes -->
       <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />
@@ -55,14 +45,25 @@
       <SolidColorBrush x:Key="ControlBrickBrush" Color="#FFF79761" />
       <SolidColorBrush x:Key="VariableBrickBrush" Color="#FFEF4E51" />
 
-      <!-- Font Sizes -->
-      <!--<system:Double x:Key="FontSizeSmall">12</system:Double>
-      <system:Double x:Key="FontSizeSmaller">15</system:Double>
-      <system:Double x:Key="FontSizeNormal">18</system:Double>
-      <system:Double x:Key="FontSizeLarger">22</system:Double>
-      <system:Double x:Key="FontSizeLarge">30</system:Double>
-      <system:Double x:Key="FontSizeExtraLarge">40</system:Double>
-      <system:Double x:Key="FontSizeExtraExtraLarger">50</system:Double>-->
+      <!-- Online Program View Brushes -->
+      <SolidColorBrush 
+        x:Key="OnlineProgramDefaultForegroundBrush" 
+        Color="{ThemeResource PocketCodeLightTurquoiseColor}"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramAlternativeForegroundBrush" 
+        Color="{ThemeResource PocketCodeDarkTurquoiseColor}"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramImageBorderBrush" 
+        Color="LightGray"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramReportButtonBrush" 
+        Color="Black"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramDownloadButtonForegroundBrush" 
+        Color="{ThemeResource PocketCodeLightOrangeColor}"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramDownloadButtonBackgroundBrush" 
+        Color="{ThemeResource PocketCodeDarkOrangeColor}"/>
 
       <!--Title Styles-->
       <Style x:Key="TextTitleLargeStyle" TargetType="TextBlock">

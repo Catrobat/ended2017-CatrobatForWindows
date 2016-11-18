@@ -17,6 +17,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.Core.Resources;
+using Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
@@ -153,6 +154,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             get { return _isLoadingOnlinePrograms; }
             set { _isLoadingOnlinePrograms = value; RaisePropertyChanged(() => IsLoadingOnlinePrograms); }
         }
+
+        public ProgramsViewModel OnlineProgramsViewModel { get; set; }
 
         #endregion
 
@@ -360,6 +363,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<ToastTag>>(this,
                 ViewModelMessagingToken.ToastNotificationActivated, ToastNotificationActivatedMessageAction);
+
+            OnlineProgramsViewModel = new ProgramsViewModel();
         }
 
         #region MessageBoxCallback
@@ -396,6 +401,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 _programsToDelete.Add(programNameToDelete);
                 programToDelete.IsDeleting = true;
                 deleteStartTime = DateTime.UtcNow;
+
+                _programsToDelete.Add(programNameToDelete);
 
                 if (_isDeleting)
                     return;
