@@ -13,10 +13,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         private Sprite _receivedSelectedSprite;
         private Sound _receivedSound;
         private string _soundName;
+        private Program _currentProgram;
+
 
         #endregion
 
         #region Properties
+
+        public Program CurrentProgram
+        {
+            get { return _currentProgram; }
+            private set
+            {
+                _currentProgram = value;
+            }
+        }
 
         public Sound ReceivedSound
         {
@@ -82,6 +93,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
                 }
                 SoundName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
                 ReceivedSound.Name = SoundName;
+                CurrentProgram.Save();
             }
             base.GoBackAction();
         }
@@ -128,11 +140,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
             Messenger.Default.Register<GenericMessage<Sound>>(this, 
                 ViewModelMessagingToken.SoundNameListener, ChangeSoundNameMessageAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this,
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         private void ResetViewModel()
         {
             SoundName = "";
+        }
+
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
+        {
+            CurrentProgram = message.Content;
         }
     }
 }

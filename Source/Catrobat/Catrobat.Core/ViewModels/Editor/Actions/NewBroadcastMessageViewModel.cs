@@ -10,12 +10,22 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
     {
         #region private Members
 
+        private Program _currentProgram;
         private BroadcastMessage _broadcastMessage;
         private ModelBase _broadcastObject;
 
         #endregion
 
         #region Properties
+
+        public Program CurrentProgram
+        {
+            get { return _currentProgram; }
+            private set
+            {
+                _currentProgram = value;
+            }
+        }
 
         public BroadcastMessage BroadcastMessage
         {
@@ -71,6 +81,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                 (_broadcastObject as BroadcastSendBlockingBrick).Message = BroadcastMessage;
             }
 
+            CurrentProgram.Save();
+
             base.GoBackAction();
         }
 
@@ -92,6 +104,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         #endregion
 
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
+        {
+            CurrentProgram = message.Content;
+        }
+
         public NewBroadcastMessageViewModel()
         {
             // Commands
@@ -100,6 +117,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
             Messenger.Default.Register<GenericMessage<ModelBase>>(this, 
                 ViewModelMessagingToken.BroadcastObjectListener, ReceiveBroadcastObjectAction);
+
+            Messenger.Default.Register<GenericMessage<Program>>(this,
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         private void ResetViewModel()

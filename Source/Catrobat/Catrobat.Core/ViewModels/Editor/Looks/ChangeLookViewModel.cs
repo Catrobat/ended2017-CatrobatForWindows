@@ -93,6 +93,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
                 }
                 LookName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
                 ReceivedLook.Name = LookName;
+                CurrentProgram.Save();
             }
             base.GoBackAction();
         }

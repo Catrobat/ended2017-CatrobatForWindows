@@ -267,6 +267,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public RelayCommand SaveCommand { get; private set; }
         private void SaveAction()
         {
+            CurrentProgram.Save();
             GoBackAction();
         }
 

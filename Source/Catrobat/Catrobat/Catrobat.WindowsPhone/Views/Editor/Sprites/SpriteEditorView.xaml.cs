@@ -43,7 +43,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             ListViewLooks.ItemWidthPortrait = width;
             ListViewSounds.ItemWidthLandscape = height;
             ListViewSounds.ItemWidthPortrait = width;
-           
+
             CreateCommandBars();
 
             BottomAppBar = _commandBarActions;
@@ -144,6 +144,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             {
                 case MultiModeEditorCommandBarMode.Normal:
                     listView.SelectionEnabled = false;
+                    _viewModel.CurrentProgram.Save();
                     break;
                 case MultiModeEditorCommandBarMode.Select:
                     listView.SelectionEnabled = true;

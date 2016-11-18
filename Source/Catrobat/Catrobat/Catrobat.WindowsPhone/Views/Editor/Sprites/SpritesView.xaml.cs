@@ -54,6 +54,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 case MultiModeEditorCommandBarMode.Normal:
                     listView.ReorderEnabled = false;
                     listView.SelectionEnabled = false;
+                    _viewModel.CurrentProgram.Save();
                     break;
                 case MultiModeEditorCommandBarMode.Reorder:
                     listView.SelectionEnabled = false;

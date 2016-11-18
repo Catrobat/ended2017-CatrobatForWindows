@@ -377,7 +377,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView
                     Clvw.Items.Insert(actSourceIndex + 1, groupedItems[i]);
                 }
             }
-
+            
             Clvw.Items[actSourceIndex] = originalContent.Content;
 
         }

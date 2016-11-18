@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat", "Catrobat", "{F4DC1FC7-F8C6-4531-A637-B99E4D3B6D9D}"
 EndProject
@@ -29,11 +29,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Test", "Catrobat.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.XML_Test", "Catrobat.XML_Test\Catrobat.XML_Test.csproj", "{E139CD96-941B-41C0-82B9-D7A2D3B12A05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saving_Test", "Saving_Test\Saving_Test.csproj", "{2F87AC17-B7D6-4B03-B180-E7A376330A3B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{ec31c574-6a2a-4056-bd46-4b58891acd8b}*SharedItemsImports = 13
 		..\..\Submodules\CatrobatForWindowsSubPlayer\Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{4b55f37f-21d4-40ee-8c6b-7fe0f32f61be}*SharedItemsImports = 9
 		..\..\Submodules\CatrobatForWindowsSubPlayer\Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{54144ca7-b859-4f79-b682-dad92b4e3353}*SharedItemsImports = 4
+		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{ec31c574-6a2a-4056-bd46-4b58891acd8b}*SharedItemsImports = 13
 		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{fbb3118e-1a31-47fa-bf90-bc92c3e1ba4a}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,6 +159,28 @@ Global
 		{E139CD96-941B-41C0-82B9-D7A2D3B12A05}.Release|x86.ActiveCfg = Release|x86
 		{E139CD96-941B-41C0-82B9-D7A2D3B12A05}.Release|x86.Build.0 = Release|x86
 		{E139CD96-941B-41C0-82B9-D7A2D3B12A05}.Release|x86.Deploy.0 = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|ARM.Build.0 = Debug|ARM
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|x64.ActiveCfg = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|x86.ActiveCfg = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|x86.Build.0 = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Debug|x86.Deploy.0 = Debug|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|Any CPU.ActiveCfg = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|ARM.ActiveCfg = Release|ARM
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|ARM.Build.0 = Release|ARM
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|ARM.Deploy.0 = Release|ARM
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|x64.ActiveCfg = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|x86.ActiveCfg = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|x86.Build.0 = Release|x86
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,5 +195,6 @@ Global
 		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E} = {F4DC1FC7-F8C6-4531-A637-B99E4D3B6D9D}
 		{084E9821-E283-40F0-BECE-8A6722B4F0A0} = {F4DC1FC7-F8C6-4531-A637-B99E4D3B6D9D}
 		{E139CD96-941B-41C0-82B9-D7A2D3B12A05} = {084E9821-E283-40F0-BECE-8A6722B4F0A0}
+		{2F87AC17-B7D6-4B03-B180-E7A376330A3B} = {084E9821-E283-40F0-BECE-8A6722B4F0A0}
 	EndGlobalSection
 EndGlobal

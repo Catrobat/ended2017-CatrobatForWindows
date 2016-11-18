@@ -53,6 +53,13 @@ namespace Catrobat.IDE.Core.Models
             set { Set(ref _background, value); }
         }
 
+        private ObservableCollection<Sprite> _spritesMerged = new ObservableCollection<Sprite>();
+        public ObservableCollection<Sprite> SpritesMerged
+        {
+            get { return _spritesMerged; }
+            set { Set(ref _spritesMerged, value); }
+        }
+
         private ObservableCollection<GlobalVariable> _globalVariables = new ObservableCollection<GlobalVariable>();
         public ObservableCollection<GlobalVariable> GlobalVariables
         {
@@ -154,26 +161,50 @@ namespace Catrobat.IDE.Core.Models
             Name = newProgramName;
         }
 
-        public async Task Save(string path = null)
+        public void SaveWithSaveHandler()
         {
-            if (path == null)
-                path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
+            Catrobat.Core.Services.Common.SaveHandler.addSaveJob(this);
+        }
 
-            var programConverter = new ProgramConverter();
+        public void MergeSpriteCollection()
+        {
+            SpritesMerged.Clear();
+
+            for (int count = 0; count < Sprites.Count; count++)
+            {
+                SpritesMerged.Add(Sprites[count]);
+            }
+
             if (Background != null && Background.Count != 0)
             {
-                Sprites.Insert(0, Background[0]);
-                Background.RemoveAt(0);
+                SpritesMerged.Insert(0, Background[0]);
             }
-            
-            var xmlProgram = programConverter.Convert(this);
+        }
 
-            var xmlString = xmlProgram.ToXmlString();
-
-            using (var storage = StorageSystem.GetStorage())
+        public async Task Save(string path = null)
+        {
+            try
             {
-                await storage.WriteTextFileAsync(path, xmlString);
+                if (path == null)
+                    path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
+
+                var programConverter = new ProgramConverter();
+
+                MergeSpriteCollection();
+
+                var xmlProgram = programConverter.Convert(this);
+
+                var xmlString = xmlProgram.ToXmlString();
+
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    await storage.WriteTextFileAsync(path, xmlString);
+                }
             }
+            catch (System.Exception e)
+            {
+                throw e;
+            }     
         }
 
         public void Undo()

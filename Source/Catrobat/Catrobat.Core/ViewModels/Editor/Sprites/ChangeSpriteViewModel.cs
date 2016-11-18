@@ -34,6 +34,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
+        public Program CurrentProgram
+        {
+            get { return _currentProgram; }
+            private set
+            {
+                _currentProgram = value;
+            }
+        }
+
         public string SpriteName
         {
             get { return _spriteName; }
@@ -46,18 +55,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 _spriteName = value;
                 RaisePropertyChanged(() => SpriteName);
                 SaveCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public Program CurrentProgram
-        {
-            get { return _currentProgram; }
-            set
-            {
-                _currentProgram = value;
-
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -99,6 +96,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 }
                 SpriteName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
                 SelectedSprite.Name = SpriteName;
+
+                CurrentProgram.Save();
             }
 
             ResetViewModel();
@@ -123,7 +122,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            _currentProgram = message.Content;
+            CurrentProgram = message.Content;
         }
 
         private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)

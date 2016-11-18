@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.ViewModels.Settings;
 using GalaSoft.MvvmLight.Messaging;
 using System.Globalization;
 using System.Threading.Tasks;
+using System.Threading;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 using Catrobat.Core.Resources.Localization;
 
@@ -24,6 +25,12 @@ namespace Catrobat.IDE.Core
             _app = app;
         }
 
+        public static void InitializeSaveHandler()
+        {
+            var SaveHandlerTask = new Task(Catrobat.Core.Services.Common.SaveHandler.Execute);
+            SaveHandlerTask.Start();
+        }
+
         public static async Task Initialize()
         {
             if (_context != null)
@@ -32,6 +39,8 @@ namespace Catrobat.IDE.Core
             //_app.InitializeInterfaces();
             //((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
             ServiceLocator.ViewModelLocator.RaiseAppPropertiesChanged();
+
+            InitializeSaveHandler();
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -47,6 +56,11 @@ namespace Catrobat.IDE.Core
             {
                 await LoadContext();
             }
+        }
+
+        public static void StopSaveThread()
+        {
+            Catrobat.Core.Services.Common.SaveHandler.StopSaveThread();
         }
 
         private static async Task LoadContext()
@@ -139,7 +153,6 @@ namespace Catrobat.IDE.Core
             }
             catch (Exception e)
             {
-
                 throw;
             }
             //await ServiceLocator.TraceService.SaveLocal();

@@ -196,6 +196,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 SelectedVariableContainer.Variable = (Variable)SelectedGlobalVariable ?? SelectedLocalVariable;
             }
 
+            CurrentProgram.Save();
+
             ResetViewModel();
             base.GoBackAction();
         }
@@ -215,6 +217,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             if (SelectedLocalVariable != null)
                 VariableHelper.DeleteLocalVariable(CurrentProgram, CurrentSprite, SelectedLocalVariable);
+
+            CurrentProgram.Save();
         }
 
         private void EditVariableAction()
