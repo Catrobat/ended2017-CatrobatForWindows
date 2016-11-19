@@ -1,0 +1,129 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="using:System">
+
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Default">
+      
+      <!-- Default Colors -->
+      <Color x:Key="PocketCodeLightTurquoiseColor">#FF19A5B4</Color>
+      <Color x:Key="PocketCodeDarkTurquoiseColor">#FF008C96</Color>
+      <Color x:Key="PocketCodeLightOrangeColor">#FFFFE6C8</Color>
+      <Color x:Key="PocketCodeDarkOrangeColor">#FFFF7800</Color>
+      
+      <!-- Accent colors and brushes -->
+      <Color x:Key="Accent1Color">#FF880088</Color>
+      <Color x:Key="Accent2Color">#FF8899AA</Color>
+      <Color x:Key="Accent3Color">#FF888800</Color>
+
+      <SolidColorBrush x:Key="Accent1Brush" Color="{ThemeResource Accent1Color}" />
+      <SolidColorBrush x:Key="Accent2Brush" Color="{ThemeResource Accent2Color}" />
+      <SolidColorBrush x:Key="Accent3Brush" Color="{ThemeResource Accent3Color}" />
+
+      <!-- Brushes -->
+
+      
+      <SolidColorBrush x:Key="AppBackgroundBrush" Color="White" />
+      <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="{ThemeResource PocketCodeLightTurquoiseColor}" />
+      <SolidColorBrush x:Key="FormulaBackgroundBrush" Color="Black" />
+      <SolidColorBrush x:Key="OnlineProgramsBackgroundBrush" Color="#FF99AACC" />
+      <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="#FF667799" />
+      <SolidColorBrush x:Key="BrickBorderBrush" Color="White" />
+      <SolidColorBrush x:Key="BrickForegroundBrush" Color="White" />
+      <SolidColorBrush x:Key="HyperLinkForegroundBrush" Color="{ThemeResource Accent1Color}" />
+      <SolidColorBrush x:Key="TextSubtileBrush" Color="#FF888888" />
+
+      <!-- Action Brushes -->
+      <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />
+      <SolidColorBrush x:Key="LooksBrush" Color="#FF6F9263" />
+      <SolidColorBrush x:Key="ObjectsBrush" Color="#FF891D1D" />
+
+      <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF6A9B49" />
+      <SolidColorBrush x:Key="MotionBrickBrush" Color="#FF009EDA" />
+      <SolidColorBrush x:Key="SoundBrickBrush" Color="#FF8351A0" />
+      <SolidColorBrush x:Key="ControlBrickBrush" Color="#FFF79761" />
+      <SolidColorBrush x:Key="VariableBrickBrush" Color="#FFEF4E51" />
+
+      <!-- Online Program View Brushes -->
+      <SolidColorBrush 
+        x:Key="OnlineProgramDefaultForegroundBrush" 
+        Color="{ThemeResource PocketCodeLightTurquoiseColor}"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramAlternativeForegroundBrush" 
+        Color="{ThemeResource PocketCodeDarkTurquoiseColor}"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramImageBorderBrush" 
+        Color="LightGray"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramReportButtonBrush" 
+        Color="Black"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramDownloadButtonForegroundBrush" 
+        Color="{ThemeResource PocketCodeLightOrangeColor}"/>
+      <SolidColorBrush 
+        x:Key="OnlineProgramDownloadButtonBackgroundBrush" 
+        Color="{ThemeResource PocketCodeDarkOrangeColor}"/>
+
+      <!--Title Styles-->
+      <Style x:Key="TextTitleLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="30"/>
+      </Style>
+
+      <Style x:Key="TextTitleNormalStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+      </Style>
+
+      <Style x:Key="TextDoubleTitle1Style" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+      </Style>
+
+      <Style x:Key="TextDoubleTitle2Style" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="{ThemeResource TextSubtileBrush}"/>
+      </Style>
+
+      <!--Text Styles-->
+      <Style x:Key="TextSubtileStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{ ThemeResource TextSubtileBrush }"/>
+      </Style>
+
+      <Style x:Key="TextSmallStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+      </Style>
+
+      <Style x:Key="TextNormalStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+      </Style>
+
+      <Style x:Key="TextLargerStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+      </Style>
+
+      <Style x:Key="TextLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="28"/>
+      </Style>
+
+      <Style x:Key="TextExtraLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="40"/>
+      </Style>
+      
+      
+      
+      <Style x:Key="TextHubHeaderStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="30"/>
+      </Style>
+
+      <Style x:Key="TextPivotHeaderStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="30"/>
+      </Style>
+
+      <Style x:Key="HyperLinkNormalStyle" TargetType="HyperlinkButton">
+        <Setter Property="Foreground" Value="{ThemeResource HyperLinkForegroundBrush}"/>
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
+
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

@@ -11,7 +11,7 @@ http://msdn.microsoft.com/library/windowsphone/develop/ff402529(v=vs.105).aspx a
 
 2) Download the repository as a zip file by clicking the Download ZIP button
 
-3) Go to Source/Master/Catrobat and open the Catrobat.sln file with Visual Studio 2013
+3) Go to Source/Master/Catrobat and open the Catrobat.sln file with Visual Studio 2015 Enterprise
 
 4) Be sure you already have installed the MultilangualToolkit
 
