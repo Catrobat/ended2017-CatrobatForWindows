@@ -61,6 +61,19 @@ namespace Saving_Test
 
             Debug.WriteLine("Running?: " + SaveHandlerTask.Status);
 
+            var now = DateTime.Now.TimeOfDay;
+            //wait til thread has started or "throw" error when taking too long
+            while (SaveHandlerTask.Status != TaskStatus.Running)
+            {
+                var nownow = DateTime.Now.TimeOfDay;
+                if (nownow.Seconds >= now.Seconds + 3)
+                {
+                    Debug.WriteLine("Error: could not start thread!");
+                    Assert.Fail();
+                }
+                  
+            }
+
             Assert.AreEqual(TaskStatus.Running, SaveHandlerTask.Status);
 
             // stop
@@ -68,11 +81,11 @@ namespace Saving_Test
             Catrobat.IDE.Core.App.StopSaveThread();
 
             // lazy polling but it works
-            var now = DateTime.Now.TimeOfDay;
+            var maxrun = DateTime.Now.TimeOfDay;
             while (SaveHandlerTask.Status == TaskStatus.Running)
             {
                 var nownow = DateTime.Now.TimeOfDay;
-                if (nownow.Seconds >= now.Seconds + 5)
+                if (nownow.Seconds >= maxrun.Seconds + 3)
                     break;
             }
 
