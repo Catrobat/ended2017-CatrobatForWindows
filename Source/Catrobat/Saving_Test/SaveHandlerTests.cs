@@ -66,7 +66,7 @@ namespace Saving_Test
             while (SaveHandlerTask.Status != TaskStatus.Running)
             {
                 var nownow = DateTime.Now.TimeOfDay;
-                if (nownow.Seconds >= now.Seconds + 3)
+                if (nownow.Seconds >= now.Seconds + 10)
                 {
                     Debug.WriteLine("Error: could not start thread!");
                     Assert.Fail();
@@ -85,7 +85,7 @@ namespace Saving_Test
             while (SaveHandlerTask.Status == TaskStatus.Running)
             {
                 var nownow = DateTime.Now.TimeOfDay;
-                if (nownow.Seconds >= maxrun.Seconds + 3)
+                if (nownow.Seconds >= maxrun.Seconds + 10)
                     break;
             }
 
