@@ -71,7 +71,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void SpriteItem_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var isClickEnabled = !ListViewSprites.SelectionEnabled;
+            var isClickEnabled = !ListViewSprites.SelectionEnabled && !ListViewSprites.ReorderEnabled;
 
             if (isClickEnabled)
                 if (_viewModel.EditSpriteCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
