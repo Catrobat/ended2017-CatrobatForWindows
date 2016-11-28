@@ -146,7 +146,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (CurrentProgram != null)
             {
-                await CurrentProgram.Save();
+                CurrentProgram.SaveWithSaveHandler();
 
                 //await ServiceLocator.ContextService.
                 //    CreateThumbnailsForNewProgram(CurrentProgram.Name);
