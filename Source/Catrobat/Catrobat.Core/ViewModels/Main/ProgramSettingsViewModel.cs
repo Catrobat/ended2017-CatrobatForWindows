@@ -95,10 +95,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
+
             string validName = await ServiceLocator.ContextService.ConvertToValidFileName(ProgramName);
             if (CurrentProgram.Name != ProgramName)
             {
                 ProgramName = await ServiceLocator.ContextService.FindUniqueProgramName(validName);
+
                 if (CurrentProgram.LocalProgramHeader == CurrentProgramHeader)
                 {
                     CurrentProgram.LocalProgramHeader.ProjectName = ProgramName;
@@ -130,11 +132,15 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     var localProgramsChangedMessage = new MessageBase();
                     Messenger.Default.Send(localProgramsChangedMessage,
                             ViewModelMessagingToken.LocalProgramsChangedListener);
-
-                    base.GoBackAction();
                 }
+            } 
+            else if(CurrentProgram.Description != ProgramDescription)
+            {
+                CurrentProgram.Description = ProgramDescription;
+                await App.SaveContext(CurrentProgram);
             }
 
+            base.GoBackAction();
         }
 
         private void CancelAction()

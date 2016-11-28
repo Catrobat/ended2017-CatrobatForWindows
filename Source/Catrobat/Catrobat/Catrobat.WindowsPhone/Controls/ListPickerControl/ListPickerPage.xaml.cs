@@ -106,7 +106,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
                 return;
             }
 
-            _spriteEditorviewModel.CurrentProgram.Save();
+            _spriteEditorviewModel.CurrentProgram.SaveWithSaveHandler();
 
             ListPicker.SelectedItem = ListBoxItems.SelectedItem;
             ServiceLocator.NavigationService.NavigateBack(this.GetType());

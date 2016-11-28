@@ -77,7 +77,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             var newVariable = new LocalVariable { Name = UserVariableName };
             CurrentSprite.LocalVariables.Add(newVariable);
-            CurrentProgram.Save();
+            CurrentProgram.SaveWithSaveHandler();
             base.GoBackAction();
         }
 

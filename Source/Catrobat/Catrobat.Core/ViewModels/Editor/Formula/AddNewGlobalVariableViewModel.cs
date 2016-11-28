@@ -78,7 +78,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             var newVariable = new GlobalVariable {Name = UserVariableName};
             CurrentProgram.GlobalVariables.Add(newVariable);
-            CurrentProgram.Save();
+            CurrentProgram.SaveWithSaveHandler();
             base.GoBackAction();
         }
 
