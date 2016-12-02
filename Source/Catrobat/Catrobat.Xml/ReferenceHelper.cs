@@ -415,8 +415,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                                 reference = reference.Split('[')[splittetReference.Count() - 1];
                                 reference = reference.Split(']')[0];
                                 count = Int32.Parse(reference) - 1;
+                                return sprite.Sounds.Sounds[count];
                             }
-                            return sprite.Sounds.Sounds[count];
+                            
                         }
                     }
                 }
