@@ -184,15 +184,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.LookImageToSaveListener);
 
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            {
-                ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.NavigateBack(this.GetType());
-            });
-
-            //ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            //    ServiceLocator.NavigationService.NavigateTo<LookSavingViewModel>());
-
             var newDimention = new ImageDimension
             {
                 Height = SelectedSize.NewHeight,
@@ -204,11 +195,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
                 _receivedSelectedSprite.Looks.Add(look);
-                //ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
-                //ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
                 ResetViewModel();
-                //ServiceLocator.NavigationService.NavigateBack(
-                //    new List<NavigationPlatform>{NavigationPlatform.WindowsStore});
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.NavigationService.NavigateBack(this.GetType());
             });
         }
 
@@ -260,9 +249,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.LookImageListener, LookImageReceivedMessageAction);
-
-            //if (IsInDesignMode)
-            //    InitDesignData();
         }
 
         private void InitDesignData()
@@ -273,17 +259,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private void InitImageSizes()
         {
-            //Dimension = new ImageDimension { Width = 0, Height = 0 };
+            
         }
 
         private void ResetViewModel()
         {
             InitImageSizes();
-
-            //LookName = AppResourcesHelper.Get("Editor_Image;
-
-            //InitImageSizes();
-            //_builder = null;
         }
     }
 }
