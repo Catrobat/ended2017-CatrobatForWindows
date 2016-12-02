@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void SaveAction()
         {
             UserVariable.Name = UserVariableName;
-            CurrentProgram.Save();
+            CurrentProgram.SaveWithSaveHandler();
             base.GoBackAction();
         }
 

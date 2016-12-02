@@ -196,7 +196,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 SelectedVariableContainer.Variable = (Variable)SelectedGlobalVariable ?? SelectedLocalVariable;
             }
 
-            CurrentProgram.Save();
+            CurrentProgram.SaveWithSaveHandler();
 
             ResetViewModel();
             base.GoBackAction();
@@ -218,7 +218,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             if (SelectedLocalVariable != null)
                 VariableHelper.DeleteLocalVariable(CurrentProgram, CurrentSprite, SelectedLocalVariable);
 
-            CurrentProgram.Save();
+            CurrentProgram.SaveWithSaveHandler();
         }
 
         private void EditVariableAction()
@@ -237,6 +237,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         protected override void GoBackAction()
         {
+            CurrentProgram.SaveWithSaveHandler();
             ResetViewModel();
             base.GoBackAction();
         }

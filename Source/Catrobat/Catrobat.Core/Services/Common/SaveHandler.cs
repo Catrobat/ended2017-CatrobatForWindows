@@ -46,6 +46,9 @@ namespace Catrobat.Core.Services.Common
         public static void StopSaveThread()
         {
             running = false;
+
+            // Wake up the Saving Task
+            waitHandle.Set();
         }
 
         #endregion

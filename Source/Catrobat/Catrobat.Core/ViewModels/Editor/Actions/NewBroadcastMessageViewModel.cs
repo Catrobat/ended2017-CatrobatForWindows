@@ -81,7 +81,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                 (_broadcastObject as BroadcastSendBlockingBrick).Message = BroadcastMessage;
             }
 
-            CurrentProgram.Save();
+            CurrentProgram.SaveWithSaveHandler();
 
             base.GoBackAction();
         }
@@ -98,6 +98,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         protected override void GoBackAction()
         {
+            CurrentProgram.SaveWithSaveHandler();
             ResetViewModel();
             base.GoBackAction();
         }

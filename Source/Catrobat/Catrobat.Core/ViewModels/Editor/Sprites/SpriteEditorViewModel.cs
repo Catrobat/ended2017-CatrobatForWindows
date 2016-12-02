@@ -972,21 +972,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void ScriptBricksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(() => IsScirptBricksEmpty);
-            //CurrentProgram.Save();
             CurrentProgram.SaveWithSaveHandler();
         }
 
         private void LooksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(() => IsLooksEmpty);
-            //CurrentProgram.Save();
             CurrentProgram.SaveWithSaveHandler();
         }
 
         private void SoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(() => IsSoundsEmpty);
-            //CurrentProgram.Save();
             CurrentProgram.SaveWithSaveHandler();
         }
 
