@@ -63,7 +63,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
             xRoot.Add(xFormulalist);
 
-            xRoot.Add(UserVariable.CreateXml());
+            if(UserVariable != null)
+                xRoot.Add(UserVariable.CreateXml());
 
             return xRoot;
         }
