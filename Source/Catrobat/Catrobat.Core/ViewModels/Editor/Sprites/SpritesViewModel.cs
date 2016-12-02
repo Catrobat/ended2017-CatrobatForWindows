@@ -264,7 +264,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         protected override void GoBackAction()
         {
             //SelectedSprites = new ObservableCollection<Sprite>();
-            base.GoBackAction();
+            if (CommandBarMode == MultiModeEditorCommandBarMode.Normal)
+            {
+                base.GoBackAction();
+            }
+            else
+            {
+                CommandBarMode = MultiModeEditorCommandBarMode.Normal;
+            }
         }
 
         public override void NavigateTo()
