@@ -82,7 +82,6 @@ namespace Catrobat.Core.Services.Common
                 if (!running)
                     break;
 
-                Debug.WriteLine("Sleeping");
                 waitHandle.WaitOne();
                 waitHandle.Reset();
             }
