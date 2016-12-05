@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {
@@ -20,11 +21,41 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         public static void DeleteGlobalVariable(Program project, GlobalVariable variable)
         {
+            foreach (var currentSprite in project.Sprites)
+            {
+
+                foreach (var currentScript in currentSprite.Scripts)
+                {
+
+                    foreach (var currentBrick in currentScript.Bricks)
+                    {
+                        if (currentBrick is SetVariableBrick || currentBrick is ChangeVariableBrick)
+                        {
+                            ((VariableBrick)currentBrick).Variable = null;
+                        }
+
+                    }
+                }
+            }
+
             project.GlobalVariables.Remove(variable);
         }
 
         public static void DeleteLocalVariable(Program project, Sprite sprite, LocalVariable variable)
         {
+            foreach (var currentScript in sprite.Scripts)
+            {
+
+                foreach (var currentBrick in currentScript.Bricks)
+                {
+                    if (currentBrick is SetVariableBrick || currentBrick is ChangeVariableBrick)
+                    {
+                        ((VariableBrick)currentBrick).Variable = null;
+                    }
+
+                }
+            }
+
             sprite.LocalVariables.Remove(variable);
         }
 
