@@ -37,7 +37,7 @@
       <!-- Action Brushes -->
       <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />
       <SolidColorBrush x:Key="LooksBrush" Color="#FF6F9263" />
-      <SolidColorBrush x:Key="ObjectsBrush" Color="#FF891D1D" />
+      <SolidColorBrush x:Key="ObjectsBrush" Color="#FF0091C3" />
 
       <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF6A9B49" />
       <SolidColorBrush x:Key="MotionBrickBrush" Color="#FF009EDA" />
