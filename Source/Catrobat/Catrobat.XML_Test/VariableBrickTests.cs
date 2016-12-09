@@ -74,7 +74,31 @@ namespace Catrobat.XML_Test
                 VariableFormula = new XmlFormula()
                 {
                     FormulaTree = new XmlFormulaTree()
-                    { 
+                    {
+                        VariableType = "NUMBER",
+                        VariableValue = "2"
+                    }
+                },
+                UserVariable = null
+            };
+
+            Assert.AreEqual(referenceObject.CreateXml().ToString(), testObject.CreateXml().ToString());
+        }
+
+        [TestMethod]
+        public void SetVariableBrickHasToAllowNullReferenceOfUserVariableAsInitialBrick()
+        {
+            TextReader sr = new StringReader("<brick type=\"SetVariableBrick\"><formulaList><formula category=\"VARIABLE\"><type>NUMBER</type><value>2</value></formula></formulaList></brick>");
+            var xRoot = XElement.Load(sr);
+
+            var testObject = new XmlSetVariableBrick(xRoot);
+
+            var referenceObject = new XmlSetVariableBrick()
+            {
+                VariableFormula = new XmlFormula()
+                {
+                    FormulaTree = new XmlFormulaTree()
+                    {
                         VariableType = "NUMBER",
                         VariableValue = "2"
                     }

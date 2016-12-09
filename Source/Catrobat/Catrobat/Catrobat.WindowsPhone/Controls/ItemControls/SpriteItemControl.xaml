@@ -8,65 +8,35 @@
     d:DesignHeight="100"
     d:DesignWidth="360">
 
-  <Grid x:Name="GridRoot" Height="90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-    <Grid Background="{ThemeResource ObjectsBrush}"  Margin="0 4 7 4" RequestedTheme="Dark">
-    <Grid.RowDefinitions>
-        <RowDefinition/>
-        <RowDefinition/>
-    </Grid.RowDefinitions>
-       
-    <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="28"
+    <Grid x:Name="GridRoot" Height="90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Background="{ThemeResource ObjectsBrush}"  Margin="0 4 7 4" RequestedTheme="Dark">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="28"
         Margin="5,0,55,0" Text="{Binding Name}" />
 
-    <StackPanel Grid.Row="1" Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-        <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
-        <TextBlock FontSize="16" Margin="0" Text="/" />
-        <TextBlock FontSize="16" Margin="0" Text="{Binding Looks.Count}" />
-        <TextBlock FontSize="16" Margin="0" Text="/" />
-        <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
-    </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid Margin="0,0,55,5" HorizontalAlignment="Right" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-    <Grid Grid.Row="1">
-      <Grid Margin="0,0,55,5" HorizontalAlignment="Right" >
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"/>
-          <ColumnDefinition Width="Auto"/>
-       <ColumnDefinition Width="Auto"/>
-    </Grid.ColumnDefinitions>
-       
-    <!--<Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
-        HorizontalAlignment="Center"
-        Source="{Binding Looks[0].Image.ImageSource}" />
-        <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Source="{Binding Looks[1].Image.ImageSource}" />
-        <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Source="{Binding Looks[2].Image.ImageSource}" />-->
-          <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
-            HorizontalAlignment="Center" Height="35">
-            <Image.Source>
-              <BitmapImage DecodePixelHeight="35"
+                    <Image Grid.Column="0" Margin="6,-35,-49,-1"
+            HorizontalAlignment="Right" Grid.ColumnSpan="4" RenderTransformOrigin="0.499,0.499" Height="72" VerticalAlignment="Center" Stretch="Uniform">
+                        <Image.Source>
+                            <BitmapImage DecodePixelHeight="72"
                            UriSource="{Binding Looks[0].Image.ImageUri}"/>
-            </Image.Source>
-          </Image>
-          <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
-                 HorizontalAlignment="Center" Height="35">
-            <Image.Source>
-              <BitmapImage DecodePixelHeight="35"
-                           UriSource="{Binding Looks[1].Image.ImageUri}"/>
-            </Image.Source>
-          </Image>
-          <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
-                 HorizontalAlignment="Center" Height="35">
-            <Image.Source>
-            <BitmapImage DecodePixelHeight="35"
-                           UriSource="{Binding Looks[2].Image.ImageUri}"/>
-          </Image.Source>
-          </Image>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+            </Grid>
         </Grid>
-      </Grid>
-    </Grid>
         <Path Data="M1,1 L2,1" Stretch="Fill" StrokeThickness="0" Grid.Row="0" />
     </Grid>
 </UserControl>
