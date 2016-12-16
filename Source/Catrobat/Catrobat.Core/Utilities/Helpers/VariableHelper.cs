@@ -38,6 +38,23 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 }
             }
 
+            if(project.Background.Count >= 1)
+            {
+                var currentSprite = project.Background[0];
+                foreach (var currentScript in currentSprite.Scripts)
+                {
+
+                    foreach (var currentBrick in currentScript.Bricks)
+                    {
+                        if (currentBrick is SetVariableBrick || currentBrick is ChangeVariableBrick)
+                        {
+                            ((VariableBrick)currentBrick).Variable = null;
+                        }
+
+                    }
+                }
+            }
+                
             project.GlobalVariables.Remove(variable);
         }
 
@@ -53,6 +70,23 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         ((VariableBrick)currentBrick).Variable = null;
                     }
 
+                }
+            }
+
+            if (project.Background.Count >= 1)
+            {
+                var currentSprite = project.Background[0];
+                foreach (var currentScript in currentSprite.Scripts)
+                {
+
+                    foreach (var currentBrick in currentScript.Bricks)
+                    {
+                        if (currentBrick is SetVariableBrick || currentBrick is ChangeVariableBrick)
+                        {
+                            ((VariableBrick)currentBrick).Variable = null;
+                        }
+
+                    }
                 }
             }
 
