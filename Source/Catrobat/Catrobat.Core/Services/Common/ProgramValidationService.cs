@@ -13,12 +13,22 @@ using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.XmlModelConvertion.Converters;
-using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
     public class ProgramValidationService : IProgramValidationService
     {
+        public async Task<XmlProgram> GetProgram(string path)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                string xml = await storage.ReadTextFileAsync(Path.Combine(path, StorageConstants.ProgramCodePath));
+                var converterResult = await CatrobatVersionConverter.
+                    ConvertToXmlVersion(xml, XmlConstants.TargetIDEVersion);
+                return new XmlProgram(converterResult.Xml);
+            }
+        }
+
         public async Task<CheckProgramResult> CheckProgram(string pathToProgramDirectory)
         {
             var pathToProgramCodeFile = Path.Combine(pathToProgramDirectory, StorageConstants.ProgramCodePath);
@@ -84,7 +94,6 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 ProgramConverter programConverter = new ProgramConverter();
                 checkResult.Program = programConverter.Convert(convertedProgram);
-                NativeWrapper.SetProject(convertedProgram);
             }
             catch (Exception)
             {
