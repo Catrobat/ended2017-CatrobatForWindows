@@ -5,10 +5,10 @@ using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlSetGhostEffectBrick : XmlBrick, ISetGhostEffectBrick
+    public partial class XmlSetGhostEffectBrick : XmlBrick, ISetTransparencyBrick
     {
         #region NativeInterface
-        IFormulaTree ISetGhostEffectBrick.Transparency
+        IFormulaTree ISetTransparencyBrick.Transparency
         {
             get
             {

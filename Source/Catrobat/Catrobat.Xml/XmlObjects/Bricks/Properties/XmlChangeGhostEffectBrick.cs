@@ -4,7 +4,7 @@ using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlChangeGhostEffectBrick : XmlBrick, IChangeGhostEffectByBrick
+    public partial class XmlChangeGhostEffectBrick : XmlBrick, IChangeTransparencyByNBrick
     {
         #region NativeInterface
         public IFormulaTree Transparency
