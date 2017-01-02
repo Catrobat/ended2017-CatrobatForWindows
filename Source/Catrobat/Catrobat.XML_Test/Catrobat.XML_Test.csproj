@@ -104,6 +104,10 @@
       <Project>{54144ca7-b859-4f79-b682-dad92b4e3353}</Project>
       <Name>Catrobat.Player.WindowsPhone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Catrobat.Core\Catrobat.Core.csproj">
+      <Project>{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}</Project>
+      <Name>Catrobat.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Catrobat.Xml\Catrobat.Xml.csproj">
       <Project>{5a97f09e-beb2-48ee-bec2-bedea5a4145d}</Project>
       <Name>Catrobat.Xml</Name>

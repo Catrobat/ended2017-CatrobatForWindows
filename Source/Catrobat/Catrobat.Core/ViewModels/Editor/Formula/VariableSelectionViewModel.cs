@@ -5,6 +5,8 @@ using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Diagnostics;
+using Catrobat.IDE.Core.Models.Bricks;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 {
