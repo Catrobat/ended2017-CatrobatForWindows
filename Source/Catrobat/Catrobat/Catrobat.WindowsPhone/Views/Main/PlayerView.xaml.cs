@@ -18,6 +18,7 @@ using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.WindowsShared.Services;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {
@@ -42,11 +43,16 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         }
         
         
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (_viewModel.IsLaunchFromTile)
                 while (ServiceLocator.NavigationService.CanGoBack)
                     ServiceLocator.NavigationService.RemoveBackEntry();
+
+            var program = await ServiceLocator.ProgramValidationService.GetProgram(Path.Combine(StorageConstants.ProgramsPath, 
+                ServiceLocator.ViewModelLocator.ProgramDetailViewModel.CurrentProgramHeader.ProjectName));
+
+            NativeWrapper.SetProject(program);
 
             _playerObject.InitPlayer(PlayerPage, _viewModel.ProgramName);
             _viewModel.AxesVisible = false;
@@ -66,6 +72,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait
                 | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped;
 
+            _playerObject.Dispose();
             base.OnNavigatingFrom(e);
         }
     }
