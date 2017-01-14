@@ -11,101 +11,103 @@ using GalaSoft.MvvmLight;
 
 namespace Catrobat.IDE.Core.ViewModels.Main.OnlinePrograms
 {
-  public class CategoryViewModel : ObservableObject
-  {
-    #region attributes 
-
-    private const int _programsPerLine = 2;
-
-    private readonly ProgramsViewModel _programsViewModel;
-
-    private int _programOffset;
-
-    #endregion
-
-    #region properties
-
-    public Category Category { get; }
-
-    public ObservableCollection<SimpleProgramViewModel> Programs { get; set; }
-
-    public int ProgramsPerLine => _programsPerLine;
-
-    #endregion
-
-    #region interfaces
-
-    public void ResetPrograms()
+    public class CategoryViewModel : ObservableObject
     {
-      Programs.Clear();
-      ShowMore();
-    }
+        #region attributes 
 
-    #endregion
+        private const int _programsPerLine = 2;
 
-    #region commands
+        private readonly ProgramsViewModel _programsViewModel;
 
-    public ICommand ShowMoreCommand => new RelayCommand(ShowMore);
+        private int _programOffset;
 
-    #endregion
+        #endregion
 
-    #region construction
+        #region properties
 
-    public CategoryViewModel(Category category, ProgramsViewModel programsViewModel)
-    {
-      Category = category;
-      _programsViewModel = programsViewModel;
+        public Category Category { get; }
 
-      Programs = new ObservableCollection<SimpleProgramViewModel>();
-      ShowMore();
-    }
+        public ObservableCollection<SimpleProgramViewModel> Programs { get; set; }
 
-    #endregion
+        public int ProgramsPerLine => _programsPerLine;
 
-    #region private helpers
+        #endregion
 
-    private async void ShowMore()
-    {     
-      while(true)
-      { 
-        var retrievedPrograms = await _programsViewModel.GetPrograms(
-          Programs.Count + _programOffset, ProgramsPerLine, 
-          Category.SearchKeyWord, new CancellationToken());
+        #region interfaces
 
-        if (CheckForDuplicates(retrievedPrograms))
+        public void ResetPrograms()
         {
-          _programOffset++;
-          continue;
+            Programs.Clear();
+            ShowMore();
         }
 
-        foreach (var project in retrievedPrograms)
+        #endregion
+
+        #region commands
+
+        public ICommand ShowMoreCommand => new RelayCommand(ShowMore);
+
+        #endregion
+
+        #region construction
+        public CategoryViewModel(Category category, ProgramsViewModel programsViewModel)
         {
-          Programs.Add(
-            new SimpleProgramViewModel(
-              new ProgramInfo(project)));
+            Category = category;
+            _programsViewModel = programsViewModel;
+
+            Programs = new ObservableCollection<SimpleProgramViewModel>();
+            ShowMore();
         }
-        break;
-      }
+
+        #endregion
+
+        #region private helpers
+
+        private async void ShowMore()
+        {
+            while (true)
+            {
+                var retrievedPrograms = await _programsViewModel.GetPrograms(
+                  Programs.Count + _programOffset, ProgramsPerLine,
+                  Category.SearchKeyWord, new CancellationToken());
+
+                if (CheckForDuplicates(retrievedPrograms))
+                {
+                    _programOffset++;
+                    continue;
+                }
+
+                foreach (var project in retrievedPrograms)
+                {
+
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.Normal,
+                        () => 
+                            Programs.Add(new SimpleProgramViewModel(new ProgramInfo(project)))
+                        );
+                }
+                break;
+            }
+        }
+
+        private bool CheckForDuplicates(List<OnlineProgramHeader> retrievedPrograms)
+        {
+            switch (Category.SearchKeyWord)
+            {
+                case "API_RECENT_PROJECTS":
+                    return Programs.Any(p => p.Program.Uploaded <= ProgramInfo.FromUnixTime(retrievedPrograms.First().Uploaded));
+
+                case "API_MOSTDOWNLOADED_PROJECTS":
+                    return Programs.Any(p => p.Program.Downloads <= Convert.ToUInt32(retrievedPrograms.First().Downloads));
+
+                case "API_MOSTVIEWED_PROJECTS":
+                    return Programs.Any(p => p.Program.Views <= Convert.ToUInt32(retrievedPrograms.First().Views));
+
+                default:
+                    throw new Exception("Unknown Category.SearchKeyWord: " + Category.SearchKeyWord);
+            }
+        }
+
+        #endregion
     }
-
-    private bool CheckForDuplicates(List<OnlineProgramHeader> retrievedPrograms)
-    {
-      switch (Category.SearchKeyWord)
-      {
-        case "API_RECENT_PROJECTS":
-          return Programs.Any(p => p.Program.Uploaded <= ProgramInfo.FromUnixTime(retrievedPrograms.First().Uploaded));
-
-        case "API_MOSTDOWNLOADED_PROJECTS":
-          return Programs.Any(p => p.Program.Downloads <= Convert.ToUInt32(retrievedPrograms.First().Downloads));
-
-        case "API_MOSTVIEWED_PROJECTS":
-          return Programs.Any(p => p.Program.Views <= Convert.ToUInt32(retrievedPrograms.First().Views));
-
-        default:
-          throw new Exception("Unknown Category.SearchKeyWord: " + Category.SearchKeyWord);
-      }
-    }
-
-    #endregion
-  }
 }
